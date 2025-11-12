@@ -1,5 +1,9 @@
 # 📅 Headless Calendar Library
 
+<!-- ![npm version](https://img.shields.io/npm/v/@verbpatch/headless-calendar)
+![downloads](https://img.shields.io/npm/dt/@verbpatch/headless-calendar)
+![license](https://img.shields.io/npm/l/@verbpatch/headless-calendar) -->
+
 A powerful, flexible, and completely headless calendar library for applications. Built with TypeScript, zero dependencies, and designed to work with any UI framework or design system.
 
 ## ✨ Features
@@ -8,25 +12,49 @@ A powerful, flexible, and completely headless calendar library for applications.
 - 📅 **Multiple Views** - Month, Week, and Day views
 - 🎨 **Framework Agnostic** - Works with any CSS framework or component library
 - 🔄 **Event Management** - Create, update, delete, and move events
-- 🖱️ **Drag & Drop** - Built-in drag and drop support
+- 🖱️ **Drag & Drop Events** - Built-in drag and drop event management support
 - 🎭 **TypeScript First** - Full type safety and IntelliSense support
 - 🌳 **Tree Shakeable** - Import only what you need
 - 📦 **Zero Dependencies**
 
-## 🚀 Installation
+## 🚀 Core Installation (Headless Logic)
+
+Install the **core logic** library for use in vanilla JavaScript/TypeScript.
 
 ```bash
-npm install @verb/headless-calendar
+npm install @verbpatch/headless-calendar
 # or
-yarn add @verb/headless-calendar
+yarn add @verbpatch/headless-calendar
 # or
-pnpm add @verb/headless-calendar
+pnpm add @verbpatch/headless-calendar
 ```
 
-## 🎯 Quick Start
+<!-- ### Basic Javscript/Typescript Example
+
+```jsx
+// In plain JavaScript/TypeScript environment
+import { createCalendar } from "@verbpatch/headless-calendar";
+
+let calendar;
+function bindCalendar() {
+  calendar = createCalendar({ defaultView: "month" });
+}
+
+bindCalendar();
+console.log(calendar.monthData);
+
+calendar.goToNext();
+bindCalendar();
+
+console.log(calendar.monthData.monthName);
+``` -->
+
+## 🎨 Basic React Example
+
+install npm package `pnpm i @verbpatch/react-calendar`
 
 ```tsx
-import { useCalendar } from "@verb/headless-calendar";
+import { useCalendar } from "@verbpatch/react-calendar";
 
 function MyCalendar() {
   const calendar = useCalendar({
@@ -37,13 +65,7 @@ function MyCalendar() {
   const handleDateClick = (date: Date) => {
     calendar.createEvent({
       title: "New Event",
-      start: new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        9,
-        0
-      ),
+      start: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 9, 0),
       end: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 10, 0),
     });
   };
@@ -77,15 +99,13 @@ function MyCalendar() {
 }
 ```
 
-## 📚 API Reference
+<!-- ## 📚 API Reference
 
-For complete API documentation, visit our [API Documentation](https://your-docs-site.com).
+For complete API documentation, visit our [API Documentation](https://your-docs-site.com). -->
 
-## 🎨 Examples
+Find more examples in our [example](https://github.com/VerbPatch/headless-calendar/tree/main/examples) directory.
 
-Find more examples in our examples directory.
-
-### Month View with Tailwind CSS
+<!-- ### Month View with Tailwind CSS
 
 ```tsx
 import { useCalendar } from "@verb/headless-calendar";
@@ -298,71 +318,21 @@ const handleEvent = (event: CalendarEvent) => {
 npm test              # Run tests
 npm run test:watch    # Watch mode
 npm run test:coverage # Coverage report
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+``` -->
 
 ## 📫 Contact
 
 - GitHub: [@rameezrajapathan](https://github.com/rameezrajapathan)
 - Email: rameezrajapathan@live.com
 
-## 🔗 Links
+## 🔗 Helpful Links
 
-- [Documentation](https://your-docs-site.com)
-- [Examples](https://github.com/your-username/headless-calendar/tree/main/examples)
-- [Issues](https://github.com/your-username/headless-calendar/issues)
+- Documentation: {coming soon}
+- [Examples](https://github.com/VerbPatch/headless-calendar/tree/main/examples)
+- [Issues](https://github.com/verbpatch/headless-calendar/issues)
+- [Contributing Guide](https://github.com/your-username/headless-calendar/blob/main/CONTRIBUTING.md)
 - [Changelog](https://github.com/your-username/headless-calendar/blob/main/CHANGELOG.md)
-
-## ⚖️ License
-
-This project is licensed under the GNU General Public License v3.0 (GPLv3). This means:
-
-- ✅ You can use this library in your projects (commercial or non-commercial)
-- ✅ You can modify the code
-- ✅ You **must** make your source code available under the same GPLv3 license
-- ✅ You **must** state any changes made to the code
-- ✅ You **must** include the original copyright and license notice
-
-For more details, see the [LICENSE](https://choosealicense.com/licenses/gpl-3.0/).
-
-### 📝 Source Code Notice
-
-As required by the GPLv3 license, any modifications to this code must be made available under the same license. When using this library, you must:
-
-1. Provide a way for users to obtain the complete source code
-2. Include the original copyright notice and license
-3. State significant changes made to the library
-4. Make your code that uses this library also available under GPLv3
-
-### ⚠️ Important License Notice
-
-This library is GPL-3.0 licensed. If you use it in your project, your project must also be released under the GPL license. This means you must make your source code available and allow others to freely modify and distribute it.
-
-If you need a different licensing arrangement, please contact the maintainers.
 
 ---
 
 Copyright (C) 2025 VerbPatch
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
