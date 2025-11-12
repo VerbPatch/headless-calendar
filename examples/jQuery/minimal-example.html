@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery HeadlessCalendar - Minimal Demo</title>
+
+</head>
+
+<body>
+    <div id="calendar"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../../packages/jquery-calendar/dist/index.umd.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            const getSampleEvents = () => {
+                const today = new Date();
+                return [
+                    {
+                        title: 'Team Meeting',
+                        start: new Date(today.getFullYear(), today.getMonth(), 5, 10, 0),
+                        end: new Date(today.getFullYear(), today.getMonth(), 5, 11, 30),
+                        color: '#667eea',
+                        description: 'Weekly team sync-up meeting',
+                        icon: '🎯'
+                    },
+                    {
+                        title: 'Project Launch',
+                        start: new Date(today.getFullYear(), today.getMonth(), 15, 14, 0),
+                        end: new Date(today.getFullYear(), today.getMonth(), 15, 16, 0),
+                        color: '#f56565',
+                        description: 'New product launch event',
+                        icon: '🚀'
+                    },
+                    {
+                        title: 'Lunch with Client',
+                        start: new Date(today.getFullYear(), today.getMonth(), 8, 12, 30),
+                        end: new Date(today.getFullYear(), today.getMonth(), 8, 14, 0),
+                        color: '#48bb78',
+                        description: 'Client meeting at Italian restaurant',
+                        icon: '🍕'
+                    },
+                    {
+                        title: 'Board Meeting',
+                        start: new Date(today.getFullYear(), today.getMonth(), 20, 9, 0),
+                        end: new Date(today.getFullYear(), today.getMonth(), 20, 11, 0),
+                        color: '#ed8936',
+                        description: 'Quarterly board meeting',
+                        icon: '💼'
+                    },
+                    {
+                        title: 'Company Party',
+                        start: new Date(today.getFullYear(), today.getMonth(), 25, 18, 0),
+                        end: new Date(today.getFullYear(), today.getMonth(), 25, 22, 0),
+                        color: '#9f7aea',
+                        description: 'End of month celebration',
+                        icon: '🎉'
+                    }
+                ];
+            };
+
+            $('#calendar').headlessCalendar({
+                initialEvents: getSampleEvents(),
+                onRender: function (calendar) {
+                    const cal = $('#calendar').headlessCalendar('getCalendar');
+                    const view = cal.view;
+                    const currentDate = cal.currentDate;
+
+                    let $html = '<table border="1" cellspacing="0" cellpadding="5" style="border-collapse: collapse; width:800px; height:800px; margin:auto;">';
+                    $html += '<thead><tr>';
+                    $html += `<th><button id="prev"><</button></th>`;
+                    $html += `<th colspan="5" style="text-align:center;"><h3>${cal.utils.formatDate(currentDate, 'MMMM yyyy')}</h3>                        
+                        <select id="view-select">
+                                <option value="month" ${view === 'month' ? 'selected' : ''}>Month View</option>
+                                <option value="week" ${view === 'week' ? 'selected' : ''}>Week View</option>
+                                <option value="day" ${view === 'day' ? 'selected' : ''}>Day View</option>    
+                            </select></th>`;
+                    $html += `<th><button id="next">></button></th>`;
+                    $html += '</tr></thead>';
+
+                    if (view === 'month') {
+                        $html += renderMonthView(cal);
+                    } else if (view === 'week') {
+                        $html += renderWeekView(cal);
+                    } else if (view === 'day') {
+                        $html += renderDayView(cal);
+                    }
+
+                    $html += '<tfoot><tr>';
+
+                    $html += `<th colspan="7" style="text-align:center;">`
+                    $html += `<div><h3 style="text-align:center;">All Events</h3>`;
+                    cal.events.forEach((event) => {
+                        $html += `<div style="margin:5px 0; padding:5px; border:1px solid #000; background-color:${event.color || '#eee'}; display:flex; gap:10px; align-items:center;">
+                                    <h4>${event.icon}</h4>
+                                    <strong>${event.title},</strong>
+                                    <span>${cal.utils.formatDate(event.start, 'd MMM yyyy HH:mm')} - ${cal.utils.formatDate(event.end, 'd MMM yyyy HH:mm')},</span>
+                                    <em>${event.description || ''}</em>
+                                </div>`;
+                    })
+                    $html += `</div></th>`;
+                    $html += '</tr></tfoot>';
+
+                    $html += '</table>';
+
+                    $('#calendar').html($html);
+                }
+            });
+
+            function renderMonthView(cal) {
+                const monthData = cal.monthData;
+
+                const weekdays = cal.utils.daysofWeek();
+
+                let $html = '<tr>';
+                weekdays.forEach(day => {
+                    $html += `<th> ${day}</th> `;
+                });
+                $html += '</tr>';
+
+                monthData.weeks.forEach(week => {
+                    $html += '<tr>';
+                    week.forEach(day => {
+                        const isToday = cal.utils.isSameDay(day, new Date());
+                        const isCurrentMonth = monthData.isCurrentMonth(day);
+
+                        $html += `<td style="text-align:center;${isToday ? "background-color: #d3d3d3; font-weight: bold; " : ""} ${isCurrentMonth ? "" : "color: #d3d3d3; "}" > ${cal.utils.formatDate(day, 'd')}</td> `;
+
+                        $html += '';
+                    });
+                    $html += '</tr>';
+                });
+
+                return $html;
+            }
+
+            function renderWeekView(cal) {
+                const weekData = cal.weekData;
+                let $html = '<tr>';
+                weekData.dates.forEach(day => {
+                    $html += `<th> ${cal.utils.formatDate(day, 'd MMM')}</th> `;
+                });
+                $html += '</tr><tr>';
+                weekData.dates.forEach(day => {
+                    $html += `<td style="height:100px; vertical-align:top; border:1px solid #000;" >&nbsp;</td> `;
+                });
+                $html += '</tr>';
+                return $html;
+            }
+
+            function renderDayView(cal) {
+                const dayData = cal.dayData;
+                let $html = '<tr>';
+                $html += `<th colspan=7> ${cal.utils.formatDate(dayData.date, 'd MMM yyyy')}</th> `;
+                $html += '</tr><tr>';
+                $html += `<td colspan=7 style="height:300px; vertical-align:top; border:1px solid #000;">&nbsp;</td>`;
+                $html += '</tr>';
+                return $html;
+            }
+
+            $(document).on('click', '#prev', function () {
+                $('#calendar').headlessCalendar('goToPrevious');
+            });
+
+            $(document).on('click', '#next', function () {
+                $('#calendar').headlessCalendar('goToNext');
+            });
+
+            $(document).on('change', '#view-select', function () {
+                $('#calendar').headlessCalendar('changeView', this.value);
+            });
+        });
+    </script>
+</body>
+
+</html>

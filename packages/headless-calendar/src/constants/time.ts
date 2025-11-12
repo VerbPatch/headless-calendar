@@ -1,0 +1,16 @@
+export const HOURS_IN_DAY = 24;
+export const MINUTES_IN_HOUR = 60;
+export const SECONDS_IN_MINUTE = 60;
+export const MILLISECONDS_IN_SECOND = 1000;
+export const MILLISECONDS_IN_MINUTE = SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+export const MILLISECONDS_IN_HOUR = MINUTES_IN_HOUR * MILLISECONDS_IN_MINUTE;
+export const MILLISECONDS_IN_DAY = HOURS_IN_DAY * MILLISECONDS_IN_HOUR;
+
+export const DEFAULT_TIME_SLOT_INTERVAL = 60; // minutes
+export const DEFAULT_START_HOUR = 0;
+export const DEFAULT_END_HOUR = 24;
+
+export const TIME_FORMAT_12H = 'h:mm A';
+export const TIME_FORMAT_24H = 'HH:mm';
+export const DATE_FORMAT_ISO = 'YYYY-MM-DD';
+export const DATETIME_FORMAT_ISO = 'YYYY-MM-DDTHH:mm:ss.SSSZ';

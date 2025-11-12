@@ -1,0 +1,60 @@
+{
+  "name": "@verbpatch/svelte-calendar",
+  "version": "0.0.1-beta.1",
+  "description": "A headless calendar library for svelte applications with full event management and drag-and-drop support",
+  "author": "Rameez Raja <rameezrajapathan@live.com>",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/your-username/headless-calendar#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/headless-calendar.git",
+    "directory": "packages/react-calendar"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/headless-calendar/issues"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "type": "module",
+  "main": "dist/index.esm.js",
+  "module": "dist/index.esm.js",
+  "svelte": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.esm.js",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "dependencies": {
+    "@verbpatch/headless-calendar": "workspace:*"
+  },
+  "devDependencies": {
+    "svelte": "^5.43.6"
+  },
+  "peerDependencies": {
+    "svelte": "^3.0.0 || ^4.0.0 || ^5.0.0"
+  },
+  "keywords": [
+    "svelte",
+    "calendar",
+    "headless",
+    "events",
+    "drag-drop",
+    "scheduler",
+    "typescript"
+  ]
+}

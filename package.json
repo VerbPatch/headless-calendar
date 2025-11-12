@@ -1,0 +1,53 @@
+{
+  "name": "calendar",
+  "namesapce": "@verbpatch",
+  "type": "module",
+  "version": "0.0.1-beta.1",
+  "description": "",
+  "author": "Rameez Raja",
+  "license": "LGPL-3.0-or-later",
+  "packageManager": "pnpm@10.18.3",
+  "keywords": [],
+  "scripts": {
+    "clean": "pnpm  --filter \"./packages/**\" run clean",
+    "build": "nx affected --targets=build --exclude=examples/** && size-limit",
+    "build:all": "nx affected --targets=build --exclude=examples/** && size-limit",
+    "watch": "pnpm run build:all && nx watch --all -- pnpm run build:all",
+    "dev": "pnpm run watch"
+  },
+  "size-limit": [
+    {
+      "limit": "10 kB",
+      "path": "packages/headless-calendar/dist/index.js"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@changesets/cli": "^2.29.7",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@size-limit/file": "^11.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "nx": "21.6.5",
+    "prettier": "^3.6.2",
+    "prettier-plugin-svelte": "^3.4.0",
+    "rimraf": "^6.1.0",
+    "rollup": "^4.53.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-size": "^0.3.1",
+    "rollup-plugin-svelte": "^7.2.3",
+    "size-limit": "^11.2.0",
+    "tslib": "^2.8.1",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "^5.9.3"
+  }
+}

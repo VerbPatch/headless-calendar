@@ -1,0 +1,60 @@
+{
+  "name": "@verbpatch/jquery-calendar",
+  "version": "0.0.1-beta.1",
+  "description": "A headless calendar library for jQuery with full event management and drag-and-drop support",
+  "author": "Rameez Raja <rameezrajapathan@live.com>",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/your-username/headless-calendar#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/headless-calendar.git",
+    "directory": "packages/react-calendar"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/headless-calendar/issues"
+  },
+  "type": "module",
+  "module": "dist/index.esm.js",
+  "main": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "source": "src/index.ts",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "react",
+    "calendar",
+    "headless",
+    "events",
+    "drag-drop",
+    "scheduler",
+    "typescript"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "dependencies": {
+    "@verbpatch/headless-calendar": "workspace:*"
+  },
+  "peerDependencies": {
+    "jquery": ">=3.0.0"
+  },
+  "packageManager": "pnpm@10.18.3",
+  "devDependencies": {
+    "@types/jquery": "^3.0.0"
+  }
+}
