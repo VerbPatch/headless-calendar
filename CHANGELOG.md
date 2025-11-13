@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.0.1-beta.5] - 2025-11-13
+## [v0.0.1-beta.6] - 2025-11-13
+
+### Added
+
+- Vuejs package
+
+### Changed
+
+- updated readme
+
+---
+
+## [v0.0.1-beta.5] - 2025-11-13
 
 ### Changed
 
@@ -20,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.0.1-beta.2] - 2025-11-12
+## [v0.0.1-beta.2] - 2025-11-12
 
 ### Added
 
@@ -30,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.0.1-beta.1] - 2025-11-12
+## [v0.0.1-beta.1] - 2025-11-12
 
 ### Added
 
@@ -40,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JQuery Wrapper of calendar headless libray with examples
 - Svelte Wrapper of calendar headless libray with examples
 
-[0.0.1-beta.5]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.5
-[0.0.1-beta.2]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.2
-[0.0.1-beta.1]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.1
+[v0.0.1-beta.6]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.6
+[v0.0.1-beta.5]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.5
+[v0.0.1-beta.2]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.2
+[v0.0.1-beta.1]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.1
