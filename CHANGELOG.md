@@ -7,23 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.0.1-beta.1] - 2025-11-12
+## [0.0.1-beta.5] - 2025-11-13
 
-### Added
-- first commit
-- Calendar headless library with no dependency with built in event management (create, edit, delete, drag-n-drop) and 3 different views (month, week, day)
-- React Wrapper of calendar headless libray with examples
-- JQuery Wrapper of calendar headless libray with examples
-- Svelte Wrapper of calendar headless libray with examples
+### Changed
+
+- updated packages
+
+### Fixed
+
+- github links
+- react example
 
 ---
 
 ## [0.0.1-beta.2] - 2025-11-12
 
 ### Added
+
 - readme.md
 - contributing.md
 - changelog.md
 
-[0.0.1-beta.1]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.1
+---
+
+## [0.0.1-beta.1] - 2025-11-12
+
+### Added
+
+- first commit
+- Calendar headless library with no dependency with built in event management (create, edit, delete, drag-n-drop) and 3 different views (month, week, day)
+- React Wrapper of calendar headless libray with examples
+- JQuery Wrapper of calendar headless libray with examples
+- Svelte Wrapper of calendar headless libray with examples
+
+[0.0.1-beta.5]: [https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.5]
 [0.0.1-beta.2]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.2
+[0.0.1-beta.1]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.1
