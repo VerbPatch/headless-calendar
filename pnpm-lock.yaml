@@ -155,6 +155,16 @@ importers:
         specifier: ^7.1.10
         version: 7.2.2(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Vanilla/minimal:
+    dependencies:
+      '@verbpatch/headless-calendar':
+        specifier: workspace:^
+        version: link:../../../packages/headless-calendar
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1)
+
   packages/headless-calendar: {}
 
   packages/jquery-calendar:
