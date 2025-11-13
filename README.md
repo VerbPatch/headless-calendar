@@ -330,8 +330,8 @@ npm run test:coverage # Coverage report
 - Documentation: {coming soon}
 - [Examples](https://github.com/VerbPatch/headless-calendar/tree/main/examples)
 - [Issues](https://github.com/verbpatch/headless-calendar/issues)
-- [Contributing Guide](https://github.com/your-username/headless-calendar/blob/main/CONTRIBUTING.md)
-- [Changelog](https://github.com/your-username/headless-calendar/blob/main/CHANGELOG.md)
+- [Contributing Guide](https://github.com/verbpatch/headless-calendar/blob/main/CONTRIBUTING.md)
+- [Changelog](https://github.com/verbpatch/headless-calendar/blob/main/CHANGELOG.md)
 
 ---
 

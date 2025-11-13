@@ -4,14 +4,14 @@
   "description": "A headless calendar library for jQuery with full event management and drag-and-drop support",
   "author": "Rameez Raja <rameezrajapathan@live.com>",
   "license": "GPL-3.0-or-later",
-  "homepage": "https://github.com/your-username/headless-calendar#readme",
+  "homepage": "https://github.com/verbpatch/headless-calendar",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/headless-calendar.git",
-    "directory": "packages/react-calendar"
+    "url": "https://github.com/verbpatch/headless-calendar.git",
+    "directory": "packages/jquery-calendar"
   },
   "bugs": {
-    "url": "https://github.com/your-username/headless-calendar/issues"
+    "url": "https://github.com/verbpatch/headless-calendar/issues"
   },
   "type": "module",
   "module": "dist/index.esm.js",
