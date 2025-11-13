@@ -1,6 +1,6 @@
 {
   "name": "@verbpatch/svelte-calendar",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.4",
   "description": "A headless calendar library for svelte applications with full event management and drag-and-drop support",
   "author": "Rameez Raja <rameezrajapathan@live.com>",
   "license": "GPL-3.0-or-later",

@@ -1,4 +1,3 @@
-import "./App.css";
 import CalendarDemo from "./CalendarDemo";
 
 function App() {

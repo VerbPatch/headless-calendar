@@ -1,19 +1,20 @@
 {
-  "name": "calendar",
+  "name": "headless-calendar",
   "namesapce": "@verbpatch",
   "type": "module",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.4",
   "description": "",
   "author": "Rameez Raja",
   "license": "LGPL-3.0-or-later",
   "packageManager": "pnpm@10.18.3",
   "keywords": [],
   "scripts": {
-    "clean": "pnpm  --filter \"./packages/**\" run clean",
+    "clean": "pnpm --filter \"./packages/**\" run clean",
     "build": "nx affected --targets=build --exclude=examples/** && size-limit",
     "build:all": "nx affected --targets=build --exclude=examples/** && size-limit",
     "watch": "pnpm run build:all && nx watch --all -- pnpm run build:all",
-    "dev": "pnpm run watch"
+    "dev": "pnpm run watch",
+    "publish": "pnpm --filter \"./packages/**\" -r publish --force --no-git-checks --access public --publish-branch main"
   },
   "size-limit": [
     {
