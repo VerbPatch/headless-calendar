@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.0.1-beta.7] - 2025-11-14
+
+### Added
+
+- Angular package
+
+### Changed
+
+- updated readme
+- Options are now optional in react calendar package
+
+---
+
 ## [v0.0.1-beta.6] - 2025-11-13
 
 ### Added
