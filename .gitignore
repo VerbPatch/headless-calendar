@@ -10,3 +10,4 @@ build
 .github/instructions/nx.instructions.md
 
 .svelte-kit
+.angular

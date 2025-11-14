@@ -1,0 +1,120 @@
+<div>
+    <div class="calendar-container">
+        <h1>Angular Signal Calendar Example</h1>
+        <div class="card">
+            <table border="0" width="840" cellspacing="0"
+                style="height:700px;border-left:1px solid; border-top:1px solid;">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid;">
+                            <button type="button" (click)="calendarHook.calendar().goToPrevious()"> ← </button>
+                            <button type="button" (click)="calendarHook.calendar().goToToday()"> Today </button>
+                            <button type="button" (click)="calendarHook.calendar().goToNext()"> → </button>
+                        </th>
+                        <th colspan="3" style="border-bottom: 1px solid;">
+                            <h3>
+                                {{ calendarHook.calendar().view === 'month' ?
+                                calendarHook.calendar().monthData?.monthName : '' }}
+                                {{ calendarHook.calendar().view === 'week' ? calendarHook.calendar().weekData?.weekRange
+                                : '' }}
+                                {{ calendarHook.calendar().view === 'day' ? calendarHook.calendar().dayData?.dayName :
+                                '' }}
+                            </h3>
+                        </th>
+                        <th colspan="2" style="border-bottom: 1px solid;border-right:1px solid;">
+                            <select (change)="changeView($event)" title="Change View">
+                                <option value="month">Month</option>
+                                <option value="week">Week</option>
+                                <option value="day">Day</option>
+                            </select>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (calendarHook.calendar().view == 'month'){
+                    <tr>
+                        @for (day of calendarHook.calendar().utils.daysofWeek('short'); track day){
+                        <th style="width: 120px;border-right:1px solid; border-bottom:1px solid;">
+                            {{ day }}
+                        </th>
+                        }
+                    </tr>
+                    @for (week of calendarHook.calendar().monthData?.weeks; track week){
+                    <tr>
+                        @for(date of week; track date){
+                        <td style="border-right:1px solid;border-bottom:1px solid;" [ngStyle]="{
+                            'color': calendarHook.calendar().monthData!.isCurrentMonth(date) == false ? 'gray':'', 
+                            'font-weight':calendarHook.calendar().monthData!.isToday(date)?'bold':''
+                            }">
+                            {{ calendarHook.calendar().utils.formatDate(date, 'd') }}
+                        </td>
+                        }
+                    </tr>
+                    }
+                    }
+
+
+                    @if(calendarHook.calendar().view == 'week'){
+                    <tr>
+                        <td colspan="7" style="border-right:1px solid;">
+                            <table cellpadding="5" cellspacing="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style=" border-bottom:1px solid;"></td>
+                                        @for (date of calendarHook.calendar().weekData?.dates; track date) {
+                                        <td style="border-left:1px solid; border-bottom:1px solid;" [ngStyle]="{
+                                            'font-weight':calendarHook.calendar().weekData!.isToday(date)?'bold':''
+                                        }">
+                                            {{ calendarHook.calendar().utils.formatDateTime(date, 'EEE d') }}
+                                        </td>
+                                        }
+                                    </tr>
+                                    @for(slot of calendarHook.calendar().timeSlots; track slot){
+                                    <tr>
+                                        <td data-slot="{{slot.time}}" style="border-bottom: 1px solid;">
+                                            {{ slot.label }}
+                                        </td>
+                                        @for(date of calendarHook.calendar().weekData?.dates; track date) {
+                                        <td style="border-left:1px solid; border-bottom: 1px solid;">
+                                            &nbsp;
+                                        </td>
+                                        }
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    }
+
+                    @if(calendarHook.calendar().view == 'day'){
+                    <tr>
+                        <td colspan="7" align="center" style="border-right:1px solid;border-bottom:1px solid;">
+                            {{ calendarHook.calendar().dayData!.dayName }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="border-right:1px solid;">
+                            <table width="100%" cellspacing="0" style="height:100%">
+                                <tbody>
+                                    @for(slot of calendarHook.calendar().timeSlots; track slot){
+                                    <tr>
+                                        <td data-slot={{slot.time}} width="25%" style="border-bottom: 1px solid;">
+                                            {{ slot.label }}
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<router-outlet />
