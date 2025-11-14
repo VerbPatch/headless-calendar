@@ -54,45 +54,20 @@ declare global {
     $el.trigger('calendar:initialized', [calendar]);
   }
 
-  // function refreshCalendarData(state: any) {
-  //   const { options, calendar } = state;
-  //   const temp = useCalendar({
-  //     ...options,
-  //     defaultDate: calendar.currentDate,
-  //     defaultView: calendar.view,
-  //     initialEvents: calendar.events
-  //   });
-
-  //   Object.assign(calendar, {
-  //     currentDate: temp.currentDate,
-  //     view: temp.view,
-  //     visibleDates: temp.visibleDates,
-  //     visibleEvents: temp.visibleEvents,
-  //     monthData: temp.monthData,
-  //     weekData: temp.weekData,
-  //     dayData: temp.dayData,
-  //     timeSlots: temp.timeSlots
-  //   });
-  // }
-
   function refreshCalendarData(state: JQueryCalendarState) {
     const { options, calendar } = state;
-    // Create a fresh computed calendar instance from latest state
     const newCalendar = useCalendar({
       ...options,
       defaultDate: calendar.currentDate,
       defaultView: calendar.view,
       initialEvents: calendar.events
     });
-
-    // Replace calendar reference to ensure computed values are fresh
     state.calendar = newCalendar;
   }
 
   function updateAfter(state: JQueryCalendarState, action: () => void) {
     action();
     refreshCalendarData(state);
-    // Optional: trigger immediate render callback if provided
     if (state.options.onRender) state.options.onRender(state.calendar);
   }
 

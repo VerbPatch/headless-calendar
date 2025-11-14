@@ -1,26 +1,23 @@
 import { useState } from "react";
 export * from "@verbpatch/headless-calendar";
 
-import {
-  useCalendar as createCalendar,
-  CalendarOptions,
-} from "@verbpatch/headless-calendar";
+import { useCalendar as createCalendar, CalendarOptions } from "@verbpatch/headless-calendar";
 
-export default function useCalendar(options: CalendarOptions) {
+export default function useCalendar(options?: CalendarOptions) {
   const [stateChanged, setStateChanged] = useState(0);
   const calendar = createCalendar({
     ...options,
     onEvent: (event) => {
       setStateChanged((stateChanged) => stateChanged + 1);
-      options.onEvent?.(event);
+      options?.onEvent?.(event);
     },
     onDateChange: (date) => {
       setStateChanged((stateChanged) => stateChanged + 1);
-      options.onDateChange?.(date);
+      options?.onDateChange?.(date);
     },
     onViewChange: (view) => {
       setStateChanged((stateChanged) => stateChanged + 1);
-      options.onViewChange?.(view);
+      options?.onViewChange?.(view);
     },
   });
 
