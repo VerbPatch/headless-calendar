@@ -541,3 +541,8 @@ export class CalendarDemo extends LitElement {
     `;
   }
 }
+declare global {
+  interface HTMLElementTagNameMap {
+    'alendar-demo': CalendarDemo
+  }
+}
