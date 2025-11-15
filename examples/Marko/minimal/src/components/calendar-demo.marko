@@ -1,0 +1,293 @@
+<marko-calendar-demo>
+  <div class="calendar-container">
+    <table border="0" style="width: 800px; height: 800px; margin: 0 auto;">
+      <tbody>
+        <tr>
+          <td style="height: 600px;">
+            <table border="1">
+              <thead>
+                <tr>
+                  <td colspan="2" align="center">
+                    <button type="button" on-click("goToPrevious")>←</button>
+                    <button type="button" on-click("goToToday")>Today</button>
+                    <button type="button" on-click("goToNext")>→</button>
+                  </td>
+                  <td colspan="3" align="center">
+                    <h3>
+                      <if(state.view === "month")>
+                        ${state.monthData?.monthName}
+                      </if>
+                      <if(state.view === "week")>
+                        ${state.weekData?.weekRange}
+                      </if>
+                      <if(state.view === "day")>
+                        ${state.dayData?.dayName}
+                      </if>
+                    </h3>
+                  </td>
+                  <td colspan="2" align="center">
+                    <button
+                      on-click("changeView", "month")
+                      class=(state.view === "month"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 hover:bg-gray-300")
+                    >
+                      Month
+                    </button>
+                    <button
+                      on-click("changeView", "week")
+                      class=(state.view === "week"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 hover:bg-gray-300")
+                    >
+                      Week
+                    </button>
+                    <button
+                      type="button"
+                      on-click("changeView", "day")
+                      class=(state.view === "day"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 hover:bg-gray-300")
+                    >
+                      Day
+                    </button>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <if(state.view === "month")>
+                  <tr>
+                    <for|day| of=state.utils.daysofWeek("long")>
+                      <td align="center">${day}</td>
+                    </for>
+                  </tr>
+                  <for|week, weekIndex| of=state.monthData.weeks>
+                    <tr key=weekIndex>
+                      <for|date, dayIndex| of=week>
+                        $ {
+                          const dateEvents = state.getEventsForDate(date);
+                          const isCurrentMonth = state.monthData.isCurrentMonth(
+                            date
+                          );
+                          const isToday = state.monthData.isToday(date);
+                        }
+                        <td
+                          align="center"
+                          style={
+                            backgroundColor: isToday ? "#cecece" : "#fff",
+                            fontWeight: isToday ? "bold" : "normal",
+                            color: isCurrentMonth ? "#000" : "#888",
+                            cursor: "pointer",
+                            width: "100px",
+                            height: "50px",
+                          }
+                          on-click("handleDateClick", date)
+                          on-dragover("preventDefault")
+                          on-drop("eventHandleDrop", date)
+                        >
+                          <div>${state.utils.formatDate(date, "d")}</div>
+                          <div>
+                            <for|event| of=dateEvents.slice(0, 2)>
+                              <div
+                                key=event.id
+                                style={backgroundColor: event.color}
+                                draggable="true"
+                                on-dragstart("handleEventDragStart", event)
+                                on-click("stopPropagation")
+                              >
+                                ${event.title}
+                              </div>
+                            </for>
+                            <if(dateEvents.length > 2)>
+                              <div>+${dateEvents.length - 2} more</div>
+                            </if>
+                          </div>
+                        </td>
+                      </for>
+                    </tr>
+                  </for>
+                </if>
+                <if(state.view === "week")>
+                  <div>
+                    <div>
+                      <div></div>
+                      <for|date, index| of=state.weekData.dates>
+                        <div key=index>
+                          <div
+                            class=(state.weekData.isToday(date)
+                              ? "font-semibold text-blue-600"
+                              : "font-semibold")
+                          >
+                            ${state.utils.formatDateTime(date, "EEE")}
+                          </div>
+                          <div
+                            class=(state.weekData.isToday(date)
+                              ? "text-sm text-blue-600"
+                              : "text-sm text-gray-600")
+                          >
+                            ${state.utils.formatDateTime(date, "d")}
+                          </div>
+                        </div>
+                      </for>
+                    </div>
+                    <div>
+                      <div>
+                        <for|slot| of=state.timeSlots>
+                          <div key=slot.time data-slot=slot.time>
+                            ${slot.label}
+                          </div>
+                        </for>
+                      </div>
+                      <for|date, dateIndex| of=state.weekData.dates>
+                        <div key=dateIndex>
+                          <for|slot| of=state.timeSlots>
+                            $ {
+                              const slotEvents = state
+                                .getEventsForDate(date)
+                                .filter((event) => {
+                                  const eventStart = new Date(event.start);
+                                  const eventEnd = new Date(event.end);
+                                  return state.utils.dateTimeInBetween(
+                                    new Date(
+                                      date.getFullYear(),
+                                      date.getMonth(),
+                                      date.getDate(),
+                                      slot.hour,
+                                      slot.minute,
+                                      0
+                                    ),
+                                    eventStart,
+                                    eventEnd
+                                  );
+                                });
+                            }
+                            <div
+                              key=slot.time
+                              data-slot=slot.time
+                              on-dragover("preventDefault")
+                              on-drop("eventHandleDrop", date, slot.time)
+                              on-click("createWeekEvent", date, slot)
+                            >
+                              <for|event| of=slotEvents>
+                                <div
+                                  key=event.id
+                                  style={backgroundColor: event.color}
+                                  draggable="true"
+                                  on-dragstart("handleEventDragStart", event)
+                                  data-props=JSON.stringify(event)
+                                >
+                                  ${event.title}
+                                </div>
+                              </for>
+                            </div>
+                          </for>
+                        </div>
+                      </for>
+                    </div>
+                  </div>
+                </if>
+                <if(state.view === "day")>
+                  <div>
+                    <div>
+                      <h2
+                        class=(state.dayData.isToday
+                          ? "text-xl font-semibold text-blue-600"
+                          : "text-xl font-semibold")
+                      >
+                        ${state.dayData.dayName}
+                      </h2>
+                    </div>
+                    <div>
+                      <div>
+                        <for|slot| of=state.timeSlots>
+                          <div key=slot.time>${slot.label}</div>
+                        </for>
+                      </div>
+                      <for|slot| of=state.timeSlots>
+                        $ {
+                          const slotEvents = state
+                            .getEventsForDate(state.dayData.date)
+                            .filter((event) => {
+                              const eventStart = new Date(event.start);
+                              return (
+                                eventStart.getHours() === slot.hour &&
+                                eventStart.getMinutes() === slot.minute
+                              );
+                            });
+                        }
+                        <div
+                          key=slot.time
+                          on-dragover("preventDefault")
+                          on-drop("eventHandleDrop", state.dayData.date, slot.time)
+                          on-click("createDayEvent", slot)
+                        >
+                          <for|event| of=slotEvents>
+                            <div
+                              data-time=JSON.stringify(event)
+                              key=event.id
+                              style={backgroundColor: event.color}
+                              draggable="true"
+                              on-dragstart("handleEventDragStart", event)
+                            >
+                              <div>${event.title}</div>
+                              <if(event.description)>
+                                <div>${event.description}</div>
+                              </if>
+                            </div>
+                          </for>
+                        </div>
+                      </for>
+                    </div>
+                  </div>
+                </if>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h3>Events (${state.events.length})</h3>
+            <div style="height: 200px; overflow: auto;">
+              <div>
+                <for|event| of=state.events>
+                  <div
+                    key=event.id
+                    style={
+                      backgroundColor: event.color,
+                      display: "flex",
+                      marginBottom: "8px",
+                      padding: "4px",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }
+                  >
+                    <div>
+                      <strong style="display: block;">${event.title}</strong>
+                      <span style="font-size: 11px;">
+                        ${state.utils.formatDateTime(
+                          event.start,
+                          "dd MMM yyyy hh:mm a"
+                        )}
+                        to
+                        ${state.utils.formatDateTime(
+                          event.end,
+                          "dd MMM yyyy hh:mm a"
+                        )}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      on-click("deleteEvent", event.id)
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </for>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</marko-calendar-demo>

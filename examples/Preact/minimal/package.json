@@ -1,0 +1,21 @@
+{
+  "name": "preact-calendar-minimal-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@verbpatch/preact-calendar": "workspace:^",
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-preact": "^0.1.0",
+    "vite": "^7.2.2"
+  }
+}
