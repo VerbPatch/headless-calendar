@@ -4,25 +4,38 @@ export * from "@verbpatch/headless-calendar";
 
 export class CalendarController implements ReactiveController {
   private host: ReactiveControllerHost;
-  public calendar: CalendarInstance;
+  private options: CalendarOptions;
+  private _calendar!: CalendarInstance;
+
+  public get calendar(): CalendarInstance {
+    return this._calendar;
+  }
 
   constructor(host: ReactiveControllerHost, options: CalendarOptions) {
-    (this.host = host).addController(this);
-    this.calendar = createCalendar({
-      ...options,
+    this.host = host;
+    this.options = options;
+    host.addController(this);
+    this.updateCalendarState();
+  }
+
+  private updateCalendarState(): void {
+    this._calendar = createCalendar({
+      ...this.options,
       onEvent: (event) => {
-        this.host.requestUpdate();
-        options?.onEvent?.(event);
+        this.updateCalendarState();
+        this.options?.onEvent?.(event);
       },
       onDateChange: (date) => {
-        this.host.requestUpdate();
-        options?.onDateChange?.(date);
+        this.updateCalendarState();
+        this.options?.onDateChange?.(date);
       },
       onViewChange: (view) => {
-        this.host.requestUpdate();
-        options?.onViewChange?.(view);
+        this.updateCalendarState();
+        this.options?.onViewChange?.(view);
       },
     });
+
+    this.host.requestUpdate();
   }
 
   hostConnected() {
@@ -35,5 +48,5 @@ export class CalendarController implements ReactiveController {
 }
 
 export function useCalendar(host: ReactiveControllerHost, options: CalendarOptions) {
-  return new CalendarController(host, options).calendar;
+  return new CalendarController(host, options);
 }
