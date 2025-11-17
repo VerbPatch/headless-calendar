@@ -1,21 +1,11 @@
 import { FunctionalComponent } from "preact";
 import { useCallback, useMemo } from "preact/hooks";
-import useCalendar, {
-  CalendarEvent,
-  generateId,
-} from "@verbpatch/preact-calendar";
+import useCalendar, { CalendarEvent, generateId } from "@verbpatch/preact-calendar";
 
 export const CalendarDemo: FunctionalComponent = () => {
   const initialEvents = useMemo<CalendarEvent[]>(() => {
     const _today = new Date();
-    const today = new Date(
-      _today.getFullYear(),
-      _today.getMonth(),
-      _today.getDate(),
-      0,
-      0,
-      0
-    );
+    const today = new Date(_today.getFullYear(), _today.getMonth(), _today.getDate(), 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -23,21 +13,8 @@ export const CalendarDemo: FunctionalComponent = () => {
       {
         id: generateId(),
         title: "Team Meeting",
-        start: new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDate(),
-          16,
-          0,
-          0
-        ),
-        end: new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDate(),
-          18,
-          0
-        ),
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 16, 0, 0),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0),
         description: "Weekly team sync",
         allDay: false,
         color: "#3b82f6",
@@ -46,22 +23,8 @@ export const CalendarDemo: FunctionalComponent = () => {
       {
         id: generateId(),
         title: "Project Deadline",
-        start: new Date(
-          tomorrow.getFullYear(),
-          tomorrow.getMonth(),
-          tomorrow.getDate(),
-          0,
-          0,
-          0
-        ),
-        end: new Date(
-          tomorrow.getFullYear(),
-          tomorrow.getMonth(),
-          tomorrow.getDate(),
-          0,
-          0,
-          0
-        ),
+        start: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
+        end: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         allDay: true,
         color: "#ef4444",
         timezone: "Asia/Calcutta",
@@ -141,20 +104,14 @@ export const CalendarDemo: FunctionalComponent = () => {
     });
   }, []);
 
-  const handleEventDragStart = useCallback(
-    (event: CalendarEvent, e: DragEvent): void => {
-      //console.log({ event });
-      startDrag(event, { type: "event" });
-    },
-    []
-  );
+  const handleEventDragStart = useCallback((event: CalendarEvent, e: DragEvent): void => {
+    //console.log({ event });
+    startDrag(event, { type: "event" });
+  }, []);
 
-  const eventHandleDrop = useCallback(
-    (e: DragEvent, date: Date, time?: string): void => {
-      handleDrop({ date, time });
-    },
-    []
-  );
+  const eventHandleDrop = useCallback((e: DragEvent, date: Date, time?: string): void => {
+    handleDrop({ date, time });
+  }, []);
 
   const renderMonthView = (): preact.JSX.Element | null => {
     console.log("Rendering Month View", monthData);
@@ -211,9 +168,7 @@ export const CalendarDemo: FunctionalComponent = () => {
                       </div>
                     ))}
 
-                    {dateEvents.length > 2 && (
-                      <div>+{dateEvents.length - 2} more</div>
-                    )}
+                    {dateEvents.length > 2 && <div>+{dateEvents.length - 2} more</div>}
                   </div>
                 </td>
               );
@@ -233,20 +188,8 @@ export const CalendarDemo: FunctionalComponent = () => {
           <div></div>
           {weekData.dates.map((date, index) => (
             <div key={index}>
-              <div
-                className={`font-semibold ${
-                  weekData!.isToday(date) ? "text-blue-600" : ""
-                }`}
-              >
-                {formatDateTime(date, "EEE")}
-              </div>
-              <div
-                className={`text-sm ${
-                  weekData!.isToday(date) ? "text-blue-600" : "text-gray-600"
-                }`}
-              >
-                {formatDateTime(date, "d")}
-              </div>
+              <div className={`font-semibold ${weekData!.isToday(date) ? "text-blue-600" : ""}`}>{formatDateTime(date, "EEE")}</div>
+              <div className={`text-sm ${weekData!.isToday(date) ? "text-blue-600" : "text-gray-600"}`}>{formatDateTime(date, "d")}</div>
             </div>
           ))}
         </div>
@@ -264,24 +207,11 @@ export const CalendarDemo: FunctionalComponent = () => {
             return (
               <div key={dateIndex}>
                 {timeSlots.map((slot) => {
-                  const slotEvents = getEventsForDate(date).filter(
-                    (event, index) => {
-                      const eventStart = new Date(event.start);
-                      const eventEnd = new Date(event.end);
-                      return dateTimeInBetween(
-                        new Date(
-                          date.getFullYear(),
-                          date.getMonth(),
-                          date.getDate(),
-                          slot.hour,
-                          slot.minute,
-                          0
-                        ),
-                        eventStart,
-                        eventEnd
-                      );
-                    }
-                  );
+                  const slotEvents = getEventsForDate(date).filter((event, index) => {
+                    const eventStart = new Date(event.start);
+                    const eventEnd = new Date(event.end);
+                    return dateTimeInBetween(new Date(date.getFullYear(), date.getMonth(), date.getDate(), slot.hour, slot.minute, 0), eventStart, eventEnd);
+                  });
                   slotEvents.length > 0 && console.log(slotEvents);
                   return (
                     <div
@@ -293,9 +223,7 @@ export const CalendarDemo: FunctionalComponent = () => {
                         const eventStart = new Date(date);
                         eventStart.setHours(slot.hour, slot.minute);
                         const eventEnd = new Date(eventStart);
-                        eventEnd.setMinutes(
-                          eventEnd.getMinutes() + (timeSlotInterval ?? 60)
-                        );
+                        eventEnd.setMinutes(eventEnd.getMinutes() + (timeSlotInterval ?? 60));
 
                         createEvent({
                           id: generateId(),
@@ -307,13 +235,7 @@ export const CalendarDemo: FunctionalComponent = () => {
                       }}
                     >
                       {slotEvents.map((event) => (
-                        <div
-                          key={event.id}
-                          style={{ backgroundColor: event.color }}
-                          draggable
-                          onDragStart={(e) => handleEventDragStart(event, e)}
-                          data-props={JSON.stringify(event)}
-                        >
+                        <div key={event.id} style={{ backgroundColor: event.color }} draggable onDragStart={(e) => handleEventDragStart(event, e)} data-props={JSON.stringify(event)}>
                           {event.title}
                         </div>
                       ))}
@@ -334,13 +256,7 @@ export const CalendarDemo: FunctionalComponent = () => {
     return (
       <div>
         <div>
-          <h2
-            className={`text-xl font-semibold ${
-              dayData.isToday ? "text-blue-600" : ""
-            }`}
-          >
-            {dayData.dayName}
-          </h2>
+          <h2 className={`text-xl font-semibold ${dayData.isToday ? "text-blue-600" : ""}`}>{dayData.dayName}</h2>
         </div>
 
         <div>
@@ -352,15 +268,10 @@ export const CalendarDemo: FunctionalComponent = () => {
 
           <div>
             {timeSlots.map((slot) => {
-              const slotEvents = getEventsForDate(dayData!.date).filter(
-                (event) => {
-                  const eventStart = new Date(event.start);
-                  return (
-                    eventStart.getHours() === slot.hour &&
-                    eventStart.getMinutes() === slot.minute
-                  );
-                }
-              );
+              const slotEvents = getEventsForDate(dayData!.date).filter((event) => {
+                const eventStart = new Date(event.start);
+                return eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute;
+              });
 
               return (
                 <div
@@ -383,13 +294,7 @@ export const CalendarDemo: FunctionalComponent = () => {
                   }}
                 >
                   {slotEvents.map((event) => (
-                    <div
-                      data-time={JSON.stringify(event)}
-                      key={event.id}
-                      style={{ backgroundColor: event.color }}
-                      draggable
-                      onDragStart={(e) => handleEventDragStart(event, e)}
-                    >
+                    <div data-time={JSON.stringify(event)} key={event.id} style={{ backgroundColor: event.color }} draggable onDragStart={(e) => handleEventDragStart(event, e)}>
                       <div>{event.title}</div>
                       {event.description && <div>{event.description}</div>}
                     </div>
@@ -434,35 +339,13 @@ export const CalendarDemo: FunctionalComponent = () => {
                     {/* {formatDateTime(currentDate, "EE dd MMM yyyy")} */}
                   </td>
                   <td colSpan={2} align="center">
-                    <button
-                      onClick={() => changeView("month")}
-                      className={`px-4 py-2 rounded ${
-                        view === "month"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200 hover:bg-gray-300"
-                      }`}
-                    >
+                    <button onClick={() => changeView("month")} className={`px-4 py-2 rounded ${view === "month" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
                       Month
                     </button>
-                    <button
-                      onClick={() => changeView("week")}
-                      className={`px-4 py-2 rounded ${
-                        view === "week"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200 hover:bg-gray-300"
-                      }`}
-                    >
+                    <button onClick={() => changeView("week")} className={`px-4 py-2 rounded ${view === "week" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
                       Week
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => changeView("day")}
-                      className={`px-4 py-2 rounded ${
-                        view === "day"
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200 hover:bg-gray-300"
-                      }`}
-                    >
+                    <button type="button" onClick={() => changeView("day")} className={`px-4 py-2 rounded ${view === "day" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
                       Day
                     </button>
                   </td>
@@ -508,19 +391,13 @@ export const CalendarDemo: FunctionalComponent = () => {
                       }}
                     >
                       <div>
-                        <strong style={{ display: "block" }}>
-                          {event.title}
-                        </strong>
+                        <strong style={{ display: "block" }}>{event.title}</strong>
                         <span style={{ fontSize: 11 }}>
-                          {formatDateTime(event.start, "dd MMM yyyy hh:mm a")}{" "}
-                          to {formatDateTime(event.end, "dd MMM yyyy hh:mm a")}
+                          {formatDateTime(event.start, "dd MMM yyyy hh:mm a")} to {formatDateTime(event.end, "dd MMM yyyy hh:mm a")}
                         </span>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => deleteEvent(event.id as string)}
-                      >
+                      <button type="button" onClick={() => deleteEvent(event.id as string)}>
                         Delete
                       </button>
                     </div>
