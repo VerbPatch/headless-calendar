@@ -10,9 +10,8 @@
   "keywords": [],
   "scripts": {
     "clean": "pnpm --filter \"./packages/**\" run clean",
-    "build": "nx affected --targets=build --exclude=examples/** && size-limit",
-    "build:all": "nx affected --targets=build --exclude=examples/** && size-limit",
-    "watch": "pnpm run build:all && nx watch --all -- pnpm run build:all",
+    "build": "pnpm --filter \"./packages/**\" -r build && size-limit",
+    "watch": "pnpm run build:all && nx watch --all -- pnpm run build",
     "dev": "pnpm run watch",
     "publish": "pnpm --filter \"./packages/**\" -r publish --force --no-git-checks --access public --publish-branch main"
   },
