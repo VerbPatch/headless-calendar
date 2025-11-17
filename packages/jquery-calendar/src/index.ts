@@ -54,7 +54,7 @@ declare global {
     $el.trigger('calendar:initialized', [calendar]);
   }
 
-  function refreshCalendarData(state: JQueryCalendarState) {
+  function refreshCalendar(state: JQueryCalendarState) {
     const { options, calendar } = state;
     const newCalendar = useCalendar({
       ...options,
@@ -67,7 +67,7 @@ declare global {
 
   function updateAfter(state: JQueryCalendarState, action: () => void) {
     action();
-    refreshCalendarData(state);
+    refreshCalendar(state);
     if (state.options.onRender) state.options.onRender(state.calendar);
   }
 
@@ -138,7 +138,7 @@ declare global {
     getTimeSlots: (s: JQueryCalendarState) => s.calendar.timeSlots,
     getVisibleDates: (s: JQueryCalendarState) => s.calendar.visibleDates,
     refresh(state: JQueryCalendarState) {
-      refreshCalendarData(state);
+      refreshCalendar(state);
       state.$el.trigger('calendar:refresh', [state.calendar]);
     },
     destroy(state: JQueryCalendarState) {

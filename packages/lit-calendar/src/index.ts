@@ -15,22 +15,22 @@ export class CalendarController implements ReactiveController {
     this.host = host;
     this.options = options;
     host.addController(this);
-    this.updateCalendarState();
+    this.refreshCalendar();
   }
 
-  private updateCalendarState(): void {
+  private refreshCalendar(): void {
     this._calendar = createCalendar({
       ...this.options,
       onEvent: (event) => {
-        this.updateCalendarState();
+        this.refreshCalendar();
         this.options?.onEvent?.(event);
       },
       onDateChange: (date) => {
-        this.updateCalendarState();
+        this.refreshCalendar();
         this.options?.onDateChange?.(date);
       },
       onViewChange: (view) => {
-        this.updateCalendarState();
+        this.refreshCalendar();
         this.options?.onViewChange?.(view);
       },
     });

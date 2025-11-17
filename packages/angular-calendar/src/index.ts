@@ -19,29 +19,29 @@ export function useCalendar(options?: CalendarOptions): CalendarComposable {
     const initialInstance = createCalendar(options);
     const calendarSignal = signal<CalendarInstance>(initialInstance);
 
-    const updateCalendarInstance = () => {
+    const refreshCalendar = () => {
         // console.log("Called here 1");
         const newInstance = createCalendar({
             ...options,
 
             onEvent: (event: CalendarEvent[]) => {
                 options?.onEvent?.(event);
-                updateCalendarInstance();
+                refreshCalendar();
             },
             onDateChange: (date: Date) => {
                 options?.onDateChange?.(date);
-                updateCalendarInstance();
+                refreshCalendar();
             },
             onViewChange: (view: ViewType) => {
                 options?.onViewChange?.(view);
-                updateCalendarInstance();
+                refreshCalendar();
             },
         });
 
         calendarSignal.set(newInstance);
     };
 
-    updateCalendarInstance();
+    refreshCalendar();
 
     const calendarWrapper: any = {
         calendar: calendarSignal
