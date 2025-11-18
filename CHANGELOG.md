@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.0.1-beta.8] - 2025-11-18
+
+### Added
+
+- lit, preact, qwik and solidjs packages with example
+
+### Removed
+
+- usecalendar default removed from headless-calendar
+
+---
+
 ## [v0.0.1-beta.7] - 2025-11-14
 
 ### Added
