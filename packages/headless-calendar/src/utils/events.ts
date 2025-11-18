@@ -1,16 +1,52 @@
 import { CalendarEvent } from '../types/events';
 import { getStartOfDay, getEndOfDay } from './date';
 
+/**
+ * @description Generates a unique ID for a calendar event.
+ * @returns {string} - A unique UUID string.
+ * @example
+ * ```ts
+ * const id = generateId(); // "123e4567-e89b-12d3-a456-426614174000"
+ * ```
+ */
 export const generateId = (): string => {
   return crypto.randomUUID();
 };
 
+/**
+ * @description Checks if a given event falls within a specified date range.
+ * @param {CalendarEvent} event - The calendar event to check.
+ * @param {Date} startDate - The start date of the range.
+ * @param {Date} endDate - The end date of the range.
+ * @returns {boolean} - True if the event is within the range, false otherwise.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const event = { start: new Date('2024-01-15'), end: new Date('2024-01-16') };
+ * const inRange = isEventInDateRange(event, new Date('2024-01-10'), new Date('2024-01-20')); // true
+ * ```
+ */
 export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDate: Date): boolean => {
   const eventStart = event.start;
   const eventEnd = event.end;
   return eventStart <= endDate && eventEnd >= startDate;
 };
 
+/**
+ * @description Retrieves all events that occur on a specific date.
+ * @param {CalendarEvent[]} events - An array of calendar events.
+ * @param {Date} date - The date to filter events by.
+ * @returns {CalendarEvent[]} - An array of events occurring on the specified date.
+ * @see {@link CalendarEvent}
+ * @see {@link getStartOfDay}
+ * @see {@link getEndOfDay}
+ * @see {@link isEventInDateRange}
+ * @example
+ * ```ts
+ * const events = [{ start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') }];
+ * const eventsForDate = getEventsForDate(events, new Date('2024-01-15'));
+ * ```
+ */
 export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarEvent[] => {
   const startOfDay = getStartOfDay(date);
   const endOfDay = getEndOfDay(date);
@@ -20,12 +56,40 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
   );
 };
 
+/**
+ * @description Retrieves all events that fall within a specified date range.
+ * @param {CalendarEvent[]} events - An array of calendar events.
+ * @param {Date} startDate - The start date of the range.
+ * @param {Date} endDate - The end date of the range.
+ * @returns {CalendarEvent[]} - An array of events within the specified date range.
+ * @see {@link CalendarEvent}
+ * @see {@link isEventInDateRange}
+ * @example
+ * ```ts
+ * const events = [{ start: new Date('2024-01-15'), end: new Date('2024-01-16') }];
+ * const eventsInRange = getEventsForDateRange(events, new Date('2024-01-10'), new Date('2024-01-20'));
+ * ```
+ */
 export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, endDate: Date): CalendarEvent[] => {
   return events.filter(event =>
     isEventInDateRange(event, startDate, endDate)
   );
 };
 
+/**
+ * @description Sorts an array of calendar events by their start time in ascending order.
+ * @param {CalendarEvent[]} events - An array of calendar events.
+ * @returns {CalendarEvent[]} - A new array of events sorted by start time.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const events = [
+ *   { start: new Date('2024-01-15T14:00:00'), end: new Date('2024-01-15T15:00:00') },
+ *   { start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') }
+ * ];
+ * const sortedEvents = sortEventsByStartTime(events);
+ * ```
+ */
 export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] => {
   return [...events].sort((a, b) => {
     const startA = a.start;
@@ -34,22 +98,69 @@ export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] 
   });
 };
 
+/**
+ * @description Calculates the duration of an event in milliseconds.
+ * @param {CalendarEvent} event - The calendar event.
+ * @returns {number} - The duration of the event in milliseconds.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const event = { start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') };
+ * const duration = getEventDuration(event); // 3600000
+ * ```
+ */
 export const getEventDuration = (event: CalendarEvent): number => {
   const start = event.start;
   const end = event.end;
   return end.getTime() - start.getTime();
 };
 
+/**
+ * @description Checks if an event is an all-day event.
+ * @param {CalendarEvent} event - The calendar event.
+ * @returns {boolean} - True if the event is an all-day event, false otherwise.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const event = { allDay: true, start: new Date(), end: new Date() };
+ * const isAllDay = isAllDayEvent(event); // true
+ * ```
+ */
 export const isAllDayEvent = (event: CalendarEvent): boolean => {
   return event.allDay === true;
 };
 
+/**
+ * @description Checks if an event spans multiple days.
+ * @param {CalendarEvent} event - The calendar event.
+ * @returns {boolean} - True if the event spans multiple days, false otherwise.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const event = { start: new Date('2024-01-15'), end: new Date('2024-01-16') };
+ * const isMultiDay = isMultiDayEvent(event); // true
+ * ```
+ */
 export const isMultiDayEvent = (event: CalendarEvent): boolean => {
   const start = event.start;
   const end = event.end;
   return start.toDateString() !== end.toDateString();
 };
 
+/**
+ * @description Retrieves events that occur at a specific time on a given date.
+ * @param {CalendarEvent[]} events - An array of calendar events.
+ * @param {Date} date - The date to filter by.
+ * @param {number} hour - The hour to filter by (0-23).
+ * @param {number} [minute=0] - The minute to filter by (0-59).
+ * @returns {CalendarEvent[]} - An array of events occurring at the specified time.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const events = [{ start: new Date('2024-01-15T10:30:00'), end: new Date('2024-01-15T11:30:00') }];
+ * const eventsAtTime = getEventsAtTime(events, new Date('2024-01-15'), 10, 30);
+ * ```
+ */
 export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: number, minute = 0): CalendarEvent[] => {
   return events.filter(event => {
     const eventStart = event.start;
@@ -61,6 +172,21 @@ export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: numbe
   });
 };
 
+/**
+ * @description Finds all events that overlap with a target event.
+ * @param {CalendarEvent[]} events - An array of calendar events.
+ * @param {CalendarEvent} targetEvent - The event to check for overlaps against.
+ * @returns {CalendarEvent[]} - An array of overlapping events.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const events = [
+ *   { id: '1', start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') },
+ *   { id: '2', start: new Date('2024-01-15T10:30:00'), end: new Date('2024-01-15T11:30:00') }
+ * ];
+ * const overlapping = getOverlappingEvents(events, events[0]); // [events[1]]
+ * ```
+ */
 export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: CalendarEvent): CalendarEvent[] => {
   const targetStart = targetEvent.start;
   const targetEnd = targetEvent.end;
@@ -75,6 +201,18 @@ export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: Calen
   });
 };
 
+/**
+ * @description Validates a calendar event object for required fields and logical consistency.
+ * @param {CalendarEvent} event - The calendar event to validate.
+ * @returns {string[]} - An array of error messages. If the array is empty, the event is valid.
+ * @see {@link CalendarEvent}
+ * @example
+ * ```ts
+ * const event = { title: '', start: new Date(), end: new Date('2000-01-01') };
+ * const errors = validateEvent(event);
+ * // errors will contain messages about missing title and invalid end date
+ * ```
+ */
 export const validateEvent = (event: CalendarEvent): string[] => {
   const errors: string[] = [];
 
@@ -267,6 +405,19 @@ export const validateEvent = (event: CalendarEvent): string[] => {
   return errors;
 };
 
+/**
+ * @description Creates a deep clone of a calendar event, assigning a new unique ID.
+ * @param {CalendarEvent} event - The event to clone.
+ * @returns {CalendarEvent} - A new event object with a unique ID and copied properties.
+ * @see {@link CalendarEvent}
+ * @see {@link generateId}
+ * @example
+ * ```ts
+ * const event = { id: '1', title: 'Meeting', start: new Date(), end: new Date() };
+ * const clonedEvent = cloneEvent(event);
+ * // clonedEvent will have a new unique ID
+ * ```
+ */
 export const cloneEvent = (event: CalendarEvent): CalendarEvent => {
   return {
     ...event,

@@ -1,8 +1,26 @@
 import type { Dispatch, StateCache } from "./types";
 
-
+/**
+ * @description A cache for storing state.
+ */
 export const stateCache = new Map<string | number, StateCache<any>>();
 
+/**
+ * @description Creates a stateful value and a function to update it.
+ * @param initialValue - The initial value of the state.
+ * @param stateId - A unique identifier for the state.
+ * @returns A tuple containing a function to get the current value and a function to set the value.
+ * @example
+ * ```jsx
+ * const [getCount, setCount] = createState(0, 'my-counter');
+ *
+ * // Get the current value
+ * const currentCount = getCount();
+ *
+ * // Update the value
+ * setCount(currentCount + 1);
+ * ```
+ */
 export function createState<T>(initialValue: T | (() => T), stateId: string | number): [() => T, Dispatch<T>] {
 
     if (!stateCache.has(stateId)) {
@@ -25,6 +43,12 @@ export function createState<T>(initialValue: T | (() => T), stateId: string | nu
     return [() => cached.value, setState];
 }
 
+/**
+ * @description Subscribes to changes in a specific state.
+ * @param id - The unique identifier of the state to subscribe to.
+ * @param callback - The function to call when the state changes.
+ * @returns A function to unsubscribe from the state changes.
+ */
 export function subscribeToState<T>(id: string | number, callback: (value: T) => void): () => void {
     const cached = stateCache.get(id) as StateCache<T> | undefined;;
 

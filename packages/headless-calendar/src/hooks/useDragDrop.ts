@@ -2,11 +2,41 @@ import { CalendarEvent, UseDragDropOptions, UseDragDropReturn } from '../types/e
 import { DraggedEvent, DropTarget } from '../types/calendar';
 import { createCallback, createState } from '../state';
 
+/**
+ * @description A hook for managing drag and drop functionality for calendar events.
+ * @param {UseDragDropOptions} options - Configuration options for drag and drop.
+ * @returns {UseDragDropReturn} - An object containing state and functions for drag and drop.
+ * @see {@link UseDragDropOptions}
+ * @see {@link UseDragDropReturn}
+ * @example
+ * ```jsx
+ * const { draggedEvent, getDragProps, getDropProps } = useDragDrop({
+ *   onEventMove: (eventId, newStart, newEnd) => {
+ *     console.log(`Event ${eventId} moved to ${newStart} - ${newEnd}`);
+ *   },
+ * });
+ *
+ * // In your component:
+ * <div {...getDragProps(event)}>
+ *   {event.title}
+ * </div>
+ *
+ * <div {...getDropProps(date, time)}>
+ *   // Drop target
+ * </div>
+ * ```
+ */
 export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn => {
   const { onEventMove, onDragStart, onDragEnd, onDrop } = options;
 
   const [getDraggedEvent, setDraggedEvent] = createState<DraggedEvent | null>(null, 'dragged-event');
 
+  /**
+   * @description Initiates a drag operation for a calendar event.
+   * @param {CalendarEvent} event - The event to be dragged.
+   * @param {Record<string, any>} [dragData={}] - Additional data to associate with the drag operation.
+   * @see {@link CalendarEvent}
+   */
   const startDrag = createCallback((event: CalendarEvent, dragData: Record<string, any> = {}): void => {
     setDraggedEvent({
       event,
@@ -18,6 +48,9 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
     [onDragStart],
     'drag-start');
 
+  /**
+   * @description Ends the current drag operation and resets the dragged event state.
+   */
   const endDrag = createCallback((): void => {
     const _evnt = getDraggedEvent()?.event;
     if (_evnt) {
@@ -28,6 +61,11 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
     [getDraggedEvent, onDragEnd],
     'drag-end');
 
+  /**
+   * @description Handles the drop of a dragged event onto a target, calculating the new start and end times and invoking callbacks.
+   * @param {DropTarget} dropTarget - The target where the event was dropped.
+   * @see {@link DropTarget}
+   */
   const handleDrop = createCallback((dropTarget: DropTarget): void => {
     const event = getDraggedEvent()?.event;
     if (!getDraggedEvent() || !event) return;
@@ -66,6 +104,12 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
     [getDraggedEvent, onEventMove, onDrop, endDrag],
     'handle-drag');
 
+  /**
+   * @description Returns props to be spread onto a draggable event element.
+   * @param {CalendarEvent} event - The calendar event to get drag props for.
+   * @returns {{ draggable: boolean; onDragStart: (e: DragEvent) => void; onDragEnd: (e: DragEvent) => void; }} - Draggable props.
+   * @see {@link CalendarEvent}
+   */
   const getDragProps = createCallback((event: CalendarEvent) => ({
     draggable: true,
     onDragStart: (e: DragEvent) => {
@@ -84,6 +128,12 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
     [startDrag, endDrag],
     'get-drag-props');
 
+  /**
+   * @description Returns props to be spread onto a drop target element.
+   * @param {Date} date - The date of the drop target.
+   * @param {string} [time] - The time of the drop target (e.g., "09:00").
+   * @returns {{ onDragOver: (e: DragEvent) => void; onDrop: (e: DragEvent) => void; }} - Droppable props.
+   */
   const getDropProps = createCallback((date: Date, time?: string) => ({
     onDragOver: (e: DragEvent) => {
       e.preventDefault();
