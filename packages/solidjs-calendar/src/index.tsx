@@ -1,24 +1,35 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
+import { useCalendar as createCalendar, type CalendarOptions, type CalendarInstance } from "@verbpatch/headless-calendar";
+
 export * from "@verbpatch/headless-calendar";
 
-import { useCalendar as createCalendar, CalendarOptions } from "@verbpatch/headless-calendar";
-
 export default function useCalendar(options?: CalendarOptions) {
-  const [stateChanged, setStateChanged] = createSignal(0);
-  const calendar = createCalendar({
-    ...options,
-    onEvent: (event) => {
-      setStateChanged((stateChanged) => stateChanged + 1);
-      options?.onEvent?.(event);
-    },
-    onDateChange: (date) => {
-      setStateChanged((stateChanged) => stateChanged + 1);
-      options?.onDateChange?.(date);
-    },
-    onViewChange: (view) => {
-      setStateChanged((stateChanged) => stateChanged + 1);
-      options?.onViewChange?.(view);
-    },
+  const [stateVersion, setStateVersion] = createSignal(0);
+  const [calendar, setCalendar] = createSignal<CalendarInstance>();
+
+  const refreshCalendar = () => {
+    const cal = createCalendar({
+      ...options,
+      onEvent: (events) => {
+        setStateVersion((v) => v + 1);
+        options?.onEvent?.(events);
+      },
+      onDateChange: (date) => {
+        setStateVersion((v) => v + 1);
+        options?.onDateChange?.(date);
+      },
+      onViewChange: (view) => {
+        setStateVersion((v) => v + 1);
+        options?.onViewChange?.(view);
+      },
+    });
+
+    setCalendar(cal);
+  };
+
+  createEffect(() => {
+    stateVersion();
+    refreshCalendar();
   });
 
   return calendar;

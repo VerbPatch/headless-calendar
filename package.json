@@ -11,8 +11,6 @@
   "scripts": {
     "clean": "pnpm --filter \"./packages/**\" run clean",
     "build": "pnpm --filter \"./packages/**\" -r build && size-limit",
-    "watch": "pnpm run build:all && nx watch --all -- pnpm run build",
-    "dev": "pnpm run watch",
     "publish": "pnpm --filter \"./packages/**\" -r publish --force --no-git-checks --access public --publish-branch main"
   },
   "size-limit": [
