@@ -2,10 +2,10 @@
   "mode": "pre",
   "tag": "beta",
   "initialVersions": {
-    "@verbpatch/headless-calendar": "0.0.1-beta.7",
-    "@verbpatch/jquery-calendar": "0.0.1-beta.7",
-    "@verbpatch/react-calendar": "0.0.1-beta.7",
-    "@verbpatch/svelte-calendar": "0.0.1-beta.7"
+    "@verbpatch/headless-calendar": "0.0.1-beta.8",
+    "@verbpatch/jquery-calendar": "0.0.1-beta.8",
+    "@verbpatch/react-calendar": "0.0.1-beta.8",
+    "@verbpatch/svelte-calendar": "0.0.1-beta.8"
   },
   "changesets": []
 }
