@@ -2,18 +2,18 @@ import type { CallbackCache, DependencyList } from "./types";
 import { haveDepsChanged } from "./util";
 
 /**
- * @description A cache for storing callbacks.
+ * A cache for storing callbacks.
  */
 export const callbackCache = new Map<string | number, CallbackCache<any>>();
 
 /**
- * @description Creates a memoized callback that only changes if its dependencies have changed.
+ * Creates a memoized callback that only changes if its dependencies have changed.
  * @param callback - The callback function to memoize.
  * @param deps - The dependency list for the callback.
  * @param callbackId - A unique identifier for the callback.
  * @returns The memoized callback function.
  * @example
- * ```jsx
+ * ```typescript
  * const handleClick = createCallback(() => {
  *   console.log('Button clicked');
  * }, [], 'my-click-handler');

@@ -40,13 +40,13 @@ import { formatDateTime } from '../utils/date';
 import { createMemo } from '../state';
 
 /**
- * @description The main hook for initializing and managing a calendar instance.
+ * The main hook for initializing and managing a calendar instance.
  * @param {CalendarOptions} options - Configuration options for the calendar.
  * @returns {CalendarInstance} - An object containing the calendar's state, navigation functions, event management functions, and other utilities.
  * @see {@link CalendarOptions}
  * @see {@link CalendarInstance}
  * @example
- * ```jsx
+ * ```typescript
  * import { useCalendar } from '@verbpatch/headless-calendar';
  *
  * const MyCalendar = () => {
@@ -62,6 +62,9 @@ import { createMemo } from '../state';
  *   );
  * };
  * ```
+ * 
+ * @category Calendar
+ * @group All Main Hooks
  */
 export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => {
   let d = new Date();
@@ -113,7 +116,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   });
 
   /**
-   * @description A memoized array of time slots for the day view, generated based on the `startHour`, `endHour`, and `timeSlotInterval` options.
+   * A memoized array of time slots for the day view, generated based on the `startHour`, `endHour`, and `timeSlotInterval` options.
    * @type {TimeSlot[]}
    * @see {@link TimeSlot}
    */
@@ -124,7 +127,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     'time-slots');
 
   /**
-   * @description A memoized array of dates currently visible in the calendar, depending on the current view.
+   * A memoized array of dates currently visible in the calendar, depending on the current view.
    * @type {Date[]}
    */
   const visibleDates = createMemo((): Date[] => {
@@ -143,7 +146,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     'visible-dates');
 
   /**
-   * @description A memoized array of calendar events that are visible within the current date range of the calendar.
+   * A memoized array of calendar events that are visible within the current date range of the calendar.
    * @type {CalendarEvent[]}
    * @see {@link CalendarEvent}
    */
@@ -163,7 +166,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     'visible-events');
 
   /**
-   * @description Retrieves events within a specified date range.
+   * Retrieves events within a specified date range.
    * @param {Date} startDate - The start date of the range.
    * @param {Date} endDate - The end date of the range.
    * @returns {CalendarEvent[]} - An array of events within the specified range.
@@ -174,7 +177,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   };
 
   /**
-   * @description Retrieves events for a specific date.
+   * Retrieves events for a specific date.
    * @param {Date} date - The date to retrieve events for.
    * @returns {CalendarEvent[]} - An array of events on the specified date.
    * @see {@link CalendarEvent}
@@ -184,7 +187,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   };
 
   /**
-   * @description A memoized object providing data specific to the month view, such as weeks, month name, and utility functions.
+   * A memoized object providing data specific to the month view, such as weeks, month name, and utility functions.
    * @type {MonthData | null}
    * @see {@link MonthData}
    */
@@ -213,7 +216,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     'month-data');
 
   /**
-   * @description A memoized object providing data specific to the week view, such as the dates in the week and the week's date range.
+   * A memoized object providing data specific to the week view, such as the dates in the week and the week's date range.
    * @type {WeekData | null}
    * @see {@link WeekData}
    */
@@ -232,7 +235,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     'week-data');
 
   /**
-   * @description A memoized object providing data specific to the day view, such as the current date and its localized name.
+   * A memoized object providing data specific to the day view, such as the current date and its localized name.
    * @type {DayData | null}
    * @see {@link DayData}
    */
@@ -299,11 +302,11 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     dayData,
 
     /**
-     * @description A collection of utility functions for date manipulation and formatting, bound to the calendar's locale and timezone.
+     * A collection of utility functions for date manipulation and formatting, bound to the calendar's locale and timezone.
      */
     utils: {
       /**
-       * @description Formats a date object into a string based on the specified format.
+       * Formats a date object into a string based on the specified format.
        * @param {Date} date - The date object to format.
        * @param {string} [format="yyyy-MM-dd"] - The format string.
        * @returns {string} - The formatted date string.
@@ -313,7 +316,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
         format?: string
       ) => formatDate(date, { format: format ?? "yyyy-MM-dd", locale, timeZone: timezone }),
       /**
-       * @description Formats a date and time object into a string based on the specified format.
+       * Formats a date and time object into a string based on the specified format.
        * @param {Date} date - The date object to format.
        * @param {string} [format="yyyy-MM-dd HH:mm:ss"] - The format string.
        * @returns {string} - The formatted date and time string.
@@ -335,14 +338,14 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       getEndOfMonth,
       dateTimeInBetween,
       /**
-       * @description Returns an array of localized day names for the week.
+       * Returns an array of localized day names for the week.
        * @param {'long' | 'short' | 'narrow'} [format='short'] - The format of the weekday names.
        * @returns {string[]} - An array of localized weekday names.
        */
       daysofWeek: (format = 'short') =>
         daysofWeek(startOfWeek, format, locale),
       /**
-       * @description Formats a date into a string according to the specified locale and timezone.
+       * Formats a date into a string according to the specified locale and timezone.
        * @param {Date} date - The date to format.
        * @param {string} [l=locale] - The locale to use.
        * @param {string} [tz=timezone] - The timezone to use.
@@ -352,7 +355,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatDateInTimeZone: (date: Date, l = locale, tz = timezone, options?) =>
         formatDateInTimeZone(date, l, tz, options),
       /**
-       * @description Converts a date from one timezone to another.
+       * Converts a date from one timezone to another.
        * @param {Date} date - The date to convert.
        * @param {string} [fromTz=timezone] - The original timezone.
        * @param {string} toTz - The target timezone.
@@ -360,7 +363,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        */
       convertToTimeZone: (date: Date, fromTz = timezone, toTz: string) => convertToTimeZone(date, fromTz, toTz),
       /**
-       * @description Formats a date into a localized date string.
+       * Formats a date into a localized date string.
        * @param {Date} date - The date to format.
        * @param {string} [l=locale] - The locale to use.
        * @param {string} [tz=timezone] - The timezone to use.
@@ -370,7 +373,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatLocalizedDate: (date: Date, l = locale, tz = timezone, options?) =>
         formatLocalizedDate(date, l, tz, options),
       /**
-       * @description Formats a date into a localized month string.
+       * Formats a date into a localized month string.
        * @param {Date} date - The date to format.
        * @param {string} [l=locale] - The locale to use.
        * @param {string} [tz=timezone] - The timezone to use.
@@ -379,7 +382,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatLocalizedMonth: (date: Date, l = locale, tz = timezone) =>
         formatLocalizedMonth(date, l, tz),
       /**
-       * @description Formats a date into a localized weekday string.
+       * Formats a date into a localized weekday string.
        * @param {Date} date - The date to format.
        * @param {string} [l=locale] - The locale to use.
        * @param {string} [tz=timezone] - The timezone to use.
@@ -389,7 +392,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatLocalizedWeekday: (date: Date, l = locale, tz = timezone, format?) =>
         formatLocalizedWeekday(date, l, tz, format),
       /**
-       * @description Formats a date into a localized time string.
+       * Formats a date into a localized time string.
        * @param {Date} date - The date to format.
        * @param {string} [l=locale] - The locale to use.
        * @param {string} [tz=timezone] - The timezone to use.

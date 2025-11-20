@@ -3,13 +3,13 @@ import { addDays, addWeeks, addMonths, getDay } from '../utils/date';
 import { createCallback, createState } from '../state';
 
 /**
- * @description A hook for managing calendar navigation, including changing views and moving between dates.
+ * A hook for managing calendar navigation, including changing views and moving between dates.
  * @param {UseNavigationOptions} options - Configuration options for navigation.
  * @returns {UseNavigationReturn} - An object containing the current date, view, and navigation functions.
  * @see {@link UseNavigationOptions}
  * @see {@link UseNavigationReturn}
  * @example
- * ```jsx
+ * ```typescript
  * const { currentDate, view, goToNext, goToPrevious, goToToday, changeView } = useNavigation({
  *   defaultView: 'month',
  *   defaultDate: new Date(),
@@ -21,6 +21,9 @@ import { createCallback, createState } from '../state';
  * // Change the view to 'week'
  * changeView('week');
  * ```
+ * 
+ * @category Calendar Navigation
+ * @group All Main Hooks
  */
 export const useNavigation = (options: UseNavigationOptions): UseNavigationReturn => {
   const {
@@ -33,7 +36,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
   const [getView, setView] = createState<ViewType>(defaultView, 'view');
 
   /**
-   * @description Navigates the calendar to the next period (day, week, or month) based on the current view.
+   * Navigates the calendar to the next period (day, week, or month) based on the current view.
    */
   const goToNext = createCallback((): void => {
     let newDate: Date;
@@ -59,7 +62,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     'go-to-next');
 
   /**
-   * @description Navigates the calendar to the previous period (day, week, or month) based on the current view.
+   * Navigates the calendar to the previous period (day, week, or month) based on the current view.
    */
   const goToPrevious = createCallback((): void => {
 
@@ -86,7 +89,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     'go-to-previous');
 
   /**
-   * @description Navigates the calendar to today's date.
+   * Navigates the calendar to today's date.
    */
   const goToToday = createCallback((): void => {
     const today = getDay(new Date(), options.timezone, options.timezone);
@@ -97,7 +100,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     'go-to-today');
 
   /**
-   * @description Navigates the calendar to a specific date.
+   * Navigates the calendar to a specific date.
    * @param {Date} date - The date to navigate to.
    */
   const goToDate = createCallback((date: Date): void => {
@@ -109,7 +112,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     'go-to-date');
 
   /**
-   * @description Changes the current view of the calendar.
+   * Changes the current view of the calendar.
    * @param {ViewType} newView - The new view to set.
    * @see {@link ViewType}
    */

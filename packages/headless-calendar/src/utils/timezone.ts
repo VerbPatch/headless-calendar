@@ -1,5 +1,5 @@
 /**
- * @description Returns an array of localized day names for the week, starting from the specified `weekStart`.
+ * Returns an array of localized day names for the week, starting from the specified `weekStart`.
  * @param {0 | 1 | 2 | 3 | 4 | 5 | 6} [weekStart=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @param {'long' | 'short' | 'narrow'} [format="short"] - The format of the weekday names ('short' for 'Mon', 'long' for 'Monday', 'narrow' for 'M').
  * @param {string} locale - The locale to use for formatting.
@@ -31,7 +31,7 @@ export function daysofWeek(
 }
 
 /**
- * @description Formats a date into a string according to the specified locale and timezone.
+ * Formats a date into a string according to the specified locale and timezone.
  * @param {Date} date - The date to format.
  * @param {string} [locale='en-GB'] - The locale to use for formatting.
  * @param {string} [timeZone='UTC'] - The timezone to use for formatting.
@@ -62,7 +62,7 @@ export const formatDateInTimeZone = (
   return fmt.format(date);
 };
 /**
- * @description Returns the timezone offset in minutes for a given date and timezone.
+ * Returns the timezone offset in minutes for a given date and timezone.
  * @param {Date} date - The date to calculate the offset for.
  * @param {string} timeZone - The timezone to get the offset for.
  * @returns {number} - The timezone offset in minutes.
@@ -98,7 +98,7 @@ export function getTimeZoneOffset(date: Date, timeZone: string): number {
 }
 
 /**
- * @description Converts a Date from one timezone to another.
+ * Converts a Date from one timezone to another.
  * @param {Date} date - The date to convert.
  * @param {string} fromTimezone - The original timezone of the date.
  * @param {string} toTimezone - The target timezone.
@@ -143,7 +143,7 @@ export function convertToTimeZone(date: Date, fromTimezone: string, toTimezone: 
 }
 
 /**
- * @description Formats a date into a localized date string.
+ * Formats a date into a localized date string.
  * @param {Date} date - The date to format.
  * @param {string} locale - The locale to use for formatting.
  * @param {string} timeZone - The timezone to use for formatting.
@@ -167,7 +167,7 @@ export const formatLocalizedDate = (
 };
 
 /**
- * @description Formats a date into a localized month string.
+ * Formats a date into a localized month string.
  * @param {Date} date - The date to format.
  * @param {string} locale - The locale to use for formatting.
  * @param {string} timeZone - The timezone to use for formatting.
@@ -190,7 +190,7 @@ export const formatLocalizedMonth = (
 };
 
 /**
- * @description Formats a date into a localized weekday string.
+ * Formats a date into a localized weekday string.
  * @param {Date} date - The date to format.
  * @param {string} locale - The locale to use for formatting.
  * @param {string} timeZone - The timezone to use for formatting.
@@ -214,7 +214,7 @@ export const formatLocalizedWeekday = (
 };
 
 /**
- * @description Formats a date into a localized time string.
+ * Formats a date into a localized time string.
  * @param {Date} date - The date to format.
  * @param {string} locale - The locale to use for formatting.
  * @param {string} timeZone - The timezone to use for formatting.

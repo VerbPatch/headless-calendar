@@ -2,7 +2,7 @@ import { TimeSlot } from '../types/calendar';
 import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek } from './date';
 
 /**
- * @description Generates an array of dates for the week containing the given date.
+ * Generates an array of dates for the week containing the given date.
  * @param {Date} date - The date within the desired week.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @returns {Date[]} - An array of 7 Date objects representing the week.
@@ -13,6 +13,9 @@ import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek }
  * const dates = getWeekDates(new Date('2024-01-15'));
  * // dates will be an array of 7 dates from 2024-01-14 to 2024-01-20 (assuming startOfWeek is 0)
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
   const start = getStartOfWeek(date, startOfWeek);
@@ -20,7 +23,7 @@ export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
 };
 
 /**
- * @description Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
+ * Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
  * @param {Date} date - A date within the desired month.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @returns {Date[]} - An array of Date objects representing all visible days in the month view.
@@ -33,9 +36,12 @@ export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
  * const dates = getMonthCalendarDates(new Date('2024-01-15'));
  * // dates will be an array of dates for the month view of January 2024
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
-  const startOfMonth = getSt   rtOfMonth(date);
+  const startOfMonth = getStartOfMonth(date);
   const endOfMonth = getEndOfMonth(date);
 
   const startDate = getStartOfWeek(startOfMonth, startOfWeek);
@@ -53,7 +59,7 @@ export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
 };
 
 /**
- * @description Generates an array of time slots for a given range of hours and interval.
+ * Generates an array of time slots for a given range of hours and interval.
  * @param {number} [startHour=0] - The starting hour (0-23).
  * @param {number} [endHour=24] - The ending hour (0-24).
  * @param {number} [interval=60] - The interval in minutes between time slots.
@@ -64,6 +70,9 @@ export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
  * const slots = getTimeSlots(9, 17, 30);
  * // slots will be an array of time slots from 9:00 to 16:30 with a 30-minute interval
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSlot[] => {
   const slots: TimeSlot[] = [];
@@ -83,7 +92,7 @@ export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSl
 };
 
 /**
- * @description Formats a given hour and minute into a time slot label.
+ * Formats a given hour and minute into a time slot label.
  * @param {number} hour - The hour (0-23).
  * @param {number} minute - The minute (0-59).
  * @param {boolean} [use24Hour=false] - Whether to format in 24-hour format.
@@ -93,6 +102,9 @@ export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSl
  * const label12 = formatTimeSlotLabel(14, 30); // "2:30 PM"
  * const label24 = formatTimeSlotLabel(14, 30, true); // "14:30"
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = false): string => {
   if (use24Hour) {
@@ -105,7 +117,7 @@ export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = fa
 };
 
 /**
- * @description Divides the dates of a month into weeks.
+ * Divides the dates of a month into weeks.
  * @param {Date} date - A date within the desired month.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @returns {Date[][]} - An array of arrays, where each inner array represents a week.
@@ -115,6 +127,9 @@ export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = fa
  * const weeks = getWeeksInMonth(new Date('2024-01-15'));
  * // weeks will be a 2D array of dates for the month of January 2024
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
   const dates = getMonthCalendarDates(date, startOfWeek);
@@ -128,7 +143,7 @@ export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
 };
 
 /**
- * @description Calculates the start and end dates of the quarter for a given date.
+ * Calculates the start and end dates of the quarter for a given date.
  * @param {Date} date - The date within the desired quarter.
  * @returns {{ start: Date; end: Date }} - An object containing the start and end dates of the quarter.
  * @example
@@ -136,6 +151,9 @@ export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
  * const quarter = getQuarterDates(new Date('2024-05-15'));
  * // quarter will be { start: Date('2024-04-01'), end: Date('2024-06-30') }
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getQuarterDates = (date: Date): { start: Date; end: Date } => {
   const year = date.getFullYear();
@@ -148,7 +166,7 @@ export const getQuarterDates = (date: Date): { start: Date; end: Date } => {
 };
 
 /**
- * @description Calculates the start and end dates of the year for a given date.
+ * Calculates the start and end dates of the year for a given date.
  * @param {Date} date - The date within the desired year.
  * @returns {{ start: Date; end: Date }} - An object containing the start and end dates of the year.
  * @example
@@ -156,6 +174,9 @@ export const getQuarterDates = (date: Date): { start: Date; end: Date } => {
  * const year = getYearRange(new Date('2024-05-15'));
  * // year will be { start: Date('2024-01-01'), end: Date('2024-12-31') }
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getYearRange = (date: Date): { start: Date; end: Date } => {
   const year = date.getFullYear();
@@ -166,13 +187,16 @@ export const getYearRange = (date: Date): { start: Date; end: Date } => {
 };
 
 /**
- * @description Calculates the week number of the year for a given date.
+ * Calculates the week number of the year for a given date.
  * @param {Date} date - The date to calculate the week number for.
  * @returns {number} - The week number (1-52 or 53).
  * @example
  * ```ts
  * const weekNumber = calculateWeekNumber(new Date('2024-01-15')); // 3
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const calculateWeekNumber = (date: Date): number => {
   const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
@@ -181,7 +205,7 @@ export const calculateWeekNumber = (date: Date): number => {
 };
 
 /**
- * @description Determines the start and end date bounds for a given calendar view.
+ * Determines the start and end date bounds for a given calendar view.
  * @param {'month' | 'week' | 'day'} view - The current calendar view.
  * @param {Date} date - The reference date for the view.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
@@ -194,6 +218,9 @@ export const calculateWeekNumber = (date: Date): number => {
  * const bounds = getCalendarBounds('week', new Date('2024-01-15'));
  * // bounds will be { start: Date('2024-01-14'), end: Date('2024-01-20') } (assuming startOfWeek is 0)
  * ```
+ * @category Calendar
+ * @group Calendar
+ * @function
  */
 export const getCalendarBounds = (view: 'month' | 'week' | 'day', date: Date, startOfWeek = 0): { start: Date; end: Date } => {
   switch (view) {

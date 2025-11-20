@@ -9,7 +9,7 @@ export * from "./createMemo";
 export * from "./createState";
 
 /**
- * @description Clears all caches for state, effects, callbacks, and memos.
+ * Clears all caches for state, effects, callbacks, and memos.
  * This is useful for testing and for resetting the calendar state completely.
  */
 export function clearAllCaches(): void {

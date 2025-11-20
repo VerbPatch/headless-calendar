@@ -2,19 +2,21 @@ import { CalendarEvent } from '../types/events';
 import { getStartOfDay, getEndOfDay } from './date';
 
 /**
- * @description Generates a unique ID for a calendar event.
+ * Generates a unique ID for a calendar event.
  * @returns {string} - A unique UUID string.
  * @example
  * ```ts
  * const id = generateId(); // "123e4567-e89b-12d3-a456-426614174000"
  * ```
+  * @category Calendar Event
+ * @group Calendar Event
  */
 export const generateId = (): string => {
   return crypto.randomUUID();
 };
 
 /**
- * @description Checks if a given event falls within a specified date range.
+ * Checks if a given event falls within a specified date range.
  * @param {CalendarEvent} event - The calendar event to check.
  * @param {Date} startDate - The start date of the range.
  * @param {Date} endDate - The end date of the range.
@@ -25,6 +27,8 @@ export const generateId = (): string => {
  * const event = { start: new Date('2024-01-15'), end: new Date('2024-01-16') };
  * const inRange = isEventInDateRange(event, new Date('2024-01-10'), new Date('2024-01-20')); // true
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDate: Date): boolean => {
   const eventStart = event.start;
@@ -33,7 +37,7 @@ export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDat
 };
 
 /**
- * @description Retrieves all events that occur on a specific date.
+ * Retrieves all events that occur on a specific date.
  * @param {CalendarEvent[]} events - An array of calendar events.
  * @param {Date} date - The date to filter events by.
  * @returns {CalendarEvent[]} - An array of events occurring on the specified date.
@@ -46,6 +50,8 @@ export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDat
  * const events = [{ start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') }];
  * const eventsForDate = getEventsForDate(events, new Date('2024-01-15'));
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarEvent[] => {
   const startOfDay = getStartOfDay(date);
@@ -57,7 +63,7 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
 };
 
 /**
- * @description Retrieves all events that fall within a specified date range.
+ * Retrieves all events that fall within a specified date range.
  * @param {CalendarEvent[]} events - An array of calendar events.
  * @param {Date} startDate - The start date of the range.
  * @param {Date} endDate - The end date of the range.
@@ -69,6 +75,8 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
  * const events = [{ start: new Date('2024-01-15'), end: new Date('2024-01-16') }];
  * const eventsInRange = getEventsForDateRange(events, new Date('2024-01-10'), new Date('2024-01-20'));
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, endDate: Date): CalendarEvent[] => {
   return events.filter(event =>
@@ -77,7 +85,7 @@ export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, 
 };
 
 /**
- * @description Sorts an array of calendar events by their start time in ascending order.
+ * Sorts an array of calendar events by their start time in ascending order.
  * @param {CalendarEvent[]} events - An array of calendar events.
  * @returns {CalendarEvent[]} - A new array of events sorted by start time.
  * @see {@link CalendarEvent}
@@ -89,6 +97,8 @@ export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, 
  * ];
  * const sortedEvents = sortEventsByStartTime(events);
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] => {
   return [...events].sort((a, b) => {
@@ -99,7 +109,7 @@ export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] 
 };
 
 /**
- * @description Calculates the duration of an event in milliseconds.
+ * Calculates the duration of an event in milliseconds.
  * @param {CalendarEvent} event - The calendar event.
  * @returns {number} - The duration of the event in milliseconds.
  * @see {@link CalendarEvent}
@@ -108,6 +118,8 @@ export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] 
  * const event = { start: new Date('2024-01-15T10:00:00'), end: new Date('2024-01-15T11:00:00') };
  * const duration = getEventDuration(event); // 3600000
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const getEventDuration = (event: CalendarEvent): number => {
   const start = event.start;
@@ -116,7 +128,7 @@ export const getEventDuration = (event: CalendarEvent): number => {
 };
 
 /**
- * @description Checks if an event is an all-day event.
+ * Checks if an event is an all-day event.
  * @param {CalendarEvent} event - The calendar event.
  * @returns {boolean} - True if the event is an all-day event, false otherwise.
  * @see {@link CalendarEvent}
@@ -125,13 +137,15 @@ export const getEventDuration = (event: CalendarEvent): number => {
  * const event = { allDay: true, start: new Date(), end: new Date() };
  * const isAllDay = isAllDayEvent(event); // true
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const isAllDayEvent = (event: CalendarEvent): boolean => {
   return event.allDay === true;
 };
 
 /**
- * @description Checks if an event spans multiple days.
+ * Checks if an event spans multiple days.
  * @param {CalendarEvent} event - The calendar event.
  * @returns {boolean} - True if the event spans multiple days, false otherwise.
  * @see {@link CalendarEvent}
@@ -140,6 +154,8 @@ export const isAllDayEvent = (event: CalendarEvent): boolean => {
  * const event = { start: new Date('2024-01-15'), end: new Date('2024-01-16') };
  * const isMultiDay = isMultiDayEvent(event); // true
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const isMultiDayEvent = (event: CalendarEvent): boolean => {
   const start = event.start;
@@ -148,7 +164,7 @@ export const isMultiDayEvent = (event: CalendarEvent): boolean => {
 };
 
 /**
- * @description Retrieves events that occur at a specific time on a given date.
+ * Retrieves events that occur at a specific time on a given date.
  * @param {CalendarEvent[]} events - An array of calendar events.
  * @param {Date} date - The date to filter by.
  * @param {number} hour - The hour to filter by (0-23).
@@ -160,6 +176,8 @@ export const isMultiDayEvent = (event: CalendarEvent): boolean => {
  * const events = [{ start: new Date('2024-01-15T10:30:00'), end: new Date('2024-01-15T11:30:00') }];
  * const eventsAtTime = getEventsAtTime(events, new Date('2024-01-15'), 10, 30);
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: number, minute = 0): CalendarEvent[] => {
   return events.filter(event => {
@@ -173,7 +191,7 @@ export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: numbe
 };
 
 /**
- * @description Finds all events that overlap with a target event.
+ * Finds all events that overlap with a target event.
  * @param {CalendarEvent[]} events - An array of calendar events.
  * @param {CalendarEvent} targetEvent - The event to check for overlaps against.
  * @returns {CalendarEvent[]} - An array of overlapping events.
@@ -186,6 +204,8 @@ export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: numbe
  * ];
  * const overlapping = getOverlappingEvents(events, events[0]); // [events[1]]
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: CalendarEvent): CalendarEvent[] => {
   const targetStart = targetEvent.start;
@@ -202,7 +222,7 @@ export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: Calen
 };
 
 /**
- * @description Validates a calendar event object for required fields and logical consistency.
+ * Validates a calendar event object for required fields and logical consistency.
  * @param {CalendarEvent} event - The calendar event to validate.
  * @returns {string[]} - An array of error messages. If the array is empty, the event is valid.
  * @see {@link CalendarEvent}
@@ -212,6 +232,8 @@ export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: Calen
  * const errors = validateEvent(event);
  * // errors will contain messages about missing title and invalid end date
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const validateEvent = (event: CalendarEvent): string[] => {
   const errors: string[] = [];
@@ -406,7 +428,7 @@ export const validateEvent = (event: CalendarEvent): string[] => {
 };
 
 /**
- * @description Creates a deep clone of a calendar event, assigning a new unique ID.
+ * Creates a deep clone of a calendar event, assigning a new unique ID.
  * @param {CalendarEvent} event - The event to clone.
  * @returns {CalendarEvent} - A new event object with a unique ID and copied properties.
  * @see {@link CalendarEvent}
@@ -417,6 +439,8 @@ export const validateEvent = (event: CalendarEvent): string[] => {
  * const clonedEvent = cloneEvent(event);
  * // clonedEvent will have a new unique ID
  * ```
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export const cloneEvent = (event: CalendarEvent): CalendarEvent => {
   return {

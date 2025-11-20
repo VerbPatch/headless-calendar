@@ -1,0 +1,50 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "Headless Calendar",
+  "cname": "Headless Calendar",
+  "entryPointStrategy": "packages",
+  "entryPoints": ["./packages/headless-calendar"],
+  "packageOptions": {
+    "entryPoints": ["src/index.ts"]
+  },
+  "out": "../website/src/docs",
+  // "outputs": [
+  //   {
+  //     "name": "html",
+  //     "path": "./docs_html"
+  //   },
+  //   {
+  //     "name": "html",
+  //     "path": "./docs_html_full_nav",
+  //     "options": {
+  //       "navigation": {
+  //         "includeCategories": true,
+  //         "includeGroups": true,
+  //         "excludeReferences": false,
+  //         "includeFolders": true
+  //       }
+  //     }
+  //   },
+  //   {
+  //     "name": "json",
+  //     "path": "./docs.json"
+  //   },
+  //   {
+  //     "name": "markdown",
+  //     "path": "./docs_markdown"
+  //   }
+  // ],
+  "readme": "./README.md",
+  "basePath": "http://verbpatch.com/api",
+  "includeVersion": false,
+  "exclude": ["node_modules", "examples"],
+  "plugin": ["typedoc-plugin-markdown"],
+  "navigation": {
+    "includeCategories": false,
+    "includeFolders": false,
+    "includeGroups": false,
+    "excludeReferences": false
+  },
+  "categorizeByGroup": false,
+  "sort": ["documents-first", "alphabetical"]
+}

@@ -1,144 +1,145 @@
-import { CalendarEvent } from './events';
+import { CalendarEvent, DraggedEvent } from './events';
 import { ViewType, MonthData, WeekData, DayData } from './views';
 
 /**
- * @description Represents a single time slot in a day view.
+ * Represents a single time slot in a day view.
+ * @category Calendar
+ * @group Calendar
  */
 export interface TimeSlot {
   /**
-   * @description The hour of the time slot (0-23).
+   * The hour of the time slot (0-23).
    */
   hour: number;
   /**
-   * @description The minute of the time slot (0-59).
+   * The minute of the time slot (0-59).
    */
   minute: number;
   /**
-   * @description The time in "HH:mm" format.
+   * The time in "HH:mm" format.
    */
   time: string;
   /**
-   * @description A formatted label for the time slot (e.g., "9:00 AM").
+   * A formatted label for the time slot (e.g., "9:00 AM").
    */
   label: string;
 }
 
-/**
- * @description Represents an event that is currently being dragged.
- */
-export interface DraggedEvent {
-  /**
-   * @description The calendar event being dragged.
-   * @see {@link CalendarEvent}
-   */
-  event: CalendarEvent;
-  /**
-   * @description The type of the dragged item (e.g., 'event').
-   */
-  type: string;
-  /**
-   * @description Additional data associated with the drag operation.
-   */
-  [key: string]: any;
-}
+
 
 /**
- * @description Represents the target of a drop operation.
+ * Represents the target of a drop operation.
+ * @category Calendar
+ * @group Calendar 
  */
 export interface DropTarget {
   /**
-   * @description The date of the drop target.
+   * The date of the drop target.
    */
   date: Date;
   /**
-   * @description The optional time of the drop target (e.g., "09:00").
+   * The optional time of the drop target (e.g., "09:00").
    */
   time?: string;
 }
 
 /**
- * @description Configuration options for initializing a calendar instance.
+ * Configuration options for initializing a calendar instance.
+ * @category Calendar
+ * @group Calendar 
  */
 export interface CalendarOptions {
   /**
-   * @description The default view to display when the calendar is initialized.
+   * The default view to display when the calendar is initialized.
    * @default 'month'
    */
   defaultView?: ViewType;
   /**
-   * @description The default date to display when the calendar is initialized.
+   * The default date to display when the calendar is initialized.
    * @default new Date()
    */
   defaultDate?: Date;
   /**
-   * @description The day of the week to consider as the start of the week (0 for Sunday, 1 for Monday, etc.).
+   * The day of the week to consider as the start of the week (0 for Sunday, 1 for Monday, etc.).
    * @default 0
    */
   startOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   /**
-   * @description The interval in minutes for time slots in day and week views.
+   * The interval in minutes for time slots in day and week views.
    * @default 60
    */
   timeSlotInterval?: number; // minutes
   /**
-   * @description The starting hour for time slots in day and week views.
+   * The starting hour for time slots in day and week views.
    * @default 0
    */
   startHour?: number;
   /**
-   * @description The ending hour for time slots in day and week views.
+   * The ending hour for time slots in day and week views.
    * @default 24
    */
   endHour?: number;
   /**
-   * @description An array of initial events to populate the calendar with.
+   * An array of initial events to populate the calendar with.
    */
   initialEvents?: CalendarEvent[];
   /**
-   * @description A callback function that is invoked whenever the events array changes.
+   * A callback function that is invoked whenever the events array changes.
    * @param {CalendarEvent[]} events - The updated array of events.
+   * @event
    */
   onEvent?: (events: CalendarEvent[]) => void;
   /**
-   * @description A callback function that is invoked when a new event is created.
+   * A callback function that is invoked when a new event is created.
    * @param {CalendarEvent} event - The newly created event.
+   * @event
    */
   onEventCreate?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when an event is updated.
+   * A callback function that is invoked when an event is updated.
    * @param {CalendarEvent} event - The updated event.
+   * @event
    */
   onEventUpdate?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when an event is deleted.
+   * A callback function that is invoked when an event is deleted.
    * @param {CalendarEvent} event - The deleted event.
+   * @event
    */
   onEventDelete?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when the calendar view changes.
+   * A callback function that is invoked when the calendar view changes.
    * @param {ViewType} view - The new calendar view.
+   * @event
    */
   onViewChange?: (view: ViewType) => void;
   /**
-   * @description A callback function that is invoked when the current date of the calendar changes.
+   * A callback function that is invoked when the current date of the calendar changes.
    * @param {Date} date - The new date.
+   * @event
    */
   onDateChange?: (date: Date) => void;
   /**
-   * @description The timezone to use for calendar operations.
+   * The timezone to use for calendar operations.
    * @default The user's local timezone.
+   * @event
    */
   timezone?: string;
   /**
-   * @description The locale to use for formatting dates and times.
+   * The locale to use for formatting dates and times.
    * @default The user's browser locale.
    */
   locale?: string;
 }
 
+/** 
+ * @category Calendar
+ * @group Calendar
+ * 
+ */
 export interface CalendarUtils {
   /**
-   * @description Formats a date object into a string based on the specified format, locale, and timezone.
+   * Formats a date object into a string based on the specified format, locale, and timezone.
    * @function
    * @param {Date} date - The date object to format.
    * @param {string} [format="yyyy-MM-dd"] - The format string (e.g., "yyyy-MM-dd", "MM/dd/yyyy").
@@ -146,7 +147,7 @@ export interface CalendarUtils {
    */
   formatDate: (date: Date, format?: string) => string;
   /**
-   * @description Formats a date and time object into a string based on the specified format, locale, and timezone.
+   * Formats a date and time object into a string based on the specified format, locale, and timezone.
    * @function
    * @param {Date} date - The date object to format.
    * @param {string} [format="yyyy-MM-dd HH:mm:ss"] - The format string (e.g., "yyyy-MM-dd HH:mm:ss").
@@ -154,14 +155,14 @@ export interface CalendarUtils {
    */
   formatDateTime: (date: Date, format?: string) => string;
   /**
-   * @description Parses a date string into a Date object.
+   * Parses a date string into a Date object.
    * @function
    * @param {string} dateString - The date string to parse.
    * @returns {Date} - The parsed Date object.
    */
   parseDate: (dateString: string) => Date;
   /**
-   * @description Checks if two dates are the same day.
+   * Checks if two dates are the same day.
    * @function
    * @param {Date} date1 - The first date.
    * @param {Date} date2 - The second date.
@@ -169,7 +170,7 @@ export interface CalendarUtils {
    */
   isSameDay: (date1: Date, date2: Date) => boolean;
   /**
-   * @description Checks if two dates are in the same week.
+   * Checks if two dates are in the same week.
    * @function
    * @param {Date} date1 - The first date.
    * @param {Date} date2 - The second date.
@@ -177,7 +178,7 @@ export interface CalendarUtils {
    */
   isSameWeek: (date1: Date, date2: Date) => boolean;
   /**
-   * @description Checks if two dates are in the same month.
+   * Checks if two dates are in the same month.
    * @function
    * @param {Date} date1 - The first date.
    * @param {Date} date2 - The second date.
@@ -185,31 +186,31 @@ export interface CalendarUtils {
    */
   isSameMonth: (date1: Date, date2: Date) => boolean;
   /**
-   * @description Adds a specified number of days to a date.
+   * Adds a specified number of days to a date.
    * @function
    * @param {Date} date - The original date.
-   * @param {number} amount - The number of days to add (can be negative).
+   * @param {number} days - The number of days to add (can be negative).
    * @returns {Date} - The new date.
    */
   addDays: (date: Date, days: number) => Date;
   /**
-   * @description Adds a specified number of weeks to a date.
+   * Adds a specified number of weeks to a date.
    * @function
    * @param {Date} date - The original date.
-   * @param {number} amount - The number of weeks to add (can be negative).
+   * @param {number} weeks - The number of weeks to add (can be negative).
    * @returns {Date} - The new date.
    */
   addWeeks: (date: Date, weeks: number) => Date;
   /**
-   * @description Adds a specified number of months to a date.
+   * Adds a specified number of months to a date.
    * @function
    * @param {Date} date - The original date.
-   * @param {number} amount - The number of months to add (can be negative).
+   * @param {number} months - The number of months to add (can be negative).
    * @returns {Date} - The new date.
    */
   addMonths: (date: Date, months: number) => Date;
   /**
-   * @description Gets the start of the week for a given date.
+   * Gets the start of the week for a given date.
    * @function
    * @param {Date} date - The date.
    * @param {number} startOfWeek - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
@@ -217,7 +218,7 @@ export interface CalendarUtils {
    */
   getStartOfWeek: (date: Date, startOfWeek?: number) => Date;
   /**
-   * @description Gets the end of the week for a given date.
+   * Gets the end of the week for a given date.
    * @function
    * @param {Date} date - The date.
    * @param {number} startOfWeek - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
@@ -225,60 +226,60 @@ export interface CalendarUtils {
    */
   getEndOfWeek: (date: Date, startOfWeek?: number) => Date;
   /**
-   * @description Gets the start of the month for a given date.
+   * Gets the start of the month for a given date.
    * @function
    * @param {Date} date - The date.
    * @returns {Date} - The start of the month.
    */
   getStartOfMonth: (date: Date) => Date;
   /**
-   * @description Gets the end of the month for a given date.
+   * Gets the end of the month for a given date.
    * @function
    * @param {Date} date - The date.
    * @returns {Date} - The end of the month.
    */
   getEndOfMonth: (date: Date) => Date;
   /**
-   * @description Checks if a given date and time falls within a specified range.
+   * Checks if a given date and time falls within a specified range.
    * @function
-   * @param {Date} date - The date to check.
-   * @param {Date} start - The start of the range.
-   * @param {Date} end - The end of the range.
+   * @param {Date} between - The date to check.
+   * @param {Date} startDateTime - The start of the range.
+   * @param {Date} endDateTime - The end of the range.
    * @returns {boolean} - True if the date is within the range, false otherwise.
    */
   dateTimeInBetween: (between: Date, startDateTime: Date, endDateTime: Date) => boolean;
   /**
-   * @description Returns an array of localized day names for the week, starting from the specified `startOfWeek`.
+   * Returns an array of localized day names for the week, starting from the specified `startOfWeek`.
    * @function
    * @param {'short' | 'long'} [format='short'] - The format of the weekday names ('short' for 'Mon', 'long' for 'Monday').
    * @returns {string[]} - An array of localized weekday names.
    */
   daysofWeek: (format?: "long" | "short" | "narrow", locale?: string) => string[];
   /**
-   * @description Formats a date into a string according to the specified locale and timezone.
+   * Formats a date into a string according to the specified locale and timezone.
    * @function
    * @param {Date} date - The date to format.
-   * @param {string} [l=locale] - The locale to use for formatting.
-   * @param {string} [tz=timezone] - The timezone to use for formatting.
+   * @param {string} [locale] - The locale to use for formatting.
+   * @param {string} [timeZone] - The timezone to use for formatting.
    * @param {Intl.DateTimeFormatOptions} [options] - Additional formatting options.
    * @returns {string} - The formatted date string.
    */
   formatDateInTimeZone: (date: Date, locale?: string, timeZone?: string, options?: Intl.DateTimeFormatOptions) => string;
   /**
-   * @description Converts a date from one timezone to another.
+   * Converts a date from one timezone to another.
    * @function
    * @param {Date} date - The date to convert.
-   * @param {string} [fromTz=timezone] - The original timezone of the date.
-   * @param {string} toTz - The target timezone.
+   * @param {string} [fromTimeZone] - The original timezone of the date.
+   * @param {string} toTimeZone - The target timezone.
    * @returns {Date} - The converted date object.
    */
   convertToTimeZone: (date: Date, fromTimeZone: string, toTimeZone: string) => Date;
   /**
-   * @description Formats a date into a localized date string.
+   * Formats a date into a localized date string.
    * @function
    * @param {Date} date - The date to format.
-   * @param {string} [l=locale] - The locale to use for formatting.
-   * @param {string} [tz=timezone] - The timezone to use for formatting.
+   * @param {string} [locale] - The locale to use for formatting.
+   * @param {string} [timeZone] - The timezone to use for formatting.
    * @param {Intl.DateTimeFormatOptions} [options] - Additional formatting options.
    * @returns {string} - The localized date string.
    */
@@ -289,11 +290,11 @@ export interface CalendarUtils {
     options?: Intl.DateTimeFormatOptions
   ) => string;
   /**
-   * @description Formats a date into a localized month string.
+   * Formats a date into a localized month string.
    * @function
    * @param {Date} date - The date to format.
-   * @param {string} [l=locale] - The locale to use for formatting.
-   * @param {string} [tz=timezone] - The timezone to use for formatting.
+   * @param {string} [locale] - The locale to use for formatting.
+   * @param {string} [timeZone] - The timezone to use for formatting.
    * @returns {string} - The localized month string.
    */
   formatLocalizedMonth: (
@@ -302,11 +303,11 @@ export interface CalendarUtils {
     timeZone?: string
   ) => string;
   /**
-   * @description Formats a date into a localized weekday string.
+   * Formats a date into a localized weekday string.
    * @function
    * @param {Date} date - The date to format.
-   * @param {string} [l=locale] - The locale to use for formatting.
-   * @param {string} [tz=timezone] - The timezone to use for formatting.
+   * @param {string} [locale] - The locale to use for formatting.
+   * @param {string} [timeZone] - The timezone to use for formatting.
    * @param {Intl.DateTimeFormatOptions['weekday']} [format] - The format of the weekday (e.g., 'short', 'long').
    * @returns {string} - The localized weekday string.
    */
@@ -317,11 +318,11 @@ export interface CalendarUtils {
     format?: 'long' | 'short' | 'narrow'
   ) => string;
   /**
-   * @description Formats a date into a localized time string.
+   * Formats a date into a localized time string.
    * @function
    * @param {Date} date - The date to format.
-   * @param {string} [l=locale] - The locale to use for formatting.
-   * @param {string} [tz=timezone] - The timezone to use for formatting.
+   * @param {string} [locale] - The locale to use for formatting.
+   * @param {string} [timeZone] - The timezone to use for formatting.
    * @param {boolean} [hour12] - Whether to use 12-hour format.
    * @returns {string} - The localized time string.
    */
@@ -333,69 +334,73 @@ export interface CalendarUtils {
   ) => string;
 }
 
+/** 
+ * @category Calendar
+ * @group Calendar 
+ */
 export interface CalendarInstance {
   /**
-   * @description The currently selected date in the calendar.
+   * The currently selected date in the calendar.
    * @type {Date}
    */
   currentDate: Date;
   /**
-   * @description The current view of the calendar (e.g., 'month', 'week', 'day').
+   * The current view of the calendar (e.g., 'month', 'week', 'day').
    * @type {ViewType}
    * @see {@link ViewType}
    */
   view: ViewType;
   /**
-   * @description An array of all events currently managed by the calendar.
+   * An array of all events currently managed by the calendar.
    * @type {CalendarEvent[]}
    * @see {@link CalendarEvent}
    */
   events: CalendarEvent[];
   /**
-   * @description The event currently being dragged, if any.
+   * The event currently being dragged, if any.
    * @type {DraggedEvent | null}
    * @see {@link DraggedEvent}
    */
   draggedEvent: DraggedEvent | null;
   /**
-   * @description The timezone used for calendar operations.
+   * The timezone used for calendar operations.
    * @type {string | undefined}
    */
   timezone?: string;
   /**
-   * @description The locale used for formatting dates and times.
+   * The locale used for formatting dates and times.
    * @type {string | undefined}
    */
   locale?: string;
   /**
-   * @description The interval in minutes for time slots in day/week views.
+   * The interval in minutes for time slots in day/week views.
    * @type {number | undefined}
    */
   timeSlotInterval?: number;
 
   /**
-   * @description Navigates the calendar to the next period (day, week, or month depending on the current view).
+   * Navigates the calendar to the next period (day, week, or month depending on the current view).
    * @function
    */
   goToNext: () => void;
   /**
-   * @description Navigates the calendar to the previous period (day, week, or month depending on the current view).
+   * Navigates the calendar to the previous period (day, week, or month depending on the current view).
    * @function
    */
   goToPrevious: () => void;
   /**
-   * @description Navigates the calendar to today's date.
+   * Navigates the calendar to today's date.
    * @function
    */
   goToToday: () => void;
   /**
-   * @description Navigates the calendar to a specific date.
+   * Navigates the calendar to a specific date.
    * @function
    * @param {Date} date - The date to navigate to.
    */
   goToDate: (date: Date) => void;
   /**
-   * @description Changes the current view of the calendar (e.g., 'month', 'week', 'day').
+   * Changes the current view of the calendar (e.g., 'month', 'week', 'day').
    * @function
    * @param {ViewType} view - The new view to set.
    * @see {@link ViewType}
@@ -403,7 +408,7 @@ export interface CalendarInstance {
   changeView: (view: ViewType) => void;
 
   /**
-   * @description Retrieves a specific event by its ID.
+   * Retrieves a specific event by its ID.
    * @function
    * @param {string} eventId - The ID of the event to retrieve.
    * @returns {CalendarEvent | undefined} - The event object if found, otherwise undefined.
@@ -411,7 +416,7 @@ export interface CalendarInstance {
    */
   getEvent: (eventId: string) => CalendarEvent | undefined;
   /**
-   * @description Creates a new calendar event.
+   * Creates a new calendar event.
    * @function
    * @param {CalendarEvent} eventData - The data for the new event.
    * @returns {CalendarEvent} - The newly created event.
@@ -419,7 +424,7 @@ export interface CalendarInstance {
    */
   createEvent: (eventData: CalendarEvent) => CalendarEvent;
   /**
-   * @description Updates an existing calendar event.
+   * Updates an existing calendar event.
    * @function
    * @param {string} eventId - The ID of the event to update.
    * @param {CalendarEvent} updates - The partial event data to apply as updates.
@@ -427,13 +432,13 @@ export interface CalendarInstance {
    */
   updateEvent: (eventId: string, updates: CalendarEvent) => void;
   /**
-   * @description Deletes a calendar event by its ID.
+   * Deletes a calendar event by its ID.
    * @function
    * @param {string} eventId - The ID of the event to delete.
    */
   deleteEvent: (eventId: string) => void;
   /**
-   * @description Moves an event to a new start and optional end date.
+   * Moves an event to a new start and optional end date.
    * @function
    * @param {string} eventId - The ID of the event to move.
    * @param {Date} newStart - The new start date for the event.
@@ -441,12 +446,12 @@ export interface CalendarInstance {
    */
   moveEvent: (eventId: string, newStart: Date, newEnd?: Date) => void;
   /**
-   * @description Clears all events from the calendar.
+   * Clears all events from the calendar.
    * @function
    */
   clearAllEvents: () => void;
   /**
-   * @description Duplicates an existing event.
+   * Duplicates an existing event.
    * @function
    * @param {string} eventId - The ID of the event to duplicate.
    * @returns {CalendarEvent | null} - The duplicated event object if successful, otherwise null.
@@ -455,7 +460,7 @@ export interface CalendarInstance {
   duplicateEvent: (eventId: string) => CalendarEvent | null;
 
   /**
-   * @description Initiates a drag operation for an event.
+   * Initiates a drag operation for an event.
    * @function
    * @param {CalendarEvent} event - The event to drag.
    * @param {Record<string, any>} [dragData] - Additional data to associate with the drag operation.
@@ -463,12 +468,12 @@ export interface CalendarInstance {
    */
   startDrag: (event: CalendarEvent, dragData?: Record<string, any>) => void;
   /**
-   * @description Ends the current drag operation.
+   * Ends the current drag operation.
    * @function
    */
   endDrag: () => void;
   /**
-   * @description Handles the drop of a dragged event onto a target.
+   * Handles the drop of a dragged event onto a target.
    * @function
    * @param {DropTarget} dropTarget - The target where the event was dropped.
    * @see {@link DropTarget}
@@ -476,7 +481,7 @@ export interface CalendarInstance {
   handleDrop: (dropTarget: DropTarget) => void;
 
   /**
-   * @description Retrieves events within a specified date range.
+   * Retrieves events within a specified date range.
    * @function
    * @param {Date} startDate - The start date of the range.
    * @param {Date} endDate - The end date of the range.
@@ -485,7 +490,7 @@ export interface CalendarInstance {
    */
   getEventsForDateRange: (startDate: Date, endDate: Date) => CalendarEvent[];
   /**
-   * @description Retrieves events for a specific date.
+   * Retrieves events for a specific date.
    * @function
    * @param {Date} date - The date to retrieve events for.
    * @returns {CalendarEvent[]} - An array of events on the specified date.
@@ -494,44 +499,44 @@ export interface CalendarInstance {
   getEventsForDate: (date: Date) => CalendarEvent[];
 
   /**
-   * @description An array of dates currently visible in the calendar, based on the current view.
+   * An array of dates currently visible in the calendar, based on the current view.
    * @type {Date[]}
    */
   visibleDates: Date[];
   /**
-   * @description An array of calendar events that are visible within the current date range.
+   * An array of calendar events that are visible within the current date range.
    * @type {CalendarEvent[]}
    * @see {@link CalendarEvent}
    */
   visibleEvents: CalendarEvent[];
   /**
-   * @description An array of time slots for the current day view, e.g., ['09:00', '10:00'].
+   * An array of time slots for the current day view, e.g., ['09:00', '10:00'].
    * @type {TimeSlot[]}
    * @see {@link TimeSlot}
    */
   timeSlots: TimeSlot[];
 
   /**
-   * @description Provides data specific to the month view, such as weeks, month name, and utility functions to check if a date is in the current month or is today.
+   * Provides data specific to the month view, such as weeks, month name, and utility functions to check if a date is in the current month or is today.
    * @type {MonthData | null}
    * @see {@link MonthData}
    */
   monthData: MonthData | null;
   /**
-   * @description Provides data specific to the week view, such as the dates in the week, the week's date range, and a utility function to check if a date is today.
+   * Provides data specific to the week view, such as the dates in the week, the week's date range, and a utility function to check if a date is today.
    * @type {WeekData | null}
    * @see {@link WeekData}
    */
   weekData: WeekData | null;
   /**
-   * @description Provides data specific to the day view, such as the current date, its localized day name, and a utility function to check if the date is today.
+   * Provides data specific to the day view, such as the current date, its localized day name, and a utility function to check if the date is today.
    * @type {DayData | null}
    * @see {@link DayData}
    */
   dayData: DayData | null;
 
   /**
-   * @description A collection of utility functions for date manipulation and formatting.
+   * A collection of utility functions for date manipulation and formatting.
    * @type {CalendarUtils}
    * @see {@link CalendarUtils}
    */

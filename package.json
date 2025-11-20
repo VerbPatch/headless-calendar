@@ -11,7 +11,8 @@
   "scripts": {
     "clean": "pnpm --filter \"./packages/**\" run clean",
     "build": "pnpm --filter \"./packages/**\" -r build && size-limit",
-    "publish": "pnpm --filter \"./packages/**\" -r publish --force --no-git-checks --access public --publish-branch main"
+    "publish": "pnpm --filter \"./packages/**\" -r publish --force --no-git-checks --access public --publish-branch main",
+    "docs": "typedoc"
   },
   "size-limit": [
     {

@@ -1,46 +1,49 @@
-import { DraggedEvent, DropTarget } from "./calendar";
+import { DropTarget } from "./calendar";
 
 /**
- * @description Represents a calendar event.
+ * Represents a calendar event.
+ * @category Calendar Event
+ * @group Calendar Event
+ * @hideCategories
  */
 export interface CalendarEvent {
   /**
-   * @description The unique identifier of the event.
+   * The unique identifier of the event.
    */
   id: string;
   /**
-   * @description The title or name of the event.
+   * The title or name of the event.
    */
   title: string;
   /**
-   * @description The start date and time of the event.
+   * The start date and time of the event.
    */
   start: Date;
   /**
-   * @description The end date and time of the event.
+   * The end date and time of the event.
    */
   end: Date;
   /**
-   * @description Indicates if the event is an all-day event.
+   * Indicates if the event is an all-day event.
    * @default false
    */
   allDay?: boolean;
   /**
-   * @description A description of the event.
+   * A description of the event.
    */
   description?: string;
   /**
-   * @description The color used to display the event.
+   * The color used to display the event.
    * @default '#3174ad'
    */
   color?: string;
   /**
-   * @description The timezone of the event.
+   * The timezone of the event.
    * @default The user's local timezone.
    */
   timezone?: string;
   /**
-   * @description Recurring event configuration. Use "never" for non-recurring events.
+   * Recurring event configuration. Use "never" for non-recurring events.
    * 
    * @example 
    * 1. Repeat every day until end of time
@@ -183,17 +186,17 @@ export interface CalendarEvent {
    */
   recurring?: {
     /** 
-     * @description The type of recurrence pattern.
+     * The type of recurrence pattern.
      */
     repeat: "yearly" | "monthly" | "weekly" | "daily";
 
     /** 
-     * @description The interval for the recurrence (e.g., every 2 weeks, every 3 months).
+     * The interval for the recurrence (e.g., every 2 weeks, every 3 months).
      */
     every: number;
 
     /** 
-     * @description The days of the week for weekly, monthly, or yearly recurrence.
+     * The days of the week for weekly, monthly, or yearly recurrence.
      * 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
      * Required for weekly recurrence.
      * Optional for monthly/yearly when used with the `week` property.
@@ -201,7 +204,7 @@ export interface CalendarEvent {
     weekDays?: number[];
 
     /** 
-     * @description The day of the month for monthly or yearly recurrence.
+     * The day of the month for monthly or yearly recurrence.
      * Positive values: 1-31 (1st to 31st day).
      * Negative values: -1 to -31 (last day to 31st-to-last day).
      * Cannot be 0.
@@ -210,7 +213,7 @@ export interface CalendarEvent {
     day?: number;
 
     /** 
-     * @description The week of the month for monthly or yearly recurrence.
+     * The week of the month for monthly or yearly recurrence.
      * Positive values: 1-4 (1st to 4th week).
      * Negative values: -1 (last week).
      * Cannot be 0.
@@ -219,19 +222,19 @@ export interface CalendarEvent {
     week?: number;
 
     /** 
-     * @description The month of the year for yearly recurrence (required for yearly).
+     * The month of the year for yearly recurrence (required for yearly).
      * 0 = January, 1 = February, ..., 11 = December.
      */
     month?: number;
 
     /** 
-     * @description The number of occurrences before the recurrence stops.
+     * The number of occurrences before the recurrence stops.
      * Mutually exclusive with the `end` property.
      */
     count?: number;
 
     /** 
-     * @description The end date for the recurrence (must be after the event's end date).
+     * The end date for the recurrence (must be after the event's end date).
      * Mutually exclusive with the `count` property.
      */
     end?: Date;
@@ -241,34 +244,65 @@ export interface CalendarEvent {
 }
 
 /**
- * @description Configuration options for the `useDragDrop` hook.
+ * Represents an event that is currently being dragged.
+ * @category Calendar Event
+ * @group Calendar Event
+ */
+export interface DraggedEvent {
+  /**
+   * The calendar event being dragged.
+   * @see {@link CalendarEvent}
+   */
+  event: CalendarEvent;
+  /**
+   * The type of the dragged item (e.g., 'event').
+   */
+  type: string;
+  /**
+   * Additional data associated with the drag operation.
+   */
+  [key: string]: any;
+}
+
+/**
+ * Configuration options for the `useDragDrop` hook.
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export interface UseDragDropOptions {
   /**
-   * @description A callback function that is invoked when an event is moved via drag and drop.
+   * A callback function that is invoked when an event is moved via drag and drop.
    * @param {string} eventId - The ID of the moved event.
    * @param {Date} newStart - The new start date and time of the event.
    * @param {Date} newEnd - The new end date and time of the event.
+   * @event
    */
   onEventMove?: (eventId: string, newStart: Date, newEnd: Date) => void;
   /**
-   * @description A callback function that is invoked when a drag operation starts.
+   * A callback function that is invoked when a drag operation starts.
    * @param {CalendarEvent} event - The event being dragged.
+   * @event
    */
   onDragStart?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when a drag operation ends.
+   * A callback function that is invoked when a drag operation ends.
    * @param {CalendarEvent} event - The event that was dragged.
+   * @event
    */
   onDragEnd?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when an event is dropped on a valid target.
+   * A callback function that is invoked when an event is dropped on a valid target.
    * @param {CalendarEvent} event - The event that was dropped.
    * @param {DropTarget} target - The target where the event was dropped.
+   * @event
    */
   onDrop?: (event: CalendarEvent, target: DropTarget) => void;
 }
 
+/**
+ * @category Calendar Event
+ * @group Calendar Event
+ */
 export interface UseDragDropReturn {
   draggedEvent: DraggedEvent | null;
   isDragging: boolean;
@@ -287,48 +321,58 @@ export interface UseDragDropReturn {
 }
 
 /**
- * @description Configuration options for the `useEvents` hook.
+ * Configuration options for the `useEvents` hook.
+ * @category Calendar Event
+ * @group Calendar Event
  */
 export interface UseEventsOptions {
   /**
-   * @description The timezone to use for the calendar.
+   * The timezone to use for the calendar.
    */
   calendarTimezone?: string;
   /**
-   * @description A callback function that is invoked whenever the events array changes.
+   * A callback function that is invoked whenever the events array changes.
    * @param {CalendarEvent[]} event - The updated array of events.
+   * @event
    */
   onEvent?: (event: CalendarEvent[]) => void;
   /**
-   * @description A callback function that is invoked when a new event is created.
+   * A callback function that is invoked when a new event is created.
    * @param {CalendarEvent} event - The newly created event.
+   * @event
    */
   onEventCreate?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when an event is updated.
+   * A callback function that is invoked when an event is updated.
    * @param {CalendarEvent} event - The updated event.
+   * @event
    */
   onEventUpdate?: (event: CalendarEvent) => void;
   /**
-   * @description A callback function that is invoked when an event is deleted.
+   * A callback function that is invoked when an event is deleted.
    * @param {CalendarEvent} event - The deleted event.
+   * @event
    */
   onEventDelete?: (event: CalendarEvent) => void;
   /**
-   * @description An array of initial events to populate the calendar with.
+   * An array of initial events to populate the calendar with.
    */
   initialEvents?: CalendarEvent[];
 }
 
+/**
+ * @category Calendar Event
+ * @group Calendar Event
+ */
 export interface UseEventsReturn {
   /**
-   * @description An array of all events currently managed by the calendar.
+   * An array of all events currently managed by the calendar.
    * @type {CalendarEvent[]}
    * @see {@link CalendarEvent}
    */
   events: CalendarEvent[];
   /**
-   * @description Creates a new calendar event.
+   * Creates a new calendar event.
    * @function
    * @param {CalendarEvent} eventData - The data for the new event.
    * @returns {CalendarEvent} - The newly created event.
@@ -336,7 +380,7 @@ export interface UseEventsReturn {
    */
   createEvent: (eventData: CalendarEvent) => CalendarEvent;
   /**
-   * @description Updates an existing calendar event.
+   * Updates an existing calendar event.
    * @function
    * @param {string} eventId - The ID of the event to update.
    * @param {CalendarEvent} updates - The partial event data to apply as updates.
@@ -344,13 +388,13 @@ export interface UseEventsReturn {
    */
   updateEvent: (eventId: string, updates: CalendarEvent) => void;
   /**
-   * @description Deletes a calendar event by its ID.
+   * Deletes a calendar event by its ID.
    * @function
    * @param {string} eventId - The ID of the event to delete.
    */
   deleteEvent: (eventId: string) => void;
   /**
-   * @description Moves an event to a new start and optional end date.
+   * Moves an event to a new start and optional end date.
    * @function
    * @param {string} eventId - The ID of the event to move.
    * @param {Date} newStart - The new start date for the event.
@@ -358,7 +402,7 @@ export interface UseEventsReturn {
    */
   moveEvent: (eventId: string, newStart: Date, newEnd?: Date) => void;
   /**
-   * @description Duplicates an existing event.
+   * Duplicates an existing event.
    * @function
    * @param {string} eventId - The ID of the event to duplicate.
    * @returns {CalendarEvent | null} - The duplicated event object if successful, otherwise null.
@@ -366,7 +410,7 @@ export interface UseEventsReturn {
    */
   duplicateEvent: (eventId: string) => CalendarEvent | null;
   /**
-   * @description Retrieves a specific event by its ID.
+   * Retrieves a specific event by its ID.
    * @function
    * @param {string} eventId - The ID of the event to retrieve.
    * @returns {CalendarEvent | undefined} - The event object if found, otherwise undefined.
@@ -374,14 +418,14 @@ export interface UseEventsReturn {
    */
   getEvent: (eventId: string) => CalendarEvent | undefined;
   /**
-   * @description Clears all events from the calendar.
+   * Clears all events from the calendar.
    * @function
    */
   clearEvents: () => void;
   /**
-   * @description Sets the entire list of events, replacing existing ones.
+   * Sets the entire list of events, replacing existing ones.
    * @function
-   * @param {CalendarEvent[]} newEvents - The new array of events to set.
+   * @param {CalendarEvent[]} events - The new array of events to set.
    * @see {@link CalendarEvent}
    */
   setEvents: (events: CalendarEvent[]) => void;

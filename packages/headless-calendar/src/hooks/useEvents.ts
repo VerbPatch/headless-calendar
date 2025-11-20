@@ -5,13 +5,13 @@ import { convertToTimeZone } from '../utils/timezone';
 import { createCallback, createState, } from '../state';
 
 /**
- * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
+ * A hook for managing calendar events, including creating, updating, deleting, and moving events.
  * @param {UseEventsOptions} options - Configuration options for event management.
  * @returns {UseEventsReturn} - An object containing the list of events and functions to manage them.
  * @see {@link UseEventsOptions}
  * @see {@link UseEventsReturn}
  * @example
- * ```jsx
+ * ```typescript
  * const { events, createEvent, updateEvent, deleteEvent } = useEvents({
  *   initialEvents: [
  *     { id: '1', title: 'Meeting', start: new Date(), end: new Date(new Date().getTime() + 3600000) },
@@ -32,6 +32,8 @@ import { createCallback, createState, } from '../state';
  * // Delete an event
  * deleteEvent('1');
  * ```
+ * @category Calendar Event
+ * @group All Main Hooks
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   const { onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;
@@ -42,7 +44,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   const [getEvents, setEvents] = createState<CalendarEvent[]>(initialEvents || [], 'calendar-event');
 
   /**
-   * @description Creates a new calendar event.
+   * Creates a new calendar event.
    * @param {CalendarEvent} eventData - The data for the new event.
    * @returns {CalendarEvent} The newly created event.
    * @throws {Error} If the event data is invalid.
@@ -79,7 +81,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'create-event');
 
   /**
-   * @description Updates an existing calendar event.
+   * Updates an existing calendar event.
    * @param {string} eventId - The ID of the event to update.
    * @param {CalendarEvent} updates - The partial event data to apply as updates.
    * @throws {Error} If the event update data is invalid.
@@ -113,7 +115,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'update-event');
 
   /**
-   * @description Deletes a calendar event by its ID.
+   * Deletes a calendar event by its ID.
    * @param {string} eventId - The ID of the event to delete.
    */
   const deleteEvent = createCallback((eventId: string): void => {
@@ -128,7 +130,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'delete-event');
 
   /**
-   * @description Moves an event to a new start and optional end date.
+   * Moves an event to a new start and optional end date.
    * @param {string} eventId - The ID of the event to move.
    * @param {Date} newStart - The new start date for the event.
    * @param {Date} [newEnd] - The new end date for the event (optional, defaults to newStart if not provided).
@@ -144,7 +146,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'move-event');
 
   /**
-   * @description Duplicates an existing event.
+   * Duplicates an existing event.
    * @param {string} eventId - The ID of the event to duplicate.
    * @returns {CalendarEvent | null} The duplicated event object if successful, otherwise null.
    * @see {@link CalendarEvent}
@@ -168,7 +170,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'duplicate-event');
 
   /**
-   * @description Retrieves a specific event by its ID.
+   * Retrieves a specific event by its ID.
    * @param {string} eventId - The ID of the event to retrieve.
    * @returns {CalendarEvent | undefined} The event object if found, otherwise undefined.
    * @see {@link CalendarEvent}
@@ -180,7 +182,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'get-event');
 
   /**
-   * @description Clears all events from the calendar.
+   * Clears all events from the calendar.
    */
   const clearEvents = createCallback((): void => {
     setEvents([]);
@@ -188,7 +190,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   }, [], 'clear-events');
 
   /**
-   * @description Sets the entire list of events, replacing existing ones.
+   * Sets the entire list of events, replacing existing ones.
    * @param {CalendarEvent[]} newEvents - The new array of events to set.
    * @see {@link CalendarEvent}
    */
