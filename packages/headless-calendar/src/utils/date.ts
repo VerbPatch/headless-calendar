@@ -3,9 +3,8 @@ import { convertToTimeZone } from './timezone';
 /**
  * Parses a date format string into `Intl.DateTimeFormatOptions`.
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd").
- * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`.
- * @category DateTime Helper
- * @group DateTime Helper
+ * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`. 
+ * @group dateTime-helper
  */
 function parseDateFormat(format: string): Intl.DateTimeFormatOptions {
   const options: Intl.DateTimeFormatOptions = {};
@@ -44,9 +43,8 @@ function parseDateFormat(format: string): Intl.DateTimeFormatOptions {
  * Parses a date and time format string into `Intl.DateTimeFormatOptions`.
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd HH:mm:ss").
  * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`.
- * @see {@link Intl.DateTimeFormatOptions}
- * @category DateTime Helper
- * @group DateTime Helper
+ * @see {@link Intl.DateTimeFormatOptions} 
+ * @group dateTime-helper
  */
 function parseDateTimeFormat(format: string): Intl.DateTimeFormatOptions {
   const options: Intl.DateTimeFormatOptions = parseDateFormat(format);
@@ -89,9 +87,8 @@ function parseDateTimeFormat(format: string): Intl.DateTimeFormatOptions {
  * @example
  * ```ts
  * const formattedDate = formatDate(new Date('2024-01-15'), { format: 'MM/dd/yyyy' }); // "01/15/2024"
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const formatDate = (
   date: Date,
@@ -114,9 +111,8 @@ export const formatDate = (
  * @example
  * ```ts
  * formatDateTime(new Date(), { format: "yyyy-MM-dd HH:mm:ss", locale: "en-US", timeZone: "America/New_York" });
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const formatDateTime = (
   date: Date,
@@ -201,9 +197,8 @@ export const formatDateTime = (
  * @example
  * ```ts
  * const day = getDay(new Date(), 'America/New_York', 'UTC');
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getDay = (date: Date, fromTimeZone: string, toTimeZone: string): Date => {
   const tzDate = convertToTimeZone(date, fromTimeZone, toTimeZone);
@@ -217,9 +212,8 @@ export const getDay = (date: Date, fromTimeZone: string, toTimeZone: string): Da
  * @example
  * ```ts
  * const date = parseDate('2024-01-15T12:00:00.000Z');
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const parseDate = (dateString: string): Date => {
   return new Date(dateString);
@@ -229,9 +223,8 @@ export const parseDate = (dateString: string): Date => {
  * Checks if two dates represent the same day, ignoring time.
  * @param {Date} date1 - The first date.
  * @param {Date} date2 - The second date.
- * @returns {boolean} - True if the dates are the same day, false otherwise.
- * @category DateTime Helper
- * @group DateTime Helper
+ * @returns {boolean} - True if the dates are the same day, false otherwise. 
+ * @group dateTime-helper
  */
 const dateEquals = (date1: Date, date2: Date): boolean => {
   return formatDate(date1) === formatDate(date2);
@@ -245,9 +238,8 @@ const dateEquals = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameDay(new Date('2024-01-15'), new Date('2024-01-15')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isSameDay = (date1: Date, date2: Date): boolean => {
   return dateEquals(date1, date2);
@@ -262,9 +254,8 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameWeek(new Date('2024-01-15'), new Date('2024-01-17')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isSameWeek = (date1: Date, date2: Date): boolean => {
   const startOfWeek1 = getStartOfWeek(date1);
@@ -281,9 +272,8 @@ export const isSameWeek = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameMonth(new Date('2024-01-15'), new Date('2024-01-25')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isSameMonth = (date1: Date, date2: Date): boolean => {
   const startOfMonth1 = getStartOfMonth(date1);
@@ -299,9 +289,8 @@ export const isSameMonth = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const start = getStartOfWeek(new Date('2024-01-15'), 1); // Monday, 2024-01-15
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
   const d = new Date(date);
@@ -321,9 +310,8 @@ export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
  * @example
  * ```ts
  * const end = getEndOfWeek(new Date('2024-01-15'), 1); // Sunday, 2024-01-21
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getEndOfWeek = (date: Date, startOfWeek = 0): Date => {
   const startWeek = getStartOfWeek(date, startOfWeek);
@@ -337,9 +325,8 @@ export const getEndOfWeek = (date: Date, startOfWeek = 0): Date => {
  * @example
  * ```ts
  * const start = getStartOfMonth(new Date('2024-01-15')); // 2024-01-01
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getStartOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -352,9 +339,8 @@ export const getStartOfMonth = (date: Date): Date => {
  * @example
  * ```ts
  * const end = getEndOfMonth(new Date('2024-01-15')); // 2024-01-31
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getEndOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -367,9 +353,8 @@ export const getEndOfMonth = (date: Date): Date => {
  * @example
  * ```ts
  * const start = getStartOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T00:00:00
- * ```
- * @category DateTime Helper
- * @group DateTime Helper 
+ * ``` 
+ * @group dateTime-helper 
  */
 export const getStartOfDay = (date: Date): Date => {
   const d = new Date(date);
@@ -384,9 +369,8 @@ export const getStartOfDay = (date: Date): Date => {
  * @example
  * ```ts
  * const end = getEndOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T23:59:59.999
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getEndOfDay = (date: Date): Date => {
   const d = new Date(date);
@@ -401,9 +385,8 @@ export const getEndOfDay = (date: Date): Date => {
  * @example
  * ```ts
  * const days = getDaysInMonth(new Date('2024-01-15')); // 31
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getDaysInMonth = (date: Date): number => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -417,9 +400,8 @@ export const getDaysInMonth = (date: Date): number => {
  * @example
  * ```ts
  * const newDate = addDays(new Date('2024-01-15'), 5); // 2024-01-20
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const addDays = (date: Date, days: number): Date => {
   const result = new Date(date);
@@ -436,9 +418,8 @@ export const addDays = (date: Date, days: number): Date => {
  * @example
  * ```ts
  * const newDate = addWeeks(new Date('2024-01-15'), 2); // 2024-01-29
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const addWeeks = (date: Date, weeks: number): Date => {
   return addDays(date, weeks * 7);
@@ -452,9 +433,8 @@ export const addWeeks = (date: Date, weeks: number): Date => {
  * @example
  * ```ts
  * const newDate = addMonths(new Date('2024-01-15'), 3); // 2024-04-15
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const addMonths = (date: Date, months: number): Date => {
   const result = new Date(date);
@@ -470,9 +450,8 @@ export const addMonths = (date: Date, months: number): Date => {
  * @example
  * ```ts
  * const newDate = addYears(new Date('2024-01-15'), 1); // 2025-01-15
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const addYears = (date: Date, years: number): Date => {
   const result = new Date(date);
@@ -489,9 +468,8 @@ export const addYears = (date: Date, years: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractDays(new Date('2024-01-15'), 5); // 2024-01-10
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const subtractDays = (date: Date, days: number): Date => {
   return addDays(date, -days);
@@ -506,9 +484,8 @@ export const subtractDays = (date: Date, days: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractWeeks(new Date('2024-01-15'), 2); // 2024-01-01
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const subtractWeeks = (date: Date, weeks: number): Date => {
   return addWeeks(date, -weeks);
@@ -523,9 +500,8 @@ export const subtractWeeks = (date: Date, weeks: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractMonths(new Date('2024-01-15'), 3); // 2023-10-15
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const subtractMonths = (date: Date, months: number): Date => {
   return addMonths(date, -months);
@@ -539,9 +515,8 @@ export const subtractMonths = (date: Date, months: number): Date => {
  * @example
  * ```ts
  * const days = getDaysBetween(new Date('2024-01-15'), new Date('2024-01-20')); // 5
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const getDaysBetween = (startDate: Date, endDate: Date): number => {
   const timeDiff = endDate.getTime() - startDate.getTime();
@@ -556,9 +531,8 @@ export const getDaysBetween = (startDate: Date, endDate: Date): number => {
  * @example
  * ```ts
  * const result = isToday(new Date()); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isToday = (date: Date): boolean => {
   return isSameDay(date, new Date());
@@ -571,9 +545,8 @@ export const isToday = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isPast(new Date('2000-01-01')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isPast = (date: Date): boolean => {
   return date < new Date();
@@ -586,9 +559,8 @@ export const isPast = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isFuture(new Date('2100-01-01')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isFuture = (date: Date): boolean => {
   return date > new Date();
@@ -601,9 +573,8 @@ export const isFuture = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isWeekend(new Date('2024-01-20')); // true (Saturday)
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const isWeekend = (date: Date): boolean => {
   const day = date.getDay();
@@ -619,9 +590,8 @@ export const isWeekend = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = dateTimeInBetween(new Date('2024-01-15T12:00:00'), new Date('2024-01-15T10:00:00'), new Date('2024-01-15T14:00:00')); // true
- * ```
- * @category DateTime Helper
- * @group DateTime Helper
+ * ``` 
+ * @group dateTime-helper
  */
 export const dateTimeInBetween = (between: Date, startDateTime: Date, endDateTime: Date): boolean => {
   const d = between.getTime();

@@ -25,8 +25,7 @@ import { createCallback, createState } from '../state';
  *   // Drop target
  * </div>
  * ```
- * @category Calendar Event
- * @group All Main Hooks
+ * @group hooks
  */
 export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn => {
   const { onEventMove, onDragStart, onDragEnd, onDrop } = options;

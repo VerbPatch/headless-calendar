@@ -21,9 +21,8 @@ import { createCallback, createState } from '../state';
  * // Change the view to 'week'
  * changeView('week');
  * ```
- * 
- * @category Calendar Navigation
- * @group All Main Hooks
+ *
+ * @group hooks
  */
 export const useNavigation = (options: UseNavigationOptions): UseNavigationReturn => {
   const {

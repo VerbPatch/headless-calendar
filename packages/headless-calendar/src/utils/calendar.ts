@@ -13,8 +13,7 @@ import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek }
  * const dates = getWeekDates(new Date('2024-01-15'));
  * // dates will be an array of 7 dates from 2024-01-14 to 2024-01-20 (assuming startOfWeek is 0)
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
@@ -36,8 +35,7 @@ export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
  * const dates = getMonthCalendarDates(new Date('2024-01-15'));
  * // dates will be an array of dates for the month view of January 2024
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
@@ -70,8 +68,7 @@ export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
  * const slots = getTimeSlots(9, 17, 30);
  * // slots will be an array of time slots from 9:00 to 16:30 with a 30-minute interval
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSlot[] => {
@@ -102,8 +99,7 @@ export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSl
  * const label12 = formatTimeSlotLabel(14, 30); // "2:30 PM"
  * const label24 = formatTimeSlotLabel(14, 30, true); // "14:30"
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = false): string => {
@@ -127,8 +123,7 @@ export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = fa
  * const weeks = getWeeksInMonth(new Date('2024-01-15'));
  * // weeks will be a 2D array of dates for the month of January 2024
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
@@ -151,8 +146,7 @@ export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
  * const quarter = getQuarterDates(new Date('2024-05-15'));
  * // quarter will be { start: Date('2024-04-01'), end: Date('2024-06-30') }
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getQuarterDates = (date: Date): { start: Date; end: Date } => {
@@ -174,8 +168,7 @@ export const getQuarterDates = (date: Date): { start: Date; end: Date } => {
  * const year = getYearRange(new Date('2024-05-15'));
  * // year will be { start: Date('2024-01-01'), end: Date('2024-12-31') }
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getYearRange = (date: Date): { start: Date; end: Date } => {
@@ -194,8 +187,7 @@ export const getYearRange = (date: Date): { start: Date; end: Date } => {
  * ```ts
  * const weekNumber = calculateWeekNumber(new Date('2024-01-15')); // 3
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const calculateWeekNumber = (date: Date): number => {
@@ -218,8 +210,7 @@ export const calculateWeekNumber = (date: Date): number => {
  * const bounds = getCalendarBounds('week', new Date('2024-01-15'));
  * // bounds will be { start: Date('2024-01-14'), end: Date('2024-01-20') } (assuming startOfWeek is 0)
  * ```
- * @category Calendar
- * @group Calendar
+ * @group calendar
  * @function
  */
 export const getCalendarBounds = (view: 'month' | 'week' | 'day', date: Date, startOfWeek = 0): { start: Date; end: Date } => {

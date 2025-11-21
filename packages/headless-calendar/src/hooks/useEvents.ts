@@ -32,8 +32,7 @@ import { createCallback, createState, } from '../state';
  * // Delete an event
  * deleteEvent('1');
  * ```
- * @category Calendar Event
- * @group All Main Hooks
+ * @group hooks
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   const { onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;

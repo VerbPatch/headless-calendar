@@ -1,0 +1,85 @@
+# @verbpatch/headless-calendar
+
+## calendar
+
+- [CalendarInstance](https://verbpatch.com/calendar/docs/api/calendar/CalendarInstance)
+- [CalendarOptions](https://verbpatch.com/calendar/docs/api/calendar/CalendarOptions)
+- [CalendarUtils](https://verbpatch.com/calendar/docs/api/calendar/CalendarUtils)
+- [DropTarget](https://verbpatch.com/calendar/docs/api/calendar/DropTarget)
+- [TimeSlot](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)
+- [calculateWeekNumber](https://verbpatch.com/calendar/docs/api/calendar/calculateWeekNumber)
+- [formatTimeSlotLabel](https://verbpatch.com/calendar/docs/api/calendar/formatTimeSlotLabel)
+- [getCalendarBounds](https://verbpatch.com/calendar/docs/api/calendar/getCalendarBounds)
+- [getMonthCalendarDates](https://verbpatch.com/calendar/docs/api/calendar/getMonthCalendarDates)
+- [getQuarterDates](https://verbpatch.com/calendar/docs/api/calendar/getQuarterDates)
+- [getTimeSlots](https://verbpatch.com/calendar/docs/api/calendar/getTimeSlots)
+- [getWeekDates](https://verbpatch.com/calendar/docs/api/calendar/getWeekDates)
+- [getWeeksInMonth](https://verbpatch.com/calendar/docs/api/calendar/getWeeksInMonth)
+- [getYearRange](https://verbpatch.com/calendar/docs/api/calendar/getYearRange)
+
+## calendar-events
+
+- [CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+- [DraggedEvent](https://verbpatch.com/calendar/docs/api/calendar-events/DraggedEvent)
+- [UseDragDropOptions](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropOptions)
+- [UseDragDropReturn](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropReturn)
+- [UseEventsOptions](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsOptions)
+- [UseEventsReturn](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsReturn)
+- [cloneEvent](https://verbpatch.com/calendar/docs/api/calendar-events/cloneEvent)
+- [generateId](https://verbpatch.com/calendar/docs/api/calendar-events/generateId)
+- [getEventDuration](https://verbpatch.com/calendar/docs/api/calendar-events/getEventDuration)
+- [getEventsAtTime](https://verbpatch.com/calendar/docs/api/calendar-events/getEventsAtTime)
+- [getEventsForDate](https://verbpatch.com/calendar/docs/api/calendar-events/getEventsForDate)
+- [getEventsForDateRange](https://verbpatch.com/calendar/docs/api/calendar-events/getEventsForDateRange)
+- [getOverlappingEvents](https://verbpatch.com/calendar/docs/api/calendar-events/getOverlappingEvents)
+- [isAllDayEvent](https://verbpatch.com/calendar/docs/api/calendar-events/isAllDayEvent)
+- [isEventInDateRange](https://verbpatch.com/calendar/docs/api/calendar-events/isEventInDateRange)
+- [isMultiDayEvent](https://verbpatch.com/calendar/docs/api/calendar-events/isMultiDayEvent)
+- [sortEventsByStartTime](https://verbpatch.com/calendar/docs/api/calendar-events/sortEventsByStartTime)
+- [validateEvent](https://verbpatch.com/calendar/docs/api/calendar-events/validateEvent)
+
+## dateTime-helper
+
+- [addDays](https://verbpatch.com/calendar/docs/api/dateTime-helper/addDays)
+- [addMonths](https://verbpatch.com/calendar/docs/api/dateTime-helper/addMonths)
+- [addWeeks](https://verbpatch.com/calendar/docs/api/dateTime-helper/addWeeks)
+- [addYears](https://verbpatch.com/calendar/docs/api/dateTime-helper/addYears)
+- [dateTimeInBetween](https://verbpatch.com/calendar/docs/api/dateTime-helper/dateTimeInBetween)
+- [formatDate](https://verbpatch.com/calendar/docs/api/dateTime-helper/formatDate)
+- [formatDateTime](https://verbpatch.com/calendar/docs/api/dateTime-helper/formatDateTime)
+- [getDay](https://verbpatch.com/calendar/docs/api/dateTime-helper/getDay)
+- [getDaysBetween](https://verbpatch.com/calendar/docs/api/dateTime-helper/getDaysBetween)
+- [getDaysInMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/getDaysInMonth)
+- [getEndOfDay](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfDay)
+- [getEndOfMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfMonth)
+- [getEndOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfWeek)
+- [getStartOfDay](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfDay)
+- [getStartOfMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfMonth)
+- [getStartOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfWeek)
+- [isFuture](https://verbpatch.com/calendar/docs/api/dateTime-helper/isFuture)
+- [isPast](https://verbpatch.com/calendar/docs/api/dateTime-helper/isPast)
+- [isSameDay](https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameDay)
+- [isSameMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameMonth)
+- [isSameWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameWeek)
+- [isToday](https://verbpatch.com/calendar/docs/api/dateTime-helper/isToday)
+- [isWeekend](https://verbpatch.com/calendar/docs/api/dateTime-helper/isWeekend)
+- [parseDate](https://verbpatch.com/calendar/docs/api/dateTime-helper/parseDate)
+- [subtractDays](https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractDays)
+- [subtractMonths](https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractMonths)
+- [subtractWeeks](https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractWeeks)
+
+## hooks
+
+- [useCalendar](https://verbpatch.com/calendar/docs/api/hooks/useCalendar)
+- [useDragDrop](https://verbpatch.com/calendar/docs/api/hooks/useDragDrop)
+- [useEvents](https://verbpatch.com/calendar/docs/api/hooks/useEvents)
+- [useNavigation](https://verbpatch.com/calendar/docs/api/hooks/useNavigation)
+
+## navigation
+
+- [DayData](https://verbpatch.com/calendar/docs/api/navigation/DayData)
+- [MonthData](https://verbpatch.com/calendar/docs/api/navigation/MonthData)
+- [UseNavigationOptions](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationOptions)
+- [UseNavigationReturn](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationReturn)
+- [WeekData](https://verbpatch.com/calendar/docs/api/navigation/WeekData)
+- [ViewType](https://verbpatch.com/calendar/docs/api/navigation/ViewType)

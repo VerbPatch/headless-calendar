@@ -62,9 +62,8 @@ import { createMemo } from '../state';
  *   );
  * };
  * ```
- * 
- * @category Calendar
- * @group All Main Hooks
+ *
+ * @group hooks
  */
 export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => {
   let d = new Date();

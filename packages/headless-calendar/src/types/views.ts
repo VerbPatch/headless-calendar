@@ -1,14 +1,12 @@
 /**
  * The available calendar views.
- * @category Calendar Navigation
- * @group Calendar Navigation
+ * @group navigation
  */
 export type ViewType = 'month' | 'week' | 'day';
 
 /**
  * Data specific to the month view.
- * @category Calendar Navigation
- * @group Calendar Navigation
+ * @group navigation
  */
 export interface MonthData {
   /**
@@ -34,9 +32,8 @@ export interface MonthData {
 }
 
 /**
- * Data specific to the week view.
- * @category Calendar Navigation
- * @group Calendar Navigation
+ * Data specific to the week view. 
+ * @group navigation
  */
 export interface WeekData {
   /**
@@ -56,9 +53,8 @@ export interface WeekData {
 }
 
 /**
- * Data specific to the day view.
- * @category Calendar Navigation
- * @group Calendar Navigation
+ * Data specific to the day view. 
+ * @group navigation
  */
 export interface DayData {
   /**
@@ -76,9 +72,8 @@ export interface DayData {
 }
 
 /**
- * Configuration options for the `useNavigation` hook.
- * @category Calendar Navigation
- * @group Calendar Navigation
+ * Configuration options for the `useNavigation` hook. 
+ * @group navigation
  */
 export interface UseNavigationOptions {
   /**
@@ -111,9 +106,8 @@ export interface UseNavigationOptions {
   locale: string;
 }
 
-/**
- * @category Calendar Navigation
- * @group Calendar Navigation
+/** 
+ * @group navigation
  */
 export interface UseNavigationReturn {
   /**

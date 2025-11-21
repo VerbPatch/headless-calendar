@@ -3,8 +3,7 @@ import { ViewType, MonthData, WeekData, DayData } from './views';
 
 /**
  * Represents a single time slot in a day view.
- * @category Calendar
- * @group Calendar
+ * @group calendar
  */
 export interface TimeSlot {
   /**
@@ -29,8 +28,7 @@ export interface TimeSlot {
 
 /**
  * Represents the target of a drop operation.
- * @category Calendar
- * @group Calendar 
+ * @group calendar 
  */
 export interface DropTarget {
   /**
@@ -45,8 +43,7 @@ export interface DropTarget {
 
 /**
  * Configuration options for initializing a calendar instance.
- * @category Calendar
- * @group Calendar 
+ * @group calendar
  */
 export interface CalendarOptions {
   /**
@@ -133,10 +130,8 @@ export interface CalendarOptions {
 }
 
 /** 
- * @category Calendar
- * @group Calendar
- * 
- */
+ * @group calendar
+*/
 export interface CalendarUtils {
   /**
    * Formats a date object into a string based on the specified format, locale, and timezone.
@@ -335,8 +330,7 @@ export interface CalendarUtils {
 }
 
 /** 
- * @category Calendar
- * @group Calendar 
+ * @group calendar 
  */
 export interface CalendarInstance {
   /**

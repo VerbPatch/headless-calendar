@@ -2,8 +2,7 @@ import { DropTarget } from "./calendar";
 
 /**
  * Represents a calendar event.
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  * @hideCategories
  */
 export interface CalendarEvent {
@@ -44,8 +43,7 @@ export interface CalendarEvent {
   timezone?: string;
   /**
    * Recurring event configuration. Use "never" for non-recurring events.
-   * 
-   * @example 
+    * @example 
    * 1. Repeat every day until end of time
    * ```tsx
    * recurring: {
@@ -53,8 +51,7 @@ export interface CalendarEvent {
    *     every: 1
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 2. Repeat every day until end date
    * ```tsx
    * recurring: {
@@ -63,8 +60,7 @@ export interface CalendarEvent {
    *     end: new Date(2025, 6, 1) // July 1, 2025 (month is 0-indexed)
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 3. Repeat every day until count completes
    * ```tsx
    * recurring: {
@@ -73,8 +69,7 @@ export interface CalendarEvent {
    *     count: 5 // Repeats 5 times and then stops 
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 4. Repeat every week on Monday & Friday until end of time
    * ```tsx
    * recurring: {
@@ -83,8 +78,7 @@ export interface CalendarEvent {
    *     every: 1
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 5. Repeat every 2 weeks on Tuesday for 3 occurrences
    * ```tsx
    * recurring: {
@@ -94,8 +88,7 @@ export interface CalendarEvent {
    *     count: 3 // Repeats 3 times and then stops 
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 6. Repeat every week on Sunday until end date
    * ```tsx
    * recurring: {
@@ -105,8 +98,7 @@ export interface CalendarEvent {
    *     end: new Date(2025, 6, 1) // July 1, 2025
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 7. Repeat every month on the 5th day until end of time
    * ```tsx
    * recurring: {
@@ -115,8 +107,7 @@ export interface CalendarEvent {
    *     day: 5
    * }
    * ```
-   * 
-   * @example
+    * @example
    * 8. Repeat every month on the last day for 4 times
    * ```tsx
    * recurring: {
@@ -126,8 +117,7 @@ export interface CalendarEvent {
    *     count: 4
    * }
    * ``` 
-   * 
-   * @example
+    * @example
    * 9. Repeat every month on the last Saturday until end of time
    * ```tsx
    * recurring: {
@@ -245,8 +235,7 @@ export interface CalendarEvent {
 
 /**
  * Represents an event that is currently being dragged.
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  */
 export interface DraggedEvent {
   /**
@@ -266,8 +255,7 @@ export interface DraggedEvent {
 
 /**
  * Configuration options for the `useDragDrop` hook.
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  */
 export interface UseDragDropOptions {
   /**
@@ -300,8 +288,7 @@ export interface UseDragDropOptions {
 }
 
 /**
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  */
 export interface UseDragDropReturn {
   draggedEvent: DraggedEvent | null;
@@ -322,8 +309,7 @@ export interface UseDragDropReturn {
 
 /**
  * Configuration options for the `useEvents` hook.
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  */
 export interface UseEventsOptions {
   /**
@@ -361,8 +347,7 @@ export interface UseEventsOptions {
 }
 
 /**
- * @category Calendar Event
- * @group Calendar Event
+ * @group calendar-events
  */
 export interface UseEventsReturn {
   /**
