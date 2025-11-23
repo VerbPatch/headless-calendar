@@ -1,8 +1,8 @@
 # Function: useEvents()
 
-> **useEvents**(`options`): [`UseEventsReturn`](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsReturn)
+> **useEvents**(`options`): [`UseEventsReturn`](/calendar/docs/api/calendar-events/UseEventsReturn)
 
-Defined in: [hooks/useEvents.ts:37](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/hooks/useEvents.ts#L37)
+Defined in: [hooks/useEvents.ts:37](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/hooks/useEvents.ts#L37)
 
 A hook for managing calendar events, including creating, updating, deleting, and moving events.
 
@@ -10,20 +10,20 @@ A hook for managing calendar events, including creating, updating, deleting, and
 
 ### options
 
-[`UseEventsOptions`](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsOptions) = `{}`
+[`UseEventsOptions`](/calendar/docs/api/calendar-events/UseEventsOptions) = `{}`
 
 Configuration options for event management.
 
 ## Returns
 
-[`UseEventsReturn`](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsReturn)
+[`UseEventsReturn`](/calendar/docs/api/calendar-events/UseEventsReturn)
 
 - An object containing the list of events and functions to manage them.
 
 ## See
 
- - [UseEventsOptions](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsOptions)
- - [UseEventsReturn](https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsReturn)
+ - [UseEventsOptions](/calendar/docs/api/calendar-events/UseEventsOptions)
+ - [UseEventsReturn](/calendar/docs/api/calendar-events/UseEventsReturn)
 
 ## Example
 

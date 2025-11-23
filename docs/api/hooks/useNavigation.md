@@ -1,8 +1,8 @@
 # Function: useNavigation()
 
-> **useNavigation**(`options`): [`UseNavigationReturn`](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationReturn)
+> **useNavigation**(`options`): [`UseNavigationReturn`](/calendar/docs/api/navigation/UseNavigationReturn)
 
-Defined in: [hooks/useNavigation.ts:27](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/hooks/useNavigation.ts#L27)
+Defined in: [hooks/useNavigation.ts:27](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/hooks/useNavigation.ts#L27)
 
 A hook for managing calendar navigation, including changing views and moving between dates.
 
@@ -10,20 +10,20 @@ A hook for managing calendar navigation, including changing views and moving bet
 
 ### options
 
-[`UseNavigationOptions`](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationOptions)
+[`UseNavigationOptions`](/calendar/docs/api/navigation/UseNavigationOptions)
 
 Configuration options for navigation.
 
 ## Returns
 
-[`UseNavigationReturn`](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationReturn)
+[`UseNavigationReturn`](/calendar/docs/api/navigation/UseNavigationReturn)
 
 - An object containing the current date, view, and navigation functions.
 
 ## See
 
- - [UseNavigationOptions](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationOptions)
- - [UseNavigationReturn](https://verbpatch.com/calendar/docs/api/navigation/UseNavigationReturn)
+ - [UseNavigationOptions](/calendar/docs/api/navigation/UseNavigationOptions)
+ - [UseNavigationReturn](/calendar/docs/api/navigation/UseNavigationReturn)
 
 ## Example
 

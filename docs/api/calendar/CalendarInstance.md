@@ -1,6 +1,6 @@
 # Interface: CalendarInstance
 
-Defined in: [types/calendar.ts:335](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L335)
+Defined in: [types/calendar.ts:335](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L335)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [types/calendar.ts:335](https://github.com/VerbPatch/headless-calend
 
 > **changeView**: (`view`) => `void`
 
-Defined in: [types/calendar.ts:402](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L402)
+Defined in: [types/calendar.ts:402](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L402)
 
 **`Function`**
 
@@ -18,7 +18,7 @@ Changes the current view of the calendar (e.g., 'month', 'week', 'day').
 
 ##### view
 
-[`ViewType`](https://verbpatch.com/calendar/docs/api/navigation/ViewType)
+[`ViewType`](/calendar/docs/api/navigation/ViewType)
 
 The new view to set.
 
@@ -28,7 +28,7 @@ The new view to set.
 
 #### See
 
-[ViewType](https://verbpatch.com/calendar/docs/api/navigation/ViewType)
+[ViewType](/calendar/docs/api/navigation/ViewType)
 
 ***
 
@@ -36,7 +36,7 @@ The new view to set.
 
 > **clearAllEvents**: () => `void`
 
-Defined in: [types/calendar.ts:446](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L446)
+Defined in: [types/calendar.ts:446](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L446)
 
 **`Function`**
 
@@ -50,9 +50,9 @@ Clears all events from the calendar.
 
 ### createEvent()
 
-> **createEvent**: (`eventData`) => [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+> **createEvent**: (`eventData`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [types/calendar.ts:419](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L419)
+Defined in: [types/calendar.ts:419](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L419)
 
 **`Function`**
 
@@ -62,19 +62,19 @@ Creates a new calendar event.
 
 ##### eventData
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The data for the new event.
 
 #### Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 - The newly created event.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
@@ -82,7 +82,7 @@ The data for the new event.
 
 > **currentDate**: `Date`
 
-Defined in: [types/calendar.ts:340](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L340)
+Defined in: [types/calendar.ts:340](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L340)
 
 The currently selected date in the calendar.
 
@@ -90,15 +90,15 @@ The currently selected date in the calendar.
 
 ### dayData
 
-> **dayData**: [`DayData`](https://verbpatch.com/calendar/docs/api/navigation/DayData) \| `null`
+> **dayData**: [`DayData`](/calendar/docs/api/navigation/DayData) \| `null`
 
-Defined in: [types/calendar.ts:530](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L530)
+Defined in: [types/calendar.ts:530](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L530)
 
 Provides data specific to the day view, such as the current date, its localized day name, and a utility function to check if the date is today.
 
 #### See
 
-[DayData](https://verbpatch.com/calendar/docs/api/navigation/DayData)
+[DayData](/calendar/docs/api/navigation/DayData)
 
 ***
 
@@ -106,7 +106,7 @@ Provides data specific to the day view, such as the current date, its localized 
 
 > **deleteEvent**: (`eventId`) => `void`
 
-Defined in: [types/calendar.ts:433](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L433)
+Defined in: [types/calendar.ts:433](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L433)
 
 **`Function`**
 
@@ -128,23 +128,23 @@ The ID of the event to delete.
 
 ### draggedEvent
 
-> **draggedEvent**: [`DraggedEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/DraggedEvent) \| `null`
+> **draggedEvent**: [`DraggedEvent`](/calendar/docs/api/calendar-events/DraggedEvent) \| `null`
 
-Defined in: [types/calendar.ts:358](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L358)
+Defined in: [types/calendar.ts:358](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L358)
 
 The event currently being dragged, if any.
 
 #### See
 
-[DraggedEvent](https://verbpatch.com/calendar/docs/api/calendar-events/DraggedEvent)
+[DraggedEvent](/calendar/docs/api/calendar-events/DraggedEvent)
 
 ***
 
 ### duplicateEvent()
 
-> **duplicateEvent**: (`eventId`) => [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent) \| `null`
+> **duplicateEvent**: (`eventId`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `null`
 
-Defined in: [types/calendar.ts:454](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L454)
+Defined in: [types/calendar.ts:454](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L454)
 
 **`Function`**
 
@@ -160,13 +160,13 @@ The ID of the event to duplicate.
 
 #### Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent) \| `null`
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `null`
 
 - The duplicated event object if successful, otherwise null.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
@@ -174,7 +174,7 @@ The ID of the event to duplicate.
 
 > **endDrag**: () => `void`
 
-Defined in: [types/calendar.ts:468](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L468)
+Defined in: [types/calendar.ts:468](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L468)
 
 **`Function`**
 
@@ -188,23 +188,23 @@ Ends the current drag operation.
 
 ### events
 
-> **events**: [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **events**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/calendar.ts:352](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L352)
+Defined in: [types/calendar.ts:352](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L352)
 
 An array of all events currently managed by the calendar.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
 ### getEvent()
 
-> **getEvent**: (`eventId`) => [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent) \| `undefined`
+> **getEvent**: (`eventId`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `undefined`
 
-Defined in: [types/calendar.ts:411](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L411)
+Defined in: [types/calendar.ts:411](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L411)
 
 **`Function`**
 
@@ -220,21 +220,21 @@ The ID of the event to retrieve.
 
 #### Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent) \| `undefined`
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `undefined`
 
 - The event object if found, otherwise undefined.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
 ### getEventsForDate()
 
-> **getEventsForDate**: (`date`) => [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **getEventsForDate**: (`date`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/calendar.ts:493](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L493)
+Defined in: [types/calendar.ts:493](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L493)
 
 **`Function`**
 
@@ -250,21 +250,21 @@ The date to retrieve events for.
 
 #### Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
 - An array of events on the specified date.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
 ### getEventsForDateRange()
 
-> **getEventsForDateRange**: (`startDate`, `endDate`) => [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **getEventsForDateRange**: (`startDate`, `endDate`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/calendar.ts:485](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L485)
+Defined in: [types/calendar.ts:485](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L485)
 
 **`Function`**
 
@@ -286,13 +286,13 @@ The end date of the range.
 
 #### Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
 - An array of events within the specified range.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
@@ -300,7 +300,7 @@ The end date of the range.
 
 > **goToDate**: (`date`) => `void`
 
-Defined in: [types/calendar.ts:395](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L395)
+Defined in: [types/calendar.ts:395](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L395)
 
 **`Function`**
 
@@ -324,7 +324,7 @@ The date to navigate to.
 
 > **goToNext**: () => `void`
 
-Defined in: [types/calendar.ts:379](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L379)
+Defined in: [types/calendar.ts:379](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L379)
 
 **`Function`**
 
@@ -340,7 +340,7 @@ Navigates the calendar to the next period (day, week, or month depending on the 
 
 > **goToPrevious**: () => `void`
 
-Defined in: [types/calendar.ts:384](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L384)
+Defined in: [types/calendar.ts:384](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L384)
 
 **`Function`**
 
@@ -356,7 +356,7 @@ Navigates the calendar to the previous period (day, week, or month depending on 
 
 > **goToToday**: () => `void`
 
-Defined in: [types/calendar.ts:389](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L389)
+Defined in: [types/calendar.ts:389](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L389)
 
 **`Function`**
 
@@ -372,7 +372,7 @@ Navigates the calendar to today's date.
 
 > **handleDrop**: (`dropTarget`) => `void`
 
-Defined in: [types/calendar.ts:475](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L475)
+Defined in: [types/calendar.ts:475](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L475)
 
 **`Function`**
 
@@ -382,7 +382,7 @@ Handles the drop of a dragged event onto a target.
 
 ##### dropTarget
 
-[`DropTarget`](https://verbpatch.com/calendar/docs/api/calendar/DropTarget)
+[`DropTarget`](/calendar/docs/api/calendar/DropTarget)
 
 The target where the event was dropped.
 
@@ -392,7 +392,7 @@ The target where the event was dropped.
 
 #### See
 
-[DropTarget](https://verbpatch.com/calendar/docs/api/calendar/DropTarget)
+[DropTarget](/calendar/docs/api/calendar/DropTarget)
 
 ***
 
@@ -400,7 +400,7 @@ The target where the event was dropped.
 
 > `optional` **locale**: `string`
 
-Defined in: [types/calendar.ts:368](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L368)
+Defined in: [types/calendar.ts:368](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L368)
 
 The locale used for formatting dates and times.
 
@@ -408,15 +408,15 @@ The locale used for formatting dates and times.
 
 ### monthData
 
-> **monthData**: [`MonthData`](https://verbpatch.com/calendar/docs/api/navigation/MonthData) \| `null`
+> **monthData**: [`MonthData`](/calendar/docs/api/navigation/MonthData) \| `null`
 
-Defined in: [types/calendar.ts:518](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L518)
+Defined in: [types/calendar.ts:518](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L518)
 
 Provides data specific to the month view, such as weeks, month name, and utility functions to check if a date is in the current month or is today.
 
 #### See
 
-[MonthData](https://verbpatch.com/calendar/docs/api/navigation/MonthData)
+[MonthData](/calendar/docs/api/navigation/MonthData)
 
 ***
 
@@ -424,7 +424,7 @@ Provides data specific to the month view, such as weeks, month name, and utility
 
 > **moveEvent**: (`eventId`, `newStart`, `newEnd?`) => `void`
 
-Defined in: [types/calendar.ts:441](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L441)
+Defined in: [types/calendar.ts:441](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L441)
 
 **`Function`**
 
@@ -460,7 +460,7 @@ The new end date for the event (optional, defaults to newStart if not provided).
 
 > **startDrag**: (`event`, `dragData?`) => `void`
 
-Defined in: [types/calendar.ts:463](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L463)
+Defined in: [types/calendar.ts:463](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L463)
 
 **`Function`**
 
@@ -470,7 +470,7 @@ Initiates a drag operation for an event.
 
 ##### event
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The event to drag.
 
@@ -486,7 +486,7 @@ Additional data to associate with the drag operation.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
@@ -494,7 +494,7 @@ Additional data to associate with the drag operation.
 
 > `optional` **timeSlotInterval**: `number`
 
-Defined in: [types/calendar.ts:373](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L373)
+Defined in: [types/calendar.ts:373](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L373)
 
 The interval in minutes for time slots in day/week views.
 
@@ -502,15 +502,15 @@ The interval in minutes for time slots in day/week views.
 
 ### timeSlots
 
-> **timeSlots**: [`TimeSlot`](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)[]
+> **timeSlots**: [`TimeSlot`](/calendar/docs/api/calendar/TimeSlot)[]
 
-Defined in: [types/calendar.ts:511](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L511)
+Defined in: [types/calendar.ts:511](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L511)
 
 An array of time slots for the current day view, e.g., ['09:00', '10:00'].
 
 #### See
 
-[TimeSlot](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)
+[TimeSlot](/calendar/docs/api/calendar/TimeSlot)
 
 ***
 
@@ -518,7 +518,7 @@ An array of time slots for the current day view, e.g., ['09:00', '10:00'].
 
 > `optional` **timezone**: `string`
 
-Defined in: [types/calendar.ts:363](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L363)
+Defined in: [types/calendar.ts:363](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L363)
 
 The timezone used for calendar operations.
 
@@ -528,7 +528,7 @@ The timezone used for calendar operations.
 
 > **updateEvent**: (`eventId`, `updates`) => `void`
 
-Defined in: [types/calendar.ts:427](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L427)
+Defined in: [types/calendar.ts:427](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L427)
 
 **`Function`**
 
@@ -544,7 +544,7 @@ The ID of the event to update.
 
 ##### updates
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The partial event data to apply as updates.
 
@@ -554,35 +554,35 @@ The partial event data to apply as updates.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
 ### utils
 
-> **utils**: [`CalendarUtils`](https://verbpatch.com/calendar/docs/api/calendar/CalendarUtils)
+> **utils**: [`CalendarUtils`](/calendar/docs/api/calendar/CalendarUtils)
 
-Defined in: [types/calendar.ts:537](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L537)
+Defined in: [types/calendar.ts:537](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L537)
 
 A collection of utility functions for date manipulation and formatting.
 
 #### See
 
-[CalendarUtils](https://verbpatch.com/calendar/docs/api/calendar/CalendarUtils)
+[CalendarUtils](/calendar/docs/api/calendar/CalendarUtils)
 
 ***
 
 ### view
 
-> **view**: [`ViewType`](https://verbpatch.com/calendar/docs/api/navigation/ViewType)
+> **view**: [`ViewType`](/calendar/docs/api/navigation/ViewType)
 
-Defined in: [types/calendar.ts:346](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L346)
+Defined in: [types/calendar.ts:346](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L346)
 
 The current view of the calendar (e.g., 'month', 'week', 'day').
 
 #### See
 
-[ViewType](https://verbpatch.com/calendar/docs/api/navigation/ViewType)
+[ViewType](/calendar/docs/api/navigation/ViewType)
 
 ***
 
@@ -590,7 +590,7 @@ The current view of the calendar (e.g., 'month', 'week', 'day').
 
 > **visibleDates**: `Date`[]
 
-Defined in: [types/calendar.ts:499](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L499)
+Defined in: [types/calendar.ts:499](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L499)
 
 An array of dates currently visible in the calendar, based on the current view.
 
@@ -598,26 +598,26 @@ An array of dates currently visible in the calendar, based on the current view.
 
 ### visibleEvents
 
-> **visibleEvents**: [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **visibleEvents**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/calendar.ts:505](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L505)
+Defined in: [types/calendar.ts:505](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L505)
 
 An array of calendar events that are visible within the current date range.
 
 #### See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ***
 
 ### weekData
 
-> **weekData**: [`WeekData`](https://verbpatch.com/calendar/docs/api/navigation/WeekData) \| `null`
+> **weekData**: [`WeekData`](/calendar/docs/api/navigation/WeekData) \| `null`
 
-Defined in: [types/calendar.ts:524](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L524)
+Defined in: [types/calendar.ts:524](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L524)
 
 Provides data specific to the week view, such as the dates in the week, the week's date range, and a utility function to check if a date is today.
 
 #### See
 
-[WeekData](https://verbpatch.com/calendar/docs/api/navigation/WeekData)
+[WeekData](/calendar/docs/api/navigation/WeekData)

@@ -1,6 +1,6 @@
 # Interface: TimeSlot
 
-Defined in: [types/calendar.ts:8](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L8)
+Defined in: [types/calendar.ts:8](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L8)
 
 Represents a single time slot in a day view.
 
@@ -10,7 +10,7 @@ Represents a single time slot in a day view.
 
 > **hour**: `number`
 
-Defined in: [types/calendar.ts:12](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L12)
+Defined in: [types/calendar.ts:12](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L12)
 
 The hour of the time slot (0-23).
 
@@ -20,7 +20,7 @@ The hour of the time slot (0-23).
 
 > **label**: `string`
 
-Defined in: [types/calendar.ts:24](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L24)
+Defined in: [types/calendar.ts:24](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L24)
 
 A formatted label for the time slot (e.g., "9:00 AM").
 
@@ -30,7 +30,7 @@ A formatted label for the time slot (e.g., "9:00 AM").
 
 > **minute**: `number`
 
-Defined in: [types/calendar.ts:16](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L16)
+Defined in: [types/calendar.ts:16](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L16)
 
 The minute of the time slot (0-59).
 
@@ -40,6 +40,6 @@ The minute of the time slot (0-59).
 
 > **time**: `string`
 
-Defined in: [types/calendar.ts:20](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/calendar.ts#L20)
+Defined in: [types/calendar.ts:20](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/calendar.ts#L20)
 
 The time in "HH:mm" format.

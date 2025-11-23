@@ -5,85 +5,85 @@
       {
         "title": "CalendarInstance",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/CalendarInstance",
+        "path": "/calendar/docs/api/calendar/CalendarInstance",
         "isDeprecated": false
       },
       {
         "title": "CalendarOptions",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/CalendarOptions",
+        "path": "/calendar/docs/api/calendar/CalendarOptions",
         "isDeprecated": false
       },
       {
         "title": "CalendarUtils",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/CalendarUtils",
+        "path": "/calendar/docs/api/calendar/CalendarUtils",
         "isDeprecated": false
       },
       {
         "title": "DropTarget",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/DropTarget",
+        "path": "/calendar/docs/api/calendar/DropTarget",
         "isDeprecated": false
       },
       {
         "title": "TimeSlot",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/TimeSlot",
+        "path": "/calendar/docs/api/calendar/TimeSlot",
         "isDeprecated": false
       },
       {
         "title": "calculateWeekNumber",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/calculateWeekNumber",
+        "path": "/calendar/docs/api/calendar/calculateWeekNumber",
         "isDeprecated": false
       },
       {
         "title": "formatTimeSlotLabel",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/formatTimeSlotLabel",
+        "path": "/calendar/docs/api/calendar/formatTimeSlotLabel",
         "isDeprecated": false
       },
       {
         "title": "getCalendarBounds",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getCalendarBounds",
+        "path": "/calendar/docs/api/calendar/getCalendarBounds",
         "isDeprecated": false
       },
       {
         "title": "getMonthCalendarDates",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getMonthCalendarDates",
+        "path": "/calendar/docs/api/calendar/getMonthCalendarDates",
         "isDeprecated": false
       },
       {
         "title": "getQuarterDates",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getQuarterDates",
+        "path": "/calendar/docs/api/calendar/getQuarterDates",
         "isDeprecated": false
       },
       {
         "title": "getTimeSlots",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getTimeSlots",
+        "path": "/calendar/docs/api/calendar/getTimeSlots",
         "isDeprecated": false
       },
       {
         "title": "getWeekDates",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getWeekDates",
+        "path": "/calendar/docs/api/calendar/getWeekDates",
         "isDeprecated": false
       },
       {
         "title": "getWeeksInMonth",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getWeeksInMonth",
+        "path": "/calendar/docs/api/calendar/getWeeksInMonth",
         "isDeprecated": false
       },
       {
         "title": "getYearRange",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar/getYearRange",
+        "path": "/calendar/docs/api/calendar/getYearRange",
         "isDeprecated": false
       }
     ]
@@ -94,109 +94,109 @@
       {
         "title": "CalendarEvent",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent",
+        "path": "/calendar/docs/api/calendar-events/CalendarEvent",
         "isDeprecated": false
       },
       {
         "title": "DraggedEvent",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/DraggedEvent",
+        "path": "/calendar/docs/api/calendar-events/DraggedEvent",
         "isDeprecated": false
       },
       {
         "title": "UseDragDropOptions",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropOptions",
+        "path": "/calendar/docs/api/calendar-events/UseDragDropOptions",
         "isDeprecated": false
       },
       {
         "title": "UseDragDropReturn",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropReturn",
+        "path": "/calendar/docs/api/calendar-events/UseDragDropReturn",
         "isDeprecated": false
       },
       {
         "title": "UseEventsOptions",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsOptions",
+        "path": "/calendar/docs/api/calendar-events/UseEventsOptions",
         "isDeprecated": false
       },
       {
         "title": "UseEventsReturn",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/UseEventsReturn",
+        "path": "/calendar/docs/api/calendar-events/UseEventsReturn",
         "isDeprecated": false
       },
       {
         "title": "cloneEvent",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/cloneEvent",
+        "path": "/calendar/docs/api/calendar-events/cloneEvent",
         "isDeprecated": false
       },
       {
         "title": "generateId",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/generateId",
+        "path": "/calendar/docs/api/calendar-events/generateId",
         "isDeprecated": false
       },
       {
         "title": "getEventDuration",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/getEventDuration",
+        "path": "/calendar/docs/api/calendar-events/getEventDuration",
         "isDeprecated": false
       },
       {
         "title": "getEventsAtTime",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/getEventsAtTime",
+        "path": "/calendar/docs/api/calendar-events/getEventsAtTime",
         "isDeprecated": false
       },
       {
         "title": "getEventsForDate",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/getEventsForDate",
+        "path": "/calendar/docs/api/calendar-events/getEventsForDate",
         "isDeprecated": false
       },
       {
         "title": "getEventsForDateRange",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/getEventsForDateRange",
+        "path": "/calendar/docs/api/calendar-events/getEventsForDateRange",
         "isDeprecated": false
       },
       {
         "title": "getOverlappingEvents",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/getOverlappingEvents",
+        "path": "/calendar/docs/api/calendar-events/getOverlappingEvents",
         "isDeprecated": false
       },
       {
         "title": "isAllDayEvent",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/isAllDayEvent",
+        "path": "/calendar/docs/api/calendar-events/isAllDayEvent",
         "isDeprecated": false
       },
       {
         "title": "isEventInDateRange",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/isEventInDateRange",
+        "path": "/calendar/docs/api/calendar-events/isEventInDateRange",
         "isDeprecated": false
       },
       {
         "title": "isMultiDayEvent",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/isMultiDayEvent",
+        "path": "/calendar/docs/api/calendar-events/isMultiDayEvent",
         "isDeprecated": false
       },
       {
         "title": "sortEventsByStartTime",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/sortEventsByStartTime",
+        "path": "/calendar/docs/api/calendar-events/sortEventsByStartTime",
         "isDeprecated": false
       },
       {
         "title": "validateEvent",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/calendar-events/validateEvent",
+        "path": "/calendar/docs/api/calendar-events/validateEvent",
         "isDeprecated": false
       }
     ]
@@ -207,163 +207,163 @@
       {
         "title": "addDays",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/addDays",
+        "path": "/calendar/docs/api/dateTime-helper/addDays",
         "isDeprecated": false
       },
       {
         "title": "addMonths",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/addMonths",
+        "path": "/calendar/docs/api/dateTime-helper/addMonths",
         "isDeprecated": false
       },
       {
         "title": "addWeeks",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/addWeeks",
+        "path": "/calendar/docs/api/dateTime-helper/addWeeks",
         "isDeprecated": false
       },
       {
         "title": "addYears",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/addYears",
+        "path": "/calendar/docs/api/dateTime-helper/addYears",
         "isDeprecated": false
       },
       {
         "title": "dateTimeInBetween",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/dateTimeInBetween",
+        "path": "/calendar/docs/api/dateTime-helper/dateTimeInBetween",
         "isDeprecated": false
       },
       {
         "title": "formatDate",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/formatDate",
+        "path": "/calendar/docs/api/dateTime-helper/formatDate",
         "isDeprecated": false
       },
       {
         "title": "formatDateTime",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/formatDateTime",
+        "path": "/calendar/docs/api/dateTime-helper/formatDateTime",
         "isDeprecated": false
       },
       {
         "title": "getDay",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getDay",
+        "path": "/calendar/docs/api/dateTime-helper/getDay",
         "isDeprecated": false
       },
       {
         "title": "getDaysBetween",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getDaysBetween",
+        "path": "/calendar/docs/api/dateTime-helper/getDaysBetween",
         "isDeprecated": false
       },
       {
         "title": "getDaysInMonth",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getDaysInMonth",
+        "path": "/calendar/docs/api/dateTime-helper/getDaysInMonth",
         "isDeprecated": false
       },
       {
         "title": "getEndOfDay",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfDay",
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfDay",
         "isDeprecated": false
       },
       {
         "title": "getEndOfMonth",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfMonth",
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfMonth",
         "isDeprecated": false
       },
       {
         "title": "getEndOfWeek",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfWeek",
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfWeek",
         "isDeprecated": false
       },
       {
         "title": "getStartOfDay",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfDay",
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfDay",
         "isDeprecated": false
       },
       {
         "title": "getStartOfMonth",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfMonth",
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfMonth",
         "isDeprecated": false
       },
       {
         "title": "getStartOfWeek",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfWeek",
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfWeek",
         "isDeprecated": false
       },
       {
         "title": "isFuture",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isFuture",
+        "path": "/calendar/docs/api/dateTime-helper/isFuture",
         "isDeprecated": false
       },
       {
         "title": "isPast",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isPast",
+        "path": "/calendar/docs/api/dateTime-helper/isPast",
         "isDeprecated": false
       },
       {
         "title": "isSameDay",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameDay",
+        "path": "/calendar/docs/api/dateTime-helper/isSameDay",
         "isDeprecated": false
       },
       {
         "title": "isSameMonth",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameMonth",
+        "path": "/calendar/docs/api/dateTime-helper/isSameMonth",
         "isDeprecated": false
       },
       {
         "title": "isSameWeek",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isSameWeek",
+        "path": "/calendar/docs/api/dateTime-helper/isSameWeek",
         "isDeprecated": false
       },
       {
         "title": "isToday",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isToday",
+        "path": "/calendar/docs/api/dateTime-helper/isToday",
         "isDeprecated": false
       },
       {
         "title": "isWeekend",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/isWeekend",
+        "path": "/calendar/docs/api/dateTime-helper/isWeekend",
         "isDeprecated": false
       },
       {
         "title": "parseDate",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/parseDate",
+        "path": "/calendar/docs/api/dateTime-helper/parseDate",
         "isDeprecated": false
       },
       {
         "title": "subtractDays",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractDays",
+        "path": "/calendar/docs/api/dateTime-helper/subtractDays",
         "isDeprecated": false
       },
       {
         "title": "subtractMonths",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractMonths",
+        "path": "/calendar/docs/api/dateTime-helper/subtractMonths",
         "isDeprecated": false
       },
       {
         "title": "subtractWeeks",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/dateTime-helper/subtractWeeks",
+        "path": "/calendar/docs/api/dateTime-helper/subtractWeeks",
         "isDeprecated": false
       }
     ]
@@ -374,25 +374,25 @@
       {
         "title": "useCalendar",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/hooks/useCalendar",
+        "path": "/calendar/docs/api/hooks/useCalendar",
         "isDeprecated": false
       },
       {
         "title": "useDragDrop",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/hooks/useDragDrop",
+        "path": "/calendar/docs/api/hooks/useDragDrop",
         "isDeprecated": false
       },
       {
         "title": "useEvents",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/hooks/useEvents",
+        "path": "/calendar/docs/api/hooks/useEvents",
         "isDeprecated": false
       },
       {
         "title": "useNavigation",
         "kind": 64,
-        "path": "https://verbpatch.com/calendar/docs/api/hooks/useNavigation",
+        "path": "/calendar/docs/api/hooks/useNavigation",
         "isDeprecated": false
       }
     ]
@@ -403,37 +403,37 @@
       {
         "title": "DayData",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/DayData",
+        "path": "/calendar/docs/api/navigation/DayData",
         "isDeprecated": false
       },
       {
         "title": "MonthData",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/MonthData",
+        "path": "/calendar/docs/api/navigation/MonthData",
         "isDeprecated": false
       },
       {
         "title": "UseNavigationOptions",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/UseNavigationOptions",
+        "path": "/calendar/docs/api/navigation/UseNavigationOptions",
         "isDeprecated": false
       },
       {
         "title": "UseNavigationReturn",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/UseNavigationReturn",
+        "path": "/calendar/docs/api/navigation/UseNavigationReturn",
         "isDeprecated": false
       },
       {
         "title": "WeekData",
         "kind": 256,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/WeekData",
+        "path": "/calendar/docs/api/navigation/WeekData",
         "isDeprecated": false
       },
       {
         "title": "ViewType",
         "kind": 2097152,
-        "path": "https://verbpatch.com/calendar/docs/api/navigation/ViewType",
+        "path": "/calendar/docs/api/navigation/ViewType",
         "isDeprecated": false
       }
     ]

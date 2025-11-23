@@ -1,6 +1,6 @@
 # Interface: CalendarEvent
 
-Defined in: [types/events.ts:8](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L8)
+Defined in: [types/events.ts:8](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L8)
 
 Represents a calendar event.
 
@@ -14,7 +14,7 @@ Represents a calendar event.
 
 > `optional` **allDay**: `boolean`
 
-Defined in: [types/events.ts:29](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L29)
+Defined in: [types/events.ts:29](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L29)
 
 Indicates if the event is an all-day event.
 
@@ -30,7 +30,7 @@ false
 
 > `optional` **color**: `string`
 
-Defined in: [types/events.ts:38](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L38)
+Defined in: [types/events.ts:38](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L38)
 
 The color used to display the event.
 
@@ -46,7 +46,7 @@ The color used to display the event.
 
 > `optional` **description**: `string`
 
-Defined in: [types/events.ts:33](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L33)
+Defined in: [types/events.ts:33](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L33)
 
 A description of the event.
 
@@ -56,7 +56,7 @@ A description of the event.
 
 > **end**: `Date`
 
-Defined in: [types/events.ts:24](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L24)
+Defined in: [types/events.ts:24](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L24)
 
 The end date and time of the event.
 
@@ -66,7 +66,7 @@ The end date and time of the event.
 
 > **id**: `string`
 
-Defined in: [types/events.ts:12](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L12)
+Defined in: [types/events.ts:12](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L12)
 
 The unique identifier of the event.
 
@@ -76,7 +76,7 @@ The unique identifier of the event.
 
 > `optional` **recurring**: \{ `count?`: `number`; `day?`: `number`; `end?`: `Date`; `every`: `number`; `month?`: `number`; `repeat`: `"yearly"` \| `"monthly"` \| `"weekly"` \| `"daily"`; `week?`: `number`; `weekDays?`: `number`[]; \} \| `"never"`
 
-Defined in: [types/events.ts:177](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L177)
+Defined in: [types/events.ts:177](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L177)
 
 Recurring event configuration. Use "never" for non-recurring events.
  *
@@ -291,7 +291,7 @@ recurring: {
 
 > **start**: `Date`
 
-Defined in: [types/events.ts:20](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L20)
+Defined in: [types/events.ts:20](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L20)
 
 The start date and time of the event.
 
@@ -301,7 +301,7 @@ The start date and time of the event.
 
 > `optional` **timezone**: `string`
 
-Defined in: [types/events.ts:43](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L43)
+Defined in: [types/events.ts:43](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L43)
 
 The timezone of the event.
 
@@ -317,6 +317,6 @@ The user's local timezone.
 
 > **title**: `string`
 
-Defined in: [types/events.ts:16](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/events.ts#L16)
+Defined in: [types/events.ts:16](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/events.ts#L16)
 
 The title or name of the event.

@@ -1,6 +1,6 @@
 # Interface: WeekData
 
-Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/views.ts#L38)
+Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/views.ts#L38)
 
 Data specific to the week view.
 
@@ -10,7 +10,7 @@ Data specific to the week view.
 
 > **dates**: `Date`[]
 
-Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/views.ts#L42)
+Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/views.ts#L42)
 
 An array of dates in the current week.
 
@@ -20,7 +20,7 @@ An array of dates in the current week.
 
 > **isToday**: (`date`) => `boolean`
 
-Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/views.ts#L52)
+Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/views.ts#L52)
 
 A function to check if a date is today.
 
@@ -44,6 +44,6 @@ The date to check.
 
 > **weekRange**: `string`
 
-Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/types/views.ts#L46)
+Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/types/views.ts#L46)
 
 A string representing the date range of the week.

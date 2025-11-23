@@ -2,7 +2,7 @@
 
 > **getEventDuration**(`event`): `number`
 
-Defined in: [utils/events.ts:118](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/events.ts#L118)
+Defined in: [utils/events.ts:118](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/events.ts#L118)
 
 Calculates the duration of an event in milliseconds.
 
@@ -10,7 +10,7 @@ Calculates the duration of an event in milliseconds.
 
 ### event
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The calendar event.
 
@@ -22,7 +22,7 @@ The calendar event.
 
 ## See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ## Example
 

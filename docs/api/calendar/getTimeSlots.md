@@ -1,8 +1,8 @@
 # Function: getTimeSlots()
 
-> **getTimeSlots**(`startHour?`, `endHour?`, `interval?`): [`TimeSlot`](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)[]
+> **getTimeSlots**(`startHour?`, `endHour?`, `interval?`): [`TimeSlot`](/calendar/docs/api/calendar/TimeSlot)[]
 
-Defined in: [utils/calendar.ts:74](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/calendar.ts#L74)
+Defined in: [utils/calendar.ts:74](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/calendar.ts#L74)
 
 Generates an array of time slots for a given range of hours and interval.
 
@@ -28,13 +28,13 @@ The interval in minutes between time slots.
 
 ## Returns
 
-[`TimeSlot`](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)[]
+[`TimeSlot`](/calendar/docs/api/calendar/TimeSlot)[]
 
 - An array of TimeSlot objects.
 
 ## See
 
-[TimeSlot](https://verbpatch.com/calendar/docs/api/calendar/TimeSlot)
+[TimeSlot](/calendar/docs/api/calendar/TimeSlot)
 
 ## Example
 

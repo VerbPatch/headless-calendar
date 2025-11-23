@@ -64,6 +64,8 @@ import { createMemo } from '../state';
  * ```
  *
  * @group hooks
+ * @title Calendar Hook
+ * @description The main hook for initializing and managing a calendar instance. 
  */
 export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => {
   let d = new Date();

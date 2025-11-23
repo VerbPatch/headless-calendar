@@ -1,8 +1,8 @@
 # Function: cloneEvent()
 
-> **cloneEvent**(`event`): [`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+> **cloneEvent**(`event`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [utils/events.ts:433](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/events.ts#L433)
+Defined in: [utils/events.ts:433](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/events.ts#L433)
 
 Creates a deep clone of a calendar event, assigning a new unique ID.
 
@@ -10,20 +10,20 @@ Creates a deep clone of a calendar event, assigning a new unique ID.
 
 ### event
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The event to clone.
 
 ## Returns
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 - A new event object with a unique ID and copied properties.
 
 ## See
 
- - [CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
- - [generateId](https://verbpatch.com/calendar/docs/api/calendar-events/generateId)
+ - [CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
+ - [generateId](/calendar/docs/api/calendar-events/generateId)
 
 ## Example
 

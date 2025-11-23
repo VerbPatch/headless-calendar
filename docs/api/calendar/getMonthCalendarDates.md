@@ -2,7 +2,7 @@
 
 > **getMonthCalendarDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:41](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/calendar.ts#L41)
+Defined in: [utils/calendar.ts:41](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/calendar.ts#L41)
 
 Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
 
@@ -28,10 +28,10 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 ## See
 
- - [getStartOfMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfMonth)
- - [getEndOfMonth](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfMonth)
- - [getStartOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfWeek)
- - [getEndOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfWeek)
+ - [getStartOfMonth](/calendar/docs/api/dateTime-helper/getStartOfMonth)
+ - [getEndOfMonth](/calendar/docs/api/dateTime-helper/getEndOfMonth)
+ - [getStartOfWeek](/calendar/docs/api/dateTime-helper/getStartOfWeek)
+ - [getEndOfWeek](/calendar/docs/api/dateTime-helper/getEndOfWeek)
 
 ## Example
 

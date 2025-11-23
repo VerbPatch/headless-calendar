@@ -1,8 +1,8 @@
 # Function: useCalendar()
 
-> **useCalendar**(`options`): [`CalendarInstance`](https://verbpatch.com/calendar/docs/api/calendar/CalendarInstance)
+> **useCalendar**(`options`): [`CalendarInstance`](/calendar/docs/api/calendar/CalendarInstance)
 
-Defined in: [hooks/useCalendar.ts:68](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/hooks/useCalendar.ts#L68)
+Defined in: [hooks/useCalendar.ts:70](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/hooks/useCalendar.ts#L70)
 
 The main hook for initializing and managing a calendar instance.
 
@@ -10,20 +10,20 @@ The main hook for initializing and managing a calendar instance.
 
 ### options
 
-[`CalendarOptions`](https://verbpatch.com/calendar/docs/api/calendar/CalendarOptions) = `{}`
+[`CalendarOptions`](/calendar/docs/api/calendar/CalendarOptions) = `{}`
 
 Configuration options for the calendar.
 
 ## Returns
 
-[`CalendarInstance`](https://verbpatch.com/calendar/docs/api/calendar/CalendarInstance)
+[`CalendarInstance`](/calendar/docs/api/calendar/CalendarInstance)
 
 - An object containing the calendar's state, navigation functions, event management functions, and other utilities.
 
 ## See
 
- - [CalendarOptions](https://verbpatch.com/calendar/docs/api/calendar/CalendarOptions)
- - [CalendarInstance](https://verbpatch.com/calendar/docs/api/calendar/CalendarInstance)
+ - [CalendarOptions](/calendar/docs/api/calendar/CalendarOptions)
+ - [CalendarInstance](/calendar/docs/api/calendar/CalendarInstance)
 
 ## Example
 
@@ -43,3 +43,11 @@ const MyCalendar = () => {
   );
 };
 ```
+
+## Title
+
+Calendar Hook
+
+## Description
+
+The main hook for initializing and managing a calendar instance.

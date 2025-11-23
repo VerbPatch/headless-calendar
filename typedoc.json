@@ -6,23 +6,26 @@
   "packageOptions": {
     "entryPoints": ["src/index.ts"]
   },
-
   "includeVersion": false,
   "exclude": ["node_modules", "examples"],
-  "plugin": ["typedoc-plugin-markdown", "./scripts/remove-md-extension.mjs"],
-
+  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-frontmatter", "./scripts/remove-md-extension.mjs"],
   "router": "group",
   "out": "./docs/api",
   "headings": {
     "readme": false,
     "document": false
   },
-  "publicPath": "https://verbpatch.com/calendar/docs/api",
+  "publicPath": "/calendar/docs/api",
   "navigationJson": "docs/api/navigation.json",
   "entryFileName": "calendar",
   "hidePageHeader": true,
   "hidePageTitle": false,
   "hideBreadcrumbs": true,
+  "hideGenerator": true,
   "readme": "none",
-  "mergeReadme": false
+  "mergeReadme": false,
+  // "frontmatterGlobals": {
+  //   "author": "Rameez Raja"
+  // },
+  "frontmatterCommentTags": ["title", "description"]
 }

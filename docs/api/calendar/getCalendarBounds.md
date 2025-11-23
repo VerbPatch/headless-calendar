@@ -2,7 +2,7 @@
 
 > **getCalendarBounds**(`view`, `date`, `startOfWeek?`): `object`
 
-Defined in: [utils/calendar.ts:216](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/calendar.ts#L216)
+Defined in: [utils/calendar.ts:216](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/calendar.ts#L216)
 
 Determines the start and end date bounds for a given calendar view.
 
@@ -42,9 +42,9 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 ## See
 
- - [getStartOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfWeek)
- - [getEndOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getEndOfWeek)
- - [getMonthCalendarDates](https://verbpatch.com/calendar/docs/api/calendar/getMonthCalendarDates)
+ - [getStartOfWeek](/calendar/docs/api/dateTime-helper/getStartOfWeek)
+ - [getEndOfWeek](/calendar/docs/api/dateTime-helper/getEndOfWeek)
+ - [getMonthCalendarDates](/calendar/docs/api/calendar/getMonthCalendarDates)
 
 ## Example
 

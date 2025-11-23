@@ -1,8 +1,8 @@
 # Function: useDragDrop()
 
-> **useDragDrop**(`options`): [`UseDragDropReturn`](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropReturn)
+> **useDragDrop**(`options`): [`UseDragDropReturn`](/calendar/docs/api/calendar-events/UseDragDropReturn)
 
-Defined in: [hooks/useDragDrop.ts:30](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/hooks/useDragDrop.ts#L30)
+Defined in: [hooks/useDragDrop.ts:30](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/hooks/useDragDrop.ts#L30)
 
 A hook for managing drag and drop functionality for calendar events.
 
@@ -10,20 +10,20 @@ A hook for managing drag and drop functionality for calendar events.
 
 ### options
 
-[`UseDragDropOptions`](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropOptions) = `{}`
+[`UseDragDropOptions`](/calendar/docs/api/calendar-events/UseDragDropOptions) = `{}`
 
 Configuration options for drag and drop.
 
 ## Returns
 
-[`UseDragDropReturn`](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropReturn)
+[`UseDragDropReturn`](/calendar/docs/api/calendar-events/UseDragDropReturn)
 
 - An object containing state and functions for drag and drop.
 
 ## See
 
- - [UseDragDropOptions](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropOptions)
- - [UseDragDropReturn](https://verbpatch.com/calendar/docs/api/calendar-events/UseDragDropReturn)
+ - [UseDragDropOptions](/calendar/docs/api/calendar-events/UseDragDropOptions)
+ - [UseDragDropReturn](/calendar/docs/api/calendar-events/UseDragDropReturn)
 
 ## Example
 

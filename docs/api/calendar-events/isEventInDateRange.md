@@ -2,7 +2,7 @@
 
 > **isEventInDateRange**(`event`, `startDate`, `endDate`): `boolean`
 
-Defined in: [utils/events.ts:31](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/events.ts#L31)
+Defined in: [utils/events.ts:31](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/events.ts#L31)
 
 Checks if a given event falls within a specified date range.
 
@@ -10,7 +10,7 @@ Checks if a given event falls within a specified date range.
 
 ### event
 
-[`CalendarEvent`](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
 The calendar event to check.
 
@@ -34,7 +34,7 @@ The end date of the range.
 
 ## See
 
-[CalendarEvent](https://verbpatch.com/calendar/docs/api/calendar-events/CalendarEvent)
+[CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
 
 ## Example
 

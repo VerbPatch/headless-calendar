@@ -2,7 +2,7 @@
 
 > **getWeekDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:19](https://github.com/VerbPatch/headless-calendar/blob/ad664e8132227ddee70c073e0baff568256ccda9/packages/headless-calendar/src/utils/calendar.ts#L19)
+Defined in: [utils/calendar.ts:19](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/calendar.ts#L19)
 
 Generates an array of dates for the week containing the given date.
 
@@ -28,8 +28,8 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 ## See
 
- - [getStartOfWeek](https://verbpatch.com/calendar/docs/api/dateTime-helper/getStartOfWeek)
- - [addDays](https://verbpatch.com/calendar/docs/api/dateTime-helper/addDays)
+ - [getStartOfWeek](/calendar/docs/api/dateTime-helper/getStartOfWeek)
+ - [addDays](/calendar/docs/api/dateTime-helper/addDays)
 
 ## Example
 
