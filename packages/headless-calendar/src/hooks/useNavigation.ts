@@ -23,6 +23,8 @@ import { createCallback, createState } from '../state';
  * ```
  *
  * @group hooks
+ * @title Calendar Navigation Hook
+ * @description A hook for managing calendar navigation, including changing views and moving between dates.
  */
 export const useNavigation = (options: UseNavigationOptions): UseNavigationReturn => {
   const {

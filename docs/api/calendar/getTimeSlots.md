@@ -2,7 +2,7 @@
 
 > **getTimeSlots**(`startHour?`, `endHour?`, `interval?`): [`TimeSlot`](/calendar/docs/api/calendar/TimeSlot)[]
 
-Defined in: [utils/calendar.ts:74](https://github.com/VerbPatch/headless-calendar/blob/6cbc631f0e9839e0e08d79e61837bbf4bf247ad8/packages/headless-calendar/src/utils/calendar.ts#L74)
+Defined in: [utils/calendar.ts:74](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/calendar.ts#L74)
 
 Generates an array of time slots for a given range of hours and interval.
 

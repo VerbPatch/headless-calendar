@@ -33,6 +33,8 @@ import { createCallback, createState, } from '../state';
  * deleteEvent('1');
  * ```
  * @group hooks
+ * @title Calendar Events Hook
+ * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   const { onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;
