@@ -50,6 +50,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @returns {CalendarEvent} The newly created event.
    * @throws {Error} If the event data is invalid.
    * @see {@link CalendarEvent}
+   * @group Event Management
+   * @title Create Event
+   * @description Creates a new calendar event.
    */
   const createEvent = createCallback((eventData: CalendarEvent): CalendarEvent => {
     const errors = validateEvent(eventData);
@@ -87,6 +90,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @param {CalendarEvent} updates - The partial event data to apply as updates.
    * @throws {Error} If the event update data is invalid.
    * @see {@link CalendarEvent}
+   * @group Event Management
+   * @title Update Event
+   * @description Updates an existing calendar event.
    */
   const updateEvent = createCallback((eventId: string, updates: CalendarEvent): void => {
     const updatedEvents = getEvents().map(event => {
@@ -118,6 +124,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   /**
    * Deletes a calendar event by its ID.
    * @param {string} eventId - The ID of the event to delete.
+   * @group Event Management
+   * @title Delete Event
+   * @description Deletes a calendar event by its ID.
    */
   const deleteEvent = createCallback((eventId: string): void => {
     const eventToDelete = getEvents().find(e => e.id === eventId);
@@ -135,6 +144,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @param {string} eventId - The ID of the event to move.
    * @param {Date} newStart - The new start date for the event.
    * @param {Date} [newEnd] - The new end date for the event (optional, defaults to newStart if not provided).
+   * @group Event Management
+   * @title Move Event
+   * @description Moves an event to a new start and optional end date.
    */
   const moveEvent = createCallback((eventId: string, newStart: Date, newEnd?: Date): void => {
     updateEvent(eventId, {
@@ -151,6 +163,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @param {string} eventId - The ID of the event to duplicate.
    * @returns {CalendarEvent | null} The duplicated event object if successful, otherwise null.
    * @see {@link CalendarEvent}
+   * @group Event Management
+   * @title Duplicate Event
+   * @description Duplicates an existing event.
    */
   const duplicateEvent = createCallback((eventId: string): CalendarEvent | null => {
     const originalEvent = getEvents().find(e => e.id === eventId);
@@ -175,6 +190,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @param {string} eventId - The ID of the event to retrieve.
    * @returns {CalendarEvent | undefined} The event object if found, otherwise undefined.
    * @see {@link CalendarEvent}
+   * @group Event Management
+   * @title Get Event
+   * @description Retrieves a specific event by its ID.
    */
   const getEvent = createCallback((eventId: string): CalendarEvent | undefined => {
     return getEvents().find(e => e.id === eventId);
@@ -184,6 +202,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
 
   /**
    * Clears all events from the calendar.
+   * @group Event Management
+   * @title Clear Events
+   * @description Clears all events from the calendar.
    */
   const clearEvents = createCallback((): void => {
     setEvents([]);
@@ -194,6 +215,9 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * Sets the entire list of events, replacing existing ones.
    * @param {CalendarEvent[]} newEvents - The new array of events to set.
    * @see {@link CalendarEvent}
+   * @group Event Management
+   * @title Set Events
+   * @description Sets the entire list of events, replacing existing ones.
    */
   const setEventsCallback = createCallback((newEvents: CalendarEvent[]): void => {
     setEvents(newEvents);

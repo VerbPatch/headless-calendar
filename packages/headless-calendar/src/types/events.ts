@@ -4,6 +4,8 @@ import { DropTarget } from "./calendar";
  * Represents a calendar event.
  * @group calendar-events
  * @hideCategories
+ * @title Calendar Event
+ * @description Represents a calendar event with properties such as ID, title, start and end times, and recurrence rules.
  */
 export interface CalendarEvent {
   /**
@@ -236,6 +238,8 @@ export interface CalendarEvent {
 /**
  * Represents an event that is currently being dragged.
  * @group calendar-events
+ * @title Dragged Event
+ * @description Represents an event that is currently being dragged, containing the event data and additional drag-related information.
  */
 export interface DraggedEvent {
   /**
@@ -256,6 +260,8 @@ export interface DraggedEvent {
 /**
  * Configuration options for the `useDragDrop` hook.
  * @group calendar-events
+ * @title Use Drag Drop Options
+ * @description Defines the configuration options for the `useDragDrop` hook, including callback functions for drag and drop events.
  */
 export interface UseDragDropOptions {
   /**
@@ -289,6 +295,8 @@ export interface UseDragDropOptions {
 
 /**
  * @group calendar-events
+ * @title Use Drag Drop Return
+ * @description The return object of the `useDragDrop` hook, providing state and functions for managing drag and drop operations.
  */
 export interface UseDragDropReturn {
   draggedEvent: DraggedEvent | null;
@@ -310,6 +318,8 @@ export interface UseDragDropReturn {
 /**
  * Configuration options for the `useEvents` hook.
  * @group calendar-events
+ * @title Use Events Options
+ * @description Defines the configuration options for the `useEvents` hook, including initial events and callback functions for event changes.
  */
 export interface UseEventsOptions {
   /**
@@ -348,6 +358,8 @@ export interface UseEventsOptions {
 
 /**
  * @group calendar-events
+ * @title Use Events Return
+ * @description The return object of the `useEvents` hook, providing access to the list of events and functions to manage them.
  */
 export interface UseEventsReturn {
   /**

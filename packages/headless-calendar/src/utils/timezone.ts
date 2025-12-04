@@ -8,6 +8,8 @@
  * ```ts
  * const days = daysofWeek(1, 'long', 'en-US'); // ["Monday", "Tuesday", ...]
  * ```
+ * @title Days of Week
+ * @description Returns an array of localized day names for the week, starting from the specified `weekStart`.
  */
 export function daysofWeek(
   weekStart: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0,
@@ -41,6 +43,8 @@ export function daysofWeek(
  * ```ts
  * const formatted = formatDateInTimeZone(new Date(), 'en-US', 'America/New_York', { month: 'long' });
  * ```
+ * @title Format Date In Time Zone
+ * @description Formats a date into a string according to the specified locale and timezone.
  */
 export const formatDateInTimeZone = (
   date: Date,
@@ -70,6 +74,8 @@ export const formatDateInTimeZone = (
  * ```ts
  * const offset = getTimeZoneOffset(new Date(), 'America/New_York'); // -240 or -300 depending on DST
  * ```
+ * @title Get Time Zone Offset
+ * @description Returns the timezone offset in minutes for a given date and timezone.
  */
 export function getTimeZoneOffset(date: Date, timeZone: string): number {
   // Modern Intl API
@@ -109,6 +115,8 @@ export function getTimeZoneOffset(date: Date, timeZone: string): number {
  * const utcDate = new Date('2024-01-01T12:00:00Z');
  * const nyDate = convertToTimeZone(utcDate, 'UTC', 'America/New_York');
  * ```
+ * @title Convert To Time Zone
+ * @description Converts a Date from one timezone to another.
  */
 export function convertToTimeZone(date: Date, fromTimezone: string, toTimezone: string): Date {
   if (fromTimezone === toTimezone) return new Date(date.getTime());
@@ -153,6 +161,8 @@ export function convertToTimeZone(date: Date, fromTimezone: string, toTimezone: 
  * ```ts
  * const localizedDate = formatLocalizedDate(new Date(), 'de-DE', 'Europe/Berlin');
  * ```
+ * @title Format Localized Date
+ * @description Formats a date into a localized date string.
  */
 export const formatLocalizedDate = (
   date: Date,
@@ -177,6 +187,8 @@ export const formatLocalizedDate = (
  * ```ts
  * const month = formatLocalizedMonth(new Date(), 'fr-FR', 'Europe/Paris'); // "janvier 2024"
  * ```
+ * @title Format Localized Month
+ * @description Formats a date into a localized month string.
  */
 export const formatLocalizedMonth = (
   date: Date,
@@ -201,6 +213,8 @@ export const formatLocalizedMonth = (
  * ```ts
  * const weekday = formatLocalizedWeekday(new Date(), 'es-ES', 'Europe/Madrid', 'long'); // "lunes"
  * ```
+ * @title Format Localized Weekday
+ * @description Formats a date into a localized weekday string.
  */
 export const formatLocalizedWeekday = (
   date: Date,
@@ -225,6 +239,8 @@ export const formatLocalizedWeekday = (
  * ```ts
  * const time = formatLocalizedTime(new Date(), 'ja-JP', 'Asia/Tokyo', true);
  * ```
+ * @title Format Localized Time
+ * @description Formats a date into a localized time string.
  */
 export const formatLocalizedTime = (
   date: Date,

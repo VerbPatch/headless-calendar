@@ -5,6 +5,8 @@ import { convertToTimeZone } from './timezone';
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd").
  * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`. 
  * @group dateTime-helper
+ * @title Parse Date Format
+ * @description Parses a date format string into `Intl.DateTimeFormatOptions`.
  */
 function parseDateFormat(format: string): Intl.DateTimeFormatOptions {
   const options: Intl.DateTimeFormatOptions = {};
@@ -45,6 +47,8 @@ function parseDateFormat(format: string): Intl.DateTimeFormatOptions {
  * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`.
  * @see {@link Intl.DateTimeFormatOptions} 
  * @group dateTime-helper
+ * @title Parse Date and Time Format
+ * @description Parses a date and time format string into `Intl.DateTimeFormatOptions`.
  */
 function parseDateTimeFormat(format: string): Intl.DateTimeFormatOptions {
   const options: Intl.DateTimeFormatOptions = parseDateFormat(format);
@@ -89,6 +93,8 @@ function parseDateTimeFormat(format: string): Intl.DateTimeFormatOptions {
  * const formattedDate = formatDate(new Date('2024-01-15'), { format: 'MM/dd/yyyy' }); // "01/15/2024"
  * ``` 
  * @group dateTime-helper
+ * @title Format Date
+ * @description Formats a date object into a string based on the specified format, locale, and timezone.
  */
 export const formatDate = (
   date: Date,
@@ -113,6 +119,8 @@ export const formatDate = (
  * formatDateTime(new Date(), { format: "yyyy-MM-dd HH:mm:ss", locale: "en-US", timeZone: "America/New_York" });
  * ``` 
  * @group dateTime-helper
+ * @title Format Date and Time
+ * @description Formats a date and time object into a string based on the specified format, locale, and timezone.
  */
 export const formatDateTime = (
   date: Date,
@@ -199,6 +207,8 @@ export const formatDateTime = (
  * const day = getDay(new Date(), 'America/New_York', 'UTC');
  * ``` 
  * @group dateTime-helper
+ * @title Get Day
+ * @description Returns a new Date object representing the start of the day (00:00:00) in the target timezone.
  */
 export const getDay = (date: Date, fromTimeZone: string, toTimeZone: string): Date => {
   const tzDate = convertToTimeZone(date, fromTimeZone, toTimeZone);
@@ -214,6 +224,8 @@ export const getDay = (date: Date, fromTimeZone: string, toTimeZone: string): Da
  * const date = parseDate('2024-01-15T12:00:00.000Z');
  * ``` 
  * @group dateTime-helper
+ * @title Parse Date
+ * @description Parses a date string into a Date object.
  */
 export const parseDate = (dateString: string): Date => {
   return new Date(dateString);
@@ -240,6 +252,8 @@ const dateEquals = (date1: Date, date2: Date): boolean => {
  * const result = isSameDay(new Date('2024-01-15'), new Date('2024-01-15')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Same Day
+ * @description Checks if two dates are the same day.
  */
 export const isSameDay = (date1: Date, date2: Date): boolean => {
   return dateEquals(date1, date2);
@@ -256,6 +270,8 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
  * const result = isSameWeek(new Date('2024-01-15'), new Date('2024-01-17')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Same Week
+ * @description Checks if two dates are in the same week.
  */
 export const isSameWeek = (date1: Date, date2: Date): boolean => {
   const startOfWeek1 = getStartOfWeek(date1);
@@ -274,6 +290,8 @@ export const isSameWeek = (date1: Date, date2: Date): boolean => {
  * const result = isSameMonth(new Date('2024-01-15'), new Date('2024-01-25')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Same Month
+ * @description Checks if two dates are in the same month.
  */
 export const isSameMonth = (date1: Date, date2: Date): boolean => {
   const startOfMonth1 = getStartOfMonth(date1);
@@ -291,6 +309,8 @@ export const isSameMonth = (date1: Date, date2: Date): boolean => {
  * const start = getStartOfWeek(new Date('2024-01-15'), 1); // Monday, 2024-01-15
  * ``` 
  * @group dateTime-helper
+ * @title Get Start Of Week
+ * @description Gets the start of the week for a given date.
  */
 export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
   const d = new Date(date);
@@ -312,6 +332,8 @@ export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
  * const end = getEndOfWeek(new Date('2024-01-15'), 1); // Sunday, 2024-01-21
  * ``` 
  * @group dateTime-helper
+ * @title Get End Of Week
+ * @description Gets the end of the week for a given date.
  */
 export const getEndOfWeek = (date: Date, startOfWeek = 0): Date => {
   const startWeek = getStartOfWeek(date, startOfWeek);
@@ -327,6 +349,8 @@ export const getEndOfWeek = (date: Date, startOfWeek = 0): Date => {
  * const start = getStartOfMonth(new Date('2024-01-15')); // 2024-01-01
  * ``` 
  * @group dateTime-helper
+ * @title Get Start Of Month
+ * @description Gets the start of the month for a given date.
  */
 export const getStartOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -341,6 +365,8 @@ export const getStartOfMonth = (date: Date): Date => {
  * const end = getEndOfMonth(new Date('2024-01-15')); // 2024-01-31
  * ``` 
  * @group dateTime-helper
+ * @title Get End Of Month
+ * @description Gets the end of the month for a given date.
  */
 export const getEndOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -354,7 +380,9 @@ export const getEndOfMonth = (date: Date): Date => {
  * ```ts
  * const start = getStartOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T00:00:00
  * ``` 
- * @group dateTime-helper 
+ * @group dateTime-helper
+ * @title Get Start Of Day
+ * @description Gets the start of the day for a given date (00:00:00).
  */
 export const getStartOfDay = (date: Date): Date => {
   const d = new Date(date);
@@ -371,6 +399,8 @@ export const getStartOfDay = (date: Date): Date => {
  * const end = getEndOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T23:59:59.999
  * ``` 
  * @group dateTime-helper
+ * @title Get End Of Day
+ * @description Gets the end of the day for a given date (23:59:59:999).
  */
 export const getEndOfDay = (date: Date): Date => {
   const d = new Date(date);
@@ -387,6 +417,8 @@ export const getEndOfDay = (date: Date): Date => {
  * const days = getDaysInMonth(new Date('2024-01-15')); // 31
  * ``` 
  * @group dateTime-helper
+ * @title Get Days In Month
+ * @description Gets the number of days in the month of a given date.
  */
 export const getDaysInMonth = (date: Date): number => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -402,6 +434,8 @@ export const getDaysInMonth = (date: Date): number => {
  * const newDate = addDays(new Date('2024-01-15'), 5); // 2024-01-20
  * ``` 
  * @group dateTime-helper
+ * @title Add Days
+ * @description Adds a specified number of days to a date.
  */
 export const addDays = (date: Date, days: number): Date => {
   const result = new Date(date);
@@ -420,6 +454,8 @@ export const addDays = (date: Date, days: number): Date => {
  * const newDate = addWeeks(new Date('2024-01-15'), 2); // 2024-01-29
  * ``` 
  * @group dateTime-helper
+ * @title Add Weeks
+ * @description Adds a specified number of weeks to a date.
  */
 export const addWeeks = (date: Date, weeks: number): Date => {
   return addDays(date, weeks * 7);
@@ -435,6 +471,8 @@ export const addWeeks = (date: Date, weeks: number): Date => {
  * const newDate = addMonths(new Date('2024-01-15'), 3); // 2024-04-15
  * ``` 
  * @group dateTime-helper
+ * @title Add Months
+ * @description Adds a specified number of months to a date.
  */
 export const addMonths = (date: Date, months: number): Date => {
   const result = new Date(date);
@@ -452,6 +490,8 @@ export const addMonths = (date: Date, months: number): Date => {
  * const newDate = addYears(new Date('2024-01-15'), 1); // 2025-01-15
  * ``` 
  * @group dateTime-helper
+ * @title Add Years
+ * @description Adds a specified number of years to a date.
  */
 export const addYears = (date: Date, years: number): Date => {
   const result = new Date(date);
@@ -470,6 +510,8 @@ export const addYears = (date: Date, years: number): Date => {
  * const newDate = subtractDays(new Date('2024-01-15'), 5); // 2024-01-10
  * ``` 
  * @group dateTime-helper
+ * @title Subtract Days
+ * @description Subtracts a specified number of days from a date.
  */
 export const subtractDays = (date: Date, days: number): Date => {
   return addDays(date, -days);
@@ -486,6 +528,8 @@ export const subtractDays = (date: Date, days: number): Date => {
  * const newDate = subtractWeeks(new Date('2024-01-15'), 2); // 2024-01-01
  * ``` 
  * @group dateTime-helper
+ * @title Subtract Weeks
+ * @description Subtracts a specified number of weeks from a date.
  */
 export const subtractWeeks = (date: Date, weeks: number): Date => {
   return addWeeks(date, -weeks);
@@ -502,6 +546,8 @@ export const subtractWeeks = (date: Date, weeks: number): Date => {
  * const newDate = subtractMonths(new Date('2024-01-15'), 3); // 2023-10-15
  * ``` 
  * @group dateTime-helper
+ * @title Subtract Months
+ * @description Subtracts a specified number of months from a date.
  */
 export const subtractMonths = (date: Date, months: number): Date => {
   return addMonths(date, -months);
@@ -517,6 +563,8 @@ export const subtractMonths = (date: Date, months: number): Date => {
  * const days = getDaysBetween(new Date('2024-01-15'), new Date('2024-01-20')); // 5
  * ``` 
  * @group dateTime-helper
+ * @title Get Days Between
+ * @description Calculates the number of full days between two dates.
  */
 export const getDaysBetween = (startDate: Date, endDate: Date): number => {
   const timeDiff = endDate.getTime() - startDate.getTime();
@@ -533,6 +581,8 @@ export const getDaysBetween = (startDate: Date, endDate: Date): number => {
  * const result = isToday(new Date()); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Today
+ * @description Checks if a given date is today.
  */
 export const isToday = (date: Date): boolean => {
   return isSameDay(date, new Date());
@@ -547,6 +597,8 @@ export const isToday = (date: Date): boolean => {
  * const result = isPast(new Date('2000-01-01')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Past
+ * @description Checks if a given date is in the past.
  */
 export const isPast = (date: Date): boolean => {
   return date < new Date();
@@ -561,6 +613,8 @@ export const isPast = (date: Date): boolean => {
  * const result = isFuture(new Date('2100-01-01')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Is Future
+ * @description Checks if a given date is in the future.
  */
 export const isFuture = (date: Date): boolean => {
   return date > new Date();
@@ -575,6 +629,8 @@ export const isFuture = (date: Date): boolean => {
  * const result = isWeekend(new Date('2024-01-20')); // true (Saturday)
  * ``` 
  * @group dateTime-helper
+ * @title Is Weekend
+ * @description Checks if a given date falls on a weekend (Saturday or Sunday).
  */
 export const isWeekend = (date: Date): boolean => {
   const day = date.getDay();
@@ -592,6 +648,8 @@ export const isWeekend = (date: Date): boolean => {
  * const result = dateTimeInBetween(new Date('2024-01-15T12:00:00'), new Date('2024-01-15T10:00:00'), new Date('2024-01-15T14:00:00')); // true
  * ``` 
  * @group dateTime-helper
+ * @title Date Time In Between
+ * @description Checks if a given date and time falls within a specified range (inclusive).
  */
 export const dateTimeInBetween = (between: Date, startDateTime: Date, endDateTime: Date): boolean => {
   const d = between.getTime();

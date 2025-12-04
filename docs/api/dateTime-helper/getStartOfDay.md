@@ -1,8 +1,13 @@
+---
+title: Get Start Of Day
+description: Gets the start of the day for a given date (00:00:00).
+---
+
 # Function: getStartOfDay()
 
 > **getStartOfDay**(`date`): `Date`
 
-Defined in: [utils/date.ts:359](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L359)
+Defined in: [utils/date.ts:387](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L387)
 
 Gets the start of the day for a given date (00:00:00).
 

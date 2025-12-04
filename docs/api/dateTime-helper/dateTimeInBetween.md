@@ -1,8 +1,13 @@
+---
+title: Date Time In Between
+description: Checks if a given date and time falls within a specified range (inclusive).
+---
+
 # Function: dateTimeInBetween()
 
 > **dateTimeInBetween**(`between`, `startDateTime`, `endDateTime`): `boolean`
 
-Defined in: [utils/date.ts:596](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L596)
+Defined in: [utils/date.ts:654](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L654)
 
 Checks if a given date and time falls within a specified range (inclusive).
 

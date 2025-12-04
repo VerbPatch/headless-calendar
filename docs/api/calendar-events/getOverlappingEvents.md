@@ -1,8 +1,13 @@
+---
+title: Get Overlapping Events
+description: Finds all events that overlap with a target event.
+---
+
 # Function: getOverlappingEvents()
 
 > **getOverlappingEvents**(`events`, `targetEvent`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:200](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/events.ts#L200)
+Defined in: [utils/events.ts:220](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/events.ts#L220)
 
 Finds all events that overlap with a target event.
 

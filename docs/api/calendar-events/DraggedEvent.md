@@ -1,6 +1,11 @@
+---
+title: Dragged Event
+description: Represents an event that is currently being dragged, containing the event data and additional drag-related information.
+---
+
 # Interface: DraggedEvent
 
-Defined in: [types/events.ts:240](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/types/events.ts#L240)
+Defined in: [types/events.ts:244](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/events.ts#L244)
 
 Represents an event that is currently being dragged.
 
@@ -16,7 +21,7 @@ Additional data associated with the drag operation.
 
 > **event**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [types/events.ts:245](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/types/events.ts#L245)
+Defined in: [types/events.ts:249](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/events.ts#L249)
 
 The calendar event being dragged.
 
@@ -30,6 +35,6 @@ The calendar event being dragged.
 
 > **type**: `string`
 
-Defined in: [types/events.ts:249](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/types/events.ts#L249)
+Defined in: [types/events.ts:253](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/events.ts#L253)
 
 The type of the dragged item (e.g., 'event').

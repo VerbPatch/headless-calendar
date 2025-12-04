@@ -1,8 +1,13 @@
+---
+title: Get Events For Date Range
+description: Retrieves all events that fall within a specified date range.
+---
+
 # Function: getEventsForDateRange()
 
 > **getEventsForDateRange**(`events`, `startDate`, `endDate`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:77](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/events.ts#L77)
+Defined in: [utils/events.ts:85](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/events.ts#L85)
 
 Retrieves all events that fall within a specified date range.
 

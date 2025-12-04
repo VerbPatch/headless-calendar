@@ -1,8 +1,13 @@
+---
+title: Get Time Slots
+description: Generates an array of time slots for a given range of hours and interval.
+---
+
 # Function: getTimeSlots()
 
 > **getTimeSlots**(`startHour?`, `endHour?`, `interval?`): [`TimeSlot`](/calendar/docs/api/calendar/TimeSlot)[]
 
-Defined in: [utils/calendar.ts:74](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/calendar.ts#L74)
+Defined in: [utils/calendar.ts:80](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/calendar.ts#L80)
 
 Generates an array of time slots for a given range of hours and interval.
 

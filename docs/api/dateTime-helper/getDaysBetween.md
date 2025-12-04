@@ -1,8 +1,13 @@
+---
+title: Get Days Between
+description: Calculates the number of full days between two dates.
+---
+
 # Function: getDaysBetween()
 
 > **getDaysBetween**(`startDate`, `endDate`): `number`
 
-Defined in: [utils/date.ts:521](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L521)
+Defined in: [utils/date.ts:569](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L569)
 
 Calculates the number of full days between two dates.
 

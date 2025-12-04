@@ -38,6 +38,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
 
   /**
    * Navigates the calendar to the next period (day, week, or month) based on the current view.
+   * @group Navigation
+   * @title Go to Next
+   * @description Navigates the calendar to the next period (day, week, or month) based on the current view.
    */
   const goToNext = createCallback((): void => {
     let newDate: Date;
@@ -64,6 +67,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
 
   /**
    * Navigates the calendar to the previous period (day, week, or month) based on the current view.
+   * @group Navigation
+   * @title Go to Previous
+   * @description Navigates the calendar to the previous period (day, week, or month) based on the current view.
    */
   const goToPrevious = createCallback((): void => {
 
@@ -91,6 +97,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
 
   /**
    * Navigates the calendar to today's date.
+   * @group Navigation
+   * @title Go to Today
+   * @description Navigates the calendar to today's date.
    */
   const goToToday = createCallback((): void => {
     const today = getDay(new Date(), options.timezone, options.timezone);
@@ -103,6 +112,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
   /**
    * Navigates the calendar to a specific date.
    * @param {Date} date - The date to navigate to.
+   * @group Navigation
+   * @title Go to Date
+   * @description Navigates the calendar to a specific date.
    */
   const goToDate = createCallback((date: Date): void => {
     const newDate = new Date(date);
@@ -116,6 +128,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * Changes the current view of the calendar.
    * @param {ViewType} newView - The new view to set.
    * @see {@link ViewType}
+   * @group Navigation
+   * @title Change View
+   * @description Changes the current view of the calendar.
    */
   const changeView = createCallback((newView: ViewType): void => {
     setView(newView);

@@ -1,8 +1,13 @@
+---
+title: Add Months
+description: Adds a specified number of months to a date.
+---
+
 # Function: addMonths()
 
 > **addMonths**(`date`, `months`): `Date`
 
-Defined in: [utils/date.ts:439](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L439)
+Defined in: [utils/date.ts:477](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L477)
 
 Adds a specified number of months to a date.
 

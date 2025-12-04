@@ -1,8 +1,13 @@
+---
+title: Is Same Month
+description: Checks if two dates are in the same month.
+---
+
 # Function: isSameMonth()
 
 > **isSameMonth**(`date1`, `date2`): `boolean`
 
-Defined in: [utils/date.ts:278](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L278)
+Defined in: [utils/date.ts:296](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L296)
 
 Checks if two dates are in the same month.
 

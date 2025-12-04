@@ -1,5 +1,34 @@
 [
   {
+    "title": "hooks",
+    "children": [
+      {
+        "title": "useCalendar",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useCalendar",
+        "isDeprecated": false
+      },
+      {
+        "title": "useDragDrop",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useDragDrop",
+        "isDeprecated": false
+      },
+      {
+        "title": "useEvents",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useEvents",
+        "isDeprecated": false
+      },
+      {
+        "title": "useNavigation",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useNavigation",
+        "isDeprecated": false
+      }
+    ]
+  },
+  {
     "title": "calendar",
     "children": [
       {
@@ -364,35 +393,6 @@
         "title": "subtractWeeks",
         "kind": 64,
         "path": "/calendar/docs/api/dateTime-helper/subtractWeeks",
-        "isDeprecated": false
-      }
-    ]
-  },
-  {
-    "title": "hooks",
-    "children": [
-      {
-        "title": "useCalendar",
-        "kind": 64,
-        "path": "/calendar/docs/api/hooks/useCalendar",
-        "isDeprecated": false
-      },
-      {
-        "title": "useDragDrop",
-        "kind": 64,
-        "path": "/calendar/docs/api/hooks/useDragDrop",
-        "isDeprecated": false
-      },
-      {
-        "title": "useEvents",
-        "kind": 64,
-        "path": "/calendar/docs/api/hooks/useEvents",
-        "isDeprecated": false
-      },
-      {
-        "title": "useNavigation",
-        "kind": 64,
-        "path": "/calendar/docs/api/hooks/useNavigation",
         "isDeprecated": false
       }
     ]

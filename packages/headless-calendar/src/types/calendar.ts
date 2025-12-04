@@ -4,6 +4,8 @@ import { ViewType, MonthData, WeekData, DayData } from './views';
 /**
  * Represents a single time slot in a day view.
  * @group calendar
+ * @title Time Slot
+ * @description Represents a single time slot in a day view.
  */
 export interface TimeSlot {
   /**
@@ -29,6 +31,8 @@ export interface TimeSlot {
 /**
  * Represents the target of a drop operation.
  * @group calendar 
+ * @title Drop Target
+ * @description Represents the target of a drop operation.
  */
 export interface DropTarget {
   /**
@@ -44,6 +48,8 @@ export interface DropTarget {
 /**
  * Configuration options for initializing a calendar instance.
  * @group calendar
+ * @title Calendar Options
+ * @description Configuration options for initializing a calendar instance.
  */
 export interface CalendarOptions {
   /**
@@ -131,6 +137,8 @@ export interface CalendarOptions {
 
 /** 
  * @group calendar
+ * @title Calendar Utilities
+ * @description A collection of utility functions for date manipulation and formatting, bound to the calendar's locale and timezone.
 */
 export interface CalendarUtils {
   /**
@@ -331,8 +339,9 @@ export interface CalendarUtils {
 
 /** 
  * @group calendar 
- */
-export interface CalendarInstance {
+ * @title Calendar Instance
+ * @description The main object returned by the `useCalendar` hook, providing access to the calendar's state, navigation functions, event management functions, and other utilities.
+*/export interface CalendarInstance {
   /**
    * The currently selected date in the calendar.
    * @type {Date}

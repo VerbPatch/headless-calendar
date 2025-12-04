@@ -1,8 +1,13 @@
+---
+title: Is Same Day
+description: Checks if two dates are the same day.
+---
+
 # Function: isSameDay()
 
 > **isSameDay**(`date1`, `date2`): `boolean`
 
-Defined in: [utils/date.ts:244](https://github.com/VerbPatch/headless-calendar/blob/9a730b39418dd9b987039719025c6e01611f225e/packages/headless-calendar/src/utils/date.ts#L244)
+Defined in: [utils/date.ts:258](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L258)
 
 Checks if two dates are the same day.
 
