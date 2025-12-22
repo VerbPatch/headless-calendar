@@ -3,11 +3,11 @@ title: Get Start Of Month
 description: Gets the start of the month for a given date.
 ---
 
-# Function: getStartOfMonth()
+# getStartOfMonth()
 
 > **getStartOfMonth**(`date`): `Date`
 
-Defined in: [utils/date.ts:355](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L355)
+Defined in: [utils/date.ts:355](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L355)
 
 Gets the start of the month for a given date.
 

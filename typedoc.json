@@ -21,11 +21,13 @@
   "hidePageHeader": true,
   "hidePageTitle": false,
   "hideBreadcrumbs": true,
-  "hideGenerator": false,
   "readme": "none",
   "mergeReadme": false,
-  "frontmatterCommentTags": ["title", "description"]
+  "frontmatterCommentTags": ["title", "description"],
   // "frontmatterGlobals": {
   //   "author": "Rameez Raja"
   // }
+  "pageTitleTemplates": {
+    "member": "{name}"
+  }
 }

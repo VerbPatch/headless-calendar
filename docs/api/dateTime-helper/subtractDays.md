@@ -3,11 +3,11 @@ title: Subtract Days
 description: Subtracts a specified number of days from a date.
 ---
 
-# Function: subtractDays()
+# subtractDays()
 
 > **subtractDays**(`date`, `days`): `Date`
 
-Defined in: [utils/date.ts:516](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L516)
+Defined in: [utils/date.ts:516](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L516)
 
 Subtracts a specified number of days from a date.
 

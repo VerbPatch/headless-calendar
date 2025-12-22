@@ -3,11 +3,11 @@ title: Format Date
 description: Formats a date object into a string based on the specified format, locale, and timezone.
 ---
 
-# Function: formatDate()
+# formatDate()
 
 > **formatDate**(`date`, `options?`): `string`
 
-Defined in: [utils/date.ts:99](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L99)
+Defined in: [utils/date.ts:99](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L99)
 
 Formats a date object into a string based on the specified format, locale, and timezone.
 

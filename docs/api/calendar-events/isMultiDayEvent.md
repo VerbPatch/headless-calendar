@@ -3,11 +3,11 @@ title: Is Multi Day Event
 description: Checks if an event spans multiple days.
 ---
 
-# Function: isMultiDayEvent()
+# isMultiDayEvent()
 
 > **isMultiDayEvent**(`event`): `boolean`
 
-Defined in: [utils/events.ts:168](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/events.ts#L168)
+Defined in: [utils/events.ts:168](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L168)
 
 Checks if an event spans multiple days.
 

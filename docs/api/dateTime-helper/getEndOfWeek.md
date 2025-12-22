@@ -3,11 +3,11 @@ title: Get End Of Week
 description: Gets the end of the week for a given date.
 ---
 
-# Function: getEndOfWeek()
+# getEndOfWeek()
 
 > **getEndOfWeek**(`date`, `startOfWeek?`): `Date`
 
-Defined in: [utils/date.ts:338](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L338)
+Defined in: [utils/date.ts:338](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L338)
 
 Gets the end of the week for a given date.
 

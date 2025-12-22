@@ -3,11 +3,11 @@ title: Validate Event
 description: Validates a calendar event object for required fields and logical consistency.
 ---
 
-# Function: validateEvent()
+# validateEvent()
 
 > **validateEvent**(`event`): `string`[]
 
-Defined in: [utils/events.ts:249](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/events.ts#L249)
+Defined in: [utils/events.ts:249](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L249)
 
 Validates a calendar event object for required fields and logical consistency.
 
