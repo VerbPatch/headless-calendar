@@ -3,11 +3,13 @@ title: Drag and Drop Events Hook
 description: A hook for managing drag and drop functionality for calendar events.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / useDragDrop
+
 # Function: useDragDrop()
 
 > **useDragDrop**(`options`): [`UseDragDropReturn`](/calendar/docs/api/calendar-events/UseDragDropReturn)
 
-Defined in: [hooks/useDragDrop.ts:32](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/hooks/useDragDrop.ts#L32)
+Defined in: [hooks/useDragDrop.ts:32](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/hooks/useDragDrop.ts#L32)
 
 A hook for managing drag and drop functionality for calendar events.
 

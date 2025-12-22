@@ -3,11 +3,13 @@ title: Clone Event
 description: Creates a deep clone of a calendar event, assigning a new unique ID.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / cloneEvent
+
 # Function: cloneEvent()
 
 > **cloneEvent**(`event`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [utils/events.ts:457](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/events.ts#L457)
+Defined in: [utils/events.ts:457](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/events.ts#L457)
 
 Creates a deep clone of a calendar event, assigning a new unique ID.
 

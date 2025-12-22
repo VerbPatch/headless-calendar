@@ -3,11 +3,13 @@ title: Is Future
 description: Checks if a given date is in the future.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / isFuture
+
 # Function: isFuture()
 
 > **isFuture**(`date`): `boolean`
 
-Defined in: [utils/date.ts:619](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L619)
+Defined in: [utils/date.ts:619](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L619)
 
 Checks if a given date is in the future.
 

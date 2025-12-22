@@ -3,11 +3,13 @@ title: Get Calendar Bounds
 description: Determines the start and end date bounds for a given calendar view.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getCalendarBounds
+
 # Function: getCalendarBounds()
 
 > **getCalendarBounds**(`view`, `date`, `startOfWeek?`): `object`
 
-Defined in: [utils/calendar.ts:234](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/calendar.ts#L234)
+Defined in: [utils/calendar.ts:234](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/calendar.ts#L234)
 
 Determines the start and end date bounds for a given calendar view.
 

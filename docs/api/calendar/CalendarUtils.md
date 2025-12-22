@@ -3,9 +3,11 @@ title: Calendar Utilities
 description: A collection of utility functions for date manipulation and formatting, bound to the calendar's locale and timezone.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / CalendarUtils
+
 # Interface: CalendarUtils
 
-Defined in: [types/calendar.ts:143](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L143)
+Defined in: [types/calendar.ts:143](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L143)
 
 ## Properties
 
@@ -13,7 +15,7 @@ Defined in: [types/calendar.ts:143](https://github.com/VerbPatch/headless-calend
 
 > **addDays**: (`date`, `days`) => `Date`
 
-Defined in: [types/calendar.ts:198](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L198)
+Defined in: [types/calendar.ts:198](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L198)
 
 **`Function`**
 
@@ -45,7 +47,7 @@ The number of days to add (can be negative).
 
 > **addMonths**: (`date`, `months`) => `Date`
 
-Defined in: [types/calendar.ts:214](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L214)
+Defined in: [types/calendar.ts:214](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L214)
 
 **`Function`**
 
@@ -77,7 +79,7 @@ The number of months to add (can be negative).
 
 > **addWeeks**: (`date`, `weeks`) => `Date`
 
-Defined in: [types/calendar.ts:206](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L206)
+Defined in: [types/calendar.ts:206](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L206)
 
 **`Function`**
 
@@ -109,7 +111,7 @@ The number of weeks to add (can be negative).
 
 > **convertToTimeZone**: (`date`, `fromTimeZone`, `toTimeZone`) => `Date`
 
-Defined in: [types/calendar.ts:279](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L279)
+Defined in: [types/calendar.ts:279](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L279)
 
 **`Function`**
 
@@ -147,7 +149,7 @@ The target timezone.
 
 > **dateTimeInBetween**: (`between`, `startDateTime`, `endDateTime`) => `boolean`
 
-Defined in: [types/calendar.ts:253](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L253)
+Defined in: [types/calendar.ts:253](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L253)
 
 **`Function`**
 
@@ -185,7 +187,7 @@ The end of the range.
 
 > **daysofWeek**: (`format?`, `locale?`) => `string`[]
 
-Defined in: [types/calendar.ts:260](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L260)
+Defined in: [types/calendar.ts:260](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L260)
 
 **`Function`**
 
@@ -215,7 +217,7 @@ The format of the weekday names ('short' for 'Mon', 'long' for 'Monday').
 
 > **formatDate**: (`date`, `format?`) => `string`
 
-Defined in: [types/calendar.ts:151](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L151)
+Defined in: [types/calendar.ts:151](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L151)
 
 **`Function`**
 
@@ -247,7 +249,7 @@ The format string (e.g., "yyyy-MM-dd", "MM/dd/yyyy").
 
 > **formatDateInTimeZone**: (`date`, `locale?`, `timeZone?`, `options?`) => `string`
 
-Defined in: [types/calendar.ts:270](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L270)
+Defined in: [types/calendar.ts:270](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L270)
 
 **`Function`**
 
@@ -291,7 +293,7 @@ Additional formatting options.
 
 > **formatDateTime**: (`date`, `format?`) => `string`
 
-Defined in: [types/calendar.ts:159](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L159)
+Defined in: [types/calendar.ts:159](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L159)
 
 **`Function`**
 
@@ -323,7 +325,7 @@ The format string (e.g., "yyyy-MM-dd HH:mm:ss").
 
 > **formatLocalizedDate**: (`date`, `locale?`, `timeZone?`, `options?`) => `string`
 
-Defined in: [types/calendar.ts:289](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L289)
+Defined in: [types/calendar.ts:289](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L289)
 
 **`Function`**
 
@@ -367,7 +369,7 @@ Additional formatting options.
 
 > **formatLocalizedMonth**: (`date`, `locale?`, `timeZone?`) => `string`
 
-Defined in: [types/calendar.ts:303](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L303)
+Defined in: [types/calendar.ts:303](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L303)
 
 **`Function`**
 
@@ -405,7 +407,7 @@ The timezone to use for formatting.
 
 > **formatLocalizedTime**: (`date`, `locale?`, `timeZone?`, `hour12?`) => `string`
 
-Defined in: [types/calendar.ts:332](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L332)
+Defined in: [types/calendar.ts:332](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L332)
 
 **`Function`**
 
@@ -449,7 +451,7 @@ Whether to use 12-hour format.
 
 > **formatLocalizedWeekday**: (`date`, `locale?`, `timeZone?`, `format?`) => `string`
 
-Defined in: [types/calendar.ts:317](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L317)
+Defined in: [types/calendar.ts:317](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L317)
 
 **`Function`**
 
@@ -493,7 +495,7 @@ The format of the weekday (e.g., 'short', 'long').
 
 > **getEndOfMonth**: (`date`) => `Date`
 
-Defined in: [types/calendar.ts:244](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L244)
+Defined in: [types/calendar.ts:244](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L244)
 
 **`Function`**
 
@@ -519,7 +521,7 @@ The date.
 
 > **getEndOfWeek**: (`date`, `startOfWeek?`) => `Date`
 
-Defined in: [types/calendar.ts:230](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L230)
+Defined in: [types/calendar.ts:230](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L230)
 
 **`Function`**
 
@@ -551,7 +553,7 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 > **getStartOfMonth**: (`date`) => `Date`
 
-Defined in: [types/calendar.ts:237](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L237)
+Defined in: [types/calendar.ts:237](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L237)
 
 **`Function`**
 
@@ -577,7 +579,7 @@ The date.
 
 > **getStartOfWeek**: (`date`, `startOfWeek?`) => `Date`
 
-Defined in: [types/calendar.ts:222](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L222)
+Defined in: [types/calendar.ts:222](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L222)
 
 **`Function`**
 
@@ -609,7 +611,7 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 > **isSameDay**: (`date1`, `date2`) => `boolean`
 
-Defined in: [types/calendar.ts:174](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L174)
+Defined in: [types/calendar.ts:174](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L174)
 
 **`Function`**
 
@@ -641,7 +643,7 @@ The second date.
 
 > **isSameMonth**: (`date1`, `date2`) => `boolean`
 
-Defined in: [types/calendar.ts:190](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L190)
+Defined in: [types/calendar.ts:190](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L190)
 
 **`Function`**
 
@@ -673,7 +675,7 @@ The second date.
 
 > **isSameWeek**: (`date1`, `date2`) => `boolean`
 
-Defined in: [types/calendar.ts:182](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L182)
+Defined in: [types/calendar.ts:182](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L182)
 
 **`Function`**
 
@@ -705,7 +707,7 @@ The second date.
 
 > **parseDate**: (`dateString`) => `Date`
 
-Defined in: [types/calendar.ts:166](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/types/calendar.ts#L166)
+Defined in: [types/calendar.ts:166](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/types/calendar.ts#L166)
 
 **`Function`**
 

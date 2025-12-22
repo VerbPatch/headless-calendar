@@ -3,11 +3,13 @@ title: Is Event In Date Range
 description: Checks if a given event falls within a specified date range.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / isEventInDateRange
+
 # Function: isEventInDateRange()
 
 > **isEventInDateRange**(`event`, `startDate`, `endDate`): `boolean`
 
-Defined in: [utils/events.ts:35](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/events.ts#L35)
+Defined in: [utils/events.ts:35](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/events.ts#L35)
 
 Checks if a given event falls within a specified date range.
 

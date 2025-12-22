@@ -3,11 +3,13 @@ title: Get Year Range
 description: Calculates the start and end dates of the year for a given date.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getYearRange
+
 # Function: getYearRange()
 
 > **getYearRange**(`date`): `object`
 
-Defined in: [utils/calendar.ts:188](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/calendar.ts#L188)
+Defined in: [utils/calendar.ts:188](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/calendar.ts#L188)
 
 Calculates the start and end dates of the year for a given date.
 

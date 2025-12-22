@@ -3,11 +3,13 @@ title: Get End Of Day
 description: Gets the end of the day for a given date (23:59:59:999).
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getEndOfDay
+
 # Function: getEndOfDay()
 
 > **getEndOfDay**(`date`): `Date`
 
-Defined in: [utils/date.ts:405](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L405)
+Defined in: [utils/date.ts:405](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L405)
 
 Gets the end of the day for a given date (23:59:59:999).
 

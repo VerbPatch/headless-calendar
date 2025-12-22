@@ -127,6 +127,12 @@
         "isDeprecated": false
       },
       {
+        "title": "CalendarEventOccurance",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/CalendarEventOccurance",
+        "isDeprecated": false
+      },
+      {
         "title": "DraggedEvent",
         "kind": 256,
         "path": "/calendar/docs/api/calendar-events/DraggedEvent",

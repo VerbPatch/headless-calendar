@@ -3,11 +3,13 @@ title: Is Past
 description: Checks if a given date is in the past.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / isPast
+
 # Function: isPast()
 
 > **isPast**(`date`): `boolean`
 
-Defined in: [utils/date.ts:603](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L603)
+Defined in: [utils/date.ts:603](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L603)
 
 Checks if a given date is in the past.
 

@@ -20,6 +20,7 @@
 ## calendar-events
 
 - [CalendarEvent](/calendar/docs/api/calendar-events/CalendarEvent)
+- [CalendarEventOccurance](/calendar/docs/api/calendar-events/CalendarEventOccurance)
 - [DraggedEvent](/calendar/docs/api/calendar-events/DraggedEvent)
 - [UseDragDropOptions](/calendar/docs/api/calendar-events/UseDragDropOptions)
 - [UseDragDropReturn](/calendar/docs/api/calendar-events/UseDragDropReturn)

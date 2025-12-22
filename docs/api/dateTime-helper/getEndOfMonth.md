@@ -3,11 +3,13 @@ title: Get End Of Month
 description: Gets the end of the month for a given date.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getEndOfMonth
+
 # Function: getEndOfMonth()
 
 > **getEndOfMonth**(`date`): `Date`
 
-Defined in: [utils/date.ts:371](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L371)
+Defined in: [utils/date.ts:371](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L371)
 
 Gets the end of the month for a given date.
 

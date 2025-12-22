@@ -3,11 +3,13 @@ title: Add Weeks
 description: Adds a specified number of weeks to a date.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / addWeeks
+
 # Function: addWeeks()
 
 > **addWeeks**(`date`, `weeks`): `Date`
 
-Defined in: [utils/date.ts:460](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/date.ts#L460)
+Defined in: [utils/date.ts:460](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L460)
 
 Adds a specified number of weeks to a date.
 

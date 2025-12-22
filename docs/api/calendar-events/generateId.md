@@ -3,11 +3,13 @@ title: Generate ID
 description: Generates a unique ID for a calendar event.
 ---
 
+[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / generateId
+
 # Function: generateId()
 
 > **generateId**(): `string`
 
-Defined in: [utils/events.ts:15](https://github.com/VerbPatch/headless-calendar/blob/184198efa3f566732cc9638ed7e00060c7790d61/packages/headless-calendar/src/utils/events.ts#L15)
+Defined in: [utils/events.ts:15](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/events.ts#L15)
 
 Generates a unique ID for a calendar event.
 
