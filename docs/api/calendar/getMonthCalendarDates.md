@@ -3,13 +3,11 @@ title: Get Month Calendar Dates
 description: Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getMonthCalendarDates
-
 # Function: getMonthCalendarDates()
 
 > **getMonthCalendarDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:45](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/calendar.ts#L45)
+Defined in: [utils/calendar.ts:45](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/calendar.ts#L45)
 
 Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
 

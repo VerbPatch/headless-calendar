@@ -3,13 +3,11 @@ title: Get Events For Date
 description: Retrieves all events that occur on a specific date.
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getEventsForDate
-
 # Function: getEventsForDate()
 
 > **getEventsForDate**(`events`, `date`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:59](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/events.ts#L59)
+Defined in: [utils/events.ts:59](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/events.ts#L59)
 
 Retrieves all events that occur on a specific date.
 

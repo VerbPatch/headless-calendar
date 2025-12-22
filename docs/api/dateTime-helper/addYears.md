@@ -3,13 +3,11 @@ title: Add Years
 description: Adds a specified number of years to a date.
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / addYears
-
 # Function: addYears()
 
 > **addYears**(`date`, `years`): `Date`
 
-Defined in: [utils/date.ts:496](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L496)
+Defined in: [utils/date.ts:496](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L496)
 
 Adds a specified number of years to a date.
 

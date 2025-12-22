@@ -3,13 +3,11 @@ title: Get Event Duration
 description: Calculates the duration of an event in milliseconds.
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / getEventDuration
-
 # Function: getEventDuration()
 
 > **getEventDuration**(`event`): `number`
 
-Defined in: [utils/events.ts:130](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/events.ts#L130)
+Defined in: [utils/events.ts:130](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/events.ts#L130)
 
 Calculates the duration of an event in milliseconds.
 

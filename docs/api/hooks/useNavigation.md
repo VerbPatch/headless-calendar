@@ -3,13 +3,11 @@ title: Calendar Navigation Hook
 description: A hook for managing calendar navigation, including changing views and moving between dates.
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / useNavigation
-
 # Function: useNavigation()
 
 > **useNavigation**(`options`): [`UseNavigationReturn`](/calendar/docs/api/navigation/UseNavigationReturn)
 
-Defined in: [hooks/useNavigation.ts:29](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/hooks/useNavigation.ts#L29)
+Defined in: [hooks/useNavigation.ts:29](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/hooks/useNavigation.ts#L29)
 
 A hook for managing calendar navigation, including changing views and moving between dates.
 

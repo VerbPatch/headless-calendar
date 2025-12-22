@@ -3,13 +3,11 @@ title: Is Weekend
 description: Checks if a given date falls on a weekend (Saturday or Sunday).
 ---
 
-[@verbpatch/headless-calendar](/calendar/docs/api/calendar) / isWeekend
-
 # Function: isWeekend()
 
 > **isWeekend**(`date`): `boolean`
 
-Defined in: [utils/date.ts:635](https://github.com/VerbPatch/headless-calendar/blob/135b06f7280928d26167e71f907075f9a8c9dcc0/packages/headless-calendar/src/utils/date.ts#L635)
+Defined in: [utils/date.ts:635](https://github.com/VerbPatch/headless-calendar/blob/c446e760845309c4ae51ef6664ad7048007c4b5c/packages/headless-calendar/src/utils/date.ts#L635)
 
 Checks if a given date falls on a weekend (Saturday or Sunday).
 
