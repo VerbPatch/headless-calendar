@@ -1,5 +1,5 @@
 {
-	"name": "svelte-calendar-minimal-example",
+	"name": "svelte-calendar-basic-example",
 	"private": true,
 	"type": "module",
 	"scripts": {

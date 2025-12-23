@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Calendar from '$lib';
+	import Calendar from './Calendar.svelte';
 
 	let showCalendar = false;
 
