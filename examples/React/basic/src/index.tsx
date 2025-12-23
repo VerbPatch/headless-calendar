@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 import React, { JSX } from "react";
 import useCalendar from "@verbpatch/react-calendar";
 
@@ -167,4 +168,4 @@ const CalendarDemo: React.FC = () => {
   );
 };
 
-export default CalendarDemo;
+createRoot(document.getElementById("root")!).render(<CalendarDemo />);
