@@ -2,7 +2,7 @@
 import { CalendarEvent, UseEventsOptions, UseEventsReturn } from '../types/events';
 import { generateId, validateEvent } from '../utils/events';
 import { convertToTimeZone } from '../utils/timezone';
-import { createCallback, createState, } from '../state';
+import { createCallback, createMemo, createState, } from '../state';
 
 /**
  * A hook for managing calendar events, including creating, updating, deleting, and moving events.
@@ -37,12 +37,24 @@ import { createCallback, createState, } from '../state';
  * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
-  const { onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;
-  initialEvents?.forEach(event => {
-    event.id ??= generateId();
-  });
+  const { calendarTimezone, onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;
 
-  const [getEvents, setEvents] = createState<CalendarEvent[]>(initialEvents || [], 'calendar-event');
+  const _initialEvents = createMemo<CalendarEvent[]>((): CalendarEvent[] => {
+    if (initialEvents && initialEvents.length > 0) {
+      const events = initialEvents.map(event => {
+        event.id ??= generateId();
+        event.timezone ??= calendarTimezone;
+        event.start = convertToTimeZone(event.start, (event.timezone ?? calendarTimezone) as string, calendarTimezone as string);
+        event.end = convertToTimeZone(event.end, (event.timezone ?? calendarTimezone) as string, calendarTimezone as string);
+        return event;
+      });
+      return events;
+    }
+    return [];
+  }, [], 'calendar-initial-events')
+
+
+  const [getEvents, setEvents] = createState<CalendarEvent[]>(_initialEvents || [], 'calendar-event');
 
   /**
    * Creates a new calendar event.
@@ -60,8 +72,8 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       throw new Error(`Invalid event data: ${errors.join(', ')}`);
     }
 
-    const start = options.calendarTimezone && eventData.timezone ? convertToTimeZone(eventData.start, options.calendarTimezone, eventData.timezone) : eventData.start;
-    const end = options.calendarTimezone && eventData.timezone ? convertToTimeZone(eventData.end, options.calendarTimezone, eventData.timezone) : eventData.end;
+    const start = convertToTimeZone(eventData.start, (eventData.timezone ?? calendarTimezone) as string, calendarTimezone as string);
+    const end = convertToTimeZone(eventData.end, (eventData.timezone ?? calendarTimezone) as string, calendarTimezone as string);
 
     const event: CalendarEvent = {
       ...eventData,

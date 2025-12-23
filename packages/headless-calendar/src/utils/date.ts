@@ -1,5 +1,21 @@
 import { convertToTimeZone } from './timezone';
 
+const intlCache = new Map<string, Intl.DateTimeFormat>();
+
+function getIntlFormatter(locale: string, options: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
+  const cacheKey = JSON.stringify({ locale, ...options });
+  if (!intlCache.has(cacheKey)) {
+    intlCache.set(cacheKey, new Intl.DateTimeFormat(locale, options));
+  }
+  return intlCache.get(cacheKey)!;
+}
+
+const toNumeric = (val: string | undefined) => {
+  if (!val) return '';
+  const num = parseInt(val, 10);
+  return isNaN(num) ? val : String(num);
+};
+
 /**
  * Parses a date format string into `Intl.DateTimeFormatOptions`.
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd").
@@ -32,8 +48,8 @@ function parseDateFormat(format: string): Intl.DateTimeFormatOptions {
     options.year = format.includes('yy') && !format.includes('yyyy') ? '2-digit' : 'numeric';
   }
 
-  if (/G{1,4}/.test(format)) {
-    if (format.includes('GGGG')) options.era = 'long';
+  if (/G{1,3}/.test(format)) {
+    if (format.includes('GGG')) options.era = 'long';
     else if (format.includes('GG')) options.era = 'short';
     else options.era = 'narrow';
   }
@@ -116,7 +132,11 @@ export const formatDate = (
  * @returns {string} - The formatted date and time string.
  * @example
  * ```ts
- * formatDateTime(new Date(), { format: "yyyy-MM-dd HH:mm:ss", locale: "en-US", timeZone: "America/New_York" });
+ * formatDateTime(new Date(), { 
+ *  format: "yyyy-MM-dd HH:mm:ss",
+ *  locale: "en-US", 
+ *  timeZone: "America/New_York" 
+ * });
  * ``` 
  * @group dateTime-helper
  * @title Format Date and Time
@@ -130,46 +150,49 @@ export const formatDateTime = (
   const locale = options?.locale ?? Intl.DateTimeFormat().resolvedOptions().locale;
   const timeZone = options?.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   const formatOptions = parseDateTimeFormat(format);
-  const parts = new Intl.DateTimeFormat(locale, { ...formatOptions, timeZone }).formatToParts(date);
+  const formatter = getIntlFormatter(locale, { ...formatOptions, timeZone });
+  const parts = formatter.formatToParts(date);
+
   const lookup: Record<string, string> = {};
   parts.forEach(p => {
-    if (p.type !== "literal") lookup[p.type] = p.value;
+    lookup[p.type] = p.value;
   });
+
+
 
   const replacementMap: Record<string, string> = {
     // Year
     'yyyy': lookup.year ?? '',
-    'yy': lookup.year ? lookup.year.slice(-2) : '',
+    'yy': lookup.year?.slice(-2) ?? '',
 
     // Month
     'MMMM': lookup.month ?? '',
     'MMM': lookup.month ?? '',
     'MM': lookup.month ?? '',
-    'M': lookup.month ? String(Number(lookup.month)) : '',
+    'M': toNumeric(lookup.month),
 
     // Day
     'dd': lookup.day ?? '',
-    'd': lookup.day ? String(Number(lookup.day)) : '',
+    'd': toNumeric(lookup.day),
 
     // Hour (24h)
     'HH': lookup.hour ?? '',
-    'H': lookup.hour ? String(Number(lookup.hour)) : '',
+    'H': toNumeric(lookup.hour),
 
     // Hour (12h)
     'hh': lookup.hour ?? '',
-    'h': lookup.hour ? String(Number(lookup.hour)) : '',
-    'a': lookup.hour ? (Number(lookup.hour) >= 12 ? "PM" : "AM") : "",
+    'h': toNumeric(lookup.hour),
+    'a': lookup.dayPeriod ?? '',
 
-    // Minute (Fixes the 'm' corruption issue!)
+    // Minute
     'mm': lookup.minute ?? '',
-    'm': lookup.minute ? String(Number(lookup.minute)) : '',
+    'm': toNumeric(lookup.minute),
 
     // Second
     'ss': lookup.second ?? '',
-    's': lookup.second ? String(Number(lookup.second)) : '',
+    's': toNumeric(lookup.second),
 
     // Time Zone
-    // Note: The z{1,4} regex is complex for this map, using a simpler 'z' approach for safety.
     'zzzz': lookup.timeZoneName ?? '',
     'zzz': lookup.timeZoneName ?? '',
     'zz': lookup.timeZoneName ?? '',
@@ -181,17 +204,17 @@ export const formatDateTime = (
     'E': lookup.weekday ?? '',
 
     // Era
-    'GGGG': lookup.era ?? '',
     'GGG': lookup.era ?? '',
+    'GG': lookup.era ?? '',
     'G': lookup.era ?? '',
   };
 
-  const tokenRegexPattern = Object.keys(replacementMap).sort((a, b) => b.length - a.length)
+  const tokenRegexPattern = Object.keys(replacementMap)
+    .sort((a, b) => b.length - a.length)
     .map(token => token.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
     .join('|');
 
-  const tokenRegex = new RegExp(`(${tokenRegexPattern})`, 'g');
-  return format.replace(tokenRegex, (match) => {
+  return format.replace(new RegExp(`\\[([^\\]]+)\\]|(${tokenRegexPattern})`, 'g'), (match) => {
     return replacementMap[match] ?? match;
   });
 };

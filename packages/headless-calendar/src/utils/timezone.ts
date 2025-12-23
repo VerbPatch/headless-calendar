@@ -65,6 +65,7 @@ export const formatDateInTimeZone = (
   });
   return fmt.format(date);
 };
+
 /**
  * Returns the timezone offset in minutes for a given date and timezone.
  * @param {Date} date - The date to calculate the offset for.
@@ -78,30 +79,21 @@ export const formatDateInTimeZone = (
  * @description Returns the timezone offset in minutes for a given date and timezone.
  */
 export function getTimeZoneOffset(date: Date, timeZone: string): number {
-  // Modern Intl API
-  if (typeof Intl?.DateTimeFormat === "function") {
-    const dtf = new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "shortOffset" });
-    const parts = dtf.formatToParts(date);
-    const tzName = parts.find(p => p.type === "timeZoneName")?.value ?? "";
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
 
-    // Match offsets like "+5", "+05:00", "-08", "-08:30"
-    const match = tzName.match(/([+-])(\d{1,2})(?::?(\d{2}))?/);
-    if (match) {
-      const sign = match[1] === "+" ? 1 : -1;
-      const hours = parseInt(match[2], 10);
-      const minutes = parseInt(match[3] || "0", 10);
-      return sign * (hours * 60 + minutes);
-    }
+  const lookup = (type: string) => parts.find(p => p.type === type)!.value;
 
-    // Plain UTC/GMT
-    if (tzName === "UTC" || tzName === "GMT") return 0;
-  }
-
-  // Fallback for older environments
-  const utc = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
-  const local = new Date(date.toLocaleString("en-US", { timeZone }));
-  return (local.getTime() - utc.getTime()) / 60000; // in minutes
-}
+  return Date.UTC(Number(lookup("year")), Number(lookup("month")) - 1, Number(lookup("day")), Number(lookup("hour")), Number(lookup("minute")), Number(lookup("second")), date.getMilliseconds());
+};
 
 /**
  * Converts a Date from one timezone to another.
@@ -121,33 +113,10 @@ export function getTimeZoneOffset(date: Date, timeZone: string): number {
 export function convertToTimeZone(date: Date, fromTimezone: string, toTimezone: string): Date {
   if (fromTimezone === toTimezone) return new Date(date.getTime());
 
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    timeZone: fromTimezone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  });
+  const fromOffset = getTimeZoneOffset(date, fromTimezone);
+  const toOffset = getTimeZoneOffset(date, toTimezone);
 
-  const parts = formatter.formatToParts(date);
-  const lookup = (type: string) => Number(parts.find(p => p.type === type)?.value || "0");
-
-  const year = lookup("year");
-  const month = lookup("month");
-  const day = lookup("day");
-  const hour = lookup("hour");
-  const minute = lookup("minute");
-  const second = lookup("second");
-
-  const fromDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second, date.getMilliseconds()));
-
-  const fromOffset = getTimeZoneOffset(fromDate, fromTimezone);
-  const toOffset = getTimeZoneOffset(fromDate, toTimezone);
-  const diffMs = (fromOffset - toOffset) * 60_000;
-  return new Date(fromDate.getTime() + diffMs);
+  return new Date(date.getTime() + (toOffset - fromOffset));
 }
 
 /**
