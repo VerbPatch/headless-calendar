@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Introduction",
+    "path": "/introduction",
+    "children": [
+      { "title": "What is Headless Calendar?", "path": "/introduction" },
+      { "title": "Getting Started", "path": "/getting-started" }
+    ]
+  }
+]
