@@ -1,16 +1,17 @@
 import { MarkdownTabs, Tab } from "../../component/MarkdownTabs";
+import { SiReact, SiVuedotjs, SiSvelte } from "react-icons/si";
 
 # Getting Started
 
-This guide will help you quickly integrate Headless Calendar into your project. While the core library is framework-agnostic, we'll demonstrate a basic setup using a popular framework (e.g., React) to illustrate the workflow. Remember that detailed instructions for each framework are available in the "Frameworks" section.
+This guide will help you quickly integrate Headless Calendar into your project. While the core library is framework-agnostic, we'll demonstrate a basic setup using each framework we support to illustrate the workflow. Remember that detailed instructions for each framework are available in the "Frameworks" section.
 
 ## 1. Installation
 
-First, install the core `headless-calendar` wrapper for your chosen framework.
+First, install the wrapper for your chosen framework.
 
 <MarkdownTabs>
-  <Tab label="React">
-    ```bash
+  <Tab label="React" icon={SiReact}>
+    ```terminal
     # Using npm
     npm install @verbpatch/react-calendar
 
@@ -21,42 +22,42 @@ First, install the core `headless-calendar` wrapper for your chosen framework.
     pnpm add @verbpatch/react-calendar
     ```
   </Tab>
-  <Tab label="Vue.js" remoteUrl="Vue/basic">
-    ```bash
+  <Tab label="Vue.js" icon={SiVuedotjs}>
+    ```terminal
     # Using npm
-    npm install @verbpatch/react-calendar
+    npm install @verbpatch/vuejs-calendar
 
     # Using yarn
-    yarn add @verbpatch/react-calendar
+    yarn add @verbpatch/vuejs-calendar
 
     # Using pnpm
-    pnpm add @verbpatch/react-calendar
+    pnpm add @verbpatch/vuejs-calendar
     ```
   </Tab>
-  <Tab label="Svelte" remoteUrl="Svelte/basic">
-    ```bash
+  <Tab label="Svelte" icon={SiSvelte}>
+    ```terminal
     # Using npm
-    npm install @verbpatch/react-calendar
+    npm install @verbpatch/svelte-calendar
 
     # Using yarn
-    yarn add @verbpatch/react-calendar
+    yarn add @verbpatch/svelte-calendar
 
     # Using pnpm
-    pnpm add @verbpatch/react-calendar
+    pnpm add @verbpatch/svelte-calendar
     ```
   </Tab>
 </MarkdownTabs>
 
 ## 2. Basic Usage
 
-Here's a minimal example of how to set up a basic month view calendar using different framework wrappers. These examples demonstrate how the framework-specific `useCalendar` hook (or equivalent) integrates with the core `headless-calendar` logic to provide a reactive calendar instance.
+Here's a minimal example of how to set up a basic month/week/day view calendar using different framework wrappers. These examples demonstrate how the framework-specific `useCalendar` hook integrates with the core `headless-calendar` logic to provide a reactive calendar instance.
 
 <MarkdownTabs>
-  <Tab label="React" remoteUrl="React/basic/src/calendar.tsx">
+  <Tab label="React" icon={SiReact} remoteUrl="React/basic/src/calendar.tsx">
   </Tab>
-  <Tab label="Vue.js" remoteUrl="Vuejs/basic/src/calendar.svelte">
+  <Tab label="Vue.js" icon={SiVuedotjs} remoteUrl="Vuejs/basic/src/calendar.vue">
   </Tab>
-  <Tab label="Svelte" remoteUrl="Svelte/basic/src/Calendar.svelte">
+  <Tab label="Svelte" icon={SiSvelte} remoteUrl="Svelte/basic/src/Calendar.svelte">
   </Tab>
 </MarkdownTabs>
 
