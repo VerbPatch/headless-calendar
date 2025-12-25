@@ -1,10 +1,10 @@
 [
   {
     "title": "Introduction",
-    "path": "/introduction",
+    "path": "/Calendar/docs/introduction",
     "children": [
-      { "title": "What is Headless Calendar?", "path": "/introduction" },
-      { "title": "Getting Started", "path": "/getting-started" }
+      { "title": "What is Headless Calendar?", "path": "/Calendar/docs/introduction" },
+      { "title": "Getting Started", "path": "/Calendar/docs/getting-started" }
     ]
   }
 ]
