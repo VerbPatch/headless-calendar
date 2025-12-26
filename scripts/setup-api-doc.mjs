@@ -2,6 +2,19 @@
 import fs from "fs";
 import path from "path";
 
+function docNavigation() {
+  return [
+    {
+      title: "Introduction",
+      group: "doc",
+      children: [
+        { title: "Headless Calendar?", path: "/Calendar/docs/introduction" },
+        { title: "Getting Started", path: "/Calendar/docs/getting-started" },
+      ],
+    },
+  ];
+}
+
 /**
  * @param {import('typedoc-plugin-markdown').MarkdownApplication} app
  */
@@ -21,7 +34,7 @@ export function load(app) {
 
   app.renderer.on("endRender", () => {
     const outputDir = app.options.getValue("out");
-    const navJsonPath = path.join(outputDir, "navigation.json");
+    const navJsonPath = path.join(outputDir.replace(/\/api$/, ""), "navigation.json");
     if (!fs.existsSync(navJsonPath)) return;
 
     try {
@@ -31,10 +44,13 @@ export function load(app) {
       const processNavItem = (item) => {
         if (item.path) {
           item.path = item.path.replace(/\.md$/, "");
+
           if (publicPath) {
             const normalized = item.path.startsWith("/") ? item.path : "/" + item.path;
             item.path = publicPath + normalized;
           }
+        } else {
+          item.group = "api";
         }
         item.children?.forEach(processNavItem);
       };
@@ -46,6 +62,10 @@ export function load(app) {
         if (index > -1) {
           navData.unshift(navData.splice(index, 1)[0]);
         }
+
+        docNavigation().forEach((item) => {
+          navData.unshift(item);
+        });
       }
 
       const updatedRaw = JSON.stringify(navData, null, 2);

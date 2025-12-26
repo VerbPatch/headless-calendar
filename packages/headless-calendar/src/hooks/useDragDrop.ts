@@ -26,7 +26,7 @@ import { createCallback, createState } from '../state';
  * </div>
  * ```
  * @group hooks
- * @title Drag and Drop Events Hook
+ * @title useDragDrop
  * @description A hook for managing drag and drop functionality for calendar events.
  */
 export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn => {

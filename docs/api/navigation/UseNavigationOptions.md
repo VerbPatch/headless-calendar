@@ -1,5 +1,5 @@
 ---
-title: Use Navigation Options
+title: UseNavigationOptions
 description: |-
   Defines the configuration options for the 
    hook, including default view, date, and callback functions for view and date changes.
@@ -7,7 +7,7 @@ description: |-
 
 # UseNavigationOptions
 
-Defined in: [types/views.ts:88](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L88)
+Defined in: [types/views.ts:88](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L88)
 
 Configuration options for the `useNavigation` hook.
 
@@ -17,7 +17,7 @@ Configuration options for the `useNavigation` hook.
 
 > **defaultDate**: `Date`
 
-Defined in: [types/views.ts:96](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L96)
+Defined in: [types/views.ts:96](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L96)
 
 The default date to display when the calendar is initialized.
 
@@ -27,7 +27,7 @@ The default date to display when the calendar is initialized.
 
 > **defaultView**: [`ViewType`](/calendar/docs/api/navigation/ViewType)
 
-Defined in: [types/views.ts:92](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L92)
+Defined in: [types/views.ts:92](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L92)
 
 The default view to display when the calendar is initialized.
 
@@ -37,7 +37,7 @@ The default view to display when the calendar is initialized.
 
 > **locale**: `string`
 
-Defined in: [types/views.ts:116](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L116)
+Defined in: [types/views.ts:116](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L116)
 
 The locale to use for the calendar.
 
@@ -47,7 +47,7 @@ The locale to use for the calendar.
 
 > **timezone**: `string`
 
-Defined in: [types/views.ts:112](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L112)
+Defined in: [types/views.ts:112](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L112)
 
 The timezone to use for the calendar.
 
@@ -57,7 +57,7 @@ The timezone to use for the calendar.
 
 > `optional` **onDateChange**: (`date`) => `void`
 
-Defined in: [types/views.ts:108](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L108)
+Defined in: [types/views.ts:108](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L108)
 
 A callback function that is invoked when the current date of the calendar changes.
 
@@ -79,7 +79,7 @@ The new date.
 
 > `optional` **onViewChange**: (`view`) => `void`
 
-Defined in: [types/views.ts:102](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L102)
+Defined in: [types/views.ts:102](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L102)
 
 A callback function that is invoked when the calendar view changes.
 

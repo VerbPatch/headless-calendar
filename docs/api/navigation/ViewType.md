@@ -1,5 +1,5 @@
 ---
-title: View Type
+title: ViewType
 description: "Defines the available calendar views: 'month', 'week', and 'day'."
 ---
 
@@ -7,6 +7,6 @@ description: "Defines the available calendar views: 'month', 'week', and 'day'."
 
 > **ViewType** = `"month"` \| `"week"` \| `"day"`
 
-Defined in: [types/views.ts:7](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/views.ts#L7)
+Defined in: [types/views.ts:7](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/views.ts#L7)
 
 The available calendar views.

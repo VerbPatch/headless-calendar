@@ -1,5 +1,5 @@
 ---
-title: Calendar Hook
+title: useCalendar
 description: The main hook for initializing and managing a calendar instance.
 ---
 
@@ -7,7 +7,7 @@ description: The main hook for initializing and managing a calendar instance.
 
 > **useCalendar**(`options`): [`CalendarInstance`](/calendar/docs/api/calendar/CalendarInstance)
 
-Defined in: [hooks/useCalendar.ts:70](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/hooks/useCalendar.ts#L70)
+Defined in: [hooks/useCalendar.ts:70](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/hooks/useCalendar.ts#L70)
 
 The main hook for initializing and managing a calendar instance.
 

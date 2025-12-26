@@ -1,10 +1,466 @@
 [
   {
     "title": "Introduction",
-    "path": "/Calendar/docs/introduction",
+    "group": "doc",
     "children": [
-      { "title": "What is Headless Calendar?", "path": "/Calendar/docs/introduction" },
-      { "title": "Getting Started", "path": "/Calendar/docs/getting-started" }
+      {
+        "title": "Headless Calendar?",
+        "path": "/Calendar/docs/introduction"
+      },
+      {
+        "title": "Getting Started",
+        "path": "/Calendar/docs/getting-started"
+      }
     ]
+  },
+  {
+    "title": "hooks",
+    "children": [
+      {
+        "title": "useCalendar",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useCalendar",
+        "isDeprecated": false
+      },
+      {
+        "title": "useDragDrop",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useDragDrop",
+        "isDeprecated": false
+      },
+      {
+        "title": "useEvents",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useEvents",
+        "isDeprecated": false
+      },
+      {
+        "title": "useNavigation",
+        "kind": 64,
+        "path": "/calendar/docs/api/hooks/useNavigation",
+        "isDeprecated": false
+      }
+    ],
+    "group": "api"
+  },
+  {
+    "title": "calendar",
+    "children": [
+      {
+        "title": "CalendarInstance",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar/CalendarInstance",
+        "isDeprecated": false
+      },
+      {
+        "title": "CalendarOptions",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar/CalendarOptions",
+        "isDeprecated": false
+      },
+      {
+        "title": "CalendarUtils",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar/CalendarUtils",
+        "isDeprecated": false
+      },
+      {
+        "title": "DropTarget",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar/DropTarget",
+        "isDeprecated": false
+      },
+      {
+        "title": "TimeSlot",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar/TimeSlot",
+        "isDeprecated": false
+      },
+      {
+        "title": "calculateWeekNumber",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/calculateWeekNumber",
+        "isDeprecated": false
+      },
+      {
+        "title": "formatTimeSlotLabel",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/formatTimeSlotLabel",
+        "isDeprecated": false
+      },
+      {
+        "title": "getCalendarBounds",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getCalendarBounds",
+        "isDeprecated": false
+      },
+      {
+        "title": "getMonthCalendarDates",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getMonthCalendarDates",
+        "isDeprecated": false
+      },
+      {
+        "title": "getQuarterDates",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getQuarterDates",
+        "isDeprecated": false
+      },
+      {
+        "title": "getTimeSlots",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getTimeSlots",
+        "isDeprecated": false
+      },
+      {
+        "title": "getWeekDates",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getWeekDates",
+        "isDeprecated": false
+      },
+      {
+        "title": "getWeeksInMonth",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getWeeksInMonth",
+        "isDeprecated": false
+      },
+      {
+        "title": "getYearRange",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getYearRange",
+        "isDeprecated": false
+      }
+    ],
+    "group": "api"
+  },
+  {
+    "title": "calendar-events",
+    "children": [
+      {
+        "title": "CalendarEvent",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/CalendarEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "CalendarEventOccurance",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/CalendarEventOccurance",
+        "isDeprecated": false
+      },
+      {
+        "title": "DraggedEvent",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/DraggedEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseDragDropOptions",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/UseDragDropOptions",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseDragDropReturn",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/UseDragDropReturn",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseEventsOptions",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/UseEventsOptions",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseEventsReturn",
+        "kind": 256,
+        "path": "/calendar/docs/api/calendar-events/UseEventsReturn",
+        "isDeprecated": false
+      },
+      {
+        "title": "cloneEvent",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/cloneEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "generateId",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/generateId",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEventDuration",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/getEventDuration",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEventsAtTime",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/getEventsAtTime",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEventsForDate",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/getEventsForDate",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEventsForDateRange",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/getEventsForDateRange",
+        "isDeprecated": false
+      },
+      {
+        "title": "getOverlappingEvents",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/getOverlappingEvents",
+        "isDeprecated": false
+      },
+      {
+        "title": "isAllDayEvent",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/isAllDayEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "isEventInDateRange",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/isEventInDateRange",
+        "isDeprecated": false
+      },
+      {
+        "title": "isMultiDayEvent",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/isMultiDayEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "sortEventsByStartTime",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/sortEventsByStartTime",
+        "isDeprecated": false
+      },
+      {
+        "title": "validateEvent",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/validateEvent",
+        "isDeprecated": false
+      }
+    ],
+    "group": "api"
+  },
+  {
+    "title": "dateTime-helper",
+    "children": [
+      {
+        "title": "addDays",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/addDays",
+        "isDeprecated": false
+      },
+      {
+        "title": "addMonths",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/addMonths",
+        "isDeprecated": false
+      },
+      {
+        "title": "addWeeks",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/addWeeks",
+        "isDeprecated": false
+      },
+      {
+        "title": "addYears",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/addYears",
+        "isDeprecated": false
+      },
+      {
+        "title": "dateTimeInBetween",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/dateTimeInBetween",
+        "isDeprecated": false
+      },
+      {
+        "title": "formatDate",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/formatDate",
+        "isDeprecated": false
+      },
+      {
+        "title": "formatDateTime",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/formatDateTime",
+        "isDeprecated": false
+      },
+      {
+        "title": "getDay",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getDay",
+        "isDeprecated": false
+      },
+      {
+        "title": "getDaysBetween",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getDaysBetween",
+        "isDeprecated": false
+      },
+      {
+        "title": "getDaysInMonth",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getDaysInMonth",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEndOfDay",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfDay",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEndOfMonth",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfMonth",
+        "isDeprecated": false
+      },
+      {
+        "title": "getEndOfWeek",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfWeek",
+        "isDeprecated": false
+      },
+      {
+        "title": "getStartOfDay",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfDay",
+        "isDeprecated": false
+      },
+      {
+        "title": "getStartOfMonth",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfMonth",
+        "isDeprecated": false
+      },
+      {
+        "title": "getStartOfWeek",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfWeek",
+        "isDeprecated": false
+      },
+      {
+        "title": "isFuture",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isFuture",
+        "isDeprecated": false
+      },
+      {
+        "title": "isPast",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isPast",
+        "isDeprecated": false
+      },
+      {
+        "title": "isSameDay",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isSameDay",
+        "isDeprecated": false
+      },
+      {
+        "title": "isSameMonth",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isSameMonth",
+        "isDeprecated": false
+      },
+      {
+        "title": "isSameWeek",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isSameWeek",
+        "isDeprecated": false
+      },
+      {
+        "title": "isToday",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isToday",
+        "isDeprecated": false
+      },
+      {
+        "title": "isWeekend",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isWeekend",
+        "isDeprecated": false
+      },
+      {
+        "title": "parseDate",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/parseDate",
+        "isDeprecated": false
+      },
+      {
+        "title": "subtractDays",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/subtractDays",
+        "isDeprecated": false
+      },
+      {
+        "title": "subtractMonths",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/subtractMonths",
+        "isDeprecated": false
+      },
+      {
+        "title": "subtractWeeks",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/subtractWeeks",
+        "isDeprecated": false
+      }
+    ],
+    "group": "api"
+  },
+  {
+    "title": "navigation",
+    "children": [
+      {
+        "title": "DayData",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/DayData",
+        "isDeprecated": false
+      },
+      {
+        "title": "MonthData",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/MonthData",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseNavigationOptions",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/UseNavigationOptions",
+        "isDeprecated": false
+      },
+      {
+        "title": "UseNavigationReturn",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/UseNavigationReturn",
+        "isDeprecated": false
+      },
+      {
+        "title": "WeekData",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/WeekData",
+        "isDeprecated": false
+      },
+      {
+        "title": "ViewType",
+        "kind": 2097152,
+        "path": "/calendar/docs/api/navigation/ViewType",
+        "isDeprecated": false
+      }
+    ],
+    "group": "api"
   }
 ]

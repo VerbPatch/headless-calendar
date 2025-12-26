@@ -11,12 +11,13 @@
   "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-frontmatter", "./scripts/setup-api-doc.mjs"],
   "router": "group",
   "out": "./docs/api",
+  "sort": ["source-order"],
   "headings": {
     "readme": false,
     "document": false
   },
   "publicPath": "/calendar/docs/api",
-  "navigationJson": "docs/api/navigation.json",
+  "navigationJson": "docs/navigation.json",
   "entryFileName": "calendar",
   "hidePageHeader": true,
   "hidePageTitle": false,

@@ -1,5 +1,5 @@
 ---
-title: Is Same Week
+title: isSameWeek
 description: Checks if two dates are in the same week.
 ---
 
@@ -7,7 +7,7 @@ description: Checks if two dates are in the same week.
 
 > **isSameWeek**(`date1`, `date2`): `boolean`
 
-Defined in: [utils/date.ts:276](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L276)
+Defined in: [utils/date.ts:299](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L299)
 
 Checks if two dates are in the same week.
 

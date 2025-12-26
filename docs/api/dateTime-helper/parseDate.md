@@ -1,5 +1,5 @@
 ---
-title: Parse Date
+title: parseDate
 description: Parses a date string into a Date object.
 ---
 
@@ -7,7 +7,7 @@ description: Parses a date string into a Date object.
 
 > **parseDate**(`dateString`): `Date`
 
-Defined in: [utils/date.ts:230](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L230)
+Defined in: [utils/date.ts:253](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L253)
 
 Parses a date string into a Date object.
 

@@ -1,5 +1,5 @@
 ---
-title: Is Future
+title: isFuture
 description: Checks if a given date is in the future.
 ---
 
@@ -7,7 +7,7 @@ description: Checks if a given date is in the future.
 
 > **isFuture**(`date`): `boolean`
 
-Defined in: [utils/date.ts:619](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L619)
+Defined in: [utils/date.ts:642](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L642)
 
 Checks if a given date is in the future.
 

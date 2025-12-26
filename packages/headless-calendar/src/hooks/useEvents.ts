@@ -33,7 +33,7 @@ import { createCallback, createMemo, createState, } from '../state';
  * deleteEvent('1');
  * ```
  * @group hooks
- * @title Calendar Events Hook
+ * @title useEvents
  * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {

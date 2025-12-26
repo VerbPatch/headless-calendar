@@ -1,5 +1,5 @@
 ---
-title: Is Weekend
+title: isWeekend
 description: Checks if a given date falls on a weekend (Saturday or Sunday).
 ---
 
@@ -7,7 +7,7 @@ description: Checks if a given date falls on a weekend (Saturday or Sunday).
 
 > **isWeekend**(`date`): `boolean`
 
-Defined in: [utils/date.ts:635](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L635)
+Defined in: [utils/date.ts:658](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L658)
 
 Checks if a given date falls on a weekend (Saturday or Sunday).
 

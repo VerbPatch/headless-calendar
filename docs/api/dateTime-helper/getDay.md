@@ -1,5 +1,5 @@
 ---
-title: Get Day
+title: getDay
 description: Returns a new Date object representing the start of the day (00:00:00) in the target timezone.
 ---
 
@@ -7,7 +7,7 @@ description: Returns a new Date object representing the start of the day (00:00:
 
 > **getDay**(`date`, `fromTimeZone`, `toTimeZone`): `Date`
 
-Defined in: [utils/date.ts:213](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L213)
+Defined in: [utils/date.ts:236](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L236)
 
 Returns a new Date object representing the start of the day (00:00:00) in the target timezone.
 

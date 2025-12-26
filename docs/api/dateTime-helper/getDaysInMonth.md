@@ -1,5 +1,5 @@
 ---
-title: Get Days In Month
+title: getDaysInMonth
 description: Gets the number of days in the month of a given date.
 ---
 
@@ -7,7 +7,7 @@ description: Gets the number of days in the month of a given date.
 
 > **getDaysInMonth**(`date`): `number`
 
-Defined in: [utils/date.ts:423](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L423)
+Defined in: [utils/date.ts:446](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L446)
 
 Gets the number of days in the month of a given date.
 

@@ -1,5 +1,5 @@
 ---
-title: Get Events For Date
+title: getEventsForDate
 description: Retrieves all events that occur on a specific date.
 ---
 
@@ -7,7 +7,7 @@ description: Retrieves all events that occur on a specific date.
 
 > **getEventsForDate**(`events`, `date`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:59](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L59)
+Defined in: [utils/events.ts:59](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/events.ts#L59)
 
 Retrieves all events that occur on a specific date.
 

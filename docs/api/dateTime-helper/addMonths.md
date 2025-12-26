@@ -1,5 +1,5 @@
 ---
-title: Add Months
+title: addMonths
 description: Adds a specified number of months to a date.
 ---
 
@@ -7,7 +7,7 @@ description: Adds a specified number of months to a date.
 
 > **addMonths**(`date`, `months`): `Date`
 
-Defined in: [utils/date.ts:477](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L477)
+Defined in: [utils/date.ts:500](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L500)
 
 Adds a specified number of months to a date.
 

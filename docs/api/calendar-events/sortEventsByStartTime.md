@@ -1,5 +1,5 @@
 ---
-title: Sort Events By Start Time
+title: sortEventsByStartTime
 description: Sorts an array of calendar events by their start time in ascending order.
 ---
 
@@ -7,7 +7,7 @@ description: Sorts an array of calendar events by their start time in ascending 
 
 > **sortEventsByStartTime**(`events`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:108](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L108)
+Defined in: [utils/events.ts:108](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/events.ts#L108)
 
 Sorts an array of calendar events by their start time in ascending order.
 

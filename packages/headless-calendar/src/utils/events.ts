@@ -9,7 +9,7 @@ import { getStartOfDay, getEndOfDay } from './date';
  * const id = generateId(); // "123e4567-e89b-12d3-a456-426614174000"
  * ```
  * @group calendar-events
- * @title Generate ID
+ * @title generateId
  * @description Generates a unique ID for a calendar event.
  */
 export const generateId = (): string => {
@@ -29,7 +29,7 @@ export const generateId = (): string => {
  * const inRange = isEventInDateRange(event, new Date('2024-01-10'), new Date('2024-01-20')); // true
  * ```
  * @group calendar-events
- * @title Is Event In Date Range
+ * @title isEventInDateRange
  * @description Checks if a given event falls within a specified date range.
  */
 export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDate: Date): boolean => {
@@ -53,7 +53,7 @@ export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDat
  * const eventsForDate = getEventsForDate(events, new Date('2024-01-15'));
  * ```
  * @group calendar-events
- * @title Get Events For Date
+ * @title getEventsForDate
  * @description Retrieves all events that occur on a specific date.
  */
 export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarEvent[] => {
@@ -79,7 +79,7 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
  * const eventsInRange = getEventsForDateRange(events, new Date('2024-01-10'), new Date('2024-01-20'));
  * ```
  * @group calendar-events
- * @title Get Events For Date Range
+ * @title getEventsForDateRange
  * @description Retrieves all events that fall within a specified date range.
  */
 export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, endDate: Date): CalendarEvent[] => {
@@ -102,7 +102,7 @@ export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, 
  * const sortedEvents = sortEventsByStartTime(events);
  * ```
  * @group calendar-events
- * @title Sort Events By Start Time
+ * @title sortEventsByStartTime
  * @description Sorts an array of calendar events by their start time in ascending order.
  */
 export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] => {
@@ -124,7 +124,7 @@ export const sortEventsByStartTime = (events: CalendarEvent[]): CalendarEvent[] 
  * const duration = getEventDuration(event); // 3600000
  * ```
  * @group calendar-events
- * @title Get Event Duration
+ * @title getEventDuration
  * @description Calculates the duration of an event in milliseconds.
  */
 export const getEventDuration = (event: CalendarEvent): number => {
@@ -144,7 +144,7 @@ export const getEventDuration = (event: CalendarEvent): number => {
  * const isAllDay = isAllDayEvent(event); // true
  * ```
  * @group calendar-events
- * @title Is All Day Event
+ * @title isAllDayEvent
  * @description Checks if an event is an all-day event.
  */
 export const isAllDayEvent = (event: CalendarEvent): boolean => {
@@ -162,7 +162,7 @@ export const isAllDayEvent = (event: CalendarEvent): boolean => {
  * const isMultiDay = isMultiDayEvent(event); // true
  * ```
  * @group calendar-events
- * @title Is Multi Day Event
+ * @title isMultiDayEvent
  * @description Checks if an event spans multiple days.
  */
 export const isMultiDayEvent = (event: CalendarEvent): boolean => {
@@ -185,7 +185,7 @@ export const isMultiDayEvent = (event: CalendarEvent): boolean => {
  * const eventsAtTime = getEventsAtTime(events, new Date('2024-01-15'), 10, 30);
  * ```
  * @group calendar-events
- * @title Get Events At Time
+ * @title getEventsAtTime
  * @description Retrieves events that occur at a specific time on a given date.
  */
 export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: number, minute = 0): CalendarEvent[] => {
@@ -214,7 +214,7 @@ export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: numbe
  * const overlapping = getOverlappingEvents(events, events[0]); // [events[1]]
  * ```
  * @group calendar-events
- * @title Get Overlapping Events
+ * @title getOverlappingEvents
  * @description Finds all events that overlap with a target event.
  */
 export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: CalendarEvent): CalendarEvent[] => {
@@ -243,7 +243,7 @@ export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: Calen
  * // errors will contain messages about missing title and invalid end date
  * ```
  * @group calendar-events
- * @title Validate Event
+ * @title validateEvent
  * @description Validates a calendar event object for required fields and logical consistency.
  */
 export const validateEvent = (event: CalendarEvent): string[] => {
@@ -451,7 +451,7 @@ export const validateEvent = (event: CalendarEvent): string[] => {
  * // clonedEvent will have a new unique ID
  * ```
  * @group calendar-events
- * @title Clone Event
+ * @title cloneEvent
  * @description Creates a deep clone of a calendar event, assigning a new unique ID.
  */
 export const cloneEvent = (event: CalendarEvent): CalendarEvent => {

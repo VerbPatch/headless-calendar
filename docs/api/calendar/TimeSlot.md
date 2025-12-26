@@ -1,11 +1,11 @@
 ---
-title: Time Slot
+title: TimeSlot
 description: Represents a single time slot in a day view.
 ---
 
 # TimeSlot
 
-Defined in: [types/calendar.ts:10](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L10)
+Defined in: [types/calendar.ts:10](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L10)
 
 Represents a single time slot in a day view.
 
@@ -15,7 +15,7 @@ Represents a single time slot in a day view.
 
 > **hour**: `number`
 
-Defined in: [types/calendar.ts:14](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L14)
+Defined in: [types/calendar.ts:14](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L14)
 
 The hour of the time slot (0-23).
 
@@ -25,7 +25,7 @@ The hour of the time slot (0-23).
 
 > **label**: `string`
 
-Defined in: [types/calendar.ts:26](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L26)
+Defined in: [types/calendar.ts:26](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L26)
 
 A formatted label for the time slot (e.g., "9:00 AM").
 
@@ -35,7 +35,7 @@ A formatted label for the time slot (e.g., "9:00 AM").
 
 > **minute**: `number`
 
-Defined in: [types/calendar.ts:18](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L18)
+Defined in: [types/calendar.ts:18](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L18)
 
 The minute of the time slot (0-59).
 
@@ -45,6 +45,6 @@ The minute of the time slot (0-59).
 
 > **time**: `string`
 
-Defined in: [types/calendar.ts:22](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L22)
+Defined in: [types/calendar.ts:22](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L22)
 
 The time in "HH:mm" format.

@@ -1,5 +1,5 @@
 ---
-title: Get Week Dates
+title: getWeekDates
 description: Generates an array of dates for the week containing the given date.
 ---
 
@@ -7,7 +7,7 @@ description: Generates an array of dates for the week containing the given date.
 
 > **getWeekDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:21](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/calendar.ts#L21)
+Defined in: [utils/calendar.ts:21](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/calendar.ts#L21)
 
 Generates an array of dates for the week containing the given date.
 

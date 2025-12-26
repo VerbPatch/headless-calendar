@@ -1,5 +1,5 @@
 ---
-title: Is All Day Event
+title: isAllDayEvent
 description: Checks if an event is an all-day event.
 ---
 
@@ -7,7 +7,7 @@ description: Checks if an event is an all-day event.
 
 > **isAllDayEvent**(`event`): `boolean`
 
-Defined in: [utils/events.ts:150](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L150)
+Defined in: [utils/events.ts:150](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/events.ts#L150)
 
 Checks if an event is an all-day event.
 

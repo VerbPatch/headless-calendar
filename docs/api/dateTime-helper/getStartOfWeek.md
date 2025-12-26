@@ -1,5 +1,5 @@
 ---
-title: Get Start Of Week
+title: getStartOfWeek
 description: Gets the start of the week for a given date.
 ---
 
@@ -7,7 +7,7 @@ description: Gets the start of the week for a given date.
 
 > **getStartOfWeek**(`date`, `startOfWeek?`): `Date`
 
-Defined in: [utils/date.ts:315](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L315)
+Defined in: [utils/date.ts:338](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L338)
 
 Gets the start of the week for a given date.
 

@@ -1,5 +1,5 @@
 ---
-title: Format Date and Time
+title: formatDateTime
 description: Formats a date and time object into a string based on the specified format, locale, and timezone.
 ---
 
@@ -7,7 +7,7 @@ description: Formats a date and time object into a string based on the specified
 
 > **formatDateTime**(`date`, `options?`): `string`
 
-Defined in: [utils/date.ts:125](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/date.ts#L125)
+Defined in: [utils/date.ts:145](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L145)
 
 Formats a date and time object into a string based on the specified format, locale, and timezone.
 
@@ -50,5 +50,9 @@ The timezone to use for formatting.
 ## Example
 
 ```ts
-formatDateTime(new Date(), { format: "yyyy-MM-dd HH:mm:ss", locale: "en-US", timeZone: "America/New_York" });
+formatDateTime(new Date(), { 
+ format: "yyyy-MM-dd HH:mm:ss",
+ locale: "en-US", 
+ timeZone: "America/New_York" 
+});
 ```

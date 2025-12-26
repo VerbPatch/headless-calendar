@@ -1,5 +1,5 @@
 ---
-title: Clone Event
+title: cloneEvent
 description: Creates a deep clone of a calendar event, assigning a new unique ID.
 ---
 
@@ -7,7 +7,7 @@ description: Creates a deep clone of a calendar event, assigning a new unique ID
 
 > **cloneEvent**(`event`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [utils/events.ts:457](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L457)
+Defined in: [utils/events.ts:457](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/events.ts#L457)
 
 Creates a deep clone of a calendar event, assigning a new unique ID.
 

@@ -1,11 +1,11 @@
 ---
-title: Calendar Event Occurance
+title: CalendarEventOccurance
 description: Represents a calendar event occurance like when to repeat and on which days/weeks/months and between dates.
 ---
 
 # CalendarEventOccurance
 
-Defined in: [types/events.ts:198](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L198)
+Defined in: [types/events.ts:198](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L198)
 
 ## Examples
 
@@ -141,7 +141,7 @@ recurring: {
 
 > `optional` **count**: `number`
 
-Defined in: [types/events.ts:245](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L245)
+Defined in: [types/events.ts:245](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L245)
 
 The number of occurrences before the recurrence stops.
 Mutually exclusive with the `end` property.
@@ -152,7 +152,7 @@ Mutually exclusive with the `end` property.
 
 > `optional` **day**: `number`
 
-Defined in: [types/events.ts:224](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L224)
+Defined in: [types/events.ts:224](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L224)
 
 The day of the month for monthly or yearly recurrence.
 Positive values: 1-31 (1st to 31st day).
@@ -166,7 +166,7 @@ Mutually exclusive with the `weekDays` + `week` combination.
 
 > `optional` **end**: `Date`
 
-Defined in: [types/events.ts:251](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L251)
+Defined in: [types/events.ts:251](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L251)
 
 The end date for the recurrence (must be after the event's end date).
 Mutually exclusive with the `count` property.
@@ -177,7 +177,7 @@ Mutually exclusive with the `count` property.
 
 > **every**: `number`
 
-Defined in: [types/events.ts:207](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L207)
+Defined in: [types/events.ts:207](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L207)
 
 The interval for the recurrence (e.g., every 2 weeks, every 3 months).
 
@@ -187,7 +187,7 @@ The interval for the recurrence (e.g., every 2 weeks, every 3 months).
 
 > `optional` **month**: `number`
 
-Defined in: [types/events.ts:239](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L239)
+Defined in: [types/events.ts:239](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L239)
 
 The month of the year for yearly recurrence (required for yearly).
 0 = January, 1 = February, ..., 11 = December.
@@ -198,7 +198,7 @@ The month of the year for yearly recurrence (required for yearly).
 
 > **repeat**: `"yearly"` \| `"monthly"` \| `"weekly"` \| `"daily"`
 
-Defined in: [types/events.ts:202](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L202)
+Defined in: [types/events.ts:202](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L202)
 
 The type of recurrence pattern.
 
@@ -208,7 +208,7 @@ The type of recurrence pattern.
 
 > `optional` **week**: `number`
 
-Defined in: [types/events.ts:233](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L233)
+Defined in: [types/events.ts:233](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L233)
 
 The week of the month for monthly or yearly recurrence.
 Positive values: 1-4 (1st to 4th week).
@@ -222,7 +222,7 @@ Must be used with the `weekDays` property.
 
 > `optional` **weekDays**: `number`[]
 
-Defined in: [types/events.ts:215](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/events.ts#L215)
+Defined in: [types/events.ts:215](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/events.ts#L215)
 
 The days of the week for weekly, monthly, or yearly recurrence.
 0 = Sunday, 1 = Monday, ..., 6 = Saturday.

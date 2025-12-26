@@ -1,11 +1,11 @@
 ---
-title: Drop Target
+title: DropTarget
 description: Represents the target of a drop operation.
 ---
 
 # DropTarget
 
-Defined in: [types/calendar.ts:37](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L37)
+Defined in: [types/calendar.ts:35](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L35)
 
 Represents the target of a drop operation.
 
@@ -15,7 +15,7 @@ Represents the target of a drop operation.
 
 > **date**: `Date`
 
-Defined in: [types/calendar.ts:41](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L41)
+Defined in: [types/calendar.ts:39](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L39)
 
 The date of the drop target.
 
@@ -25,6 +25,6 @@ The date of the drop target.
 
 > `optional` **time**: `string`
 
-Defined in: [types/calendar.ts:45](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/types/calendar.ts#L45)
+Defined in: [types/calendar.ts:43](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/types/calendar.ts#L43)
 
 The optional time of the drop target (e.g., "09:00").

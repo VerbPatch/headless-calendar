@@ -1,7 +1,7 @@
 /**
  * The available calendar views.
  * @group navigation
- * @title View Type
+ * @title ViewType
  * @description Defines the available calendar views: 'month', 'week', and 'day'.
  */
 export type ViewType = 'month' | 'week' | 'day';
@@ -9,7 +9,7 @@ export type ViewType = 'month' | 'week' | 'day';
 /**
  * Data specific to the month view.
  * @group navigation
- * @title Month Data
+ * @title MonthData
  * @description Represents the data structure for the month view, including weeks, month name, and utility functions.
  */
 export interface MonthData {
@@ -38,7 +38,7 @@ export interface MonthData {
 /**
  * Data specific to the week view. 
  * @group navigation
- * @title Week Data
+ * @title WeekData
  * @description Represents the data structure for the week view, including the dates in the current week and the week's date range.
  */
 export interface WeekData {
@@ -61,7 +61,7 @@ export interface WeekData {
 /**
  * Data specific to the day view. 
  * @group navigation
- * @title Day Data
+ * @title DayData
  * @description Represents the data structure for the day view, including the current date and its localized name.
  */
 export interface DayData {
@@ -82,7 +82,7 @@ export interface DayData {
 /**
  * Configuration options for the `useNavigation` hook. 
  * @group navigation
- * @title Use Navigation Options
+ * @title UseNavigationOptions
  * @description Defines the configuration options for the `useNavigation` hook, including default view, date, and callback functions for view and date changes.
  */
 export interface UseNavigationOptions {
@@ -118,7 +118,7 @@ export interface UseNavigationOptions {
 
 /** 
  * @group navigation
- * @title Use Navigation Return
+ * @title UseNavigationReturn
  * @description The return object of the `useNavigation` hook, providing access to the current date, view, and functions for navigating the calendar.
  */
 export interface UseNavigationReturn {

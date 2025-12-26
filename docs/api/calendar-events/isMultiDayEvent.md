@@ -1,5 +1,5 @@
 ---
-title: Is Multi Day Event
+title: isMultiDayEvent
 description: Checks if an event spans multiple days.
 ---
 
@@ -7,7 +7,7 @@ description: Checks if an event spans multiple days.
 
 > **isMultiDayEvent**(`event`): `boolean`
 
-Defined in: [utils/events.ts:168](https://github.com/VerbPatch/headless-calendar/blob/632ab242d58cefebdf5020dc2ce3b33c0ec9286d/packages/headless-calendar/src/utils/events.ts#L168)
+Defined in: [utils/events.ts:168](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/events.ts#L168)
 
 Checks if an event spans multiple days.
 
