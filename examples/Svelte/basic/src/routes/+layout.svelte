@@ -1,11 +1,9 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
-
-	let { children } = $props();
+  let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+  <title>Svelte Calendar minimal Example</title>
 </svelte:head>
 
 {@render children()}

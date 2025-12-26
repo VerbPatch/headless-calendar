@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import useCalendar from "@verbpatch/react-calendar";
+import useCalendar, { ViewType } from "@verbpatch/react-calendar";
 
 export const CalendarDemo: React.FC = () => {
   const {
@@ -27,7 +27,7 @@ export const CalendarDemo: React.FC = () => {
       <>
         <tr>
           {daysofWeek("long").map((day) => (
-            <td align="center" key={day}>
+            <td style={{ width: "120px", borderRight: "1px solid", borderBottom: "1px solid" }} key={day}>
               {day}
             </td>
           ))}
@@ -44,12 +44,10 @@ export const CalendarDemo: React.FC = () => {
                   align="center"
                   key={dayIndex}
                   style={{
-                    backgroundColor: isToday ? "#cecece" : "#fff",
                     fontWeight: isToday ? "bold" : "normal",
-                    color: isCurrentMonth ? "#000" : "#888",
-                    cursor: "pointer",
-                    width: "100px",
-                    height: "50px",
+                    color: isCurrentMonth ? "black" : "gray",
+                    borderRight: "1px solid",
+                    borderBottom: "1px solid",
                   }}
                 >
                   <div>{formatDate(date, "d")}</div>
@@ -66,31 +64,35 @@ export const CalendarDemo: React.FC = () => {
     if (!weekData) return null;
 
     return (
-      <>
-        <tr>
-          <th></th>
-          {weekData.dates.map((date, index) => (
-            <th key={index}>{formatDateTime(date, "d MMM")}</th>
-          ))}
-        </tr>
+      <tr>
+        <td colSpan={7} style={{ borderRight: "1px solid" }}>
+          <table cellPadding="5" cellSpacing="0" width="100%">
+            <tbody>
+              <tr>
+                <td></td>
+                {weekData.dates.map((date, index) => (
+                  <td key={index} style={{ fontWeight: weekData!.isToday(date) ? "bold" : "normal" }}>
+                    {formatDateTime(date, "d MMM")}
+                  </td>
+                ))}
+              </tr>
 
-        {timeSlots.map((slot) => (
-          <tr key={slot.label} data-key={slot.label}>
-            <td>
-              <div key={slot.time} data-slot={slot.time}>
-                {slot.label}
-              </div>
-            </td>
-            {weekData.dates.map((date, dateIndex) => {
-              return (
-                <td key={dateIndex}>
-                  <div key={slot.time} data-date={formatDate(date)} data-slot={slot.time}></div>
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </>
+              {timeSlots.map((slot) => (
+                <tr key={slot.label} data-key={slot.label}>
+                  <td style={{ borderBottom: "1px solid" }}>
+                    <div key={slot.time} data-slot={slot.time}>
+                      {slot.label}
+                    </div>
+                  </td>
+                  {weekData.dates.map((date, dateIndex) => {
+                    return <td key={dateIndex} data-date={formatDate(date)} data-slot={slot.time} style={{ borderBottom: "1px solid", fontWeight: weekData!.isToday(date) ? "bold" : "normal" }}></td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </td>
+      </tr>
     );
   };
 
@@ -99,17 +101,17 @@ export const CalendarDemo: React.FC = () => {
     return (
       <>
         <tr>
-          <th></th>
-          <th colSpan={7}>{dayData.dayName}</th>
+          <td colSpan={7} style={{ borderRight: "1px solid", borderBottom: "1px solid", textAlign: "center" }}>
+            {dayData.dayName}
+          </td>
         </tr>
 
         {timeSlots.map((slot) => (
           <tr>
-            <td>
-              <div key={slot.time}>{slot.label}</div>
-            </td>
-            <td colSpan={7}>
-              <div key={slot.time} data-time={slot.time} data-day={formatDate(dayData.date)}></div>
+            <td colSpan={7} style={{ borderRight: "1px solid", borderBottom: "1px solid" }}>
+              <div key={slot.time} data-time={slot.time} data-day={formatDate(dayData.date)}>
+                {slot.label}
+              </div>
             </td>
           </tr>
         ))}
@@ -118,50 +120,46 @@ export const CalendarDemo: React.FC = () => {
   };
 
   return (
-    <table border={0} style={{ width: 800, height: 800, margin: "0 auto" }}>
-      <tbody>
+    <table border={0} cellPadding={0} cellSpacing={0} width={840} style={{ height: "700px", borderLeft: "1px solid", borderTop: "1px solid" }}>
+      <thead>
         <tr>
-          <td style={{ height: 600 }}>
-            <table border={1}>
-              <thead>
-                <tr>
-                  <td colSpan={2} align="center">
-                    <button type="button" onClick={goToPrevious}>
-                      ←
-                    </button>
+          <th colSpan={2} style={{ borderBottom: "1px solid" }}>
+            <button type="button" onClick={goToPrevious}>
+              ←
+            </button>
+            <button type="button" onClick={goToToday}>
+              Today
+            </button>
 
-                    <button type="button" onClick={goToToday}>
-                      Today
-                    </button>
-
-                    <button type="button" onClick={goToNext}>
-                      →
-                    </button>
-                  </td>
-                  <td colSpan={view === "week" ? 4 : 3} align="center">
-                    <h3>
-                      {view === "month" && monthData?.monthName}
-                      {view === "week" && weekData?.weekRange}
-                      {view === "day" && dayData?.dayName}
-                    </h3>
-                  </td>
-                  <td colSpan={2} align="center">
-                    <button onClick={() => changeView("month")}>Month</button>
-                    <button onClick={() => changeView("week")}>Week</button>
-                    <button type="button" onClick={() => changeView("day")}>
-                      Day
-                    </button>
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                {view === "month" && renderMonthView()}
-                {view === "week" && renderWeekView()}
-                {view === "day" && renderDayView()}
-              </tbody>
-            </table>
-          </td>
+            <button type="button" onClick={goToNext}>
+              →
+            </button>
+          </th>
+          <th colSpan={3} style={{ borderBottom: "1px solid" }}>
+            <h3>
+              {view === "month" && monthData?.monthName}
+              {view === "week" && weekData?.weekRange}
+              {view === "day" && dayData?.dayName}
+            </h3>
+          </th>
+          <th colSpan={2} style={{ borderBottom: "1px solid", borderRight: "1px solid" }}>
+            <select
+              onChange={(s) => {
+                const value = (s.target as HTMLSelectElement).value as ViewType;
+                changeView(value);
+              }}
+            >
+              <option value="month">Month</option>
+              <option value="week">Week</option>
+              <option value="day">Day</option>
+            </select>
+          </th>
         </tr>
+      </thead>
+      <tbody>
+        {view === "month" && renderMonthView()}
+        {view === "week" && renderWeekView()}
+        {view === "day" && renderDayView()}
       </tbody>
     </table>
   );
