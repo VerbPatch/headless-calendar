@@ -8,7 +8,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@verbpatch/svelte-calendar": "workspace:^"
+		"@verbpatch/svelte-calendar": "latest"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.0",

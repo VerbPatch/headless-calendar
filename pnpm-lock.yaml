@@ -114,7 +114,7 @@ importers:
         specifier: ^20.3.12
         version: 20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
       '@verbpatch/angular-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/angular-calendar
       rxjs:
         specifier: ~7.8.2
@@ -163,7 +163,7 @@ importers:
   examples/Lit/minimal:
     dependencies:
       '@verbpatch/lit-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/lit-calendar
       lit:
         specifier: ^3.3.1
@@ -179,7 +179,7 @@ importers:
   examples/Preact/minimal:
     dependencies:
       '@verbpatch/preact-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/preact-calendar
       preact:
         specifier: ^10.27.2
@@ -198,7 +198,7 @@ importers:
         specifier: ^1.17.2
         version: 1.17.2(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
       '@verbpatch/qwik-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/qwik-calendar
     devDependencies:
       '@types/node':
@@ -217,7 +217,7 @@ importers:
   examples/React/basic:
     dependencies:
       '@verbpatch/react-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/react-calendar
       react:
         specifier: ^19.2.0
@@ -245,7 +245,7 @@ importers:
   examples/React/minimal:
     dependencies:
       '@verbpatch/react-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/react-calendar
       react:
         specifier: ^19.2.0
@@ -273,7 +273,7 @@ importers:
   examples/Solidjs/minimal:
     dependencies:
       '@verbpatch/solidjs-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/solidjs-calendar
       solid-js:
         specifier: ^1.9.10
@@ -292,10 +292,10 @@ importers:
         specifier: ^2.11.10
         version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
 
-  examples/Svelete/minimal:
+  examples/Svelte/basic:
     dependencies:
       '@verbpatch/svelte-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/svelte-calendar
     devDependencies:
       '@sveltejs/adapter-auto':
@@ -332,17 +332,17 @@ importers:
   examples/Vanilla/minimal:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/headless-calendar
     devDependencies:
       vite:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Vuejs/minimal:
+  examples/Vuejs/basic:
     dependencies:
       '@verbpatch/vuejs-calendar':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../../packages/vuejs-calendar
       vue:
         specifier: ^3.5.24

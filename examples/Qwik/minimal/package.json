@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@builder.io/qwik": "^1.17.2",
-    "@verbpatch/qwik-calendar": "workspace:^"
+    "@verbpatch/qwik-calendar": "latest"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
