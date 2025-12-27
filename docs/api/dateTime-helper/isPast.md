@@ -7,7 +7,7 @@ description: Checks if a given date is in the past.
 
 > **isPast**(`date`): `boolean`
 
-Defined in: [utils/date.ts:626](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L626)
+Defined in: [utils/date.ts:626](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/date.ts#L626)
 
 Checks if a given date is in the past.
 

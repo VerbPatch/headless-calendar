@@ -7,7 +7,7 @@ description: Calculates the start and end dates of the quarter for a given date.
 
 > **getQuarterDates**(`date`): `object`
 
-Defined in: [utils/calendar.ts:164](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/calendar.ts#L164)
+Defined in: [utils/calendar.ts:164](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/calendar.ts#L164)
 
 Calculates the start and end dates of the quarter for a given date.
 

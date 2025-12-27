@@ -5,6 +5,15 @@ import path from "path";
 function docNavigation() {
   return [
     {
+      title: "Core Concepts",
+      group: "doc",
+      children: [
+        { title: "Architecture", path: "/Calendar/docs/core-concepts/architecture" },
+        { title: "Calendar State", path: "/Calendar/docs/core-concepts/calendar-state" },
+        { title: "Localization", path: "/Calendar/docs/core-concepts/localization" },
+      ],
+    },
+    {
       title: "Introduction",
       group: "doc",
       children: [

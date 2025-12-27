@@ -1,0 +1,99 @@
+# Localization (i18n)
+
+Headless Calendar provides robust support for internationalization (i18n), allowing you to display dates, times, and events according to different locales and timezones. This is crucial for applications serving a global audience.
+
+## Timezones
+
+The library handles timezones internally using standard JavaScript `Date` objects and `Intl` APIs where appropriate. When working with events, it's highly recommended to store event times in **UTC** and then convert them to the user's local timezone (or a specified timezone) for display.
+
+### Configuring Timezone
+
+The `CalendarOptions` object, which you pass to the `useCalendar` hook, allows you to specify a default timezone.
+
+```typescript
+interface CalendarOptions {
+  // ... other options
+  timezone?: string; // IANA timezone name, e.g., 'America/New_York', 'Europe/London'
+}
+```
+
+If no `timezone` is specified, the library will typically default to the browser's local timezone.
+
+**Example:**
+
+```typescript jsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function MyCalendar() {
+  const { calendarInstance } = useCalendar({
+    defaultDate: new Date(),
+    timezone: 'Europe/Berlin', // Display calendar in Berlin time
+  });
+
+  // All date calculations and event displays will now respect 'Europe/Berlin' timezone.
+}
+```
+
+## Locales
+
+Locales determine how dates and times are formatted (e.g., `MM/DD/YYYY` vs `DD/MM/YYYY`), the names of months and days of the week, and the start day of the week.
+
+### Configuring Locale
+
+You can set the desired locale via the `CalendarOptions`:
+
+```typescript
+interface CalendarOptions {
+  // ... other options
+  locale?: string; // BCP 47 language tag, e.g., 'en-US', 'fr-FR', 'de-DE'
+  startOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 for Sunday, 1 for Monday, etc.
+}
+```
+
+If `locale` is not specified, it will usually default to the browser's language setting. The `startOfWeek` option allows you to explicitly define the first day of the week, overriding locale defaults if necessary.
+**Example:**
+
+```typescript jsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function MyCalendar() {
+  const { calendarInstance } = useCalendar({
+    defaultDate: new Date(),
+    locale: 'es-ES', // Use Spanish (Spain) locale
+    startOfWeek: 1, // Explicitly start week on Monday (common in Europe),
+  });
+
+  // Date formatting and day names will be in Spanish, with weeks starting on Monday.
+}
+```
+
+## Formatting Dates and Times
+
+Headless Calendar provides utility functions for formatting dates and times according to the configured locale and timezone. The `formatDate` and `formatDateTime` functions inside `utils` option from `@verbpatch/headless-calendar` are your primary tools.
+
+```typescript
+import { useCalendar } from '@verbpatch/headless-calendar';
+
+const { utils: { formatDate, formatDateTime } } = useCalendar();
+
+const date = new Date(); // e.g., November 23, 2023 14:30:00 UTC
+
+// Format for a specific locale and timezone
+const formattedDateUS = formatDate(date, {
+  format: 'MM-dd-yyyy',
+  locale: 'en-US',
+  timezone: 'America/New_York',
+});
+// Output: "November 23, 2023" (if date is Nov 23 in New York)
+
+const formattedTimeDE = formatDateTime(date, {
+  format: 'HH:mm',
+  locale: 'de-DE',
+  timezone: 'Europe/Berlin'
+});
+// Output: "15:30" (if date is 14:30 UTC, it's 15:30 in Berlin)
+```
+
+These functions use the browser's `Intl.DateTimeFormat` API, ensuring consistent and correct localization.
+
+By leveraging these options, you can ensure your calendar adapts beautifully to the diverse needs of your users worldwide.

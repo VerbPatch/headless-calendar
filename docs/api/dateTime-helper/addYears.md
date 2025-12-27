@@ -7,7 +7,7 @@ description: Adds a specified number of years to a date.
 
 > **addYears**(`date`, `years`): `Date`
 
-Defined in: [utils/date.ts:519](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/utils/date.ts#L519)
+Defined in: [utils/date.ts:519](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/date.ts#L519)
 
 Adds a specified number of years to a date.
 

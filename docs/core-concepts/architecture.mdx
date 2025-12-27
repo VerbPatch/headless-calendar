@@ -1,0 +1,51 @@
+---
+title: Architecture
+Description: Understanding the architecture of the Headless Calendar library
+---
+
+# Architecture
+
+The Headless Calendar library is designed with a clear separation of concerns, providing a powerful and flexible foundation for building calendar UIs. Understanding its architecture is key to effectively using and extending it.
+
+## The Headless Core (`@verbpatch/headless-calendar`)
+
+At the heart of the library is the `@verbpatch/headless-calendar` package. This core package is:
+
+* **Framework Agnostic**: Written in pure TypeScript, it has no dependencies on any UI framework (React, Vue, Svelte, etc.). This means the core logic can be used anywhere JavaScript runs.
+* **Logic-Only**: It provides all the complex business logic for calendar operations:
+  * Date calculations (weeks in month, days between dates, etc.)
+  * Calendar instance management (current date, view type, options)
+  * Event management (adding, updating, deleting, querying events)
+  * Drag and drop calculations (determining drop targets, new event times)
+* **Non-Reactive**: Crucially, the core library itself does **NOT** provide reactivity. When you call a function in the core, it computes a result and returns it. It does not automatically re-render your UI or trigger updates when its internal state changes. This design choice keeps the core lean and performant, free from framework-specific reactivity systems.
+
+### `CalendarInstance`
+
+The central object returned by the core `useCalendar` function (and subsequently exposed by framework wrappers) is the `CalendarInstance`. This object contains:
+
+* The current state of the calendar (e.g., `currentDate`, `view`, `events`, `monthData`, `weekData`, `dayData`, `timezone`, `locale`, `timeSlots`, `timeSlotInterval`, `draggedEvent`).
+* Actions to manipulate the calendar's state including events (e.g., `goToNext()`, `goToPrevious()`, `goToToday()`, `goToDate()`, `changeView()`).
+* Props or Methods to get calendar data (e.g., `visibleDates`, `visibleEvents`,`getEvent()`, `createEvent()`, `getEventsForDate()`, `getEventsForDateRange()`).
+
+When you call a method on `CalendarInstance` that changes its internal state, it updates its internal representation. However, it's up to the **framework wrapper** to detect this change by calling `useCalendar` function and re-render your UI. More about [Calendar State](/docs/core-concepts/calendar-state).
+
+## Framework Wrappers (`@verbpatch/react-calendar`, `@verbpatch/vue-calendar`, etc.)
+
+To bridge the gap between the non-reactive core and your reactive UI framework, we provide lightweight wrapper packages for various frameworks. These wrappers are responsible for:
+
+* **Providing Reactivity**: They integrate the core `CalendarInstance` with the framework's native reactivity system (e.g., React's `useState` and `useEffect`, Vue's `ref` and `computed`, Svelte's reactive declarations, etc for respective frameworks). This allows your UI components to automatically re-render when the calendar's state changes.
+* **Exposing Hooks/Composables**: They typically expose custom hooks (React, Svelte) or composables (Vue) that make it easy to consume the `CalendarInstance` and its derived state in a framework-idiomatic way.
+* **Handling Event Listeners**: They manage attaching and detaching event listeners and ensuring that core functions are called in response to user interactions, which then trigger UI updates.
+
+### How it Works Together
+
+1. Your component (e.g., a React functional component) calls `useCalendar()` from the framework wrapper.
+2. The wrapper internally creates or retrieves the core `CalendarInstance`.
+3. The wrapper then observes relevant parts of the `CalendarInstance`'s state (or triggers re-renders when actions are performed).
+4. Your component uses the reactive values and functions exposed by the wrapper to render the calendar UI.
+5. When a user interacts (e.g., clicks "next month"), the wrapper calls the corresponding method on the core `CalendarInstance`.
+6. The `CalendarInstance` updates its internal state.
+7. The framework wrapper detects this change (due to its integration with the framework's reactivity) and triggers a re-render of your component.
+8. Your component re-renders with the new calendar data.
+
+This architecture ensures that the core logic is reusable and testable, while giving developers the flexibility to build highly optimized and custom UIs in their preferred framework.

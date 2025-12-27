@@ -1,0 +1,107 @@
+---
+title: Calendar State
+description: Understanding the core CalendarInstance object and its properties/methods for building custom calendar UIs.
+---
+
+# Calendar State
+
+At the core of the Headless Calendar library is the `CalendarInstance` object, which encapsulates the entire state and a rich set of methods for interacting with the calendar. When you use a framework wrapper's `useCalendar` hook (e.g., `@verbpatch/react-calendar`'s `useCalendar`), this `CalendarInstance` (or a reactive version of its properties) is what gets returned.
+
+Understanding the `CalendarInstance` is crucial for building custom calendar UIs.
+
+## `CalendarInstance` Structure
+
+The `CalendarInstance` is a comprehensive object containing the current calendar configuration, date data, navigation functions, and event-related helpers. While the exact properties might be exposed reactively by framework wrappers, the underlying structure from the core library is as follows:
+
+```typescript
+interface CalendarInstance {
+  currentDate: Date;
+  view: ViewType;
+  events: CalendarEvent[];
+  draggedEvent: DraggedEvent | null;
+  timezone?: string;
+  locale?: string;
+  timeSlotInterval?: number;
+
+  goToNext: () => void;
+  goToPrevious: () => void;
+  goToToday: () => void;
+  goToDate: (date: Date) => void;
+  changeView: (view: ViewType) => void;
+
+  getEvent: (eventId: string) => CalendarEvent | undefined;
+  getEventsForDateRange: (startDate: Date, endDate: Date) => CalendarEvent[];
+  getEventsForDate: (date: Date) => CalendarEvent[];
+
+  createEvent: (eventData: CalendarEvent) => CalendarEvent;
+  updateEvent: (eventId: string, updates: CalendarEvent) => void;
+  deleteEvent: (eventId: string) => void;
+  moveEvent: (eventId: string, newStart: Date, newEnd?: Date) => void;
+  clearAllEvents: () => void;
+  duplicateEvent: (eventId: string) => CalendarEvent | null;
+
+  startDrag: (event: CalendarEvent, dragData?: Record<string, any>) => void;
+  endDrag: () => void;
+  handleDrop: (dropTarget: DropTarget) => void;
+  
+  visibleDates: Date[];
+  visibleEvents: CalendarEvent[];
+
+  timeSlots: TimeSlot[];
+  
+  monthData: MonthData | null;
+  weekData: WeekData | null;
+  dayData: DayData | null;
+
+  utils: CalendarUtils;
+}
+```
+
+## Key Properties and Methods Explained
+
+* **`currentDate` / `goToDate(date)`**: These are fundamental for controlling which date the calendar is currently focused on. Changing this date will affect all other date-related calculations.
+* **`view` / `changeView(viewType)`**: Allows you to switch between different calendar views (e.g., 'day', 'week', 'month').
+* **`goToNext()` / `goToToday()` /`goToPrevious()`**: A comprehensive set of navigation functions to move the calendar view forward or backward by various time units depending on the current view.
+* **`monthData` / `weekData` / `dayData`**: These data are commonly used to render the grid of days for a month or week or day view. They return arrays of `date` objects, which contain detailed information about each date as well as helping methods, such as whether it's in the current month, a weekend, etc.
+* **`getEvent()` / `getEventsForDateRange()` / `getEventsForDate()`**: If you've configured the calendar to manage events, this functions provides all the necessary events.
+* **`createEvent()` / `updateEvent()` / `deleteEvent()` / `moveEvent()` / `clearAllEvents()` / `duplicateEvent()`**: A complete set of methods for managing calendar events programmatically.
+* **`draggedEvent` / `startDrag()` / `endDrag()` / `handleDrop()`**: If drag-and-drop functionality is enabled, these properties and methods help manage the state of the currently dragged event and handle drop actions.
+* **`visibleDates` / `visibleEvents`**: These properties provide the dates and events currently visible in the calendar view, useful for rendering.
+* **`timeSlots`**: In views that support time slots (like day or week views), this property provides the structured time slots for rendering.
+* **`utils` object**: A collection of utility functions for date manipulation, formatting, and other common tasks.
+
+## Reactivity with Framework Wrappers
+
+It's important to reiterate that while the `CalendarInstance` from the core library is an object with methods, framework wrappers make its properties reactive. For instance, in React:
+
+<MarkdownTabs library="calendar">
+  <Tab active={true} label="React" icon={<SiReact />}>
+  ```typescript
+  import { useCalendar } from '@verbpatch/react-calendar';
+
+  function MyComponent() {
+    const { monthData, goToNext, goToPrevious } = useCalendar();
+  }
+  ```
+</Tab>
+
+<Tab active={false} label="Vue.js" icon={<SiVuedotjs />}>
+  ```vue
+  import { useCalendar } from '@verbpatch/vuejs-calendar';
+
+  const { monthData, goToNext, goToPrevious } = useCalendar();
+  ```
+</Tab>
+
+<Tab active={false} label="Svelte" icon={<SiSvelte />}>
+  ```svelte
+  <script>
+    import { useCalendar } from '@verbpatch/svelte-calendar';
+    const { monthData, goToNext, goToPrevious } = useCalendar();
+  </script> 
+  ```
+</Tab>
+</MarkdownTabs>
+
+
+This seamless integration allows you to build dynamic and responsive calendar UIs without worrying about manual state synchronization.

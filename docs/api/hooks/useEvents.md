@@ -7,7 +7,7 @@ description: A hook for managing calendar events, including creating, updating, 
 
 > **useEvents**(`options`): [`UseEventsReturn`](/calendar/docs/api/calendar-events/UseEventsReturn)
 
-Defined in: [hooks/useEvents.ts:39](https://github.com/VerbPatch/headless-calendar/blob/fa249db528ce00b6c43397b05c9b5c74159b52db/packages/headless-calendar/src/hooks/useEvents.ts#L39)
+Defined in: [hooks/useEvents.ts:39](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/hooks/useEvents.ts#L39)
 
 A hook for managing calendar events, including creating, updating, deleting, and moving events.
 
