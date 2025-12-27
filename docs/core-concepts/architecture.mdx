@@ -7,7 +7,7 @@ Description: Understanding the architecture of the Headless Calendar library
 
 The Headless Calendar library is designed with a clear separation of concerns, providing a powerful and flexible foundation for building calendar UIs. Understanding its architecture is key to effectively using and extending it.
 
-## The Headless Core (`@verbpatch/headless-calendar`)
+## The Headless Core
 
 At the heart of the library is the `@verbpatch/headless-calendar` package. This core package is:
 
@@ -27,9 +27,9 @@ The central object returned by the core `useCalendar` function (and subsequently
 * Actions to manipulate the calendar's state including events (e.g., `goToNext()`, `goToPrevious()`, `goToToday()`, `goToDate()`, `changeView()`).
 * Props or Methods to get calendar data (e.g., `visibleDates`, `visibleEvents`,`getEvent()`, `createEvent()`, `getEventsForDate()`, `getEventsForDateRange()`).
 
-When you call a method on `CalendarInstance` that changes its internal state, it updates its internal representation. However, it's up to the **framework wrapper** to detect this change by calling `useCalendar` function and re-render your UI. More about [Calendar State](/docs/core-concepts/calendar-state).
+When you call a method on `CalendarInstance` that changes its internal state, it updates its internal representation. However, it's up to the **framework wrapper** to detect this change by calling `useCalendar` function and re-render your UI. More about [Calendar State](/Calendar/docs/core-concepts/calendar-state).
 
-## Framework Wrappers (`@verbpatch/react-calendar`, `@verbpatch/vue-calendar`, etc.)
+## Framework Wrappers
 
 To bridge the gap between the non-reactive core and your reactive UI framework, we provide lightweight wrapper packages for various frameworks. These wrappers are responsible for:
 

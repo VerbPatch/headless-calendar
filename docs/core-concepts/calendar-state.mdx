@@ -9,10 +9,11 @@ At the core of the Headless Calendar library is the `CalendarInstance` object, w
 
 Understanding the `CalendarInstance` is crucial for building custom calendar UIs.
 
-## `CalendarInstance` Structure
+## Structure
 
 The `CalendarInstance` is a comprehensive object containing the current calendar configuration, date data, navigation functions, and event-related helpers. While the exact properties might be exposed reactively by framework wrappers, the underlying structure from the core library is as follows:
 
+<CodeBlock>
 ```typescript
 interface CalendarInstance {
   currentDate: Date;
@@ -56,6 +57,7 @@ interface CalendarInstance {
   utils: CalendarUtils;
 }
 ```
+</CodeBlock>
 
 ## Key Properties and Methods Explained
 
@@ -87,15 +89,17 @@ It's important to reiterate that while the `CalendarInstance` from the core libr
 
 <Tab active={false} label="Vue.js" icon={<SiVuedotjs />}>
   ```vue
-  import { useCalendar } from '@verbpatch/vuejs-calendar';
+  <script setup lang="ts">
+    import { useCalendar } from '@verbpatch/vuejs-calendar';
 
-  const { monthData, goToNext, goToPrevious } = useCalendar();
+    const { monthData, goToNext, goToPrevious } = useCalendar();
+  </script>
   ```
 </Tab>
 
 <Tab active={false} label="Svelte" icon={<SiSvelte />}>
   ```svelte
-  <script>
+  <script lang="ts">
     import { useCalendar } from '@verbpatch/svelte-calendar';
     const { monthData, goToNext, goToPrevious } = useCalendar();
   </script> 

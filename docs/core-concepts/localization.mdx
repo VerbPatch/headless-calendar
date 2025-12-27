@@ -10,17 +10,19 @@ The library handles timezones internally using standard JavaScript `Date` object
 
 The `CalendarOptions` object, which you pass to the `useCalendar` hook, allows you to specify a default timezone.
 
+<CodeBlock>
 ```typescript
 interface CalendarOptions {
   // ... other options
   timezone?: string; // IANA timezone name, e.g., 'America/New_York', 'Europe/London'
 }
 ```
+</CodeBlock>
 
 If no `timezone` is specified, the library will typically default to the browser's local timezone.
 
 **Example:**
-
+<CodeBlock>
 ```typescript jsx
 import { useCalendar } from '@verbpatch/react-calendar';
 
@@ -33,6 +35,7 @@ function MyCalendar() {
   // All date calculations and event displays will now respect 'Europe/Berlin' timezone.
 }
 ```
+</CodeBlock>
 
 ## Locales
 
@@ -42,6 +45,7 @@ Locales determine how dates and times are formatted (e.g., `MM/DD/YYYY` vs `DD/M
 
 You can set the desired locale via the `CalendarOptions`:
 
+<CodeBlock>
 ```typescript
 interface CalendarOptions {
   // ... other options
@@ -49,10 +53,12 @@ interface CalendarOptions {
   startOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 for Sunday, 1 for Monday, etc.
 }
 ```
+</CodeBlock>
 
 If `locale` is not specified, it will usually default to the browser's language setting. The `startOfWeek` option allows you to explicitly define the first day of the week, overriding locale defaults if necessary.
 **Example:**
 
+<CodeBlock>
 ```typescript jsx
 import { useCalendar } from '@verbpatch/react-calendar';
 
@@ -66,11 +72,13 @@ function MyCalendar() {
   // Date formatting and day names will be in Spanish, with weeks starting on Monday.
 }
 ```
+</CodeBlock>
 
 ## Formatting Dates and Times
 
 Headless Calendar provides utility functions for formatting dates and times according to the configured locale and timezone. The `formatDate` and `formatDateTime` functions inside `utils` option from `@verbpatch/headless-calendar` are your primary tools.
 
+<CodeBlock>
 ```typescript
 import { useCalendar } from '@verbpatch/headless-calendar';
 
@@ -93,6 +101,7 @@ const formattedTimeDE = formatDateTime(date, {
 });
 // Output: "15:30" (if date is 14:30 UTC, it's 15:30 in Berlin)
 ```
+</CodeBlock>
 
 These functions use the browser's `Intl.DateTimeFormat` API, ensuring consistent and correct localization.
 
