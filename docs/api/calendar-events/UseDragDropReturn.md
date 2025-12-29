@@ -7,7 +7,7 @@ description: |-
 
 # UseDragDropReturn
 
-Defined in: [types/events.ts:316](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L316)
+Defined in: [types/events.ts:316](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L316)
 
 ## Properties
 
@@ -15,7 +15,7 @@ Defined in: [types/events.ts:316](https://github.com/VerbPatch/headless-calendar
 
 > **draggedEvent**: [`DraggedEvent`](/calendar/docs/api/calendar-events/DraggedEvent) \| `null`
 
-Defined in: [types/events.ts:317](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L317)
+Defined in: [types/events.ts:317](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L317)
 
 ***
 
@@ -23,7 +23,7 @@ Defined in: [types/events.ts:317](https://github.com/VerbPatch/headless-calendar
 
 > **endDrag**: () => `void`
 
-Defined in: [types/events.ts:320](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L320)
+Defined in: [types/events.ts:320](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L320)
 
 #### Returns
 
@@ -35,7 +35,7 @@ Defined in: [types/events.ts:320](https://github.com/VerbPatch/headless-calendar
 
 > **getDragProps**: (`event`) => `object`
 
-Defined in: [types/events.ts:322](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L322)
+Defined in: [types/events.ts:322](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L322)
 
 #### Parameters
 
@@ -85,7 +85,7 @@ Defined in: [types/events.ts:322](https://github.com/VerbPatch/headless-calendar
 
 > **getDropProps**: (`date`, `time?`) => `object`
 
-Defined in: [types/events.ts:327](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L327)
+Defined in: [types/events.ts:327](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L327)
 
 #### Parameters
 
@@ -135,7 +135,7 @@ Defined in: [types/events.ts:327](https://github.com/VerbPatch/headless-calendar
 
 > **handleDrop**: (`dropTarget`) => `void`
 
-Defined in: [types/events.ts:321](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L321)
+Defined in: [types/events.ts:321](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L321)
 
 #### Parameters
 
@@ -153,7 +153,7 @@ Defined in: [types/events.ts:321](https://github.com/VerbPatch/headless-calendar
 
 > **isDragging**: `boolean`
 
-Defined in: [types/events.ts:318](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L318)
+Defined in: [types/events.ts:318](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L318)
 
 ***
 
@@ -161,7 +161,7 @@ Defined in: [types/events.ts:318](https://github.com/VerbPatch/headless-calendar
 
 > **startDrag**: (`event`, `dragData?`) => `void`
 
-Defined in: [types/events.ts:319](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L319)
+Defined in: [types/events.ts:319](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/types/events.ts#L319)
 
 #### Parameters
 

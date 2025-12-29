@@ -488,7 +488,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/angular/minimal"
+        "path": "/calendar/examples/Angular/minimal"
       }
     ]
   },
@@ -499,7 +499,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/lit/minimal"
+        "path": "/calendar/examples/Lit/minimal"
       }
     ]
   },
@@ -510,7 +510,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/preact/minimal"
+        "path": "/calendar/examples/Preact/minimal"
       }
     ]
   },
@@ -521,7 +521,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/qwik/minimal"
+        "path": "/calendar/examples/Qwik/minimal"
       }
     ]
   },
@@ -532,12 +532,12 @@
       {
         "title": "basic",
         "group": "example",
-        "path": "/calendar/examples/react/basic"
+        "path": "/calendar/examples/React/basic"
       },
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/react/minimal"
+        "path": "/calendar/examples/React/minimal"
       }
     ]
   },
@@ -548,7 +548,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/solidjs/minimal"
+        "path": "/calendar/examples/Solidjs/minimal"
       }
     ]
   },
@@ -559,7 +559,7 @@
       {
         "title": "basic",
         "group": "example",
-        "path": "/calendar/examples/svelte/basic"
+        "path": "/calendar/examples/Svelte/basic"
       }
     ]
   },
@@ -570,7 +570,7 @@
       {
         "title": "minimal",
         "group": "example",
-        "path": "/calendar/examples/vanilla/minimal"
+        "path": "/calendar/examples/Vanilla/minimal"
       }
     ]
   },
@@ -581,7 +581,7 @@
       {
         "title": "basic",
         "group": "example",
-        "path": "/calendar/examples/vuejs/basic"
+        "path": "/calendar/examples/Vuejs/basic"
       }
     ]
   }

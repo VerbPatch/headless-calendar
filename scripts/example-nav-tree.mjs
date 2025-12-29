@@ -35,7 +35,7 @@ function scan(dirPath, pathPrefix) {
     };
 
     if (child.label === "pro") {
-      result.path = ("/" + pathPrefix + "/" + item.path.substr(dirPath.lastIndexOf("\\") + 1) + "/" + item.name).toLowerCase();
+      result.path = "/" + pathPrefix + "/" + item.path.substr(dirPath.lastIndexOf("\\") + 1) + "/" + item.name;
     } else {
       result.children = child;
     }

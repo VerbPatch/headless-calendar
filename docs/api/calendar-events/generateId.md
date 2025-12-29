@@ -7,7 +7,7 @@ description: Generates a unique ID for a calendar event.
 
 > **generateId**(): `string`
 
-Defined in: [utils/events.ts:15](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/utils/events.ts#L15)
+Defined in: [utils/events.ts:15](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/events.ts#L15)
 
 Generates a unique ID for a calendar event.
 

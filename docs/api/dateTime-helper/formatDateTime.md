@@ -7,7 +7,7 @@ description: Formats a date and time object into a string based on the specified
 
 > **formatDateTime**(`date`, `options?`): `string`
 
-Defined in: [utils/date.ts:145](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/utils/date.ts#L145)
+Defined in: [utils/date.ts:145](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/date.ts#L145)
 
 Formats a date and time object into a string based on the specified format, locale, and timezone.
 
