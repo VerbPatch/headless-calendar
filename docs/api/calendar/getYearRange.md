@@ -7,7 +7,7 @@ description: Calculates the start and end dates of the year for a given date.
 
 > **getYearRange**(`date`): `object`
 
-Defined in: [utils/calendar.ts:188](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/calendar.ts#L188)
+Defined in: [utils/calendar.ts:188](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/utils/calendar.ts#L188)
 
 Calculates the start and end dates of the year for a given date.
 

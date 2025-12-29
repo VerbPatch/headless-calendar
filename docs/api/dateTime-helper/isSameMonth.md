@@ -7,7 +7,7 @@ description: Checks if two dates are in the same month.
 
 > **isSameMonth**(`date1`, `date2`): `boolean`
 
-Defined in: [utils/date.ts:319](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/date.ts#L319)
+Defined in: [utils/date.ts:319](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/utils/date.ts#L319)
 
 Checks if two dates are in the same month.
 

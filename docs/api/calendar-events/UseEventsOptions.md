@@ -7,7 +7,7 @@ description: |-
 
 # UseEventsOptions
 
-Defined in: [types/events.ts:339](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L339)
+Defined in: [types/events.ts:339](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L339)
 
 Configuration options for the `useEvents` hook.
 
@@ -17,7 +17,7 @@ Configuration options for the `useEvents` hook.
 
 > `optional` **calendarTimezone**: `string`
 
-Defined in: [types/events.ts:343](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L343)
+Defined in: [types/events.ts:343](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L343)
 
 The timezone to use for the calendar.
 
@@ -27,7 +27,7 @@ The timezone to use for the calendar.
 
 > `optional` **initialEvents**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/events.ts:371](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L371)
+Defined in: [types/events.ts:371](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L371)
 
 An array of initial events to populate the calendar with.
 
@@ -37,7 +37,7 @@ An array of initial events to populate the calendar with.
 
 > `optional` **onEvent**: (`event`) => `void`
 
-Defined in: [types/events.ts:349](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L349)
+Defined in: [types/events.ts:349](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L349)
 
 A callback function that is invoked whenever the events array changes.
 
@@ -59,7 +59,7 @@ The updated array of events.
 
 > `optional` **onEventCreate**: (`event`) => `void`
 
-Defined in: [types/events.ts:355](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L355)
+Defined in: [types/events.ts:355](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L355)
 
 A callback function that is invoked when a new event is created.
 
@@ -81,7 +81,7 @@ The newly created event.
 
 > `optional` **onEventDelete**: (`event`) => `void`
 
-Defined in: [types/events.ts:367](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L367)
+Defined in: [types/events.ts:367](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L367)
 
 A callback function that is invoked when an event is deleted.
 
@@ -103,7 +103,7 @@ The deleted event.
 
 > `optional` **onEventUpdate**: (`event`) => `void`
 
-Defined in: [types/events.ts:361](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/types/events.ts#L361)
+Defined in: [types/events.ts:361](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/types/events.ts#L361)
 
 A callback function that is invoked when an event is updated.
 

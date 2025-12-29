@@ -1,6 +1,7 @@
 // @ts-check
 import fs from "fs";
 import path from "path";
+import { buildExamplesNav } from "./example-nav-tree.mjs";
 
 function docNavigation() {
   return [
@@ -74,6 +75,14 @@ export function load(app) {
 
         docNavigation().forEach((item) => {
           navData.unshift(item);
+        });
+      }
+
+      const examplesPaths = buildExamplesNav("calendar/examples");
+      if (examplesPaths) {
+        // @ts-ignore
+        examplesPaths.forEach((item) => {
+          navData.push(item);
         });
       }
 

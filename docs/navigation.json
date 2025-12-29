@@ -480,5 +480,109 @@
       }
     ],
     "group": "api"
+  },
+  {
+    "title": "Angular",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/angular/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Lit",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/lit/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Preact",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/preact/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Qwik",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/qwik/minimal"
+      }
+    ]
+  },
+  {
+    "title": "React",
+    "group": "example",
+    "children": [
+      {
+        "title": "basic",
+        "group": "example",
+        "path": "/calendar/examples/react/basic"
+      },
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/react/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Solidjs",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/solidjs/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Svelte",
+    "group": "example",
+    "children": [
+      {
+        "title": "basic",
+        "group": "example",
+        "path": "/calendar/examples/svelte/basic"
+      }
+    ]
+  },
+  {
+    "title": "Vanilla",
+    "group": "example",
+    "children": [
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/vanilla/minimal"
+      }
+    ]
+  },
+  {
+    "title": "Vuejs",
+    "group": "example",
+    "children": [
+      {
+        "title": "basic",
+        "group": "example",
+        "path": "/calendar/examples/vuejs/basic"
+      }
+    ]
   }
 ]

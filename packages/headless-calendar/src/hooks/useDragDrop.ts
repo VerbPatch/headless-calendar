@@ -131,8 +131,6 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       startDrag(event);
     },
     onDragEnd: (e: DragEvent) => {
-      //eslint-disable-next-line
-      console.log(e)
       endDrag();
     }
   }),

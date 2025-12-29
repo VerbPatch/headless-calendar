@@ -12,13 +12,11 @@ export function setupCalendar($elem) {
     if (!event.target) return;
 
     if (event.target.id === "prev") {
-      console.log("prev called");
       calendar.goToPrevious();
       bindCalendar();
     }
 
     if (event.target.id === "next") {
-      console.log("prev called");
       calendar.goToNext();
       bindCalendar();
     }
@@ -28,7 +26,6 @@ export function setupCalendar($elem) {
     if (!event.target) return;
 
     if (event.target.id === "view-select") {
-      console.log("view called", event.target.value);
       calendar.changeView(event.target.value);
       bindCalendar();
     }

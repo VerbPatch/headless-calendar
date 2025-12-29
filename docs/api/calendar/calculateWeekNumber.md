@@ -7,7 +7,7 @@ description: Calculates the week number of the year for a given date.
 
 > **calculateWeekNumber**(`date`): `number`
 
-Defined in: [utils/calendar.ts:209](https://github.com/VerbPatch/headless-calendar/blob/c0dcd17780db0093f7c06ed44773cd2f5150604e/packages/headless-calendar/src/utils/calendar.ts#L209)
+Defined in: [utils/calendar.ts:209](https://github.com/VerbPatch/headless-calendar/blob/8833b0f17c00ba782778b695113cd46c831140c9/packages/headless-calendar/src/utils/calendar.ts#L209)
 
 Calculates the week number of the year for a given date.
 

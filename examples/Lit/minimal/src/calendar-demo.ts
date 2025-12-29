@@ -68,17 +68,14 @@ export class CalendarDemo extends LitElement {
       timeSlotInterval: 30,
       initialEvents: this.initialEvents,
       onViewChange: (view) => {
-        console.log(view);
         this.requestUpdate();
       },
       onDateChange: (date) => {
-        console.log("Current date:", date);
         this.requestUpdate();
       },
       locale: "en-IN",
       timezone: "Asia/Calcutta",
       onEvent: (events: CalendarEvent[]) => {
-        console.log("Events:", events);
         this.requestUpdate();
       },
     });

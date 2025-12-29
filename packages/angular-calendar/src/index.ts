@@ -20,7 +20,6 @@ export function useCalendar(options?: CalendarOptions): CalendarComposable {
     const calendarSignal = signal<CalendarInstance>(initialInstance);
 
     const refreshCalendar = () => {
-        // console.log("Called here 1");
         const newInstance = createCalendar({
             ...options,
 

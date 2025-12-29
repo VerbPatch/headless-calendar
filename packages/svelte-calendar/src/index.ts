@@ -15,17 +15,14 @@ export function useCalendar(options?: CalendarOptions): Writable<CalendarInstanc
         const calendar = createCalendar({
             ...options,
             onEvent: (event) => {
-                console.log('onEvent:', event);
                 refreshCalendar();
                 options?.onEvent?.(event);
             },
             onDateChange: (date) => {
-                console.log('onDateChange:', date);
                 refreshCalendar();
                 options?.onDateChange?.(date);
             },
             onViewChange: (view) => {
-                console.log('onViewChange:', view);
                 refreshCalendar();
                 options?.onViewChange?.(view);
             },
