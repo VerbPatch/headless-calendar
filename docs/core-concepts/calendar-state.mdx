@@ -82,7 +82,13 @@ It's important to reiterate that while the `CalendarInstance` from the core libr
   import { useCalendar } from '@verbpatch/react-calendar';
 
   function MyComponent() {
-    const { monthData, goToNext, goToPrevious } = useCalendar();
+    const { view, monthData, goToNext, goToPrevious } = useCalendar({
+      //options
+    });
+
+    return (
+      //render calendar here
+    )
   }
   ```
 </Tab>
@@ -92,8 +98,13 @@ It's important to reiterate that while the `CalendarInstance` from the core libr
   <script setup lang="ts">
     import { useCalendar } from '@verbpatch/vuejs-calendar';
 
-    const { monthData, goToNext, goToPrevious } = useCalendar();
+    const { view, monthData, goToNext, goToPrevious } = useCalendar({
+      //options
+    });
   </script>
+  <template>  
+    //render calendar here  
+  </template>
   ```
 </Tab>
 
@@ -101,8 +112,142 @@ It's important to reiterate that while the `CalendarInstance` from the core libr
   ```svelte
   <script lang="ts">
     import { useCalendar } from '@verbpatch/svelte-calendar';
-    const { monthData, goToNext, goToPrevious } = useCalendar();
+    const { view, monthData, goToNext, goToPrevious } = useCalendar({
+      //options
+    });
   </script> 
+  
+  <!-- render calendar here -->
+  ```
+</Tab>
+
+<Tab active={false} label="Angular" icon={<SiAngular />}>
+  ```ts
+  import { CalendarComposable, useCalendar, ViewType } from '@verbpatch/angular-calendar';
+
+  @Component({
+    selector: 'app-root',
+    standalone: true,
+    template: `<render-calendar></render-calendar>`,
+    changeDetection: ChangeDetectionStrategy.OnPush
+  })
+  export class App {
+    calendarHook: CalendarComposable = useCalendar({
+      //options
+    });
+
+    changeView(event: Event) {
+      this.calendarHook.calendar().changeView((event.target as HTMLSelectElement).value as ViewType)
+    }
+  }
+  ```
+</Tab>
+<Tab active={false} label="JQuery" icon={<SiJquery />}>
+  ```html
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
+
+  <div id="calendar"></div>
+  <script>
+    $(document).ready(function () {
+      $('#calendar').headlessCalendar({
+        //options
+        onRender: function (calendar) {
+          const cal = $('#calendar').headlessCalendar('getCalendar'); //cal has everything you need to make html and render calendar
+          //render calendar here in calendar div
+        }
+      });
+    })
+  </script>
+  ```
+</Tab>
+<Tab active={false} label="Lit" icon={<SiLit />}>
+  ```ts
+  import { useCalendar, CalendarEvent, generateId } from "@verbpatch/lit-calendar";
+  import { LitElement } from "lit";
+  import { customElement, state } from "lit/decorators.js";
+
+  @customElement("calendar-demo")
+  export class CalendarDemo extends LitElement {
+    @state()
+    private _calendarState: ReturnType<typeof useCalendar>;
+
+    constructor() {
+      super();
+      this._calendarState = useCalendar(this, {
+        //options
+      });
+    }
+    
+    render() {
+      const { view, monthData, goToNext, goToPrevious } = this._calendarState.calendar;
+
+      //render calendar here
+    }
+  }
+  ```
+</Tab>
+<Tab active={false} label="Preact" icon={<SiPreact />}>
+  ```tsx
+  import { FunctionalComponent } from "preact";
+  import { useCallback, useMemo } from "preact/hooks";
+  import useCalendar from "@verbpatch/preact-calendar";
+
+  export const CalendarDemo: FunctionalComponent = () => {
+    const { view, monthData, goToNext, goToPrevious } = useCalendar({
+      //options
+    })
+
+    return (
+      //render calendar here
+    )
+  }
+  ```
+</Tab>
+<Tab active={false} label="Qwik" icon={<SiQwik />}>
+  ```tsx
+  import { $, component$ } from "@builder.io/qwik";
+  import { useCalendar, type CalendarEvent } from "@verbpatch/qwik-calendar";
+
+  export const App = component$(() => {
+    const { view, monthData, goToNext, goToPrevious } = useCalendar({
+      //options
+    })
+
+    return (
+      //render calendar here
+    )
+  })
+  ```
+</Tab>
+<Tab active={false} label="SolidJS" icon={<SiSolid />}>
+  ```tsx
+  import { type Component, createMemo } from "solid-js";
+  import { useCalendar, type CalendarEvent, generateId } from "@verbpatch/solidjs-calendar";
+
+  const CalendarDemo: Component = () => {
+    const calendar = useCalendar({
+      //options
+    })
+
+    return (
+      //render calendar here
+    )
+  }
+  ```
+</Tab>
+<Tab active={false} label="Vanilla" icon={<SiJavascript />}>
+  ```js
+  import { useCalendar } from "@verbpatch/headless-calendar";
+
+  let calendar; //calendar object has everything to bind the calendar
+  function bindCalendar() {
+    calendar = useCalendar({ 
+      //options
+    });
+  }
+  
+  bindCalendar();
   ```
 </Tab>
 </MarkdownTabs>
