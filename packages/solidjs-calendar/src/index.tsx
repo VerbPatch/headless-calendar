@@ -3,7 +3,7 @@ import { useCalendar as createCalendar, type CalendarOptions, type CalendarInsta
 
 export * from "@verbpatch/headless-calendar";
 
-export default function useCalendar(options?: CalendarOptions) {
+export function useCalendar(options?: CalendarOptions) {
   const [stateVersion, setStateVersion] = createSignal(0);
   const [calendar, setCalendar] = createSignal<CalendarInstance>();
 

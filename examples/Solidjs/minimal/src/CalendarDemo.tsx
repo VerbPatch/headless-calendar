@@ -1,5 +1,5 @@
 import { type Component, createMemo } from "solid-js";
-import useCalendar, { type CalendarEvent, generateId } from "@verbpatch/solidjs-calendar";
+import { useCalendar, type CalendarEvent, generateId } from "@verbpatch/solidjs-calendar";
 
 const CalendarDemo: Component = () => {
   const initialEvents = createMemo<CalendarEvent[]>(() => {
@@ -80,11 +80,12 @@ const CalendarDemo: Component = () => {
   };
 
   const handleEventDragStart = (event: CalendarEvent, e: DragEvent): void => {
-    //console.log({ event });
+    console.log({ event, e });
     calendar()?.startDrag(event, { type: "event" });
   };
 
   const eventHandleDrop = (e: DragEvent, date: Date, time?: string): void => {
+    console.log(e);
     calendar()?.handleDrop({ date, time });
   };
 
@@ -102,9 +103,9 @@ const CalendarDemo: Component = () => {
             ))}
         </tr>
 
-        {calendar()?.monthData?.weeks.map((week, weekIndex) => (
+        {calendar()?.monthData?.weeks.map((week) => (
           <tr>
-            {week.map((date, dayIndex) => {
+            {week.map((date) => {
               const dateEvents = calendar()?.getEventsForDate(date) || [];
               const isCurrentMonth = calendar()?.monthData?.isCurrentMonth(date);
               const isToday = calendar()?.monthData?.isToday(date);
@@ -159,7 +160,7 @@ const CalendarDemo: Component = () => {
       <div>
         <div>
           <div></div>
-          {calendar()?.weekData?.dates.map((date, index) => (
+          {calendar()?.weekData?.dates.map((date) => (
             <div>
               <div class={`font-semibold ${calendar()?.weekData?.isToday(date) ? "text-blue-600" : ""}`}>{calendar()?.utils.formatDateTime(date, "EEE")}</div>
               <div class={`text-sm ${calendar()?.weekData?.isToday(date) ? "text-blue-600" : "text-gray-600"}`}>{calendar()?.utils.formatDateTime(date, "d")}</div>
@@ -174,7 +175,7 @@ const CalendarDemo: Component = () => {
             ))}
           </div>
 
-          {calendar()?.weekData?.dates.map((date, dateIndex) => {
+          {calendar()?.weekData?.dates.map((date) => {
             return (
               <div>
                 {calendar()?.timeSlots.map((slot) => {

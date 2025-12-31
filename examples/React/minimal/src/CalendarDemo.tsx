@@ -1,5 +1,5 @@
 import React, { JSX, useCallback, useEffect, useMemo, useState } from "react";
-import useCalendar, { CalendarEvent, generateId } from "@verbpatch/react-calendar";
+import { useCalendar, CalendarEvent, generateId } from "@verbpatch/react-calendar";
 
 const CalendarDemo: React.FC = () => {
   const initialEvents = useMemo<CalendarEvent[]>(() => {

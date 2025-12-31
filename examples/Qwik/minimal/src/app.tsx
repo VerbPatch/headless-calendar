@@ -1,5 +1,5 @@
 import { $, component$ } from "@builder.io/qwik";
-import { generateId, useCalendar, type CalendarEvent } from "@verbpatch/qwik-calendar";
+import { useCalendar, generateId, type CalendarEvent } from "@verbpatch/qwik-calendar";
 
 export const App = component$(() => {
   const _today = new Date();
@@ -8,7 +8,6 @@ export const App = component$(() => {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const {
-    currentDate,
     view,
     events,
     changeView,
@@ -101,11 +100,12 @@ export const App = component$(() => {
   });
 
   const handleEventDragStart = $((event: CalendarEvent, e: DragEvent): void => {
-    //console.log({ event });
+    console.log({ event, e });
     startDrag(event, { type: "event" });
   });
 
   const eventHandleDrop = $((e: DragEvent, date: Date, time?: string): void => {
+    console.log(e);
     handleDrop({ date, time });
   });
 
@@ -203,7 +203,7 @@ export const App = component$(() => {
             return (
               <div key={dateIndex}>
                 {timeSlots.map((slot) => {
-                  const slotEvents = getEventsForDate(date).filter((event, index) => {
+                  const slotEvents = getEventsForDate(date).filter((event) => {
                     const eventStart = new Date(event.start);
                     const eventEnd = new Date(event.end);
                     return utils?.dateTimeInBetween(new Date(date.getFullYear(), date.getMonth(), date.getDate(), slot.hour, slot.minute, 0), eventStart, eventEnd);

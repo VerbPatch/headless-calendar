@@ -1,6 +1,6 @@
-import { FunctionalComponent } from "preact";
 import { useCallback, useMemo } from "preact/hooks";
-import useCalendar, { CalendarEvent, generateId } from "@verbpatch/preact-calendar";
+import { useCalendar, generateId, type CalendarEvent } from "@verbpatch/preact-calendar";
+import type { FunctionalComponent } from "preact";
 
 export const CalendarDemo: FunctionalComponent = () => {
   const initialEvents = useMemo<CalendarEvent[]>(() => {

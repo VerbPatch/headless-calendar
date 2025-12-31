@@ -11,16 +11,17 @@ import { NgStyle } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected readonly title = signal({ name: 'Raja' });
+  protected readonly title = signal({ name: 'Calendar Demo' });
   changeTitle() {
-    this.title.update(({ name }) => name == "Raja" ? { name: "Rameez" } : { name: "Raja" });
+    this.title.update(({ name }) => name == "Calendar Demo" ? { name: "Angular Calendar Demo" } : { name: "Calendar Demo" });
   }
-
   calendarHook: CalendarComposable = useCalendar({
     defaultDate: new Date(),
     defaultView: 'month',
     onDateChange: (date: Date) => console.log('Date updated:', date),
   });
+
+
 
   changeView(event: Event) {
     this.calendarHook.calendar().changeView((event.target as HTMLSelectElement).value as ViewType)

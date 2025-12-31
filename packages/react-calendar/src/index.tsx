@@ -3,7 +3,7 @@ export * from "@verbpatch/headless-calendar";
 
 import { useCalendar as createCalendar, CalendarOptions } from "@verbpatch/headless-calendar";
 
-export default function useCalendar(options?: CalendarOptions) {
+export function useCalendar(options?: CalendarOptions) {
   const [stateChanged, setStateChanged] = useState(0);
   const calendar = createCalendar({
     ...options,

@@ -20,8 +20,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "esm": "./dist/esm2022/verbpatch-angular-calendar.mjs",
-      "default": "./dist/fesm2022/verbpatch-angular-calendar.mjs",
-      "esm2022": "./dist/esm2022/verbpatch-angular-calendar.mjs"
+      "esm2022": "./dist/esm2022/verbpatch-angular-calendar.mjs",
+      "default": "./dist/fesm2022/verbpatch-angular-calendar.mjs"
     }
   },
   "files": [

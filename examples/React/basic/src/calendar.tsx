@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import useCalendar, { ViewType } from "@verbpatch/react-calendar";
+import { useCalendar, type ViewType } from "@verbpatch/react-calendar";
 
 export const CalendarDemo: React.FC = () => {
   const {
