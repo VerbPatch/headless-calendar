@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.0.1-beta.9] - 2025-12-31
+
+### Added
+
+- Documentation and examples for all packages
+- Default export of useCalendar removed from preact, react and solidjs packages with examples updated
+
+---
+
 ## [v0.0.1-beta.8] - 2025-11-18
 
 ### Added
