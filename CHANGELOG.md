@@ -86,6 +86,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JQuery Wrapper of calendar headless libray with examples
 - Svelte Wrapper of calendar headless libray with examples
 
+[v0.0.1-beta.9]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.9
+[v0.0.1-beta.8]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.8
+[v0.0.1-beta.7]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.7
 [v0.0.1-beta.6]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.6
 [v0.0.1-beta.5]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.5
 [v0.0.1-beta.2]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.2
