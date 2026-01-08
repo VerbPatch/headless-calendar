@@ -81,7 +81,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     startHour = DEFAULT_START_HOUR,
     endHour = DEFAULT_END_HOUR,
     timezone = Intl.DateTimeFormat().resolvedOptions().timeZone,
-    locale = navigator.language,
+    locale = Intl.DateTimeFormat().resolvedOptions().locale,
     initialEvents,
     onEvent,
     onEventCreate,

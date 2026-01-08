@@ -105,7 +105,7 @@ function MyCalendar() {
 
 ## 🔗 Helpful Links
 
-- Documentation: {coming soon}
+- [Documentation](https://www.verbpatch.com/calendar/docs/introduction)
 - [Examples](https://github.com/VerbPatch/headless-calendar/tree/main/examples)
 - [Issues](https://github.com/verbpatch/headless-calendar/issues)
 - [Contributing Guide](https://github.com/verbpatch/headless-calendar/blob/main/CONTRIBUTING.md)
