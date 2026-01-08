@@ -1,5 +1,5 @@
 import { UseNavigationOptions, UseNavigationReturn, ViewType } from '../types/views';
-import { addDays, addWeeks, addMonths, getDay } from '../utils/date';
+import { addDays, addWeeks, addMonths, getDay, addYears } from '../utils/date';
 import { createCallback, createState } from '../state';
 
 /**
@@ -37,10 +37,10 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
   const [getView, setView] = createState<ViewType>(defaultView, 'view');
 
   /**
-   * Navigates the calendar to the next period (day, week, or month) based on the current view.
+   * Navigates the calendar to the next period (day, week, month, or year) based on the current view.
    * @group Navigation
    * @title Go to Next
-   * @description Navigates the calendar to the next period (day, week, or month) based on the current view.
+   * @description Navigates the calendar to the next period (day, week, month, or year) based on the current view.
    */
   const goToNext = createCallback((): void => {
     let newDate: Date;
@@ -55,6 +55,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       case 'month':
         newDate = addMonths(getCurrentDate(), 1);
         break;
+      case 'year':
+        newDate = addYears(getCurrentDate(), 1);
+        break;
       default:
         return;
     }
@@ -66,10 +69,10 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     'go-to-next');
 
   /**
-   * Navigates the calendar to the previous period (day, week, or month) based on the current view.
+   * Navigates the calendar to the previous period (day, week, month, or year) based on the current view.
    * @group Navigation
    * @title Go to Previous
-   * @description Navigates the calendar to the previous period (day, week, or month) based on the current view.
+   * @description Navigates the calendar to the previous period (day, week, month, or year) based on the current view.
    */
   const goToPrevious = createCallback((): void => {
 
@@ -84,6 +87,9 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
         break;
       case 'month':
         newDate = addMonths(getCurrentDate(), -1);
+        break;
+      case 'year':
+        newDate = addYears(getCurrentDate(), -1);
         break;
       default:
         return;

@@ -1,5 +1,6 @@
+import { ViewType } from '../types';
 import { TimeSlot } from '../types/calendar';
-import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek } from './date';
+import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek, getStartOfYear, getEndOfYear, addMonths } from './date';
 
 /**
  * Generates an array of dates for the week containing the given date.
@@ -59,6 +60,42 @@ export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
 
   return dates;
 };
+
+/**
+ * Generates an array of dates in a year, including days from the previous and next years to complete the weeks.
+ * @param {Date} date - A date within the desired year.
+ * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
+ * @returns {Date[]} - An array of Date objects representing all visible days in the year.
+ * @see {@link getStartOfYear}
+ * @see {@link getEndOfYear}
+ * @example
+ * ```ts
+ * const dates = getYearCalendarDays(new Date('2024-01-15'));
+ * // dates will be an array of dates for the year view of 2024
+ * ```
+ * @group calendar
+ * @title getYearCalendarDays
+ * @description Generates an array of dates in a year, including days from the previous and next years to complete the weeks.
+ * @function
+ */
+export const getYearCalendarDays = (date: Date, startOfWeek = 0): Date[] => {
+  const startOfYear = getStartOfYear(date);
+  const endOfYear = getEndOfYear(date);
+
+  const startDate = getStartOfWeek(startOfYear, startOfWeek);
+  const endDate = getEndOfWeek(endOfYear, startOfWeek);
+
+  const dates: Date[] = [];
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dates;
+};
+
 
 /**
  * Generates an array of time slots for a given range of hours and interval.
@@ -214,10 +251,11 @@ export const calculateWeekNumber = (date: Date): number => {
 
 /**
  * Determines the start and end date bounds for a given calendar view.
- * @param {'month' | 'week' | 'day'} view - The current calendar view.
+ * @param {ViewType} view - The current calendar view.
  * @param {Date} date - The reference date for the view.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @returns {{ start: Date; end: Date }} - An object containing the start and end dates of the visible calendar period.
+ * @see {@link ViewType}
  * @see {@link getStartOfWeek}
  * @see {@link getEndOfWeek}
  * @see {@link getMonthCalendarDates}
@@ -231,7 +269,7 @@ export const calculateWeekNumber = (date: Date): number => {
  * @description Determines the start and end date bounds for a given calendar view.
  * @function
  */
-export const getCalendarBounds = (view: 'month' | 'week' | 'day', date: Date, startOfWeek = 0): { start: Date; end: Date } => {
+export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek = 0): { start: Date; end: Date } => {
   switch (view) {
     case 'day':
       return {
@@ -249,6 +287,12 @@ export const getCalendarBounds = (view: 'month' | 'week' | 'day', date: Date, st
       return {
         start: monthDates[0],
         end: monthDates[monthDates.length - 1]
+      };
+
+    case 'year':
+      return {
+        start: new Date(date.getFullYear(), 0, 1),
+        end: new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999)
       };
 
     default:

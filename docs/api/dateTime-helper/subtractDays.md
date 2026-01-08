@@ -7,7 +7,7 @@ description: Subtracts a specified number of days from a date.
 
 > **subtractDays**(`date`, `days`): `Date`
 
-Defined in: [utils/date.ts:539](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/date.ts#L539)
+Defined in: [utils/date.ts:591](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/date.ts#L591)
 
 Subtracts a specified number of days from a date.
 

@@ -1,5 +1,5 @@
 import { CalendarEvent, DraggedEvent } from './events';
-import { ViewType, MonthData, WeekData, DayData } from './views';
+import { ViewType, MonthData, WeekData, DayData, YearData } from './views';
 
 /**
  * Represents a single time slot in a day view.
@@ -517,6 +517,13 @@ export interface CalendarInstance {
    * @see {@link TimeSlot}
    */
   timeSlots: TimeSlot[];
+
+  /**
+   * Provides data specific to the Year with all month, weeks, month name, and month data has utility functions to check if a date is in the current month or is today.
+   * @type {YearData | null}
+   * @see {@link YearData}
+   */
+  yearData: YearData | null;
 
   /**
    * Provides data specific to the month view, such as weeks, month name, and utility functions to check if a date is in the current month or is today.

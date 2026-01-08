@@ -7,7 +7,7 @@ description: Determines the start and end date bounds for a given calendar view.
 
 > **getCalendarBounds**(`view`, `date`, `startOfWeek?`): `object`
 
-Defined in: [utils/calendar.ts:234](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/calendar.ts#L234)
+Defined in: [utils/calendar.ts:272](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/calendar.ts#L272)
 
 Determines the start and end date bounds for a given calendar view.
 
@@ -15,9 +15,9 @@ Determines the start and end date bounds for a given calendar view.
 
 ### view
 
-The current calendar view.
+[`ViewType`](/calendar/docs/api/navigation/ViewType)
 
-`"month"` | `"week"` | `"day"`
+The current calendar view.
 
 ### date
 
@@ -47,6 +47,7 @@ The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
 
 ## See
 
+ - [ViewType](/calendar/docs/api/navigation/ViewType)
  - [getStartOfWeek](/calendar/docs/api/dateTime-helper/getStartOfWeek)
  - [getEndOfWeek](/calendar/docs/api/dateTime-helper/getEndOfWeek)
  - [getMonthCalendarDates](/calendar/docs/api/calendar/getMonthCalendarDates)

@@ -4,7 +4,30 @@
  * @title ViewType
  * @description Defines the available calendar views: 'month', 'week', and 'day'.
  */
-export type ViewType = 'month' | 'week' | 'day';
+export type ViewType = 'year' | 'month' | 'week' | 'day';
+
+/**
+ * Data specific to the year view.
+ * @group navigation
+ * @title YearData
+ * @description Represents the data structure for the year view, including months, weeks, month name, and utility functions.
+ */
+export interface YearData {
+  /**
+   * An array of month data representing all months of a years .
+   */
+  months: MonthData[];
+  /**
+   * Year label.
+   */
+  year: string;
+  /**
+   * A function to check if a date is in the current year.
+   * @param date - The date to check.
+   * @returns - True if the date is in the current year, false otherwise.
+   */
+  isCurrentYear: (date: Date) => boolean;
+}
 
 /**
  * Data specific to the month view.

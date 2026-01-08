@@ -6,6 +6,7 @@ export const CalendarDemo: React.FC = () => {
     view,
     changeView,
 
+    yearData,
     monthData,
     weekData,
     dayData,
@@ -20,6 +21,62 @@ export const CalendarDemo: React.FC = () => {
     defaultView: "month",
     startOfWeek: 0, // 0 = Sunday, 1 = Monday
   });
+
+  const renderYearView = (): JSX.Element | null => {
+    if (!yearData) return null;
+    return (
+      <tr>
+        <td colSpan={7} style={{ borderBottom: "1px solid", borderRight: "1px solid" }}>
+          {yearData.months.map((month, monthIndex) => {
+            return (
+              <table key={monthIndex} cellPadding={1} cellSpacing={0} style={{ display: "inline-table", padding: "8px" }}>
+                <thead>
+                  <tr>
+                    <th colSpan={7} style={{ textAlign: "center", borderBottom: "1px solid" }}>
+                      {month.monthName}
+                    </th>
+                  </tr>
+                  <tr>
+                    {daysofWeek("short").map((day) => (
+                      <th style={{ width: "35px", borderBottom: "1px solid" }} key={day}>
+                        {day}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {month.weeks.map((week, weekIndex) => {
+                    return (
+                      <tr key={weekIndex}>
+                        {week.map((date, dayIndex) => {
+                          const isCurrentMonth = month!.isCurrentMonth(date);
+                          const isToday = month!.isToday(date);
+                          const isCurrentYear = yearData.isCurrentYear(date);
+                          return (
+                            <td
+                              align="center"
+                              key={dayIndex}
+                              style={{
+                                fontWeight: isToday ? "bold" : "normal",
+                                color: isCurrentMonth ? "black" : "gray",
+                                borderBottom: "1px solid",
+                              }}
+                            >
+                              <div>{isCurrentYear && formatDate(date, "d")}</div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            );
+          })}
+        </td>
+      </tr>
+    );
+  };
 
   const renderMonthView = (): JSX.Element | null => {
     if (!monthData) return null;
@@ -137,6 +194,7 @@ export const CalendarDemo: React.FC = () => {
           </th>
           <th colSpan={3} style={{ borderBottom: "1px solid" }}>
             <h3>
+              {view === "year" && yearData?.year}
               {view === "month" && monthData?.monthName}
               {view === "week" && weekData?.weekRange}
               {view === "day" && dayData?.dayName}
@@ -149,14 +207,24 @@ export const CalendarDemo: React.FC = () => {
                 changeView(value);
               }}
             >
-              <option value="month">Month</option>
-              <option value="week">Week</option>
-              <option value="day">Day</option>
+              <option value="year" selected={view === "year"}>
+                Year
+              </option>
+              <option value="month" selected={view === "month"}>
+                Month
+              </option>
+              <option value="week" selected={view === "week"}>
+                Week
+              </option>
+              <option value="day" selected={view === "day"}>
+                Day
+              </option>
             </select>
           </th>
         </tr>
       </thead>
       <tbody>
+        {view === "year" && renderYearView()}
         {view === "month" && renderMonthView()}
         {view === "week" && renderWeekView()}
         {view === "day" && renderDayView()}

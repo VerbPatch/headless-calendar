@@ -7,7 +7,7 @@ description: Subtracts a specified number of months from a date.
 
 > **subtractMonths**(`date`, `months`): `Date`
 
-Defined in: [utils/date.ts:575](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/date.ts#L575)
+Defined in: [utils/date.ts:627](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/date.ts#L627)
 
 Subtracts a specified number of months from a date.
 

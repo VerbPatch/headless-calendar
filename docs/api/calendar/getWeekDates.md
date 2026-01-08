@@ -7,7 +7,7 @@ description: Generates an array of dates for the week containing the given date.
 
 > **getWeekDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:21](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/calendar.ts#L21)
+Defined in: [utils/calendar.ts:22](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/calendar.ts#L22)
 
 Generates an array of dates for the week containing the given date.
 

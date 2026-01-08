@@ -1,5 +1,5 @@
 import { CalendarOptions, CalendarInstance, TimeSlot } from '../types/calendar';
-import { MonthData, WeekData, DayData } from '../types/views';
+import { MonthData, WeekData, DayData, YearData } from '../types/views';
 import { CalendarEvent } from '../types/events';
 import { useEvents } from './useEvents';
 import { useNavigation } from './useNavigation';
@@ -8,7 +8,8 @@ import {
   getTimeSlots,
   getWeekDates,
   getMonthCalendarDates,
-  getCalendarBounds
+  getCalendarBounds,
+  getYearCalendarDays
 } from '../utils/calendar';
 import {
   getEventsForDate,
@@ -27,7 +28,8 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   dateTimeInBetween,
-  formatDate
+  formatDate,
+  isSameYear
 } from '../utils/date';
 import {
   DEFAULT_START_HOUR,
@@ -143,6 +145,8 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
         return getWeekDates(navigation.currentDate, startOfWeek);
       case 'month':
         return getMonthCalendarDates(navigation.currentDate, startOfWeek);
+      case 'year':
+        return getYearCalendarDays(navigation.currentDate, startOfWeek);
       default:
         return [];
     }
@@ -196,6 +200,47 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   const getEventsForSpecificDate = (date: Date): CalendarEvent[] => {
     return getEventsForDate(eventsManager.events, date);
   };
+
+  /**
+   * A memoized object providing data specific to the year view, such as months, weeks, month name, and utility functions.
+   * @type {YearData | null}
+   * @see {@link YearData}
+   * @title Year Data
+   * @description A memoized object providing data specific to the year view.
+   */
+  const yearData = createMemo((): YearData | null => {
+    if (navigation.view !== 'year') return null;
+
+    const months: MonthData[] = [];
+
+    for (let month = 0; month < 12; month++) {
+      const monthFirstDay = new Date(navigation.currentDate.getFullYear(), month, 1);
+      const dates = getMonthCalendarDates(monthFirstDay, startOfWeek);
+
+      const weeks: Date[][] = [];
+
+      for (let i = 0; i < dates.length; i += 7) {
+        weeks.push(dates.slice(i, i + 7));
+      }
+
+      months.push({
+        weeks,
+        monthName: formatLocalizedMonth(monthFirstDay, locale, timezone),
+        isCurrentMonth: (date: Date) => isSameMonth(date, monthFirstDay),
+        isToday: (date: Date) => isSameDay(date, new Date())
+      });
+    }
+    return {
+      months,
+      isCurrentYear: (date: Date) => isSameYear(date, navigation.currentDate),
+      year: formatLocalizedDate(navigation.currentDate, locale, timezone, {
+        year: "numeric"
+      })
+    };
+
+  },
+    [navigation.currentDate, navigation.view, startOfWeek, locale, timezone],
+    'year-data');
 
   /**
    * A memoized object providing data specific to the month view, such as weeks, month name, and utility functions.
@@ -314,6 +359,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     timeSlots,
 
     // View-specific data
+    yearData,
     monthData,
     weekData,
     dayData,

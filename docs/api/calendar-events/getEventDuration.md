@@ -7,7 +7,7 @@ description: Calculates the duration of an event in milliseconds.
 
 > **getEventDuration**(`event`): `number`
 
-Defined in: [utils/events.ts:130](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/events.ts#L130)
+Defined in: [utils/events.ts:130](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/events.ts#L130)
 
 Calculates the duration of an event in milliseconds.
 

@@ -323,6 +323,58 @@ export const isSameMonth = (date1: Date, date2: Date): boolean => {
 };
 
 /**
+ * Checks if two dates are in the same year.
+ * @param {Date} date1 - The first date.
+ * @param {Date} date2 - The second date.
+ * @returns {boolean} - True if the dates are in the same year, false otherwise.
+ * @see {@link getStartOfYear}
+ * @example
+ * ```ts
+ * const result = isSameYear(new Date('2024-01-15'), new Date('2024-02-25')); // true
+ * ``` 
+ * @group dateTime-helper
+ * @title isSameYear
+ * @description Checks if two dates are in the same year.
+ */
+export const isSameYear = (date1: Date, date2: Date): boolean => {
+  const startOfYear1 = getStartOfYear(date1);
+  const startOfYear2 = getStartOfYear(date2);
+  return dateEquals(startOfYear1, startOfYear2);
+};
+
+/**
+ * Gets the start of the year for a given date.
+ * @param {Date} date - The date.
+ * @returns {Date} - The start of the year.
+ * @example
+ * ```ts
+ * const start = getStartOfYear(new Date('2024-05-15')); // 2024-01-01
+ * ``` 
+ * @group dateTime-helper
+ * @title getStartOfYear
+ * @description Gets the start of the year for a given date.
+ */
+export const getStartOfYear = (date: Date): Date => {
+  return new Date(date.getFullYear(), 0, 1);
+};
+
+/**
+ * Gets the end of the year for a given date.
+ * @param {Date} date - The date.
+ * @returns {Date} - The end of the year.
+ * @example
+ * ```ts
+ * const end = getEndOfYear(new Date('2024-05-15')); // 2024-11-31
+ * ``` 
+ * @group dateTime-helper
+ * @title getEndOfYear
+ * @description Gets the end of the year for a given date.
+ */
+export const getEndOfYear = (date: Date): Date => {
+  return new Date(date.getFullYear(), 11, 31);
+};
+
+/**
  * Gets the start of the week for a given date.
  * @param {Date} date - The date.
  * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).

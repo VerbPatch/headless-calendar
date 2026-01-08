@@ -7,7 +7,7 @@ description: Divides the dates of a month into weeks.
 
 > **getWeeksInMonth**(`date`, `startOfWeek?`): `Date`[][]
 
-Defined in: [utils/calendar.ts:139](https://github.com/VerbPatch/headless-calendar/blob/eaa85931d143a0b3add300d186b798ceb1550764/packages/headless-calendar/src/utils/calendar.ts#L139)
+Defined in: [utils/calendar.ts:176](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/utils/calendar.ts#L176)
 
 Divides the dates of a month into weeks.
 

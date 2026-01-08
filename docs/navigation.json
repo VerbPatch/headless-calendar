@@ -143,6 +143,12 @@
         "isDeprecated": false
       },
       {
+        "title": "getYearCalendarDays",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/getYearCalendarDays",
+        "isDeprecated": false
+      },
+      {
         "title": "getYearRange",
         "kind": 64,
         "path": "/calendar/docs/api/calendar/getYearRange",
@@ -353,6 +359,12 @@
         "isDeprecated": false
       },
       {
+        "title": "getEndOfYear",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getEndOfYear",
+        "isDeprecated": false
+      },
+      {
         "title": "getStartOfDay",
         "kind": 64,
         "path": "/calendar/docs/api/dateTime-helper/getStartOfDay",
@@ -368,6 +380,12 @@
         "title": "getStartOfWeek",
         "kind": 64,
         "path": "/calendar/docs/api/dateTime-helper/getStartOfWeek",
+        "isDeprecated": false
+      },
+      {
+        "title": "getStartOfYear",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/getStartOfYear",
         "isDeprecated": false
       },
       {
@@ -398,6 +416,12 @@
         "title": "isSameWeek",
         "kind": 64,
         "path": "/calendar/docs/api/dateTime-helper/isSameWeek",
+        "isDeprecated": false
+      },
+      {
+        "title": "isSameYear",
+        "kind": 64,
+        "path": "/calendar/docs/api/dateTime-helper/isSameYear",
         "isDeprecated": false
       },
       {
@@ -470,6 +494,12 @@
         "title": "WeekData",
         "kind": 256,
         "path": "/calendar/docs/api/navigation/WeekData",
+        "isDeprecated": false
+      },
+      {
+        "title": "YearData",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/YearData",
         "isDeprecated": false
       },
       {
