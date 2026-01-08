@@ -5,7 +5,7 @@ description: Represents the data structure for the month view, including weeks, 
 
 # MonthData
 
-Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/types/views.ts#L38)
+Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L38)
 
 Data specific to the month view.
 
@@ -15,7 +15,7 @@ Data specific to the month view.
 
 > **isCurrentMonth**: (`date`) => `boolean`
 
-Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/types/views.ts#L52)
+Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L52)
 
 A function to check if a date is in the current month.
 
@@ -39,7 +39,7 @@ The date to check.
 
 > **isToday**: (`date`) => `boolean`
 
-Defined in: [types/views.ts:58](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/types/views.ts#L58)
+Defined in: [types/views.ts:58](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L58)
 
 A function to check if a date is today.
 
@@ -63,7 +63,7 @@ The date to check.
 
 > **monthName**: `string`
 
-Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/types/views.ts#L46)
+Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L46)
 
 The localized name of the month.
 
@@ -73,6 +73,6 @@ The localized name of the month.
 
 > **weeks**: `Date`[][]
 
-Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/61268b1f62ea267e33767c46cf07b70c5e3c1eeb/packages/headless-calendar/src/types/views.ts#L42)
+Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L42)
 
 A 2D array of dates representing the weeks of the month.
