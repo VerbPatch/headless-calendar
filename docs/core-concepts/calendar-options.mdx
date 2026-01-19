@@ -1,0 +1,49 @@
+---
+title: Calendar options
+description: Understanding the calendar options and its properties and events for building custom calendar UIs.
+---
+
+# Calendar Options
+CalendarOptions is a configuration interface, used for the initialization and control of the calendar instance’s functionality. There is a wide range of options that can only be accessed through this interface. These options deal with the way the calendar should look when the page is initially loaded, time, and date-related options, as well as options for the notification of changes through the use of callback functions.
+
+Each option is thoroughly explained in this document, along with its function, default behavior, and real-world application examples.
+
+<CodeBlock>
+```ts
+export interface CalendarOptions {
+    defaultView?: ViewType;
+    defaultDate?: Date;
+    startOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    timeSlotInterval?: number;
+    startHour?: number; // from 1 to 23
+    endHour?: number; // from 2 to 24
+    initialEvents?: CalendarEvent[];
+    timezone?: string;
+    locale?: string;
+    onEvent?: (events: CalendarEvent[]) => void;
+    onEventCreate?: (event: CalendarEvent) => void;
+    onEventUpdate?: (event: CalendarEvent) => void;
+    onEventDelete?: (event: CalendarEvent) => void;
+    onViewChange?: (view: ViewType) => void;
+    onDateChange?: (date: Date) => void;
+}
+```
+</CodeBlock>
+
+## Properties and Events Explained
+
+* `defaultView`: it can be either 'year' or 'month' or 'week' or 'day', if not set, it defaults to 'month'
+* `defaultDate`: when you like the calendar to start showing data for, defaults to current utc date, time not included
+* `startOfWeek`: when you like calendar week to start from, usually its 1(Monday), defaults to 0(Sunday).
+* `timeSlotInterval`: time slots you want to display time in week or day view, defaults to 60 minutes.
+* `startHour`: when you want to display only specific period of day like office timing from 9AM, defaults to 0 starts at midnight, values corresponds to 24Hour format like 9 for 9AM, 17 for 5PM.
+* `endHour`: just like startHour, end hour works as an ending hour of the day, defaults to 24.
+* `initialEvents`: when you like to start the calendar with default events.
+* `timezone`: when you like your calendar to work in a specific timezone, defaults to user browser timezone, values should TZ Identifier from IANA (Internet Assigned Numbers Authority) like 'Europe/Paris' or 'America/New_York', you can find complete list [here](https://www.iana.org/time-zones).
+* `locale`: when you like calendar to display information in specific locale, defaults to user browser locale, supports (BCP 47 language tag)[https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag]
+* `onEvent`: this callback event will returns array of event whenever event data changes.
+* `onEventCreate`: this callback event will return event which is recently created.
+* `onEventUpdate`: this callback event will return event which is recently updated.
+* `onEventDelete`: this callback event will return event which is recently deleted.
+* `onViewChange`: this callback event will return recently changed view.
+* `onDateChange`: this callback event will be called when date change, after navigating.

@@ -22,7 +22,11 @@
         "path": "/Calendar/docs/core-concepts/architecture"
       },
       {
-        "title": "Calendar State",
+        "title": "Options",
+        "path": "/Calendar/docs/core-concepts/calendar-options"
+      },
+      {
+        "title": "State",
         "path": "/Calendar/docs/core-concepts/calendar-state"
       },
       {

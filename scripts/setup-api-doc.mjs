@@ -10,7 +10,8 @@ function docNavigation() {
       group: "doc",
       children: [
         { title: "Architecture", path: "/Calendar/docs/core-concepts/architecture" },
-        { title: "Calendar State", path: "/Calendar/docs/core-concepts/calendar-state" },
+        { title: "Options", path: "/Calendar/docs/core-concepts/calendar-options" },
+        { title: "State", path: "/Calendar/docs/core-concepts/calendar-state" },
         { title: "Localization", path: "/Calendar/docs/core-concepts/localization" },
       ],
     },
