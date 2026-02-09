@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CalendarComposable, useCalendar, ViewType } from '@verbpatch/angular-calendar';
 import { NgStyle } from '@angular/common';
@@ -11,17 +11,11 @@ import { NgStyle } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected readonly title = signal({ name: 'Calendar Demo' });
-  changeTitle() {
-    this.title.update(({ name }) => name == "Calendar Demo" ? { name: "Angular Calendar Demo" } : { name: "Calendar Demo" });
-  }
   calendarHook: CalendarComposable = useCalendar({
     defaultDate: new Date(),
     defaultView: 'month',
     onDateChange: (date: Date) => console.log('Date updated:', date),
   });
-
-
 
   changeView(event: Event) {
     this.calendarHook.calendar().changeView((event.target as HTMLSelectElement).value as ViewType)
@@ -34,6 +28,7 @@ export class App {
   formatDate(date: Date) {
     return this.calendarHook.calendar().utils.formatDate(date);
   }
+
   weeks() {
     return this.calendarHook.calendar().utils.daysofWeek('short');
   }

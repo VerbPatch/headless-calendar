@@ -265,7 +265,7 @@ export const App = component$(() => {
 
           <div>
             {timeSlots.map((slot) => {
-              const slotEvents = getEventsForDate(dayData!.date).filter((event) => {
+              const slotEvents = getEventsForDate(dayData!.dates[0]).filter((event) => {
                 const eventStart = new Date(event.start);
                 return eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute;
               });
@@ -274,9 +274,9 @@ export const App = component$(() => {
                 <div
                   key={slot.time}
                   onDragOver$={(e) => e.preventDefault()}
-                  onDrop$={(e) => eventHandleDrop(e, dayData!.date, slot.time)}
+                  onDrop$={(e) => eventHandleDrop(e, dayData!.dates[0], slot.time)}
                   onClick$={() => {
-                    const eventStart = new Date(dayData!.date);
+                    const eventStart = new Date(dayData!.dates[0]);
                     eventStart.setHours(slot.hour, slot.minute);
                     const eventEnd = new Date(eventStart);
                     eventEnd.setMinutes(eventEnd.getMinutes() + 60);

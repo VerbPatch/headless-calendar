@@ -244,7 +244,7 @@ const CalendarDemo: Component = () => {
             {calendar()?.timeSlots.map((slot) => {
               const slotEvents =
                 calendar()
-                  ?.getEventsForDate(calendar()?.dayData?.date as Date)
+                  ?.getEventsForDate(calendar()?.dayData?.dates[0] as Date)
                   .filter((event) => {
                     const eventStart = new Date(event.start);
                     return eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute;
@@ -253,9 +253,9 @@ const CalendarDemo: Component = () => {
               return (
                 <div
                   onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => eventHandleDrop(e, calendar()?.dayData?.date as Date, slot.time)}
+                  onDrop={(e) => eventHandleDrop(e, calendar()?.dayData?.dates[0] as Date, slot.time)}
                   onClick={() => {
-                    const eventStart = new Date(calendar()?.dayData?.date as Date);
+                    const eventStart = new Date(calendar()?.dayData?.dates[0] as Date);
                     eventStart.setHours(slot.hour, slot.minute);
                     const eventEnd = new Date(eventStart);
                     eventEnd.setMinutes(eventEnd.getMinutes() + 60);
