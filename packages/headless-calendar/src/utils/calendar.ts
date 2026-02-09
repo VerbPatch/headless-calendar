@@ -326,6 +326,14 @@ export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek: numbe
   }
 };
 
+/**
+ * Validate custom view before populating custom view data when view is set to 'custom'
+ * @param {CustomViewOptions} customViewOptions - custom view option
+ * @see {@link CustomViewOptions} 
+ * @group calendar
+ * @title validateCustomView
+ * @description Validate custom view before populating custom view data when view is set to 'custom'
+ */
 export const validateCustomView = (customViewOptions: CustomViewOptions) => {
   if (!customViewOptions) {
     throw new Error(`customViewOptions must be set for custom view`);
