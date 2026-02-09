@@ -1,0 +1,20 @@
+{
+  "name": "vue-calendar-custom-view-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@verbpatch/vuejs-calendar": "workspace:*",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vue-tsc": "^2.0.6"
+  }
+}

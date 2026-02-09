@@ -1,0 +1,19 @@
+{
+  "name": "preact-calendar-custom-view-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@verbpatch/preact-calendar": "workspace:*",
+    "preact": "^10.19.6"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.8.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  }
+}

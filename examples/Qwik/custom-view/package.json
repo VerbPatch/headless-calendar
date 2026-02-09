@@ -1,0 +1,20 @@
+{
+  "name": "qwik-calendar-custom-view-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@builder.io/qwik": "^1.17.2",
+    "@verbpatch/qwik-calendar": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "serve": "^14.2.5",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.2"
+  }
+}

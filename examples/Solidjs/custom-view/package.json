@@ -1,0 +1,19 @@
+{
+  "name": "solid-calendar-custom-view-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@verbpatch/solidjs-calendar": "workspace:*",
+    "solid-js": "^1.8.15"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vite-plugin-solid": "^2.10.2"
+  }
+}

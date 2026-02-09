@@ -1,0 +1,18 @@
+{
+  "name": "lit-calendar-custom-view-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@verbpatch/lit-calendar": "workspace:*",
+    "lit": "^3.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  }
+}
