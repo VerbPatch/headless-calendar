@@ -3,7 +3,8 @@ import {
   CalendarOptions,
   CalendarInstance,
   ViewType as CalendarView,
-  CalendarEvent
+  CalendarEvent,
+  CustomViewOptions
 } from "@verbpatch/headless-calendar";
 
 export * from "@verbpatch/headless-calendar";
@@ -60,6 +61,7 @@ declare global {
       ...options,
       defaultDate: calendar.currentDate,
       defaultView: calendar.view,
+      customViewOptions: calendar.customViewOptions,
       initialEvents: calendar.events
     });
     state.calendar = newCalendar;
@@ -88,9 +90,9 @@ declare global {
       updateAfter(state, () => state.calendar.goToDate(date));
       state.$el.trigger('calendar:navigate', ['date', state.calendar.currentDate]);
     },
-    changeView(state: JQueryCalendarState, view: CalendarView) {
-      updateAfter(state, () => state.calendar.changeView(view));
-      state.$el.trigger('calendar:viewChanged', [view]);
+    changeView(state: JQueryCalendarState, view: CalendarView, options?: CustomViewOptions) {
+      updateAfter(state, () => state.calendar.changeView(view, options));
+      state.$el.trigger('calendar:viewChanged', [view, options]);
     },
     createEvent(state: JQueryCalendarState, eventData: CalendarEvent) {
       let event: CalendarEvent;
@@ -135,12 +137,6 @@ declare global {
     clearAllEvents(state: JQueryCalendarState) {
       updateAfter(state, () => state.calendar.clearAllEvents());
       state.$el.trigger('calendar:eventAllCleared', []);
-    },
-    setCustomViewOptions(state: JQueryCalendarState, options: any) {
-      state.options.customViewOptions = { ...state.options.customViewOptions, ...options };
-      refreshCalendar(state);
-      if (state.options.onRender) state.options.onRender(state.calendar);
-      state.$el.trigger('calendar:customViewOptionsChanged', [state.options]);
     },
     getEvents: (s: JQueryCalendarState) => s.calendar.events,
     getEvent: (s: JQueryCalendarState, id: string) => s.calendar.getEvent(id),
