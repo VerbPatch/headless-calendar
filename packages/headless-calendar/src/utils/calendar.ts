@@ -1,6 +1,6 @@
-import { ViewType } from '../types';
+import { ViewType, CustomViewOptions } from '../types';
 import { TimeSlot } from '../types/calendar';
-import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek, getStartOfYear, getEndOfYear, addMonths } from './date';
+import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek, getStartOfYear, getEndOfYear, addMonths, addWeeks } from './date';
 
 /**
  * Generates an array of dates for the week containing the given date.
@@ -19,7 +19,7 @@ import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek, 
  * @description Generates an array of dates for the week containing the given date.
  * @function
  */
-export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
+export const getWeekDates = (date: Date, startOfWeek: number = 0): Date[] => {
   const start = getStartOfWeek(date, startOfWeek);
   return Array.from({ length: 7 }, (_, i) => addDays(start, i));
 };
@@ -43,7 +43,7 @@ export const getWeekDates = (date: Date, startOfWeek = 0): Date[] => {
  * @description Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
  * @function
  */
-export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
+export const getMonthCalendarDates = (date: Date, startOfWeek: number = 0): Date[] => {
   const startOfMonth = getStartOfMonth(date);
   const endOfMonth = getEndOfMonth(date);
 
@@ -78,7 +78,7 @@ export const getMonthCalendarDates = (date: Date, startOfWeek = 0): Date[] => {
  * @description Generates an array of dates in a year, including days from the previous and next years to complete the weeks.
  * @function
  */
-export const getYearCalendarDays = (date: Date, startOfWeek = 0): Date[] => {
+export const getYearCalendarDays = (date: Date, startOfWeek: number = 0): Date[] => {
   const startOfYear = getStartOfYear(date);
   const endOfYear = getEndOfYear(date);
 
@@ -173,7 +173,7 @@ export const formatTimeSlotLabel = (hour: number, minute: number, use24Hour = fa
  * @description Divides the dates of a month into weeks.
  * @function
  */
-export const getWeeksInMonth = (date: Date, startOfWeek = 0): Date[][] => {
+export const getWeeksInMonth = (date: Date, startOfWeek: number = 0): Date[][] => {
   const dates = getMonthCalendarDates(date, startOfWeek);
   const weeks: Date[][] = [];
 
@@ -269,7 +269,8 @@ export const calculateWeekNumber = (date: Date): number => {
  * @description Determines the start and end date bounds for a given calendar view.
  * @function
  */
-export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek = 0): { start: Date; end: Date } => {
+export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek: number = 0, customViewOptions: CustomViewOptions = { unit: 'day', count: 1 },
+): { start: Date; end: Date } => {
   switch (view) {
     case 'day':
       return {
@@ -295,7 +296,42 @@ export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek = 0): 
         end: new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999)
       };
 
+    case 'custom':
+      validateCustomView(customViewOptions);
+
+      let start: Date;
+      let end: Date;
+
+      switch (customViewOptions.unit) {
+        case 'day':
+          start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          end = addDays(start, customViewOptions.count - 1);
+          end.setHours(23, 59, 59, 999);
+          break;
+        case 'week':
+          start = getStartOfWeek(date, startOfWeek);
+          const lastWeekStart = addWeeks(start, customViewOptions.count - 1);
+          end = getEndOfWeek(lastWeekStart, startOfWeek);
+          break;
+        case 'month':
+          start = getStartOfMonth(date);
+          const lastMonthStart = addMonths(start, customViewOptions.count - 1);
+          end = getEndOfMonth(lastMonthStart);
+          break;
+      }
+      return { start, end };
+
     default:
       throw new Error(`Unknown view type: ${view}`);
   }
 };
+
+export const validateCustomView = (customViewOptions: CustomViewOptions) => {
+  if (!customViewOptions) {
+    throw new Error(`customViewOptions must be set for custom view`);
+  }
+
+  if (!["day", "week", "month"].includes(customViewOptions.unit)) {
+    throw new Error(`customViewOptions.unit must be set to either day or week or month`);
+  }
+}

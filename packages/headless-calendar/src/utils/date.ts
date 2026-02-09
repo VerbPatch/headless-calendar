@@ -286,19 +286,20 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
  * Checks if two dates are in the same week.
  * @param {Date} date1 - The first date.
  * @param {Date} date2 - The second date.
+ * @param {number} [startOfWeek=0] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
  * @returns {boolean} - True if the dates are in the same week, false otherwise.
  * @see {@link getStartOfWeek}
  * @example
  * ```ts
- * const result = isSameWeek(new Date('2024-01-15'), new Date('2024-01-17')); // true
+ * const result = isSameWeek(new Date('2024-01-15'), new Date('2024-01-17'), 1); // true
  * ``` 
  * @group dateTime-helper
  * @title isSameWeek
  * @description Checks if two dates are in the same week.
  */
-export const isSameWeek = (date1: Date, date2: Date): boolean => {
-  const startOfWeek1 = getStartOfWeek(date1);
-  const startOfWeek2 = getStartOfWeek(date2);
+export const isSameWeek = (date1: Date, date2: Date, startOfWeek: number = 0): boolean => {
+  const startOfWeek1 = getStartOfWeek(date1, startOfWeek);
+  const startOfWeek2 = getStartOfWeek(date2, startOfWeek);
   return dateEquals(startOfWeek1, startOfWeek2);
 };
 
@@ -387,7 +388,7 @@ export const getEndOfYear = (date: Date): Date => {
  * @title getStartOfWeek
  * @description Gets the start of the week for a given date.
  */
-export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
+export const getStartOfWeek = (date: Date, startOfWeek: number = 0): Date => {
   const d = new Date(date);
   const day = d.getDay();
   const diff = (day - startOfWeek + 7) % 7;
@@ -410,7 +411,7 @@ export const getStartOfWeek = (date: Date, startOfWeek = 0): Date => {
  * @title getEndOfWeek
  * @description Gets the end of the week for a given date.
  */
-export const getEndOfWeek = (date: Date, startOfWeek = 0): Date => {
+export const getEndOfWeek = (date: Date, startOfWeek: number = 0): Date => {
   const startWeek = getStartOfWeek(date, startOfWeek);
   return new Date(startWeek.getTime() + 6 * 24 * 60 * 60 * 1000);
 };
@@ -543,15 +544,21 @@ export const addWeeks = (date: Date, weeks: number): Date => {
  * @returns {Date} - The new date.
  * @example
  * ```ts
- * const newDate = addMonths(new Date('2024-01-15'), 3); // 2024-04-15
+ * const newDate = addMonths(new Date('2024-01-31'), 1); // 2024-02-29
  * ``` 
  * @group dateTime-helper
  * @title addMonths
- * @description Adds a specified number of months to a date.
+ * @description Adds a specified number of months to a date, clamping to the last day if necessary.
  */
 export const addMonths = (date: Date, months: number): Date => {
   const result = new Date(date);
+  const day = result.getDate();
   result.setMonth(result.getMonth() + months);
+
+  if (result.getDate() !== day) {
+    result.setDate(0);
+  }
+
   return result;
 };
 
@@ -562,7 +569,7 @@ export const addMonths = (date: Date, months: number): Date => {
  * @returns {Date} - The new date.
  * @example
  * ```ts
- * const newDate = addYears(new Date('2024-01-15'), 1); // 2025-01-15
+ * const newDate = addYears(new Date('2024-02-29'), 1); // 2025-02-28
  * ``` 
  * @group dateTime-helper
  * @title addYears
@@ -570,7 +577,13 @@ export const addMonths = (date: Date, months: number): Date => {
  */
 export const addYears = (date: Date, years: number): Date => {
   const result = new Date(date);
+  const day = result.getDate();
   result.setFullYear(result.getFullYear() + years);
+
+  if (result.getDate() !== day) {
+    result.setDate(0);
+  }
+
   return result;
 };
 

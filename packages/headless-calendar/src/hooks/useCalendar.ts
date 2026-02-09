@@ -1,5 +1,5 @@
 import { CalendarOptions, CalendarInstance, TimeSlot } from '../types/calendar';
-import { MonthData, WeekData, DayData, YearData } from '../types/views';
+import { MonthData, WeekData, DayData, YearData, CustomViewOptions } from '../types/views';
 import { CalendarEvent } from '../types/events';
 import { useEvents } from './useEvents';
 import { useNavigation } from './useNavigation';
@@ -9,7 +9,8 @@ import {
   getWeekDates,
   getMonthCalendarDates,
   getCalendarBounds,
-  getYearCalendarDays
+  getYearCalendarDays,
+  validateCustomView
 } from '../utils/calendar';
 import {
   getEventsForDate,
@@ -91,6 +92,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     onEventDelete,
     onViewChange,
     onDateChange,
+    customViewOptions = { unit: 'day', count: 1 },
   } = options;
 
   // Use navigation hook
@@ -100,7 +102,8 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     onViewChange,
     onDateChange,
     timezone,
-    locale
+    locale,
+    customViewOptions,
   });
 
   // Use events hook
@@ -125,7 +128,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Time Slots
    * @description A memoized array of time slots for the day view.
    */
-  const timeSlots = createMemo((): TimeSlot[] => {
+  const timeSlots: TimeSlot[] = createMemo((): TimeSlot[] => {
     return getTimeSlots(startHour, endHour, timeSlotInterval)
   },
     [startHour, endHour, timeSlotInterval],
@@ -137,21 +140,55 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Visible Dates
    * @description A memoized array of dates currently visible in the calendar.
    */
-  const visibleDates = createMemo((): Date[] => {
+  const visibleDates: Date[] = createMemo((): Date[] => {
+    let dates: Date[] = [];
     switch (navigation.view) {
       case 'day':
-        return [navigation.currentDate];
+        dates = [navigation.currentDate];
+        break;
       case 'week':
-        return getWeekDates(navigation.currentDate, startOfWeek);
+        dates = getWeekDates(navigation.currentDate, startOfWeek);
+        break;
       case 'month':
-        return getMonthCalendarDates(navigation.currentDate, startOfWeek);
+        dates = getMonthCalendarDates(navigation.currentDate, startOfWeek);
+        break;
       case 'year':
-        return getYearCalendarDays(navigation.currentDate, startOfWeek);
-      default:
-        return [];
+        dates = getYearCalendarDays(navigation.currentDate, startOfWeek);
+        break;
+      case 'custom': {
+        validateCustomView(customViewOptions);
+
+        let current = navigation.currentDate;
+        for (let i = 0; i < customViewOptions.count; i++) {
+          switch (customViewOptions.unit) {
+            case 'day':
+              dates.push(current);
+              current = addDays(current, 1);
+              break;
+            case 'week':
+              const weekStart = addWeeks(navigation.currentDate, i);
+              const weekDates = getWeekDates(weekStart, startOfWeek);
+              dates.push(...weekDates);
+              break;
+            case 'month':
+              const monthStart = addMonths(navigation.currentDate, i);
+              const monthDates = getMonthCalendarDates(monthStart, startOfWeek);
+              dates.push(...monthDates);
+              break;
+          }
+        }
+
+        if (customViewOptions.includeSpecificDays?.length && ["week", "month"].includes(customViewOptions.unit)) {
+          dates = dates.filter(date => customViewOptions.includeSpecificDays!.includes(date.getDay()));
+        }
+
+        break;
+      }
     }
+
+    return dates;
   },
-    [navigation.currentDate, navigation.view, startOfWeek],
+    [navigation.currentDate, navigation.view, startOfWeek, customViewOptions],
     'visible-dates');
 
   /**
@@ -161,19 +198,30 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Visible Events
    * @description A memoized array of calendar events that are visible within the current date range.
    */
-  const visibleEvents = createMemo((): CalendarEvent[] => {
+  const visibleEvents: CalendarEvent[] = createMemo((): CalendarEvent[] => {
     if (visibleDates.length === 0) return [];
 
-    const bounds = getCalendarBounds(navigation.view, navigation.currentDate, startOfWeek);
+    const bounds = getCalendarBounds(navigation.view, navigation.currentDate, startOfWeek, customViewOptions);
     const events = getEventsForDateRange(eventsManager.events, bounds.start, bounds.end);
 
-    return events.map(event => ({
+
+    const filteredEvents = events.filter(event => {
+      const eventStart = new Date(event.start);
+      const eventEnd = new Date(event.end);
+      return visibleDates.some(date => {
+        const dStart = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+        const dEnd = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
+        return (eventStart <= dEnd && eventEnd >= dStart);
+      });
+    });
+
+    return filteredEvents.map(event => ({
       ...event,
       start: convertToTimeZone(new Date(event.start), timezone, event.timezone ?? timezone),
       end: convertToTimeZone(new Date(event.end), timezone, event.timezone ?? timezone)
     }));
   },
-    [eventsManager.events, visibleDates, navigation.view, navigation.currentDate, startOfWeek, timezone],
+    [eventsManager.events, visibleDates, navigation.view, navigation.currentDate, startOfWeek, timezone, customViewOptions],
     'visible-events');
 
   /**
@@ -208,7 +256,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Year Data
    * @description A memoized object providing data specific to the year view.
    */
-  const yearData = createMemo((): YearData | null => {
+  const yearData: YearData | null = createMemo((): YearData | null => {
     if (navigation.view !== 'year') return null;
 
     const months: MonthData[] = [];
@@ -249,20 +297,35 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Month Data
    * @description A memoized object providing data specific to the month view.
    */
-  const monthData = createMemo((): MonthData | null => {
-    if (navigation.view !== 'month') return null;
+  const monthData: MonthData | null = createMemo((): MonthData | null => {
+    if (navigation.view !== 'month' && (navigation.view !== 'custom' || customViewOptions.unit !== 'month')) return null;
 
-    const dates = getMonthCalendarDates(navigation.currentDate, startOfWeek);
+    // Use visibleDates which already handles the custom view logic
+    const dates = visibleDates;
 
     const weeks: Date[][] = [];
+    let currentWeek: Date[] = [];
 
-    for (let i = 0; i < dates.length; i += 7) {
-      weeks.push(dates.slice(i, i + 7));
+    dates.forEach((date) => {
+      if (currentWeek.length > 0) {
+        const prevDate = currentWeek[currentWeek.length - 1];
+        if (!isSameWeek(prevDate, date, startOfWeek)) {
+          weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      }
+      currentWeek.push(date);
+    });
+
+    if (currentWeek.length > 0) {
+      weeks.push(currentWeek);
     }
 
     const response = {
       weeks,
-      monthName: formatLocalizedMonth(navigation.currentDate, locale, timezone),
+      monthName: customViewOptions && customViewOptions.count > 1 && customViewOptions.unit === 'month'
+        ? `${formatLocalizedMonth(dates[0], locale, timezone)} - ${formatLocalizedMonth(dates[dates.length - 1], locale, timezone)}`
+        : formatLocalizedMonth(navigation.currentDate, locale, timezone),
       isCurrentMonth: (date: Date) => isSameMonth(date, navigation.currentDate),
       isToday: (date: Date) => isSameDay(date, new Date())
     };
@@ -270,7 +333,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     return response;
 
   },
-    [navigation.currentDate, navigation.view, startOfWeek, locale, timezone],
+    [navigation.currentDate, navigation.view, visibleDates, startOfWeek, locale, timezone, customViewOptions],
     'month-data');
 
   /**
@@ -280,18 +343,18 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Week Data
    * @description A memoized object providing data specific to the week view.
    */
-  const weekData = createMemo((): WeekData | null => {
-    if (navigation.view !== 'week') return null;
+  const weekData: WeekData | null = createMemo((): WeekData | null => {
+    if (navigation.view !== 'week' && (navigation.view !== 'custom' || customViewOptions.unit !== 'week')) return null;
 
-    const weekDates = getWeekDates(navigation.currentDate, startOfWeek);
+    const dates = visibleDates;
 
     return {
-      dates: weekDates,
-      weekRange: `${formatLocalizedDate(weekDates[0], locale, timezone)} - ${formatLocalizedDate(weekDates[6], locale, timezone)}`,
+      dates: dates,
+      weekRange: dates.length > 0 ? `${formatLocalizedDate(dates[0], locale, timezone)} - ${formatLocalizedDate(dates[dates.length - 1], locale, timezone)}` : '',
       isToday: (date: Date) => isSameDay(date, new Date())
     };
   },
-    [navigation.currentDate, navigation.view, startOfWeek, locale, timezone],
+    [navigation.currentDate, navigation.view, visibleDates, startOfWeek, locale, timezone, customViewOptions],
     'week-data');
 
   /**
@@ -301,21 +364,23 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @title Day Data
    * @description A memoized object providing data specific to the day view.
    */
-  const dayData = createMemo((): DayData | null => {
-    if (navigation.view !== 'day') return null;
+  const dayData: DayData | null = createMemo((): DayData | null => {
+    if (navigation.view !== 'day' && (navigation.view !== 'custom' || customViewOptions.unit !== 'day')) return null;
 
     return {
-      date: navigation.currentDate,
-      dayName: formatLocalizedDate(navigation.currentDate, locale, timezone, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      }),
+      dates: visibleDates,
+      dayName: visibleDates.length > 1
+        ? `${formatLocalizedDate(visibleDates[0], locale, timezone)} - ${formatLocalizedDate(visibleDates[visibleDates.length - 1], locale, timezone)}`
+        : formatLocalizedDate(navigation.currentDate, locale, timezone, {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }),
       isToday: isSameDay(navigation.currentDate, new Date())
     };
   },
-    [navigation.currentDate, navigation.view, locale, timezone],
+    [navigation.currentDate, navigation.view, visibleDates, locale, timezone, customViewOptions],
     'day-data');
 
   // Modify the utils section to include new localization helpers
@@ -381,7 +446,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatDate: (
         date: Date,
         format?: string
-      ) => formatDate(date, { format: format ?? "yyyy-MM-dd", locale, timeZone: timezone }),
+      ): string => formatDate(date, { format: format ?? "yyyy-MM-dd", locale, timeZone: timezone }),
       /**
        * Formats a date and time object into a string based on the specified format.
        * @param {Date} date - The date object to format.
@@ -393,10 +458,10 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       formatDateTime: (
         date: Date,
         format?: string
-      ) => formatDateTime(date, { format: format ?? "yyyy-MM-dd HH:mm:ss", locale, timeZone: timezone }),
+      ): string => formatDateTime(date, { format: format ?? "yyyy-MM-dd HH:mm:ss", locale, timeZone: timezone }),
       parseDate,
       isSameDay,
-      isSameWeek,
+      isSameWeek: (d1: Date, d2: Date) => isSameWeek(d1, d2, startOfWeek),
       isSameMonth,
       addDays,
       addWeeks,
@@ -413,7 +478,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Days of Week
        * @description Returns an array of localized day names for the week.
        */
-      daysofWeek: (format = 'short') =>
+      daysofWeek: (format: 'long' | 'short' | 'narrow' = 'short'): string[] =>
         daysofWeek(startOfWeek, format, locale),
       /**
        * Formats a date into a string according to the specified locale and timezone.
@@ -425,7 +490,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Format Date In Time Zone
        * @description Formats a date into a string according to the specified locale and timezone.
        */
-      formatDateInTimeZone: (date: Date, l = locale, tz = timezone, options?) =>
+      formatDateInTimeZone: (date: Date, l: string = locale, tz: string = timezone, options?: Intl.DateTimeFormatOptions): string =>
         formatDateInTimeZone(date, l, tz, options),
       /**
        * Converts a date from one timezone to another.
@@ -436,7 +501,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Convert To Time Zone
        * @description Converts a date from one timezone to another.
        */
-      convertToTimeZone: (date: Date, fromTz = timezone, toTz: string) => convertToTimeZone(date, fromTz, toTz),
+      convertToTimeZone: (date: Date, fromTz: string = timezone, toTz: string): Date => convertToTimeZone(date, fromTz, toTz),
       /**
        * Formats a date into a localized date string.
        * @param {Date} date - The date to format.
@@ -447,7 +512,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Format Localized Date
        * @description Formats a date into a localized date string.
        */
-      formatLocalizedDate: (date: Date, l = locale, tz = timezone, options?) =>
+      formatLocalizedDate: (date: Date, l: string = locale, tz: string = timezone, options?: Intl.DateTimeFormatOptions): string =>
         formatLocalizedDate(date, l, tz, options),
       /**
        * Formats a date into a localized month string.
@@ -458,7 +523,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Format Localized Month
        * @description Formats a date into a localized month string.
        */
-      formatLocalizedMonth: (date: Date, l = locale, tz = timezone) =>
+      formatLocalizedMonth: (date: Date, l: string = locale, tz: string = timezone): string =>
         formatLocalizedMonth(date, l, tz),
       /**
        * Formats a date into a localized weekday string.
@@ -470,7 +535,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Format Localized Weekday
        * @description Formats a date into a localized weekday string.
        */
-      formatLocalizedWeekday: (date: Date, l = locale, tz = timezone, format?) =>
+      formatLocalizedWeekday: (date: Date, l: string = locale, tz: string = timezone, format?: 'long' | 'short' | 'narrow'): string =>
         formatLocalizedWeekday(date, l, tz, format),
       /**
        * Formats a date into a localized time string.
@@ -482,7 +547,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @title Format Localized Time
        * @description Formats a date into a localized time string.
        */
-      formatLocalizedTime: (date: Date, l = locale, tz = timezone, hour12?) =>
+      formatLocalizedTime: (date: Date, l: string = locale, tz: string = timezone, hour12?: boolean): string =>
         formatLocalizedTime(date, l, tz, hour12)
     }
   };

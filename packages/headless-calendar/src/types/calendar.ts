@@ -1,5 +1,5 @@
 import { CalendarEvent, DraggedEvent } from './events';
-import { ViewType, MonthData, WeekData, DayData, YearData } from './views';
+import { ViewType, MonthData, WeekData, DayData, YearData, CustomViewOptions } from './views';
 
 /**
  * Represents a single time slot in a day view.
@@ -131,6 +131,10 @@ export interface CalendarOptions {
    * @default The user's browser locale.
    */
   locale?: string;
+  /**
+   * Configuration options for the 'custom' view.
+   */
+  customViewOptions?: CustomViewOptions;
 }
 
 /** 
@@ -175,9 +179,10 @@ export interface CalendarUtils {
    * @function
    * @param {Date} date1 - The first date.
    * @param {Date} date2 - The second date.
+   * @param {number} [startOfWeek] - The day of the week to consider as the start (0 for Sunday, 1 for Monday, etc.).
    * @returns {boolean} - True if the dates are in the same week, false otherwise.
    */
-  isSameWeek: (date1: Date, date2: Date) => boolean;
+  isSameWeek: (date1: Date, date2: Date, startOfWeek?: number) => boolean;
   /**
    * Checks if two dates are in the same month.
    * @function

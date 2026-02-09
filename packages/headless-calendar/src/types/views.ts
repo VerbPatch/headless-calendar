@@ -4,7 +4,30 @@
  * @title ViewType
  * @description Defines the available calendar views: 'month', 'week', and 'day'.
  */
-export type ViewType = 'year' | 'month' | 'week' | 'day';
+export type ViewType = 'year' | 'month' | 'week' | 'day' | 'custom';
+
+/**
+ * Configuration for a custom view.
+ * @group navigation
+ * @title CustomViewOptions
+ * @description Defines the configuration for a custom view, such as the number of days, weeks, or months to display.
+ */
+export interface CustomViewOptions {
+  /**
+   * The unit of time for the custom view.
+   */
+  unit: 'day' | 'week' | 'month';
+  /**
+   * The number of units to display.
+   */
+  count: number;
+  /**
+   * Specific days of the week to include (0 for Sunday, 1 for Monday, etc.).
+   * If provided, only these days will be visible in the custom view.
+   * Only works if unit is set to either week or month
+   */
+  includeSpecificDays?: number[];
+}
 
 /**
  * Data specific to the year view.
@@ -89,15 +112,15 @@ export interface WeekData {
  */
 export interface DayData {
   /**
-   * The current date.
+   * An array of dates visible in the day view (useful for custom multi-day views).
    */
-  date: Date;
+  dates: Date[];
   /**
-   * The localized name of the day.
+   * The localized name of the day or range.
    */
   dayName: string;
   /**
-   * Indicates if the date is today.
+   * Indicates if the primary date is today.
    */
   isToday: boolean;
 }
@@ -137,13 +160,16 @@ export interface UseNavigationOptions {
    * The locale to use for the calendar.
    */
   locale: string;
+  /**
+   * Configuration options for the 'custom' view.
+   */
+  customViewOptions?: CustomViewOptions;
 }
-
 /** 
- * @group navigation
- * @title UseNavigationReturn
- * @description The return object of the `useNavigation` hook, providing access to the current date, view, and functions for navigating the calendar.
- */
+* @group navigation
+* @title UseNavigationReturn
+* @description The return object of the `useNavigation` hook, providing access to the current date, view, and functions for navigating the calendar.
+*/
 export interface UseNavigationReturn {
   /**
    * The currently selected date in the calendar.

@@ -120,9 +120,27 @@ declare global {
       if (dup) state.$el.trigger('calendar:eventDuplicated', [dup]);
       return dup;
     },
+    startDrag(state: JQueryCalendarState, event: CalendarEvent, dragData?: Record<string, any>) {
+      state.calendar.startDrag(event, dragData);
+      state.$el.trigger('calendar:dragStart', [event, dragData]);
+    },
+    endDrag(state: JQueryCalendarState) {
+      state.calendar.endDrag();
+      state.$el.trigger('calendar:dragEnd');
+    },
+    handleDrop(state: JQueryCalendarState, dropTarget: any) {
+      updateAfter(state, () => state.calendar.handleDrop(dropTarget));
+      state.$el.trigger('calendar:drop', [dropTarget]);
+    },
     clearAllEvents(state: JQueryCalendarState) {
       updateAfter(state, () => state.calendar.clearAllEvents());
       state.$el.trigger('calendar:eventAllCleared', []);
+    },
+    setCustomViewOptions(state: JQueryCalendarState, options: any) {
+      state.options.customViewOptions = { ...state.options.customViewOptions, ...options };
+      refreshCalendar(state);
+      if (state.options.onRender) state.options.onRender(state.calendar);
+      state.$el.trigger('calendar:customViewOptionsChanged', [state.options]);
     },
     getEvents: (s: JQueryCalendarState) => s.calendar.events,
     getEvent: (s: JQueryCalendarState, id: string) => s.calendar.getEvent(id),
@@ -135,6 +153,7 @@ declare global {
     getMonthData: (s: JQueryCalendarState) => s.calendar.monthData,
     getWeekData: (s: JQueryCalendarState) => s.calendar.weekData,
     getDayData: (s: JQueryCalendarState) => s.calendar.dayData,
+    getYearData: (s: JQueryCalendarState) => s.calendar.yearData,
     getTimeSlots: (s: JQueryCalendarState) => s.calendar.timeSlots,
     getVisibleDates: (s: JQueryCalendarState) => s.calendar.visibleDates,
     refresh(state: JQueryCalendarState) {

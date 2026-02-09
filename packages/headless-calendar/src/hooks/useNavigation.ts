@@ -1,6 +1,7 @@
 import { UseNavigationOptions, UseNavigationReturn, ViewType } from '../types/views';
 import { addDays, addWeeks, addMonths, getDay, addYears } from '../utils/date';
 import { createCallback, createState } from '../state';
+import { validateCustomView } from '../utils';
 
 /**
  * A hook for managing calendar navigation, including changing views and moving between dates.
@@ -32,6 +33,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     defaultDate,
     onViewChange,
     onDateChange,
+    customViewOptions = { unit: 'day', count: 1 },
   } = options;
   const [getCurrentDate, setCurrentDate] = createState<Date>(defaultDate, 'current-date');
   const [getView, setView] = createState<ViewType>(defaultView, 'view');
@@ -44,19 +46,35 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    */
   const goToNext = createCallback((): void => {
     let newDate: Date;
+    const current = getCurrentDate();
 
     switch (getView()) {
       case 'day':
-        newDate = addDays(getCurrentDate(), 1);
+        newDate = addDays(current, 1);
         break;
       case 'week':
-        newDate = addWeeks(getCurrentDate(), 1);
+        newDate = addWeeks(current, 1);
         break;
       case 'month':
-        newDate = addMonths(getCurrentDate(), 1);
+        newDate = addMonths(current, 1);
         break;
       case 'year':
-        newDate = addYears(getCurrentDate(), 1);
+        newDate = addYears(current, 1);
+        break;
+      case 'custom':
+        validateCustomView(customViewOptions);
+
+        newDate = current;
+        if (customViewOptions.unit === 'day') {
+          newDate = addDays(current, customViewOptions.count);
+        }
+        else if (customViewOptions.unit === 'week') {
+          newDate = addWeeks(current, customViewOptions.count);
+        }
+        else if (customViewOptions.unit === 'month') {
+          newDate = addMonths(current, customViewOptions.count);
+        }
+
         break;
       default:
         return;
@@ -65,7 +83,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     setCurrentDate(newDate);
     onDateChange?.(newDate);
   },
-    [getCurrentDate, getView, onDateChange],
+    [getCurrentDate, getView, onDateChange, customViewOptions],
     'go-to-next');
 
   /**
@@ -75,21 +93,36 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @description Navigates the calendar to the previous period (day, week, month, or year) based on the current view.
    */
   const goToPrevious = createCallback((): void => {
-
     let newDate: Date;
+    const current = getCurrentDate();
 
     switch (getView()) {
       case 'day':
-        newDate = addDays(getCurrentDate(), -1);
+        newDate = addDays(current, -1);
         break;
       case 'week':
-        newDate = addWeeks(getCurrentDate(), -1);
+        newDate = addWeeks(current, -1);
         break;
       case 'month':
-        newDate = addMonths(getCurrentDate(), -1);
+        newDate = addMonths(current, -1);
         break;
       case 'year':
-        newDate = addYears(getCurrentDate(), -1);
+        newDate = addYears(current, -1);
+        break;
+      case 'custom':
+        validateCustomView(customViewOptions);
+
+        newDate = current;
+        if (customViewOptions.unit === 'day') {
+          newDate = addDays(current, -customViewOptions.count);
+        }
+        else if (customViewOptions.unit === 'week') {
+          newDate = addWeeks(current, -customViewOptions.count);
+        }
+        else if (customViewOptions.unit === 'month') {
+          newDate = addMonths(current, -customViewOptions.count);
+        }
+
         break;
       default:
         return;
@@ -98,7 +131,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     setCurrentDate(newDate);
     onDateChange?.(newDate);
   },
-    [getCurrentDate, getView, onDateChange],
+    [getCurrentDate, getView, onDateChange, customViewOptions],
     'go-to-previous');
 
   /**
