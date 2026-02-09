@@ -6,8 +6,8 @@ const CalendarDemo: Component = () => {
     defaultView: "custom",
     customViewOptions: { unit: "day", count: 2 },
     initialEvents: [
-      { id: generateId(), title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
-      { id: generateId(), title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
+      { id: '1', title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
+      { id: '2', title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
     ]
   });
 
@@ -34,37 +34,32 @@ const CalendarDemo: Component = () => {
   };
 
   return (
-    <div style={{ "max-width": "1000px", margin: "0 auto", background: "white", padding: "24px", "border-radius": "12px", "box-shadow": "0 4px 6px rgba(0,0,0,0.1)", "font-family": "sans-serif" }}>
-      <div style={{ display: "flex", "justify-content": "space-between", "align-items": "center", "margin-bottom": "24px" }}>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <button onClick={() => calendar()?.goToPrevious()} style={btnStyle}>Previous</button>
-          <button onClick={() => calendar()?.goToToday()} style={btnStyle}>Today</button>
-          <button onClick={() => calendar()?.goToNext()} style={btnStyle}>Next</button>
-        </div>
-        <h2 style={{ margin: 0 }}>{getTitle()}</h2>
+    <div style={{ padding: "20px", "font-family": "sans-serif" }}>
+      <div>
+        <button onClick={() => calendar()?.goToPrevious()}>Prev</button>
+        <button onClick={() => calendar()?.goToToday()}>Today</button>
+        <button onClick={() => calendar()?.goToNext()}>Next</button>
+        <span style={{ "margin-left": "20px" }}><strong>{getTitle()}</strong></span>
       </div>
 
-      <div style={{ "margin-bottom": "24px", padding: "16px", background: "#f3f4f6", "border-radius": "8px" }}>
-        <strong>View Presets:</strong>
-        <div style={{ display: "flex", gap: "8px", "margin-top": "12px", "flex-wrap": "wrap" }}>
-          <button onClick={() => calendar()?.changeView('custom', { unit: 'day', count: 2 })} style={btnStyle}>2 Days</button>
-          <button onClick={() => calendar()?.changeView('custom', { unit: 'week', count: 1, includeSpecificDays: [1,2,3,4,5] })} style={btnStyle}>Work Week</button>
-          <button onClick={() => calendar()?.changeView('custom', { unit: 'week', count: 2 })} style={btnStyle}>2 Weeks</button>
-          <button onClick={() => calendar()?.changeView('custom', { unit: 'month', count: 1, includeSpecificDays: [1,2,3,4,5] })} style={btnStyle}>1 Month Weekdays</button>
-          <button onClick={() => calendar()?.changeView('custom', { unit: 'month', count: 3 })} style={btnStyle}>Quarter (3 Months)</button>
-        </div>
+      <div style={{ margin: "20px 0" }}>
+        <strong>Presets:</strong>
+        <button onClick={() => calendar()?.changeView('custom', { unit: 'day', count: 2 })}>2 Days</button>
+        <button onClick={() => calendar()?.changeView('custom', { unit: 'week', count: 1, includeSpecificDays: [1,2,3,4,5] })}>Work Week</button>
+        <button onClick={() => calendar()?.changeView('custom', { unit: 'week', count: 2 })}>2 Weeks</button>
+        <button onClick={() => calendar()?.changeView('custom', { unit: 'month', count: 1, includeSpecificDays: [1,2,3,4,5] })}>1 Month (WD)</button>
+        <button onClick={() => calendar()?.changeView('custom', { unit: 'month', count: 3 })}>Quarter</button>
       </div>
 
-      <div class="view-content">
+      <div>
         <Show when={calendar()?.customViewOptions?.unit === 'month' && calendar()?.monthData} fallback={
-          <table border="1" style={{ width: "100%", "border-collapse": "collapse", "margin-top": "20px", "text-align": "center" }}>
+          <table border="1" cellPadding={5} style={{ width: "100%", "border-collapse": "collapse", "text-align": "center" }}>
             <thead>
-              <tr style={{ background: "#f9fafb" }}>
+              <tr>
                 <For each={calendar()?.customViewOptions?.unit === 'week' ? calendar()?.weekData?.dates : calendar()?.dayData?.dates}>
                   {(date) => (
-                    <th style={{ padding: "10px" }}>
-                      <div style={{ "font-size": "12px", color: "#6b7280" }}>{calendar()?.utils.formatDate(date, 'EEE')}</div>
-                      <div style={{ "font-size": "16px" }}>{date.getDate()}</div>
+                    <th>
+                      {calendar()?.utils.formatDate(date, 'EEE d')}
                     </th>
                   )}
                 </For>
@@ -75,20 +70,17 @@ const CalendarDemo: Component = () => {
                 <For each={calendar()?.customViewOptions?.unit === 'week' ? calendar()?.weekData?.dates : calendar()?.dayData?.dates}>
                   {(date) => (
                     <td style={{ 
-                      height: "150px", 
+                      height: "100px", 
                       "vertical-align": "top", 
-                      padding: "8px",
-                      background: calendar()?.utils.isSameDay(date, new Date()) ? "#eff6ff" : "white"
+                      background: calendar()?.utils.isSameDay(date, new Date()) ? "#eee" : "transparent"
                     }}>
-                      <div style={{ display: "flex", "flex-direction": "column", gap: "4px" }}>
-                        <For each={calendar()?.getEventsForDate(date)}>
-                          {(event) => (
-                            <div style={{ background: event.color, color: "white", padding: "4px 8px", "border-radius": "4px", "font-size": "11px" }}>
-                              {event.title}
-                            </div>
-                          )}
-                        </For>
-                      </div>
+                      <For each={calendar()?.getEventsForDate(date)}>
+                        {(event) => (
+                          <div style={{ "font-size": "11px", border: "1px solid", "margin-bottom": "2px" }}>
+                            {event.title}
+                          </div>
+                        )}
+                      </For>
                     </td>
                   )}
                 </For>
@@ -98,13 +90,13 @@ const CalendarDemo: Component = () => {
         }>
           <For each={getMonthsToDisplay()}>
             {(m) => (
-              <div style={{ "margin-bottom": "30px" }}>
-                <div style={{ "font-weight": "bold", "font-size": "1.2em", "margin-bottom": "10px", "margin-top": "20px" }}>{calendar()?.utils.formatLocalizedMonth(m.date)}</div>
-                <table border="1" style={{ width: "100%", "border-collapse": "collapse", "text-align": "center" }}>
+              <div>
+                <h3>{calendar()?.utils.formatLocalizedMonth(m.date)}</h3>
+                <table border="1" cellPadding={5} style={{ width: "100%", "border-collapse": "collapse", "text-align": "center" }}>
                   <thead>
                     <tr>
                       <For each={calendar()?.utils.daysofWeek('short')}>
-                        {(day) => <th style={{ padding: "8px", background: "#f8fafc" }}>{day}</th>}
+                        {(day) => <th>{day}</th>}
                       </For>
                     </tr>
                   </thead>
@@ -119,24 +111,19 @@ const CalendarDemo: Component = () => {
                                 const isInMonth = () => date() && date()!.getMonth() === m.month && date()!.getFullYear() === m.year;
                                 return (
                                   <td style={{ 
-                                    border: "1px solid #ccc", 
-                                    height: "100px", 
+                                    height: "80px", 
                                     "vertical-align": "top", 
-                                    padding: "4px",
-                                    width: "14.28%",
-                                    background: !isInMonth() ? "#f8fafc" : (calendar()?.utils.isSameDay(date()!, new Date()) ? "#eff6ff" : "white")
+                                    background: isInMonth() && calendar()?.utils.isSameDay(date()!, new Date()) ? "#eee" : "transparent"
                                   }}>
                                     <Show when={isInMonth()}>
-                                      <div style={{ "text-align": "right", "font-size": "12px", "margin-bottom": "4px" }}>{date()!.getDate()}</div>
-                                      <div style={{ display: "flex", "flex-direction": "column", gap: "2px" }}>
-                                        <For each={calendar()?.getEventsForDate(date()!)}>
-                                          {(event) => (
-                                            <div style={{ background: event.color, color: "white", padding: "2px 4px", "border-radius": "2px", "font-size": "10px", "white-space": "nowrap", overflow: "hidden", "text-overflow": "ellipsis" }}>
-                                              {event.title}
-                                            </div>
-                                          )}
-                                        </For>
-                                      </div>
+                                      <div><strong>{date()!.getDate()}</strong></div>
+                                      <For each={calendar()?.getEventsForDate(date()!)}>
+                                        {(event) => (
+                                          <div style={{ border: "1px solid", "font-size": "10px", "margin-bottom": "2px" }}>
+                                            {event.title}
+                                          </div>
+                                        )}
+                                      </For>
                                     </Show>
                                   </td>
                                 );
@@ -155,15 +142,6 @@ const CalendarDemo: Component = () => {
       </div>
     </div>
   );
-};
-
-const btnStyle = {
-  padding: "8px 16px",
-  background: "white",
-  border: "1px solid #d1d5db",
-  "border-radius": "6px",
-  cursor: "pointer",
-  "font-weight": "500"
 };
 
 export default CalendarDemo;

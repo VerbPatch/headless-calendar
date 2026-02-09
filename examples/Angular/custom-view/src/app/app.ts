@@ -1,12 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CalendarComposable, useCalendar, ViewType, CustomViewOptions, generateId } from '@verbpatch/angular-calendar';
-import { NgStyle, NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { CalendarComposable, useCalendar, generateId } from '@verbpatch/angular-calendar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgStyle, NgIf, NgFor, NgTemplateOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -17,8 +16,8 @@ export class App {
     defaultView: 'custom',
     customViewOptions: { unit: 'day', count: 2 },
     initialEvents: [
-      { id: generateId(), title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
-      { id: generateId(), title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
+      { id: '1', title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
+      { id: '2', title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
     ]
   });
 
@@ -30,7 +29,7 @@ export class App {
     const cal = this.calendarHook.calendar();
     const opts = cal.customViewOptions;
     if (!cal || !opts || opts.unit !== 'month') return [];
-
+    
     const count = opts.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {

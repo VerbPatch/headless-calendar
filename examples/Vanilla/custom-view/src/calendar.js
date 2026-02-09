@@ -5,13 +5,12 @@ export function setupCalendar($elem) {
   let customOptions = { unit: "day", count: 2 };
 
   function bindCalendar() {
-    // Preserving currentDate when re-binding
     const options = {
       defaultView: "custom",
       customViewOptions: customOptions,
       initialEvents: [
-        { id: generateId(), title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
-        { id: generateId(), title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
+        { id: '1', title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
+        { id: '2', title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
       ]
     };
 
@@ -23,12 +22,10 @@ export function setupCalendar($elem) {
     render();
   }
 
-  // Attach event listener once to the parent container
   $elem.addEventListener("click", (event) => {
     const target = event.target;
     if (!target) return;
 
-    // Navigation
     if (target.id === "prev") {
       calendar.goToPrevious();
       bindCalendar();
@@ -39,7 +36,6 @@ export function setupCalendar($elem) {
       calendar.goToNext();
       bindCalendar();
     } 
-    // Presets - using closest to catch clicks on inner text if any
     else {
       const presetBtn = target.closest(".preset");
       if (presetBtn) {
@@ -68,25 +64,21 @@ export function setupCalendar($elem) {
     const utils = calendar.utils;
 
     let html = `
-      <div class="calendar-wrapper">
-        <div class="header">
-          <div class="nav">
-            <button id="prev">Previous</button>
-            <button id="today">Today</button>
-            <button id="next">Next</button>
-          </div>
-          <h2 class="range">${title}</h2>
+      <div style="font-family: sans-serif; padding: 20px;">
+        <div>
+          <button id="prev">Prev</button>
+          <button id="today">Today</button>
+          <button id="next">Next</button>
+          <span style="margin-left: 20px;"><strong>${title}</strong></span>
         </div>
 
-        <div class="presets">
-          <strong>View Presets:</strong>
-          <div class="preset-buttons">
-            <button class="preset" data-unit="day" data-count="2">2 Days</button>
-            <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">Work Week</button>
-            <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
-            <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">1 Month Weekdays</button>
-            <button class="preset" data-unit="month" data-count="3">Quarter (3 Months)</button>
-          </div>
+        <div style="margin: 20px 0;">
+          <strong>Presets:</strong>
+          <button class="preset" data-unit="day" data-count="2">2 Days</button>
+          <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">Work Week</button>
+          <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
+          <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">1 Month (WD)</button>
+          <button class="preset" data-unit="month" data-count="3">Quarter</button>
         </div>
 
         <div class="view-content">`;
@@ -98,13 +90,9 @@ export function setupCalendar($elem) {
         const m = mDate.getMonth();
         const y = mDate.getFullYear();
         
-        html += `<div class="month-container">
-          <div class="month-title">${utils.formatLocalizedMonth(mDate)}</div>
-          <table class="calendar-table" border="1">
-            <thead>
-              <tr>${utils.daysofWeek('short').map(day => `<th>${day}</th>`).join('')}</tr>
-            </thead>
-            <tbody>`;
+        html += `<div><h3>${utils.formatLocalizedMonth(mDate)}</h3>`;
+        html += '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;">';
+        html += `<thead><tr>${utils.daysofWeek('short').map(day => `<th>${day}</th>`).join('')}</tr></thead><tbody>`;
 
         calendar.monthData.weeks.forEach(week => {
           const hasDaysInMonth = week.some(d => d.getMonth() === m && d.getFullYear() === y);
@@ -118,14 +106,12 @@ export function setupCalendar($elem) {
             
             if (isInMonth) {
               const events = calendar.getEventsForDate(date);
-              html += `<td class="${isToday ? 'today' : ''}">
-                <div class="day-num">${date.getDate()}</div>
-                <div class="events">
-                  ${events.map(e => `<div class="event-pill" style="background-color: ${e.color}">${e.title}</div>`).join('')}
-                </div>
-              </td>`;
+              html += `<td style="height: 80px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
+              html += `<div><strong>${date.getDate()}</strong></div>`;
+              html += events.map(e => `<div style="border: 1px solid; font-size: 10px; margin-bottom: 2px;">${e.title}</div>`).join('');
+              html += `</td>`;
             } else {
-              html += '<td class="empty-cell"></td>';
+              html += '<td style="background: #f9fafb;"></td>';
             }
           });
           html += '</tr>';
@@ -135,27 +121,18 @@ export function setupCalendar($elem) {
     } else {
       const data = opts?.unit === 'week' ? calendar.weekData : calendar.dayData;
       if (data) {
-        html += `<table class="calendar-table horizontal-view" border="1">
-          <thead>
-            <tr>${data.dates.map(date => `
-              <th>
-                <div class="day-name-small">${utils.formatDate(date, 'EEE')}</div>
-                <div class="day-num-large">${date.getDate()}</div>
-              </th>`).join('')}
-            </tr>
-          </thead>
-          <tbody><tr>`;
-        
+        html += '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
+        data.dates.forEach(date => {
+          html += `<th>${utils.formatDate(date, 'EEE d')}</th>`;
+        });
+        html += '</tr></thead><tbody><tr>';
         data.dates.forEach(date => {
           const isToday = utils.isSameDay(date, new Date());
           const events = calendar.getEventsForDate(date);
-          html += `<td class="${isToday ? 'today' : ''}">
-            <div class="events">
-              ${events.map(e => `<div class="event-pill" style="background-color: ${e.color}">${e.title}</div>`).join('')}
-            </div>
-          </td>`;
+          html += `<td style="height: 100px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
+          html += events.map(e => `<div style="border: 1px solid; font-size: 11px; margin-bottom: 2px;">${e.title}</div>`).join('');
+          html += `</td>`;
         });
-        
         html += '</tr></tbody></table>';
       }
     }
