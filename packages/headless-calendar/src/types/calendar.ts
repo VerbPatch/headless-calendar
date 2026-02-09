@@ -352,11 +352,17 @@ export interface CalendarInstance {
    */
   currentDate: Date;
   /**
-   * The current view of the calendar (e.g., 'month', 'week', 'day').
+   * The current view of the calendar (e.g., 'year', 'month', 'week', 'day', 'custom').
    * @type {ViewType}
    * @see {@link ViewType}
    */
   view: ViewType;
+  /**
+   * Returns custom view option when view is 'custom'
+   * @type {CustomViewOptions}
+   * @see {@link CustomViewOptions}
+   */
+  customViewOptions?: CustomViewOptions;
   /**
    * An array of all events currently managed by the calendar.
    * @type {CalendarEvent[]}

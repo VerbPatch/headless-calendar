@@ -387,6 +387,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   return {
     currentDate: navigation.currentDate,
     view: navigation.view,
+    customViewOptions: options.customViewOptions,
     events: eventsManager.events,
     draggedEvent: dragDrop.draggedEvent,
     timezone: options.timezone,
