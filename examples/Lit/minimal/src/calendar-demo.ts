@@ -366,7 +366,7 @@ export class CalendarDemo extends LitElement {
 
           <div>
             ${timeSlots.map((slot) => {
-          const slotEvents = getEventsForDate(dayData.date).filter(
+          const slotEvents = getEventsForDate(dayData.dates[0]).filter(
             (event) => {
               const eventStart = new Date(event.start);
               return (
@@ -381,9 +381,9 @@ export class CalendarDemo extends LitElement {
                   key=${slot.time}
                   @dragover=${(e: DragEvent) => e.preventDefault()}
                   @drop=${(e: DragEvent) =>
-              this.eventHandleDrop(e, dayData.date, slot.time)}
+              this.eventHandleDrop(e, dayData.dates[0], slot.time)}
                   @click=${() => {
-              const eventStart = new Date(dayData.date);
+              const eventStart = new Date(dayData.dates[0]);
               eventStart.setHours(slot.hour, slot.minute);
               const eventEnd = new Date(eventStart);
               eventEnd.setMinutes(eventEnd.getMinutes() + 60);
@@ -540,6 +540,6 @@ export class CalendarDemo extends LitElement {
 }
 declare global {
   interface HTMLElementTagNameMap {
-    'alendar-demo': CalendarDemo
+    'calendar-demo': CalendarDemo
   }
 }

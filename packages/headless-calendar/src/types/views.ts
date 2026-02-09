@@ -183,6 +183,11 @@ export interface UseNavigationReturn {
    */
   view: ViewType;
   /**
+   * Configuration options for the 'custom' view.
+   * @type {CustomViewOptions}
+   */
+  customViewOptions: CustomViewOptions;
+  /**
    * Navigates the calendar to the next period (day, week, or month depending on the current view).
    * @function
    */
@@ -207,9 +212,10 @@ export interface UseNavigationReturn {
    * Changes the current view of the calendar (e.g., 'month', 'week', 'day').
    * @function
    * @param {ViewType} view - The new view to set.
+   * @param {CustomViewOptions} [options] - Configuration options for the 'custom' view.
    * @see {@link ViewType}
    */
-  changeView: (view: ViewType) => void;
+  changeView: (view: ViewType, options?: CustomViewOptions) => void;
   /**
    * Indicates if navigation to the next period is possible.
    * @type {boolean}

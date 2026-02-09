@@ -165,7 +165,7 @@ function renderWeekView(cal) {
 function renderDayView(cal) {
   const dayData = cal.dayData;
   let $html = "<tr>";
-  $html += `<th colspan=7> ${cal.utils.formatDate(dayData.date, "d MMM yyyy")}</th> `;
+  $html += `<th colspan=7> ${cal.utils.formatDate(dayData.dates[0], "d MMM yyyy")}</th> `;
   $html += "</tr><tr>";
   $html += `<td colspan=7 style="height:300px; vertical-align:top; border:1px solid #000;">&nbsp;</td>`;
   $html += "</tr>";

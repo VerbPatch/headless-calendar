@@ -233,7 +233,7 @@ const CalendarDemo: React.FC = () => {
         </tr>
 
         {timeSlots.map((slot) => {
-          const slotEvents = getEventsForDate(dayData!.date).filter((event) => {
+          const slotEvents = getEventsForDate(dayData!.dates[0]).filter((event) => {
             const eventStart = new Date(event.start);
             console.log(eventStart.getHours(), slot.hour, eventStart.getMinutes(), slot.minute);
             return eventStart.getHours() === slot.hour;
@@ -247,11 +247,11 @@ const CalendarDemo: React.FC = () => {
               <td colSpan={7}>
                 <div
                   data-time={slot.time}
-                  data-day={formatDate(dayData.date)}
+                  data-day={formatDate(dayData.dates[0])}
                   onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => eventHandleDrop(e, dayData!.date, slot.time)}
+                  onDrop={(e) => eventHandleDrop(e, dayData!.dates[0], slot.time)}
                   onClick={() => {
-                    const eventStart = new Date(dayData!.date);
+                    const eventStart = new Date(dayData!.dates[0]);
                     eventStart.setHours(slot.hour, slot.minute);
                     const eventEnd = new Date(eventStart);
                     eventEnd.setMinutes(eventEnd.getMinutes() + 60);

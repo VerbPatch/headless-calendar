@@ -416,9 +416,10 @@ export interface CalendarInstance {
    * Changes the current view of the calendar (e.g., 'month', 'week', 'day').
    * @function
    * @param {ViewType} view - The new view to set.
+   * @param {CustomViewOptions} [options] - Configuration options for the 'custom' view.
    * @see {@link ViewType}
    */
-  changeView: (view: ViewType) => void;
+  changeView: (view: ViewType, options?: CustomViewOptions) => void;
 
   /**
    * Retrieves a specific event by its ID.

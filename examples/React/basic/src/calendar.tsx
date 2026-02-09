@@ -166,7 +166,7 @@ export const CalendarDemo: React.FC = () => {
         {timeSlots.map((slot) => (
           <tr>
             <td colSpan={7} style={{ borderRight: "1px solid", borderBottom: "1px solid" }}>
-              <div key={slot.time} data-time={slot.time} data-day={formatDate(dayData.date)}>
+              <div key={slot.time} data-time={slot.time} data-day={formatDate(dayData.dates[0])}>
                 {slot.label}
               </div>
             </td>

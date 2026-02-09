@@ -1,5 +1,5 @@
 import { ReactiveController, ReactiveControllerHost } from 'lit';
-import { useCalendar as createCalendar, CalendarOptions, CalendarInstance } from '@verbpatch/headless-calendar';
+import { useCalendar as createCalendar, CalendarOptions, CalendarInstance, CalendarEvent, ViewType } from '@verbpatch/headless-calendar';
 export * from "@verbpatch/headless-calendar";
 
 export class CalendarController implements ReactiveController {
@@ -21,15 +21,15 @@ export class CalendarController implements ReactiveController {
   private refreshCalendar(): void {
     this._calendar = createCalendar({
       ...this.options,
-      onEvent: (event) => {
+      onEvent: (event: CalendarEvent[]) => {
         this.refreshCalendar();
         this.options?.onEvent?.(event);
       },
-      onDateChange: (date) => {
+      onDateChange: (date: Date) => {
         this.refreshCalendar();
         this.options?.onDateChange?.(date);
       },
-      onViewChange: (view) => {
+      onViewChange: (view: ViewType) => {
         this.refreshCalendar();
         this.options?.onViewChange?.(view);
       },
