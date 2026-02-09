@@ -326,7 +326,6 @@
         $(document).ready(function () {
             console.log('Initializing calendar...');
 
-            // Sample events for demonstration
             const getSampleEvents = () => {
                 const today = new Date();
                 return [
@@ -368,7 +367,6 @@
                 ];
             };
 
-            // Initialize calendar with events
             $('#calendar').headlessCalendar({
                 defaultView: 'month',
                 startOfWeek: 0,
@@ -407,7 +405,6 @@
                 }
             });
 
-            // Navigation buttons
             $('#prevBtn').on('click', function () {
                 $('#calendar').headlessCalendar('goToPrevious');
             });
@@ -420,13 +417,11 @@
                 $('#calendar').headlessCalendar('goToToday');
             });
 
-            // View switcher
             $('.view-switcher button').on('click', function () {
                 const view = $(this).data('view');
                 $('#calendar').headlessCalendar('changeView', view);
             });
 
-            // Add event form
             $('#addEventBtn').on('click', function () {
                 const title = $('#eventTitle').val().trim();
                 const start = new Date($('#eventStart').val());
@@ -460,7 +455,6 @@
                         allDay: allDay
                     });
 
-                    // Clear form
                     $('#eventTitle').val('');
                     $('#eventDesc').val('');
                     setDefaultDateTime();
@@ -469,7 +463,6 @@
                 }
             });
 
-            // Add sample events
             $('#addSampleEvents').on('click', function () {
                 const samples = getSampleEvents();
                 samples.forEach(event => {
@@ -482,7 +475,6 @@
                 showSuccess(samples.length + ' sample events added!');
             });
 
-            // Clear all events
             $('#clearAllEvents').on('click', function () {
                 if (confirm('Are you sure you want to delete all events?')) {
                     $('#calendar').headlessCalendar('clearAllEvents');
@@ -493,7 +485,6 @@
                 }
             });
 
-            // Modal controls
             $('#modalClose').on('click', function () {
                 $('#eventModal').removeClass('active');
             });
@@ -504,7 +495,6 @@
                 }
             });
 
-            // Render calendar based on current view
             function renderCalendar() {
                 const cal = $('#calendar').headlessCalendar('getCalendar');
                 const view = cal.view;
@@ -523,20 +513,17 @@
                 updateCurrentDate(cal);
             }
 
-            // Render month view
             function renderMonthView(cal) {
                 const monthData = cal.monthData;
                 if (!monthData) return '<div class="empty-state"><div class="empty-state-icon">📅</div><p>Loading month view...</p></div>';
 
                 let html = '<div class="month-view">';
 
-                // Weekday headers
                 const weekdays = cal.utils.daysofWeek('short');
                 weekdays.forEach(day => {
                     html += `<div class="weekday-header">${day}</div>`;
                 });
 
-                // Days
                 monthData.weeks.forEach(week => {
                     week.forEach(date => {
                         const isToday = cal.utils.isSameDay(date, new Date());
@@ -562,7 +549,6 @@
                 return html;
             }
 
-            // Render week view
             function renderWeekView(cal) {
                 const weekData = cal.weekData;
                 if (!weekData) return '<div class="empty-state"><div class="empty-state-icon">📅</div><p>Loading week view...</p></div>';
@@ -596,12 +582,11 @@
                 return html;
             }
 
-            // Render day view
             function renderDayView(cal) {
                 const dayData = cal.dayData;
                 if (!dayData) return '<div class="empty-state"><div class="empty-state-icon">📅</div><p>Loading day view...</p></div>';
 
-                const events = cal.getEventsForDate(dayData.date);
+                const events = cal.getEventsForDate(dayData.dates[0]);
 
                 let html = '<div style="text-align:center;padding:20px;">';
                 html += '<h3 style="margin-bottom:20px;color:#667eea;">' + dayData.dayName + '</h3>';
@@ -636,44 +621,36 @@
                 return html;
             }
 
-            // Update current date display
             function updateCurrentDate(cal) {
                 const date = cal.currentDate;
                 const formatted = cal.utils.formatDate(date, 'MMMM yyyy');
                 $('#currentDate').text(formatted);
             }
 
-            // Update statistics
             function updateStats() {
                 const cal = $('#calendar').headlessCalendar('getCalendar');
                 const allEvents = cal.events;
                 const now = new Date();
 
-                // Total events
                 $('#totalEvents').text(allEvents.length);
 
-                // Events this month
                 const thisMonth = allEvents.filter(e => {
                     return e.start.getMonth() === now.getMonth() &&
                         e.start.getFullYear() === now.getFullYear();
                 });
                 $('#monthEvents').text(thisMonth.length);
 
-                // Upcoming events
                 const upcoming = allEvents.filter(e => e.start > now);
                 $('#upcomingEvents').text(upcoming.length);
 
-                // Current view
                 $('#currentView').text(cal.view);
             }
 
-            // Update events list
             function updateEventsList() {
                 const cal = $('#calendar').headlessCalendar('getCalendar');
                 const allEvents = cal.events;
                 const now = new Date();
 
-                // Get upcoming events (next 30 days)
                 const upcoming = allEvents.filter(e => {
                     const daysDiff = (e.start - now) / (1000 * 60 * 60 * 24);
                     return daysDiff >= 0 && daysDiff <= 30;
@@ -706,13 +683,11 @@
                 $('#eventsList').html(html);
             }
 
-            // Update view buttons
             function updateViewButtons(view) {
                 $('.view-switcher button').removeClass('active');
                 $(`.view-switcher button[data-view="${view}"]`).addClass('active');
             }
 
-            // Show success message
             function showSuccess(message) {
                 const $msg = $('<div class="success-message">' + message + '</div>');
                 $('body').append($msg);
@@ -724,7 +699,6 @@
                 }, 3000);
             }
 
-            // Set default datetime values
             function setDefaultDateTime() {
                 const now = new Date();
                 const tomorrow = new Date(now);
@@ -744,7 +718,6 @@
                 return `${year}-${month}-${day}T${hours}:${minutes}`;
             }
 
-            // Event delegation for dynamic elements
             $(document).on('click', '.event-badge, .event-item-title', function (e) {
                 e.stopPropagation();
                 const eventId = $(this).closest('[data-event-id]').data('event-id');
@@ -786,7 +759,6 @@
                     endDate.setHours(date.getHours() + 1);
                     $('#eventEnd').val(formatDateTimeLocal(endDate));
 
-                    // Scroll to form
                     $('html, body').animate({
                         scrollTop: $('.event-form').offset().top - 100
                     }, 500);
@@ -795,7 +767,6 @@
                 }
             });
 
-            // Show event details in modal
             function showEventDetails(eventId) {
                 const event = $('#calendar').headlessCalendar('getEvent', eventId);
                 if (!event) return;
@@ -847,7 +818,6 @@
                 $('#eventModal').addClass('active');
             }
 
-            // Initialize form with default values
             setDefaultDateTime();
 
             console.log('Calendar initialized successfully!');
