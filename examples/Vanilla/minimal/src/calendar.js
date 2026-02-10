@@ -2,173 +2,164 @@ import { useCalendar } from '@verbpatch/headless-calendar';
 
 export function setupCalendar($elem) {
   let calendar;
-  function bindCalendar() {
-    calendar = useCalendar({ defaultView: 'month', initialEvents: getSampleEvents() });
-    generateCalendarHTML($elem, calendar);
-  }
-  bindCalendar();
 
-  document.getElementById($elem.id).addEventListener('click', (event) => {
-    if (!event.target) return;
-
-    if (event.target.id === 'prev') {
-      calendar.goToPrevious();
-      bindCalendar();
-    }
-
-    if (event.target.id === 'next') {
-      calendar.goToNext();
-      bindCalendar();
-    }
-  });
-
-  document.getElementById($elem.id).addEventListener('change', (event) => {
-    if (!event.target) return;
-
-    if (event.target.id === 'view-select') {
-      calendar.changeView(event.target.value);
-      bindCalendar();
-    }
-  });
-}
-
-function getSampleEvents() {
-  const today = new Date();
-  return [
-    {
-      title: 'Team Meeting',
-      start: new Date(today.getFullYear(), today.getMonth(), 5, 10, 0),
-      end: new Date(today.getFullYear(), today.getMonth(), 5, 11, 30),
-      color: '#667eea',
-      description: 'Weekly team sync-up meeting',
-      icon: '🎯',
-    },
-    {
-      title: 'Project Launch',
-      start: new Date(today.getFullYear(), today.getMonth(), 15, 14, 0),
-      end: new Date(today.getFullYear(), today.getMonth(), 15, 16, 0),
-      color: '#f56565',
-      description: 'New product launch event',
-      icon: '🚀',
-    },
-    {
-      title: 'Lunch with Client',
-      start: new Date(today.getFullYear(), today.getMonth(), 8, 12, 30),
-      end: new Date(today.getFullYear(), today.getMonth(), 8, 14, 0),
-      color: '#48bb78',
-      description: 'Client meeting at Italian restaurant',
-      icon: '🍕',
-    },
-    {
-      title: 'Board Meeting',
-      start: new Date(today.getFullYear(), today.getMonth(), 20, 9, 0),
-      end: new Date(today.getFullYear(), today.getMonth(), 20, 11, 0),
-      color: '#ed8936',
-      description: 'Quarterly board meeting',
-      icon: '💼',
-    },
-    {
-      title: 'Company Party',
-      start: new Date(today.getFullYear(), today.getMonth(), 25, 18, 0),
-      end: new Date(today.getFullYear(), today.getMonth(), 25, 22, 0),
-      color: '#9f7aea',
-      description: 'End of month celebration',
-      icon: '🎉',
-    },
-  ];
-}
-
-function generateCalendarHTML($elem, cal) {
-  const view = cal.view;
-  const currentDate = cal.currentDate;
-  let $html =
-    '<table border="1" cellspacing="0" cellpadding="5" style="border-collapse: collapse; width:800px; height:800px; margin:auto;">';
-  $html += '<thead><tr>';
-  $html += `<th><button id="prev"><</button></th>`;
-  $html += `<th colspan="5" style="text-align:center;"><h3>${cal.utils.formatDate(currentDate, 'MMMM yyyy')}</h3>                        
-            <select id="view-select">
-                    <option value="month" ${view === 'month' ? 'selected' : ''}>Month View</option>
-                    <option value="week" ${view === 'week' ? 'selected' : ''}>Week View</option>
-                    <option value="day" ${view === 'day' ? 'selected' : ''}>Day View</option>    
-                </select></th>`;
-  $html += `<th><button id="next">></button></th>`;
-  $html += '</tr></thead>';
-
-  if (view === 'month') {
-    $html += renderMonthView(cal);
-  } else if (view === 'week') {
-    $html += renderWeekView(cal);
-  } else if (view === 'day') {
-    $html += renderDayView(cal);
-  }
-
-  $html += '<tfoot><tr>';
-
-  $html += `<th colspan="7" style="text-align:center;">`;
-  $html += `<div><h3 style="text-align:center;">All Events</h3>`;
-  cal.events.forEach((event) => {
-    $html += `<div style="margin:5px 0; padding:5px; border:1px solid #000; background-color:${event.color || '#eee'}; display:flex; gap:10px; align-items:center;">
-                                    <h4>${event.icon}</h4>
-                                    <strong>${event.title},</strong>
-                                    <span>${cal.utils.formatDate(event.start, 'd MMM yyyy HH:mm')} - ${cal.utils.formatDate(event.end, 'd MMM yyyy HH:mm')},</span>
-                                    <em>${event.description || ''}</em>
-                                </div>`;
-  });
-  $html += `</div></th>`;
-  $html += '</tr></tfoot>';
-
-  $html += '</table>';
-
-  $elem.innerHTML = $html;
-}
-
-function renderMonthView(cal) {
-  const monthData = cal.monthData;
-
-  const weekdays = cal.utils.daysofWeek();
-
-  let $html = '<tr>';
-  weekdays.forEach((day) => {
-    $html += `<th> ${day}</th> `;
-  });
-  $html += '</tr>';
-
-  monthData.weeks.forEach((week) => {
-    $html += '<tr>';
-    week.forEach((day) => {
-      const isToday = cal.utils.isSameDay(day, new Date());
-      const isCurrentMonth = monthData.isCurrentMonth(day);
-
-      $html += `<td style="text-align:center;${isToday ? 'background-color: #d3d3d3; font-weight: bold; ' : ''} ${isCurrentMonth ? '' : 'color: #d3d3d3; '}" > ${cal.utils.formatDate(day, 'd')}</td> `;
-
-      $html += '';
+  function render() {
+    calendar = useCalendar({
+      defaultView: 'month',
+      startOfWeek: 0,
+      locale: 'en-IN',
     });
-    $html += '</tr>';
+
+    const { view, monthData, weekData, dayData, timeSlots, utils } = calendar;
+
+    let html = `
+      <h1>Vanilla Calendar minimal Example</h1>
+      <table border="0" width="840" cellspacing="0" style="height:700px; border-left:1px solid; border-top:1px solid;">
+        <thead>
+          <tr>
+            <th colspan="2" style="border-bottom: 1px solid;">
+              <button type="button" data-action="prev"> ← </button>
+              <button type="button" data-action="today"> Today </button>
+              <button type="button" data-action="next"> → </button>
+            </th>
+            <th colspan="3" style="border-bottom: 1px solid;">
+              <h3>
+                ${view === 'month' ? monthData?.monthName || '' : ''}
+                ${view === 'week' ? weekData?.weekRange || '' : ''}
+                ${view === 'day' ? dayData?.dayName || '' : ''}
+              </h3>
+            </th>
+            <th colspan="2" style="border-bottom: 1px solid; border-right:1px solid;">
+              <select id="view-select">
+                <option value="month" ${view === 'month' ? 'selected' : ''}>Month</option>
+                <option value="week" ${view === 'week' ? 'selected' : ''}>Week</option>
+                <option value="day" ${view === 'day' ? 'selected' : ''}>Day</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    if (view === 'month' && monthData) {
+      html += '<tr>';
+      utils.daysofWeek('short').forEach((day) => {
+        html += `<th style="width: 120px; border-right:1px solid; border-bottom:1px solid;">${day}</th>`;
+      });
+      html += '</tr>';
+
+      monthData.weeks.forEach((week) => {
+        html += '<tr>';
+        week.forEach((date) => {
+          const isCurrentMonth = monthData.isCurrentMonth(date);
+          const isToday = monthData.isToday(date);
+          html += `
+            <td style="
+              ${!isCurrentMonth ? 'color: gray;' : ''}
+              ${isToday ? 'font-weight: bold;' : ''}
+              border-right: 1px solid; border-bottom: 1px solid;
+            ">
+              ${utils.formatDate(date, 'd')}
+            </td>
+          `;
+        });
+        html += '</tr>';
+      });
+    } else if (view === 'week' && weekData) {
+      html += `
+        <tr>
+          <td colspan="7" style="border-right:1px solid;">
+            <table cellpadding="5" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td></td>
+                  ${weekData.dates
+                    .map(
+                      (date) => `
+                    <td style="${weekData.isToday(date) ? 'font-weight: bold;' : ''}">
+                      ${utils.formatDateTime(date, 'EEE d')}
+                    </td>
+                  `,
+                    )
+                    .join('')}
+                </tr>
+                ${timeSlots
+                  .map(
+                    (slot) => `
+                  <tr>
+                    <td style="border-bottom: 1px solid;">${slot.label}</td>
+                    ${weekData.dates
+                      .map(
+                        (date) => `
+                      <td style="${weekData.isToday(date) ? 'font-weight: bold;' : ''} border-bottom: 1px solid;">
+                        &nbsp;
+                      </td>
+                    `,
+                      )
+                      .join('')}
+                  </tr>
+                `,
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      `;
+    } else if (view === 'day' && dayData) {
+      html += `
+        <tr>
+          <td colspan="7" align="center" style="border-right: 1px solid; border-bottom: 1px solid;">
+            ${dayData.dayName}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7" style="border-right: 1px solid;">
+            <table width="100%" cellspacing="0" style="height: 100%;">
+              <tbody>
+                ${timeSlots
+                  .map(
+                    (slot) => `
+                  <tr>
+                    <td width="25%" style="border-bottom: 1px solid;">
+                      ${slot.label} &nbsp;
+                    </td>
+                  </tr>
+                `,
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      `;
+    }
+
+    html += '</tbody></table>';
+    $elem.innerHTML = html;
+  }
+
+  // Event delegation
+  $elem.addEventListener('click', (e) => {
+    const action = e.target.getAttribute('data-action');
+    if (action === 'prev') {
+      calendar.goToPrevious();
+      render();
+    } else if (action === 'today') {
+      calendar.goToToday();
+      render();
+    } else if (action === 'next') {
+      calendar.goToNext();
+      render();
+    }
   });
 
-  return $html;
-}
-
-function renderWeekView(cal) {
-  const weekData = cal.weekData;
-  let $html = '<tr>';
-  weekData.dates.forEach((day) => {
-    $html += `<th> ${cal.utils.formatDate(day, 'd MMM')}</th> `;
+  $elem.addEventListener('change', (e) => {
+    if (e.target.id === 'view-select') {
+      calendar.changeView(e.target.value);
+      render();
+    }
   });
-  $html += '</tr><tr>';
-  weekData.dates.forEach((day) => {
-    $html += `<td style="height:100px; vertical-align:top; border:1px solid #000;" >&nbsp;</td> `;
-  });
-  $html += '</tr>';
-  return $html;
-}
 
-function renderDayView(cal) {
-  const dayData = cal.dayData;
-  let $html = '<tr>';
-  $html += `<th colspan=7> ${cal.utils.formatDate(dayData.dates[0], 'd MMM yyyy')}</th> `;
-  $html += '</tr><tr>';
-  $html += `<td colspan=7 style="height:300px; vertical-align:top; border:1px solid #000;">&nbsp;</td>`;
-  $html += '</tr>';
-  return $html;
+  render();
 }

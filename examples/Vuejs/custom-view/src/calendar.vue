@@ -52,6 +52,7 @@ const currentTitle = computed(() => {
 
 <template>
   <div v-if="calendar" style="padding: 20px">
+    <h1>Vue.js Calendar Custom View Example</h1>
     <div>
       <button @click="calendar.goToPrevious">Prev</button>
       <button @click="calendar.goToToday">Today</button>

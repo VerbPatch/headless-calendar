@@ -45,6 +45,7 @@ export const App = component$(() => {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+      <h1>Qwik Calendar Custom View Example</h1>
       <div>
         <button onClick$={() => calendar.goToPrevious()}>Prev</button>
         <button onClick$={() => calendar.goToToday()}>Today</button>

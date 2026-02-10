@@ -182,6 +182,7 @@ const CalendarDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
+      <h1>React Calendar Custom View Example</h1>
       <div>
         <button onClick={goToPrevious}>Prev</button>
         <button onClick={goToToday}>Today</button>

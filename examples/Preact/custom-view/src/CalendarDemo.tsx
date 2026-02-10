@@ -180,6 +180,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+      <h1>Preact Calendar Custom View Example</h1>
       <div>
         <button onClick={goToPrevious}>Prev</button>
         <button onClick={goToToday}>Today</button>

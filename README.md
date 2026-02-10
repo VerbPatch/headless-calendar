@@ -98,11 +98,6 @@ function MyCalendar() {
 }
 ```
 
-## 📫 Contact
-
-- GitHub: [@rameezrajapathan](https://github.com/rameezrajapathan)
-- Email: rameezrajapathan@live.com
-
 ## 🔗 Helpful Links
 
 - [Documentation](https://www.verbpatch.com/calendar/docs/introduction)
@@ -110,7 +105,3 @@ function MyCalendar() {
 - [Issues](https://github.com/verbpatch/headless-calendar/issues)
 - [Contributing Guide](https://github.com/verbpatch/headless-calendar/blob/main/CONTRIBUTING.md)
 - [Changelog](https://github.com/verbpatch/headless-calendar/blob/main/CHANGELOG.md)
-
----
-
-Copyright (C) 2025 VerbPatch

@@ -3,32 +3,15 @@ import { useCalendar } from '@verbpatch/vuejs-calendar';
 
 const calendar = useCalendar({
   defaultView: 'month',
+  startOfWeek: 0,
+  locale: 'en-IN',
 });
-
-const monthDayStyle = (date: Date): string => {
-  let style = 'border-right:1px solid; border-bottom:1px solid;';
-  if (!calendar.value?.monthData!.isCurrentMonth(date)) {
-    style += 'color:gray;';
-  }
-  if (calendar.value?.monthData!.isToday(date)) {
-    style += 'font-weight:bold;';
-  }
-  return style;
-};
 </script>
 
 <template>
-  <h1>Vue Js Calendar Minimal Example</h1>
-
-  <div class="card">
-    <table
-      border="0"
-      width="840"
-      cellspacing="0"
-      style="height: 700px; border-left: 1px solid; border-top: 1px solid"
-      v-show="calendar != null"
-      v-if="calendar != null"
-    >
+  <div v-if="calendar">
+    <h1>Vue.js Calendar minimal Example</h1>
+    <table border="0" width="840" cellspacing="0" style="height: 700px; border-left: 1px solid; border-top: 1px solid">
       <thead>
         <tr>
           <th colspan="2" style="border-bottom: 1px solid">
@@ -44,7 +27,7 @@ const monthDayStyle = (date: Date): string => {
             </h3>
           </th>
           <th colspan="2" style="border-bottom: 1px solid; border-right: 1px solid">
-            <select @change="(s: any) => calendar?.changeView(s.target.value)">
+            <select :value="calendar.view" @change="(e: any) => calendar?.changeView(e.target.value)">
               <option value="month">Month</option>
               <option value="week">Week</option>
               <option value="day">Day</option>
@@ -53,46 +36,44 @@ const monthDayStyle = (date: Date): string => {
         </tr>
       </thead>
       <tbody>
-        <tr v-show="calendar.view == 'month'">
-          <th
-            v-for="day in calendar.utils.daysofWeek('short')"
-            style="width: 120px; border-right: 1px solid; border-bottom: 1px solid"
-          >
-            {{ day }}
-          </th>
-        </tr>
-        <tr v-show="calendar.view == 'month'" v-for="week in calendar.monthData?.weeks">
-          <td v-for="date in week" :style="monthDayStyle(date)">
-            {{ calendar.utils.formatDate(date, 'd') }}
-          </td>
-        </tr>
+        <template v-if="calendar.view === 'month'">
+          <tr>
+            <th v-for="day in calendar.utils.daysofWeek('short')" :key="day"
+              style="width: 120px; border-right: 1px solid; border-bottom: 1px solid">
+              {{ day }}
+            </th>
+          </tr>
+          <tr v-for="(week, i) in calendar.monthData?.weeks" :key="i">
+            <td v-for="(date, j) in week" :key="j" :style="{
+              color: !calendar.monthData?.isCurrentMonth(date) ? 'gray' : undefined,
+              fontWeight: calendar.monthData?.isToday(date) ? 'bold' : 'normal',
+              borderRight: '1px solid',
+              borderBottom: '1px solid',
+            }">
+              {{ calendar.utils.formatDate(date, 'd') }}
+            </td>
+          </tr>
+        </template>
 
-        <tr v-show="calendar.view == 'week'">
+        <tr v-if="calendar.view === 'week'">
           <td colspan="7" style="border-right: 1px solid">
             <table cellpadding="5" cellspacing="0" width="100%">
               <tbody>
                 <tr>
                   <td></td>
-                  <td
-                    v-for="date in calendar.weekData?.dates"
-                    :style="calendar.weekData!.isToday(date) ? 'font-weight:bold' : ''"
-                  >
+                  <td v-for="(date, i) in calendar.weekData?.dates" :key="i"
+                    :style="{ fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal' }">
                     {{ calendar.utils.formatDateTime(date, 'EEE d') }}
                   </td>
                 </tr>
-                <tr v-for="slot in calendar.timeSlots">
-                  <td :data-slot="slot.time" style="border-bottom: 1px solid">
+                <tr v-for="slot in calendar.timeSlots" :key="slot.time">
+                  <td style="border-bottom: 1px solid">
                     {{ slot.label }}
                   </td>
-                  <td
-                    v-for="date in calendar.weekData?.dates"
-                    :data-slot="slot.time"
-                    :data-date="calendar.utils.formatDate(date)"
-                    :style="
-                      (calendar.weekData!.isToday(date) ? 'font-weight:bold;' : '') +
-                      'border-bottom: 1px solid;'
-                    "
-                  >
+                  <td v-for="(date, i) in calendar.weekData?.dates" :key="i" :style="{
+                    fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal',
+                    borderBottom: '1px solid',
+                  }">
                     &nbsp;
                   </td>
                 </tr>
@@ -101,28 +82,28 @@ const monthDayStyle = (date: Date): string => {
           </td>
         </tr>
 
-        <tr v-if="calendar.view == 'day'">
-          <td colspan="7" align="center" style="border-right: 1px solid; border-bottom: 1px solid">
-            {{ calendar.dayData!.dayName }}
-          </td>
-        </tr>
-        <tr v-if="calendar.view == 'day'">
-          <td colspan="7" style="border-right: 1px solid">
-            <table width="100%" cellspacing="0" style="height: 100%">
-              <tbody>
-                <tr v-for="slot in calendar.timeSlots">
-                  <td data-slot="{slot.time}" width="25%" style="border-bottom: 1px solid">
-                    {{ slot.label }}
-                    &nbsp;
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
+        <template v-if="calendar.view === 'day'">
+          <tr>
+            <td colspan="7" align="center" style="border-right: 1px solid; border-bottom: 1px solid">
+              {{ calendar.dayData?.dayName }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="7" style="border-right: 1px solid">
+              <table width="100%" cellspacing="0" style="height: 100%">
+                <tbody>
+                  <tr v-for="slot in calendar.timeSlots" :key="slot.time">
+                    <td width="25%" style="border-bottom: 1px solid">
+                      {{ slot.label }}
+                      &nbsp;
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>
 </template>
-
-<style scoped></style>

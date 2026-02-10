@@ -22,7 +22,7 @@ export class CalendarDemo extends LitElement {
   `;
 
   @state()
-  declare _calendarState: any;
+  declare _calendarState: ReturnType<typeof useCalendar>;
 
   constructor() {
     super();
@@ -88,28 +88,29 @@ export class CalendarDemo extends LitElement {
 
     return html`
       <div>
+        <h1>Lit Calendar Custom View Example</h1>
         <div>
           <button
             @click=${() => {
-              calendar.goToPrevious();
-              this.requestUpdate();
-            }}
+        calendar.goToPrevious();
+        this.requestUpdate();
+      }}
           >
             Prev
           </button>
           <button
             @click=${() => {
-              calendar.goToToday();
-              this.requestUpdate();
-            }}
+        calendar.goToToday();
+        this.requestUpdate();
+      }}
           >
             Today
           </button>
           <button
             @click=${() => {
-              calendar.goToNext();
-              this.requestUpdate();
-            }}
+        calendar.goToNext();
+        this.requestUpdate();
+      }}
           >
             Next
           </button>
@@ -127,12 +128,12 @@ export class CalendarDemo extends LitElement {
 
         <div>
           ${opts?.unit === 'month'
-            ? calendar.monthData
-              ? this._renderMonthViews()
-              : html`Loading Month...`
-            : calendar.dayData || calendar.weekData
-              ? this._renderHorizontalView()
-              : html`Loading...`}
+        ? calendar.monthData
+          ? this._renderMonthViews()
+          : html`Loading Month...`
+        : calendar.dayData || calendar.weekData
+          ? this._renderHorizontalView()
+          : html`Loading...`}
         </div>
       </div>
     `;
@@ -153,45 +154,45 @@ export class CalendarDemo extends LitElement {
             </thead>
             <tbody>
               ${calendar.monthData?.weeks.map((week) => {
-                if (!week.some((d) => d.getMonth() === m.month && d.getFullYear() === m.year))
-                  return null;
-                return html`
+        if (!week.some((d) => d.getMonth() === m.month && d.getFullYear() === m.year))
+          return null;
+        return html`
                   <tr>
                     ${[0, 1, 2, 3, 4, 5, 6].map((dayIdx) => {
-                      const date = week.find((d) => d.getDay() === dayIdx);
-                      const isInMonth =
-                        date && date.getMonth() === m.month && date.getFullYear() === m.year;
-                      const isToday = date && calendar.utils.isSameDay(date, new Date());
-                      return html`
+          const date = week.find((d) => d.getDay() === dayIdx);
+          const isInMonth =
+            date && date.getMonth() === m.month && date.getFullYear() === m.year;
+          const isToday = date && calendar.utils.isSameDay(date, new Date());
+          return html`
                         <td
                           style="height: 80px; vertical-align: top; background: ${isToday
-                            ? '#eee'
-                            : 'transparent'};"
+              ? '#eee'
+              : 'transparent'};"
                         >
                           ${isInMonth
-                            ? html`
+              ? html`
                                 <strong>${date!.getDate()}</strong>
                                 <div>
                                   ${calendar
-                                    .getEventsForDate(date!)
-                                    .map(
-                                      (e) => html`
+                  .getEventsForDate(date!)
+                  .map(
+                    (e) => html`
                                         <div
                                           style="font-size: 10px; border: 1px solid; margin-bottom: 2px;"
                                         >
                                           ${e.title}
                                         </div>
                                       `,
-                                    )}
+                  )}
                                 </div>
                               `
-                            : ''}
+              : ''}
                         </td>
                       `;
-                    })}
+        })}
                   </tr>
                 `;
-              })}
+      })}
             </tbody>
           </table>
         </div>
@@ -209,32 +210,32 @@ export class CalendarDemo extends LitElement {
         <thead>
           <tr>
             ${data.dates.map(
-              (date) => html` <th>${calendar.utils.formatDate(date, 'EEE d')}</th> `,
-            )}
+      (date) => html` <th>${calendar.utils.formatDate(date, 'EEE d')}</th> `,
+    )}
           </tr>
         </thead>
         <tbody>
           <tr>
             ${data.dates.map((date) => {
-              const isToday = calendar.utils.isSameDay(date, new Date());
-              return html`
+      const isToday = calendar.utils.isSameDay(date, new Date());
+      return html`
                 <td
                   style="height: 100px; vertical-align: top; background: ${isToday
-                    ? '#eee'
-                    : 'transparent'};"
+          ? '#eee'
+          : 'transparent'};"
                 >
                   ${calendar
-                    .getEventsForDate(date)
-                    .map(
-                      (e) => html`
+          .getEventsForDate(date)
+          .map(
+            (e) => html`
                         <div style="font-size: 11px; border: 1px solid; margin-bottom: 2px;">
                           ${e.title}
                         </div>
                       `,
-                    )}
+          )}
                 </td>
               `;
-            })}
+    })}
           </tr>
         </tbody>
       </table>

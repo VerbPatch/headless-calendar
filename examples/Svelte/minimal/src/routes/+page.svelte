@@ -9,7 +9,7 @@
 	});
 </script>
 
-<h1>Welcome to Svelte Calendar</h1>
+<h1>Svelte Calendar minimal Example</h1>
 {#if showCalendar}
 	<Calendar />
 {:else}

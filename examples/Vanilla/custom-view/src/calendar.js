@@ -78,6 +78,7 @@ export function setupCalendar($elem) {
 
     let html = `
       <div style="font-family: sans-serif; padding: 20px;">
+        <h1>Vanilla Calendar Custom View Example</h1>
         <div>
           <button id="prev">Prev</button>
           <button id="today">Today</button>

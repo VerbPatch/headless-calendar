@@ -47,6 +47,7 @@ const CalendarDemo: Component = () => {
 
   return (
     <div style={{ padding: '20px', 'font-family': 'sans-serif' }}>
+      <h1>Solidjs Calendar Custom View Example</h1>
       <div>
         <button onClick={() => calendar()?.goToPrevious()}>Prev</button>
         <button onClick={() => calendar()?.goToToday()}>Today</button>
@@ -96,8 +97,6 @@ const CalendarDemo: Component = () => {
           when={calendar()?.customViewOptions?.unit === 'month' && calendar()?.monthData}
           fallback={
             <table
-              border="1"
-              cellPadding={5}
               style={{ width: '100%', 'border-collapse': 'collapse', 'text-align': 'center' }}
             >
               <thead>
@@ -158,8 +157,6 @@ const CalendarDemo: Component = () => {
               <div>
                 <h3>{calendar()?.utils.formatLocalizedMonth(m.date)}</h3>
                 <table
-                  border="1"
-                  cellPadding={5}
                   style={{ width: '100%', 'border-collapse': 'collapse', 'text-align': 'center' }}
                 >
                   <thead>
