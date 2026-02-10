@@ -7,3 +7,7 @@ coverage
 # Ignore markdown files
 **/*.md
 **/*.mdx
+
+# Ignore yaml file
+**/*.yaml
+**/*.yml

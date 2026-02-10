@@ -128,9 +128,7 @@ export class CalendarDemo extends LitElement {
               ${timeSlots.map(
                 (slot) => html`
                   <tr>
-                    <td width="25%" style="border-bottom: 1px solid;">
-                      ${slot.label} &nbsp;
-                    </td>
+                    <td width="25%" style="border-bottom: 1px solid;">${slot.label} &nbsp;</td>
                   </tr>
                 `,
               )}
@@ -168,10 +166,7 @@ export class CalendarDemo extends LitElement {
               </h3>
             </th>
             <th colspan="2" style="border-bottom: 1px solid; border-right: 1px solid;">
-              <select
-                .value=${view}
-                @change=${(e: any) => changeView(e.target.value as ViewType)}
-              >
+              <select .value=${view} @change=${(e: any) => changeView(e.target.value as ViewType)}>
                 <option value="month">Month</option>
                 <option value="week">Week</option>
                 <option value="day">Day</option>

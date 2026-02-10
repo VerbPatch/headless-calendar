@@ -96,9 +96,7 @@ const CalendarDemo: Component = () => {
         <Show
           when={calendar()?.customViewOptions?.unit === 'month' && calendar()?.monthData}
           fallback={
-            <table
-              style={{ width: '100%', 'border-collapse': 'collapse', 'text-align': 'center' }}
-            >
+            <table style={{ width: '100%', 'border-collapse': 'collapse', 'text-align': 'center' }}>
               <thead>
                 <tr>
                   <For

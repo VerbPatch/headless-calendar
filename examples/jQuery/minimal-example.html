@@ -1,35 +1,35 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Calendar minimal Example</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 0;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>jQuery Calendar minimal Example</title>
-  <style>
-    table {
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 0;
-    }
-  </style>
-</head>
+  <body>
+    <h1>jQuery Calendar minimal Example</h1>
+    <div id="calendar"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#calendar').headlessCalendar({
+          defaultView: 'month',
+          startOfWeek: 0,
+          locale: 'en-IN',
+          onRender: function (cal) {
+            const { view, monthData, weekData, dayData, timeSlots, utils } = cal;
 
-<body>
-  <h1>jQuery Calendar minimal Example</h1>
-  <div id="calendar"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#calendar').headlessCalendar({
-        defaultView: 'month',
-        startOfWeek: 0,
-        locale: 'en-IN',
-        onRender: function (cal) {
-          const { view, monthData, weekData, dayData, timeSlots, utils } = cal;
-
-          let html = `
+            let html = `
             <table border="0" width="840" cellspacing="0" style="height:700px; border-left:1px solid; border-top:1px solid;">
               <thead>
                 <tr>
@@ -57,19 +57,19 @@
               <tbody>
           `;
 
-          if (view === 'month' && monthData) {
-            html += '<tr>';
-            utils.daysofWeek('short').forEach((day) => {
-              html += `<th style="width: 120px; border-right:1px solid; border-bottom:1px solid;">${day}</th>`;
-            });
-            html += '</tr>';
-
-            monthData.weeks.forEach((week) => {
+            if (view === 'month' && monthData) {
               html += '<tr>';
-              week.forEach((date) => {
-                const isCurrentMonth = monthData.isCurrentMonth(date);
-                const isToday = monthData.isToday(date);
-                html += `
+              utils.daysofWeek('short').forEach((day) => {
+                html += `<th style="width: 120px; border-right:1px solid; border-bottom:1px solid;">${day}</th>`;
+              });
+              html += '</tr>';
+
+              monthData.weeks.forEach((week) => {
+                html += '<tr>';
+                week.forEach((date) => {
+                  const isCurrentMonth = monthData.isCurrentMonth(date);
+                  const isToday = monthData.isToday(date);
+                  html += `
                   <td style="
                     ${!isCurrentMonth ? 'color: gray;' : ''}
                     ${isToday ? 'font-weight: bold;' : ''}
@@ -78,11 +78,11 @@
                     ${utils.formatDate(date, 'd')}
                   </td>
                 `;
+                });
+                html += '</tr>';
               });
-              html += '</tr>';
-            });
-          } else if (view === 'week' && weekData) {
-            html += `
+            } else if (view === 'week' && weekData) {
+              html += `
               <tr>
                 <td colspan="7" style="border-right:1px solid;">
                   <table cellpadding="5" cellspacing="0" width="100%">
@@ -122,8 +122,8 @@
                 </td>
               </tr>
             `;
-          } else if (view === 'day' && dayData) {
-            html += `
+            } else if (view === 'day' && dayData) {
+              html += `
               <tr>
                 <td colspan="7" align="center" style="border-right: 1px solid; border-bottom: 1px solid;">
                   ${dayData.dayName}
@@ -149,30 +149,29 @@
                 </td>
               </tr>
             `;
-          }
+            }
 
-          html += '</tbody></table>';
-          $('#calendar').html(html);
-        },
+            html += '</tbody></table>';
+            $('#calendar').html(html);
+          },
+        });
+
+        $(document).on('click', '#btn-prev', function () {
+          $('#calendar').headlessCalendar('goToPrevious');
+        });
+
+        $(document).on('click', '#btn-today', function () {
+          $('#calendar').headlessCalendar('goToToday');
+        });
+
+        $(document).on('click', '#btn-next', function () {
+          $('#calendar').headlessCalendar('goToNext');
+        });
+
+        $(document).on('change', '#view-select', function () {
+          $('#calendar').headlessCalendar('changeView', this.value);
+        });
       });
-
-      $(document).on('click', '#btn-prev', function () {
-        $('#calendar').headlessCalendar('goToPrevious');
-      });
-
-      $(document).on('click', '#btn-today', function () {
-        $('#calendar').headlessCalendar('goToToday');
-      });
-
-      $(document).on('click', '#btn-next', function () {
-        $('#calendar').headlessCalendar('goToNext');
-      });
-
-      $(document).on('change', '#view-select', function () {
-        $('#calendar').headlessCalendar('changeView', this.value);
-      });
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

@@ -11,7 +11,12 @@ const calendar = useCalendar({
 <template>
   <div v-if="calendar">
     <h1>Vue.js Calendar minimal Example</h1>
-    <table border="0" width="840" cellspacing="0" style="height: 700px; border-left: 1px solid; border-top: 1px solid">
+    <table
+      border="0"
+      width="840"
+      cellspacing="0"
+      style="height: 700px; border-left: 1px solid; border-top: 1px solid"
+    >
       <thead>
         <tr>
           <th colspan="2" style="border-bottom: 1px solid">
@@ -27,7 +32,10 @@ const calendar = useCalendar({
             </h3>
           </th>
           <th colspan="2" style="border-bottom: 1px solid; border-right: 1px solid">
-            <select :value="calendar.view" @change="(e: any) => calendar?.changeView(e.target.value)">
+            <select
+              :value="calendar.view"
+              @change="(e: any) => calendar?.changeView(e.target.value)"
+            >
               <option value="month">Month</option>
               <option value="week">Week</option>
               <option value="day">Day</option>
@@ -38,18 +46,25 @@ const calendar = useCalendar({
       <tbody>
         <template v-if="calendar.view === 'month'">
           <tr>
-            <th v-for="day in calendar.utils.daysofWeek('short')" :key="day"
-              style="width: 120px; border-right: 1px solid; border-bottom: 1px solid">
+            <th
+              v-for="day in calendar.utils.daysofWeek('short')"
+              :key="day"
+              style="width: 120px; border-right: 1px solid; border-bottom: 1px solid"
+            >
               {{ day }}
             </th>
           </tr>
           <tr v-for="(week, i) in calendar.monthData?.weeks" :key="i">
-            <td v-for="(date, j) in week" :key="j" :style="{
-              color: !calendar.monthData?.isCurrentMonth(date) ? 'gray' : undefined,
-              fontWeight: calendar.monthData?.isToday(date) ? 'bold' : 'normal',
-              borderRight: '1px solid',
-              borderBottom: '1px solid',
-            }">
+            <td
+              v-for="(date, j) in week"
+              :key="j"
+              :style="{
+                color: !calendar.monthData?.isCurrentMonth(date) ? 'gray' : undefined,
+                fontWeight: calendar.monthData?.isToday(date) ? 'bold' : 'normal',
+                borderRight: '1px solid',
+                borderBottom: '1px solid',
+              }"
+            >
               {{ calendar.utils.formatDate(date, 'd') }}
             </td>
           </tr>
@@ -61,8 +76,11 @@ const calendar = useCalendar({
               <tbody>
                 <tr>
                   <td></td>
-                  <td v-for="(date, i) in calendar.weekData?.dates" :key="i"
-                    :style="{ fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal' }">
+                  <td
+                    v-for="(date, i) in calendar.weekData?.dates"
+                    :key="i"
+                    :style="{ fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal' }"
+                  >
                     {{ calendar.utils.formatDateTime(date, 'EEE d') }}
                   </td>
                 </tr>
@@ -70,10 +88,14 @@ const calendar = useCalendar({
                   <td style="border-bottom: 1px solid">
                     {{ slot.label }}
                   </td>
-                  <td v-for="(date, i) in calendar.weekData?.dates" :key="i" :style="{
-                    fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal',
-                    borderBottom: '1px solid',
-                  }">
+                  <td
+                    v-for="(date, i) in calendar.weekData?.dates"
+                    :key="i"
+                    :style="{
+                      fontWeight: calendar.weekData?.isToday(date) ? 'bold' : 'normal',
+                      borderBottom: '1px solid',
+                    }"
+                  >
                     &nbsp;
                   </td>
                 </tr>
@@ -84,7 +106,11 @@ const calendar = useCalendar({
 
         <template v-if="calendar.view === 'day'">
           <tr>
-            <td colspan="7" align="center" style="border-right: 1px solid; border-bottom: 1px solid">
+            <td
+              colspan="7"
+              align="center"
+              style="border-right: 1px solid; border-bottom: 1px solid"
+            >
               {{ calendar.dayData?.dayName }}
             </td>
           </tr>

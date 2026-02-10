@@ -138,49 +138,49 @@ export const App = component$(() => {
       <h1>Qwik Calendar minimal Example</h1>
       <table
         border="0"
-      width="840"
-      cellSpacing="0"
-      style={{ height: '700px', 'border-left': '1px solid', 'border-top': '1px solid' }}
-    >
-      <thead>
-        <tr>
-          <th colSpan={2} style={{ 'border-bottom': '1px solid' }}>
-            <button type="button" onClick$={() => goToPrevious()}>
-              {' '}
-              ←{' '}
-            </button>
-            <button type="button" onClick$={() => goToToday()}>
-              {' '}
-              Today{' '}
-            </button>
-            <button type="button" onClick$={() => goToNext()}>
-              {' '}
-              →{' '}
-            </button>
-          </th>
-          <th colSpan={3} style={{ 'border-bottom': '1px solid' }}>
-            <h3>{renderViewText()}</h3>
-          </th>
-          <th colSpan={2} style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}>
-            <select
-              value={view}
-              onChange$={(e) => {
-                changeView((e.target as HTMLSelectElement).value as ViewType);
-              }}
-            >
-              <option value="month">Month</option>
-              <option value="week">Week</option>
-              <option value="day">Day</option>
-            </select>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {view === 'month' && renderMonthView()}
-        {view === 'week' && renderWeekView()}
-        {view === 'day' && renderDayView()}
-      </tbody>
-    </table>
+        width="840"
+        cellSpacing="0"
+        style={{ height: '700px', 'border-left': '1px solid', 'border-top': '1px solid' }}
+      >
+        <thead>
+          <tr>
+            <th colSpan={2} style={{ 'border-bottom': '1px solid' }}>
+              <button type="button" onClick$={() => goToPrevious()}>
+                {' '}
+                ←{' '}
+              </button>
+              <button type="button" onClick$={() => goToToday()}>
+                {' '}
+                Today{' '}
+              </button>
+              <button type="button" onClick$={() => goToNext()}>
+                {' '}
+                →{' '}
+              </button>
+            </th>
+            <th colSpan={3} style={{ 'border-bottom': '1px solid' }}>
+              <h3>{renderViewText()}</h3>
+            </th>
+            <th colSpan={2} style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}>
+              <select
+                value={view}
+                onChange$={(e) => {
+                  changeView((e.target as HTMLSelectElement).value as ViewType);
+                }}
+              >
+                <option value="month">Month</option>
+                <option value="week">Week</option>
+                <option value="day">Day</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {view === 'month' && renderMonthView()}
+          {view === 'week' && renderWeekView()}
+          {view === 'day' && renderDayView()}
+        </tbody>
+      </table>
     </>
   );
 });

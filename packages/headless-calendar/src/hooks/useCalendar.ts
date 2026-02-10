@@ -378,8 +378,8 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
         weeks,
         monthName:
           currentCustomOptions &&
-            currentCustomOptions.count > 1 &&
-            currentCustomOptions.unit === 'month'
+          currentCustomOptions.count > 1 &&
+          currentCustomOptions.unit === 'month'
             ? `${formatLocalizedMonth(dates[0], locale, timezone)} - ${formatLocalizedMonth(dates[dates.length - 1], locale, timezone)}`
             : formatLocalizedMonth(navigation.currentDate, locale, timezone),
         isCurrentMonth: (date: Date) => isSameMonth(date, navigation.currentDate),
@@ -461,11 +461,11 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
           visibleDates.length > 1
             ? `${formatLocalizedDate(visibleDates[0], locale, timezone)} - ${formatLocalizedDate(visibleDates[visibleDates.length - 1], locale, timezone)}`
             : formatLocalizedDate(navigation.currentDate, locale, timezone, {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }),
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }),
         isToday: isSameDay(navigation.currentDate, new Date()),
       };
     },
