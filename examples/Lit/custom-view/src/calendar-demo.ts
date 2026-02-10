@@ -1,13 +1,24 @@
-import { LitElement, html, css } from "lit";
-import { customElement, state } from "lit/decorators.js";
-import { useCalendar, CustomViewOptions, generateId } from "@verbpatch/lit-calendar";
+import { LitElement, html, css } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
+import { useCalendar, CustomViewOptions, generateId } from '@verbpatch/lit-calendar';
 
-@customElement("calendar-demo")
+@customElement('calendar-demo')
 export class CalendarDemo extends LitElement {
   static styles = css`
-    :host { display: block; padding: 20px; font-family: sans-serif; }
-    table { border-collapse: collapse; width: 100%; text-align: center; }
-    th, td { border: 1px solid #ccc; }
+    :host {
+      display: block;
+      padding: 20px;
+      font-family: sans-serif;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      text-align: center;
+    }
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
   `;
 
   @state()
@@ -16,20 +27,36 @@ export class CalendarDemo extends LitElement {
   constructor() {
     super();
     this._calendarState = useCalendar(this, {
-      defaultView: "custom",
-      customViewOptions: { unit: "day", count: 2 },
+      defaultView: 'custom',
+      customViewOptions: { unit: 'day', count: 2 },
       initialEvents: [
-        { id: '1', title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
-        { id: '2', title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
+        {
+          id: '1',
+          title: 'Project Review',
+          start: new Date(),
+          end: new Date(new Date().getTime() + 3600000),
+          color: '#8b5cf6',
+        },
+        {
+          id: '2',
+          title: 'Lunch Sync',
+          start: new Date(new Date().setHours(12, 0)),
+          end: new Date(new Date().setHours(13, 0)),
+          color: '#10b981',
+        },
       ],
       onViewChange: () => this.requestUpdate(),
       onDateChange: () => this.requestUpdate(),
-      onEvent: () => this.requestUpdate()
+      onEvent: () => this.requestUpdate(),
     });
   }
 
   private _setPreset(unit: 'day' | 'week' | 'month', count: number, include?: number[]) {
-    this._calendarState.calendar.changeView('custom', { unit, count, includeSpecificDays: include });
+    this._calendarState.calendar.changeView('custom', {
+      unit,
+      count,
+      includeSpecificDays: include,
+    });
     this.requestUpdate();
   }
 
@@ -62,9 +89,30 @@ export class CalendarDemo extends LitElement {
     return html`
       <div>
         <div>
-          <button @click=${() => { calendar.goToPrevious(); this.requestUpdate(); }}>Prev</button>
-          <button @click=${() => { calendar.goToToday(); this.requestUpdate(); }}>Today</button>
-          <button @click=${() => { calendar.goToNext(); this.requestUpdate(); }}>Next</button>
+          <button
+            @click=${() => {
+              calendar.goToPrevious();
+              this.requestUpdate();
+            }}
+          >
+            Prev
+          </button>
+          <button
+            @click=${() => {
+              calendar.goToToday();
+              this.requestUpdate();
+            }}
+          >
+            Today
+          </button>
+          <button
+            @click=${() => {
+              calendar.goToNext();
+              this.requestUpdate();
+            }}
+          >
+            Next
+          </button>
           <span style="margin-left: 20px;"><strong>${this._getTitle()}</strong></span>
         </div>
 
@@ -78,8 +126,13 @@ export class CalendarDemo extends LitElement {
         </div>
 
         <div>
-          ${opts?.unit === 'month' ? (calendar.monthData ? this._renderMonthViews() : html`Loading Month...`) :
-        (calendar.dayData || calendar.weekData ? this._renderHorizontalView() : html`Loading...`)}
+          ${opts?.unit === 'month'
+            ? calendar.monthData
+              ? this._renderMonthViews()
+              : html`Loading Month...`
+            : calendar.dayData || calendar.weekData
+              ? this._renderHorizontalView()
+              : html`Loading...`}
         </div>
       </div>
     `;
@@ -88,42 +141,62 @@ export class CalendarDemo extends LitElement {
   private _renderMonthViews() {
     const { calendar } = this._calendarState;
     const months = this._getMonthsToDisplay();
-    return months.map(m => html`
-      <div>
-        <h3>${calendar.utils.formatLocalizedMonth(m.date)}</h3>
-        <table border="1" cellpadding="5">
-          <thead>
-            <tr>${calendar.utils.daysofWeek('short').map(day => html`<th>${day}</th>`)}</tr>
-          </thead>
-          <tbody>
-            ${calendar.monthData?.weeks.map(week => {
-      if (!week.some(d => d.getMonth() === m.month && d.getFullYear() === m.year)) return null;
-      return html`
-                <tr>
-                  ${[0, 1, 2, 3, 4, 5, 6].map(dayIdx => {
-        const date = week.find(d => d.getDay() === dayIdx);
-        const isInMonth = date && date.getMonth() === m.month && date.getFullYear() === m.year;
-        const isToday = date && calendar.utils.isSameDay(date, new Date());
-        return html`
-                      <td style="height: 80px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'};">
-                        ${isInMonth ? html`
-                          <strong>${date!.getDate()}</strong>
-                          <div>
-                            ${calendar.getEventsForDate(date!).map(e => html`
-                              <div style="font-size: 10px; border: 1px solid; margin-bottom: 2px;">${e.title}</div>
-                            `)}
-                          </div>
-                        ` : ''}
-                      </td>
-                    `;
-      })}
-                </tr>
-              `;
-    })}
-          </tbody>
-        </table>
-      </div>
-    `);
+    return months.map(
+      (m) => html`
+        <div>
+          <h3>${calendar.utils.formatLocalizedMonth(m.date)}</h3>
+          <table border="1" cellpadding="5">
+            <thead>
+              <tr>
+                ${calendar.utils.daysofWeek('short').map((day) => html`<th>${day}</th>`)}
+              </tr>
+            </thead>
+            <tbody>
+              ${calendar.monthData?.weeks.map((week) => {
+                if (!week.some((d) => d.getMonth() === m.month && d.getFullYear() === m.year))
+                  return null;
+                return html`
+                  <tr>
+                    ${[0, 1, 2, 3, 4, 5, 6].map((dayIdx) => {
+                      const date = week.find((d) => d.getDay() === dayIdx);
+                      const isInMonth =
+                        date && date.getMonth() === m.month && date.getFullYear() === m.year;
+                      const isToday = date && calendar.utils.isSameDay(date, new Date());
+                      return html`
+                        <td
+                          style="height: 80px; vertical-align: top; background: ${isToday
+                            ? '#eee'
+                            : 'transparent'};"
+                        >
+                          ${isInMonth
+                            ? html`
+                                <strong>${date!.getDate()}</strong>
+                                <div>
+                                  ${calendar
+                                    .getEventsForDate(date!)
+                                    .map(
+                                      (e) => html`
+                                        <div
+                                          style="font-size: 10px; border: 1px solid; margin-bottom: 2px;"
+                                        >
+                                          ${e.title}
+                                        </div>
+                                      `,
+                                    )}
+                                </div>
+                              `
+                            : ''}
+                        </td>
+                      `;
+                    })}
+                  </tr>
+                `;
+              })}
+            </tbody>
+          </table>
+        </div>
+      `,
+    );
   }
 
   private _renderHorizontalView() {
@@ -135,23 +208,33 @@ export class CalendarDemo extends LitElement {
       <table border="1" cellpadding="5">
         <thead>
           <tr>
-            ${data.dates.map(date => html`
-              <th>${calendar.utils.formatDate(date, 'EEE d')}</th>
-            `)}
+            ${data.dates.map(
+              (date) => html` <th>${calendar.utils.formatDate(date, 'EEE d')}</th> `,
+            )}
           </tr>
         </thead>
         <tbody>
           <tr>
-            ${data.dates.map(date => {
-      const isToday = calendar.utils.isSameDay(date, new Date());
-      return html`
-                <td style="height: 100px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'};">
-                  ${calendar.getEventsForDate(date).map(e => html`
-                    <div style="font-size: 11px; border: 1px solid; margin-bottom: 2px;">${e.title}</div>
-                  `)}
+            ${data.dates.map((date) => {
+              const isToday = calendar.utils.isSameDay(date, new Date());
+              return html`
+                <td
+                  style="height: 100px; vertical-align: top; background: ${isToday
+                    ? '#eee'
+                    : 'transparent'};"
+                >
+                  ${calendar
+                    .getEventsForDate(date)
+                    .map(
+                      (e) => html`
+                        <div style="font-size: 11px; border: 1px solid; margin-bottom: 2px;">
+                          ${e.title}
+                        </div>
+                      `,
+                    )}
                 </td>
               `;
-    })}
+            })}
           </tr>
         </tbody>
       </table>
@@ -161,6 +244,6 @@ export class CalendarDemo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'calendar-demo': CalendarDemo
+    'calendar-demo': CalendarDemo;
   }
 }

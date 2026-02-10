@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbpatch/vuejs-calendar": "workspace:*",
+    "@verbpatch/vuejs-calendar": "latest",
     "vue": "^3.4.21"
   },
   "devDependencies": {

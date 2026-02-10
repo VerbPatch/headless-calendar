@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from "preact/hooks";
-import { useCalendar, generateId, type CalendarEvent } from "@verbpatch/preact-calendar";
-import type { FunctionalComponent } from "preact";
+import { useCallback, useMemo } from 'preact/hooks';
+import { useCalendar, generateId, type CalendarEvent } from '@verbpatch/preact-calendar';
+import type { FunctionalComponent } from 'preact';
 
 export const CalendarDemo: FunctionalComponent = () => {
   const initialEvents = useMemo<CalendarEvent[]>(() => {
@@ -12,22 +12,22 @@ export const CalendarDemo: FunctionalComponent = () => {
     return [
       {
         id: generateId(),
-        title: "Team Meeting",
+        title: 'Team Meeting',
         start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 16, 0, 0),
         end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0),
-        description: "Weekly team sync",
+        description: 'Weekly team sync',
         allDay: false,
-        color: "#3b82f6",
-        timezone: "Asia/Calcutta",
+        color: '#3b82f6',
+        timezone: 'Asia/Calcutta',
       },
       {
         id: generateId(),
-        title: "Project Deadline",
+        title: 'Project Deadline',
         start: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         end: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         allDay: true,
-        color: "#ef4444",
-        timezone: "Asia/Calcutta",
+        color: '#ef4444',
+        timezone: 'Asia/Calcutta',
       },
     ];
   }, []);
@@ -57,7 +57,7 @@ export const CalendarDemo: FunctionalComponent = () => {
     clearAllEvents,
     utils: { formatDate, formatDateTime, daysofWeek, dateTimeInBetween },
   } = useCalendar({
-    defaultView: "month",
+    defaultView: 'month',
     startOfWeek: 0, // 0 = Sunday, 1 = Monday
     timeSlotInterval: 30,
     initialEvents,
@@ -70,13 +70,13 @@ export const CalendarDemo: FunctionalComponent = () => {
       console.log(view);
     },
     onDateChange: (date) => {
-      console.log("Current date:", date);
+      console.log('Current date:', date);
       //setCurrentDate(date);
     },
-    locale: "en-IN",
-    timezone: "Asia/Calcutta",
+    locale: 'en-IN',
+    timezone: 'Asia/Calcutta',
     onEvent: (events: CalendarEvent[]) => {
-      console.log("Events:", events);
+      console.log('Events:', events);
       //setEvents(events);
     },
     //onEventUpdate: (event: CalendarEvent) => console.log("Event updated:", event),
@@ -85,7 +85,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
   const generateColor = useCallback((): string => {
     const randomColorValue = Math.floor(Math.random() * 16777215);
-    const hexColor = randomColorValue.toString(16).padStart(6, "0");
+    const hexColor = randomColorValue.toString(16).padStart(6, '0');
     return `#${hexColor}`;
   }, []);
 
@@ -97,7 +97,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
     createEvent({
       id: generateId(),
-      title: "New Event",
+      title: 'New Event',
       start: startTime,
       end: endTime,
       color: generateColor(),
@@ -106,7 +106,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
   const handleEventDragStart = useCallback((event: CalendarEvent, e: DragEvent): void => {
     //console.log({ event });
-    startDrag(event, { type: "event" });
+    startDrag(event, { type: 'event' });
   }, []);
 
   const eventHandleDrop = useCallback((e: DragEvent, date: Date, time?: string): void => {
@@ -114,13 +114,13 @@ export const CalendarDemo: FunctionalComponent = () => {
   }, []);
 
   const renderMonthView = (): preact.JSX.Element | null => {
-    console.log("Rendering Month View", monthData);
+    console.log('Rendering Month View', monthData);
     if (!monthData) return null;
     //console.log(calendar.monthData);
     return (
       <>
         <tr>
-          {daysofWeek("long").map((day) => (
+          {daysofWeek('long').map((day) => (
             <td align="center" key={day}>
               {day}
             </td>
@@ -139,18 +139,18 @@ export const CalendarDemo: FunctionalComponent = () => {
                   align="center"
                   key={dayIndex}
                   style={{
-                    backgroundColor: isToday ? "#cecece" : "#fff",
-                    fontWeight: isToday ? "bold" : "normal",
-                    color: isCurrentMonth ? "#000" : "#888",
-                    cursor: "pointer",
-                    width: "100px",
-                    height: "50px",
+                    backgroundColor: isToday ? '#cecece' : '#fff',
+                    fontWeight: isToday ? 'bold' : 'normal',
+                    color: isCurrentMonth ? '#000' : '#888',
+                    cursor: 'pointer',
+                    width: '100px',
+                    height: '50px',
                   }}
                   onClick={() => handleDateClick(date)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => eventHandleDrop(e, date)}
                 >
-                  <div>{formatDate(date, "d")}</div>
+                  <div>{formatDate(date, 'd')}</div>
 
                   <div>
                     {dateEvents.slice(0, 2).map((event) => (
@@ -188,8 +188,14 @@ export const CalendarDemo: FunctionalComponent = () => {
           <div></div>
           {weekData.dates.map((date, index) => (
             <div key={index}>
-              <div className={`font-semibold ${weekData!.isToday(date) ? "text-blue-600" : ""}`}>{formatDateTime(date, "EEE")}</div>
-              <div className={`text-sm ${weekData!.isToday(date) ? "text-blue-600" : "text-gray-600"}`}>{formatDateTime(date, "d")}</div>
+              <div className={`font-semibold ${weekData!.isToday(date) ? 'text-blue-600' : ''}`}>
+                {formatDateTime(date, 'EEE')}
+              </div>
+              <div
+                className={`text-sm ${weekData!.isToday(date) ? 'text-blue-600' : 'text-gray-600'}`}
+              >
+                {formatDateTime(date, 'd')}
+              </div>
             </div>
           ))}
         </div>
@@ -210,7 +216,18 @@ export const CalendarDemo: FunctionalComponent = () => {
                   const slotEvents = getEventsForDate(date).filter((event, index) => {
                     const eventStart = new Date(event.start);
                     const eventEnd = new Date(event.end);
-                    return dateTimeInBetween(new Date(date.getFullYear(), date.getMonth(), date.getDate(), slot.hour, slot.minute, 0), eventStart, eventEnd);
+                    return dateTimeInBetween(
+                      new Date(
+                        date.getFullYear(),
+                        date.getMonth(),
+                        date.getDate(),
+                        slot.hour,
+                        slot.minute,
+                        0,
+                      ),
+                      eventStart,
+                      eventEnd,
+                    );
                   });
                   slotEvents.length > 0 && console.log(slotEvents);
                   return (
@@ -227,7 +244,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
                         createEvent({
                           id: generateId(),
-                          title: "New Event",
+                          title: 'New Event',
                           start: eventStart,
                           end: eventEnd,
                           color: generateColor(),
@@ -235,7 +252,13 @@ export const CalendarDemo: FunctionalComponent = () => {
                       }}
                     >
                       {slotEvents.map((event) => (
-                        <div key={event.id} style={{ backgroundColor: event.color }} draggable onDragStart={(e) => handleEventDragStart(event, e)} data-props={JSON.stringify(event)}>
+                        <div
+                          key={event.id}
+                          style={{ backgroundColor: event.color }}
+                          draggable
+                          onDragStart={(e) => handleEventDragStart(event, e)}
+                          data-props={JSON.stringify(event)}
+                        >
                           {event.title}
                         </div>
                       ))}
@@ -256,7 +279,9 @@ export const CalendarDemo: FunctionalComponent = () => {
     return (
       <div>
         <div>
-          <h2 className={`text-xl font-semibold ${dayData.isToday ? "text-blue-600" : ""}`}>{dayData.dayName}</h2>
+          <h2 className={`text-xl font-semibold ${dayData.isToday ? 'text-blue-600' : ''}`}>
+            {dayData.dayName}
+          </h2>
         </div>
 
         <div>
@@ -270,7 +295,9 @@ export const CalendarDemo: FunctionalComponent = () => {
             {timeSlots.map((slot) => {
               const slotEvents = getEventsForDate(dayData!.date).filter((event) => {
                 const eventStart = new Date(event.start);
-                return eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute;
+                return (
+                  eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute
+                );
               });
 
               return (
@@ -286,7 +313,7 @@ export const CalendarDemo: FunctionalComponent = () => {
 
                     createEvent({
                       id: generateId(),
-                      title: "New Event",
+                      title: 'New Event',
                       start: eventStart,
                       end: eventEnd,
                       color: generateColor(),
@@ -294,7 +321,13 @@ export const CalendarDemo: FunctionalComponent = () => {
                   }}
                 >
                   {slotEvents.map((event) => (
-                    <div data-time={JSON.stringify(event)} key={event.id} style={{ backgroundColor: event.color }} draggable onDragStart={(e) => handleEventDragStart(event, e)}>
+                    <div
+                      data-time={JSON.stringify(event)}
+                      key={event.id}
+                      style={{ backgroundColor: event.color }}
+                      draggable
+                      onDragStart={(e) => handleEventDragStart(event, e)}
+                    >
                       <div>{event.title}</div>
                       {event.description && <div>{event.description}</div>}
                     </div>
@@ -309,7 +342,7 @@ export const CalendarDemo: FunctionalComponent = () => {
   };
 
   return (
-    <table border={0} style={{ width: 800, height: 800, margin: "0 auto" }}>
+    <table border={0} style={{ width: 800, height: 800, margin: '0 auto' }}>
       <tbody>
         <tr>
           <td style={{ height: 600 }}>
@@ -332,20 +365,30 @@ export const CalendarDemo: FunctionalComponent = () => {
                   </td>
                   <td colSpan={3} align="center">
                     <h3>
-                      {view === "month" && monthData?.monthName}
-                      {view === "week" && weekData?.weekRange}
-                      {view === "day" && dayData?.dayName}
+                      {view === 'month' && monthData?.monthName}
+                      {view === 'week' && weekData?.weekRange}
+                      {view === 'day' && dayData?.dayName}
                     </h3>
                     {/* {formatDateTime(currentDate, "EE dd MMM yyyy")} */}
                   </td>
                   <td colSpan={2} align="center">
-                    <button onClick={() => changeView("month")} className={`px-4 py-2 rounded ${view === "month" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
+                    <button
+                      onClick={() => changeView('month')}
+                      className={`px-4 py-2 rounded ${view === 'month' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    >
                       Month
                     </button>
-                    <button onClick={() => changeView("week")} className={`px-4 py-2 rounded ${view === "week" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
+                    <button
+                      onClick={() => changeView('week')}
+                      className={`px-4 py-2 rounded ${view === 'week' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    >
                       Week
                     </button>
-                    <button type="button" onClick={() => changeView("day")} className={`px-4 py-2 rounded ${view === "day" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
+                    <button
+                      type="button"
+                      onClick={() => changeView('day')}
+                      className={`px-4 py-2 rounded ${view === 'day' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    >
                       Day
                     </button>
                   </td>
@@ -365,9 +408,9 @@ export const CalendarDemo: FunctionalComponent = () => {
               </tr>*/}
               </thead>
               <tbody>
-                {view === "month" && renderMonthView()}
-                {view === "week" && renderWeekView()}
-                {view === "day" && renderDayView()}
+                {view === 'month' && renderMonthView()}
+                {view === 'week' && renderWeekView()}
+                {view === 'day' && renderDayView()}
               </tbody>
             </table>
           </td>
@@ -375,7 +418,7 @@ export const CalendarDemo: FunctionalComponent = () => {
         <tr>
           <td>
             <h3>Events ({events.length})</h3>
-            <div style={{ height: 200, overflow: "auto" }}>
+            <div style={{ height: 200, overflow: 'auto' }}>
               <div>
                 {events.map((event) => {
                   return (
@@ -383,17 +426,18 @@ export const CalendarDemo: FunctionalComponent = () => {
                       key={event.id}
                       style={{
                         backgroundColor: event.color,
-                        display: "flex",
+                        display: 'flex',
                         marginBottom: 8,
                         padding: 4,
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                       }}
                     >
                       <div>
-                        <strong style={{ display: "block" }}>{event.title}</strong>
+                        <strong style={{ display: 'block' }}>{event.title}</strong>
                         <span style={{ fontSize: 11 }}>
-                          {formatDateTime(event.start, "dd MMM yyyy hh:mm a")} to {formatDateTime(event.end, "dd MMM yyyy hh:mm a")}
+                          {formatDateTime(event.start, 'dd MMM yyyy hh:mm a')} to{' '}
+                          {formatDateTime(event.end, 'dd MMM yyyy hh:mm a')}
                         </span>
                       </div>
 

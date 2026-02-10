@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbpatch/solidjs-calendar": "workspace:*",
+    "@verbpatch/solidjs-calendar": "latest",
     "solid-js": "^1.8.15"
   },
   "devDependencies": {

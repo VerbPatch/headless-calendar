@@ -1,3 +1,3 @@
-import { setupCalendar } from './calendar.js'
+import { setupCalendar } from './calendar.js';
 
-setupCalendar(document.querySelector('#calendar-app'))
+setupCalendar(document.querySelector('#calendar-app'));

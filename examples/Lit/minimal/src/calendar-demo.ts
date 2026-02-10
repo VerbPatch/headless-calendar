@@ -1,12 +1,8 @@
-import { LitElement, html, css, nothing } from "lit";
-import { customElement, state } from "lit/decorators.js";
-import {
-  useCalendar,
-  CalendarEvent,
-  generateId,
-} from "@verbpatch/lit-calendar";
+import { LitElement, html, css, nothing } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
+import { useCalendar, CalendarEvent, generateId } from '@verbpatch/lit-calendar';
 
-@customElement("calendar-demo")
+@customElement('calendar-demo')
 export class CalendarDemo extends LitElement {
   static styles = css`
     :host {
@@ -63,7 +59,7 @@ export class CalendarDemo extends LitElement {
   constructor() {
     super();
     this._calendarState = useCalendar(this, {
-      defaultView: "month",
+      defaultView: 'month',
       startOfWeek: 0, // 0 = Sunday, 1 = Monday
       timeSlotInterval: 30,
       initialEvents: this.initialEvents,
@@ -73,8 +69,8 @@ export class CalendarDemo extends LitElement {
       onDateChange: (date) => {
         this.requestUpdate();
       },
-      locale: "en-IN",
-      timezone: "Asia/Calcutta",
+      locale: 'en-IN',
+      timezone: 'Asia/Calcutta',
       onEvent: (events: CalendarEvent[]) => {
         this.requestUpdate();
       },
@@ -83,70 +79,36 @@ export class CalendarDemo extends LitElement {
 
   private initialEvents: CalendarEvent[] = (() => {
     const _today = new Date();
-    const today = new Date(
-      _today.getFullYear(),
-      _today.getMonth(),
-      _today.getDate(),
-      0,
-      0,
-      0
-    );
+    const today = new Date(_today.getFullYear(), _today.getMonth(), _today.getDate(), 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     return [
       {
         id: generateId(),
-        title: "Team Meeting",
-        start: new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDate(),
-          16,
-          0,
-          0
-        ),
-        end: new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          today.getDate(),
-          18,
-          0
-        ),
-        description: "Weekly team sync",
+        title: 'Team Meeting',
+        start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 16, 0, 0),
+        end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0),
+        description: 'Weekly team sync',
         allDay: false,
-        color: "#3b82f6",
-        timezone: "Asia/Calcutta",
+        color: '#3b82f6',
+        timezone: 'Asia/Calcutta',
       },
       {
         id: generateId(),
-        title: "Project Deadline",
-        start: new Date(
-          tomorrow.getFullYear(),
-          tomorrow.getMonth(),
-          tomorrow.getDate(),
-          0,
-          0,
-          0
-        ),
-        end: new Date(
-          tomorrow.getFullYear(),
-          tomorrow.getMonth(),
-          tomorrow.getDate(),
-          0,
-          0,
-          0
-        ),
+        title: 'Project Deadline',
+        start: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
+        end: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         allDay: true,
-        color: "#ef4444",
-        timezone: "Asia/Calcutta",
+        color: '#ef4444',
+        timezone: 'Asia/Calcutta',
       },
     ];
   })();
 
   private generateColor(): string {
     const randomColorValue = Math.floor(Math.random() * 16777215);
-    const hexColor = randomColorValue.toString(16).padStart(6, "0");
+    const hexColor = randomColorValue.toString(16).padStart(6, '0');
     return `#${hexColor}`;
   }
 
@@ -158,7 +120,7 @@ export class CalendarDemo extends LitElement {
 
     this._calendarState.calendar.createEvent({
       id: generateId(),
-      title: "New Event",
+      title: 'New Event',
       start: startTime,
       end: endTime,
       color: this.generateColor(),
@@ -166,7 +128,7 @@ export class CalendarDemo extends LitElement {
   }
 
   private handleEventDragStart(event: CalendarEvent, e: DragEvent): void {
-    this._calendarState.calendar.startDrag(event, { type: "event" });
+    this._calendarState.calendar.startDrag(event, { type: 'event' });
   }
 
   private eventHandleDrop(e: DragEvent, date: Date, time?: string): void {
@@ -179,59 +141,53 @@ export class CalendarDemo extends LitElement {
 
     return html`
       <tr>
-        ${utils.daysofWeek("long").map(
-      (day) => html`<td align="center">${day}</td>`
-    )}
+        ${utils.daysofWeek('long').map((day) => html`<td align="center">${day}</td>`)}
       </tr>
 
       ${monthData.weeks.map(
-      (week, weekIndex) => html`
+        (week, weekIndex) => html`
           <tr key=${weekIndex}>
             ${week.map((date, dayIndex) => {
-        const dateEvents = getEventsForDate(date);
-        const isCurrentMonth = monthData.isCurrentMonth(date);
-        const isToday = monthData.isToday(date);
+              const dateEvents = getEventsForDate(date);
+              const isCurrentMonth = monthData.isCurrentMonth(date);
+              const isToday = monthData.isToday(date);
 
-        return html`
+              return html`
                 <td
                   align="center"
-                  class="${isToday ? "today" : ""} ${isCurrentMonth
-            ? "current-month"
-            : "other-month"}"
+                  class="${isToday ? 'today' : ''} ${isCurrentMonth
+                    ? 'current-month'
+                    : 'other-month'}"
                   @click=${() => this.handleDateClick(date)}
                   @dragover=${(e: DragEvent) => e.preventDefault()}
                   @drop=${(e: DragEvent) => this.eventHandleDrop(e, date)}
                 >
-                  <div>${utils.formatDate(date, "d")}</div>
+                  <div>${utils.formatDate(date, 'd')}</div>
 
                   <div>
                     ${dateEvents.slice(0, 2).map(
-              (event) => html`
+                      (event) => html`
                         <div
                           class="event"
                           style="background-color: ${event.color}"
                           draggable="true"
-                          @dragstart=${(e: DragEvent) =>
-                  this.handleEventDragStart(event, e)}
+                          @dragstart=${(e: DragEvent) => this.handleEventDragStart(event, e)}
                           @click=${(e: Event) => {
-                  e.stopPropagation();
-                }}
+                            e.stopPropagation();
+                          }}
                         >
                           ${event.title}
                         </div>
-                      `
-            )}
-
-                    ${dateEvents.length > 2
-            ? html`<div>+${dateEvents.length - 2} more</div>`
-            : ""}
+                      `,
+                    )}
+                    ${dateEvents.length > 2 ? html`<div>+${dateEvents.length - 2} more</div>` : ''}
                   </div>
                 </td>
               `;
-      })}
+            })}
           </tr>
-        `
-    )}
+        `,
+      )}
     `;
   }
 
@@ -245,97 +201,83 @@ export class CalendarDemo extends LitElement {
         <div>
           <div></div>
           ${weekData.dates.map(
-      (date, index) => html`
+            (date, index) => html`
               <div key=${index}>
-                <div
-                  class="font-semibold ${weekData.isToday(date)
-          ? "text-blue-600"
-          : ""}"
-                >
-                  ${utils.formatDateTime(date, "EEE")}
+                <div class="font-semibold ${weekData.isToday(date) ? 'text-blue-600' : ''}">
+                  ${utils.formatDateTime(date, 'EEE')}
                 </div>
-                <div
-                  class="text-sm ${weekData.isToday(date)
-          ? "text-blue-600"
-          : "text-gray-600"}"
-                >
-                  ${utils.formatDateTime(date, "d")}
+                <div class="text-sm ${weekData.isToday(date) ? 'text-blue-600' : 'text-gray-600'}">
+                  ${utils.formatDateTime(date, 'd')}
                 </div>
               </div>
-            `
-    )}
+            `,
+          )}
         </div>
 
         <div>
           <div>
-            ${timeSlots.map(
-      (slot) => html`<div data-slot=${slot.time}>${slot.label}</div>`
-    )}
+            ${timeSlots.map((slot) => html`<div data-slot=${slot.time}>${slot.label}</div>`)}
           </div>
 
           ${weekData.dates.map(
-      (date, dateIndex) => html`
+            (date, dateIndex) => html`
               <div key=${dateIndex}>
                 ${timeSlots.map((slot) => {
-        const slotEvents = getEventsForDate(date).filter((event) => {
-          const eventStart = new Date(event.start);
-          const eventEnd = new Date(event.end);
-          return utils.dateTimeInBetween(
-            new Date(
-              date.getFullYear(),
-              date.getMonth(),
-              date.getDate(),
-              slot.hour,
-              slot.minute,
-              0
-            ),
-            eventStart,
-            eventEnd
-          );
-        });
-        return html`
+                  const slotEvents = getEventsForDate(date).filter((event) => {
+                    const eventStart = new Date(event.start);
+                    const eventEnd = new Date(event.end);
+                    return utils.dateTimeInBetween(
+                      new Date(
+                        date.getFullYear(),
+                        date.getMonth(),
+                        date.getDate(),
+                        slot.hour,
+                        slot.minute,
+                        0,
+                      ),
+                      eventStart,
+                      eventEnd,
+                    );
+                  });
+                  return html`
                     <div
                       data-slot=${slot.time}
                       @dragover=${(e: DragEvent) => e.preventDefault()}
-                      @drop=${(e: DragEvent) =>
-            this.eventHandleDrop(e, date, slot.time)}
+                      @drop=${(e: DragEvent) => this.eventHandleDrop(e, date, slot.time)}
                       @click=${() => {
-            const eventStart = new Date(date);
-            eventStart.setHours(slot.hour, slot.minute);
-            const eventEnd = new Date(eventStart);
-            eventEnd.setMinutes(
-              eventEnd.getMinutes() + (timeSlotInterval ?? 60)
-            );
+                        const eventStart = new Date(date);
+                        eventStart.setHours(slot.hour, slot.minute);
+                        const eventEnd = new Date(eventStart);
+                        eventEnd.setMinutes(eventEnd.getMinutes() + (timeSlotInterval ?? 60));
 
-            this._calendarState.calendar.createEvent({
-              id: generateId(),
-              title: "New Event",
-              start: eventStart,
-              end: eventEnd,
-              color: this.generateColor(),
-            });
-          }}
+                        this._calendarState.calendar.createEvent({
+                          id: generateId(),
+                          title: 'New Event',
+                          start: eventStart,
+                          end: eventEnd,
+                          color: this.generateColor(),
+                        });
+                      }}
                     >
                       ${slotEvents.map(
-            (event) => html`
+                        (event) => html`
                           <div
                             class="event"
                             style="background-color: ${event.color}"
                             draggable="true"
-                            @dragstart=${(e: DragEvent) =>
-                this.handleEventDragStart(event, e)}
+                            @dragstart=${(e: DragEvent) => this.handleEventDragStart(event, e)}
                             data-props=${JSON.stringify(event)}
                           >
                             ${event.title}
                           </div>
-                        `
-          )}
+                        `,
+                      )}
                     </div>
                   `;
-      })}
+                })}
               </div>
-            `
-    )}
+            `,
+          )}
         </div>
       </div>
     `;
@@ -348,75 +290,60 @@ export class CalendarDemo extends LitElement {
     return html`
       <div>
         <div>
-          <h2
-            class="text-xl font-semibold ${dayData.isToday
-        ? "text-blue-600"
-        : ""}"
-          >
+          <h2 class="text-xl font-semibold ${dayData.isToday ? 'text-blue-600' : ''}">
             ${dayData.dayName}
           </h2>
         </div>
 
         <div>
-          <div>
-            ${timeSlots.map(
-          (slot) => html`<div key=${slot.time}>${slot.label}</div>`
-        )}
-          </div>
+          <div>${timeSlots.map((slot) => html`<div key=${slot.time}>${slot.label}</div>`)}</div>
 
           <div>
             ${timeSlots.map((slot) => {
-          const slotEvents = getEventsForDate(dayData.dates[0]).filter(
-            (event) => {
-              const eventStart = new Date(event.start);
-              return (
-                eventStart.getHours() === slot.hour &&
-                eventStart.getMinutes() === slot.minute
-              );
-            }
-          );
+              const slotEvents = getEventsForDate(dayData.dates[0]).filter((event) => {
+                const eventStart = new Date(event.start);
+                return (
+                  eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute
+                );
+              });
 
-          return html`
+              return html`
                 <div
                   key=${slot.time}
                   @dragover=${(e: DragEvent) => e.preventDefault()}
-                  @drop=${(e: DragEvent) =>
-              this.eventHandleDrop(e, dayData.dates[0], slot.time)}
+                  @drop=${(e: DragEvent) => this.eventHandleDrop(e, dayData.dates[0], slot.time)}
                   @click=${() => {
-              const eventStart = new Date(dayData.dates[0]);
-              eventStart.setHours(slot.hour, slot.minute);
-              const eventEnd = new Date(eventStart);
-              eventEnd.setMinutes(eventEnd.getMinutes() + 60);
+                    const eventStart = new Date(dayData.dates[0]);
+                    eventStart.setHours(slot.hour, slot.minute);
+                    const eventEnd = new Date(eventStart);
+                    eventEnd.setMinutes(eventEnd.getMinutes() + 60);
 
-              this._calendarState.calendar.createEvent({
-                id: generateId(),
-                title: "New Event",
-                start: eventStart,
-                end: eventEnd,
-                color: this.generateColor(),
-              });
-            }}
+                    this._calendarState.calendar.createEvent({
+                      id: generateId(),
+                      title: 'New Event',
+                      start: eventStart,
+                      end: eventEnd,
+                      color: this.generateColor(),
+                    });
+                  }}
                 >
                   ${slotEvents.map(
-              (event) => html`
+                    (event) => html`
                       <div
                         data-time=${JSON.stringify(event)}
                         class="event"
                         style="background-color: ${event.color}"
                         draggable="true"
-                        @dragstart=${(e: DragEvent) =>
-                  this.handleEventDragStart(event, e)}
+                        @dragstart=${(e: DragEvent) => this.handleEventDragStart(event, e)}
                       >
                         <div>${event.title}</div>
-                        ${event.description
-                  ? html`<div>${event.description}</div>`
-                  : ""}
+                        ${event.description ? html`<div>${event.description}</div>` : ''}
                       </div>
-                    `
-            )}
+                    `,
+                  )}
                 </div>
               `;
-        })}
+            })}
           </div>
         </div>
       </div>
@@ -452,34 +379,34 @@ export class CalendarDemo extends LitElement {
                     </td>
                     <td colspan="3" align="center">
                       <h3>
-                        ${view === "month" ? monthData?.monthName : nothing}
-                        ${view === "week" ? weekData?.weekRange : nothing}
-                        ${view === "day" ? dayData?.dayName : nothing}
+                        ${view === 'month' ? monthData?.monthName : nothing}
+                        ${view === 'week' ? weekData?.weekRange : nothing}
+                        ${view === 'day' ? dayData?.dayName : nothing}
                       </h3>
                     </td>
                     <td colspan="2" align="center" class="view-controls">
                       <button
-                        @click=${() => changeView("month")}
-                        class="${view === "month"
-        ? "bg-blue-500 text-white"
-        : "bg-gray-200 hover:bg-gray-300"}"
+                        @click=${() => changeView('month')}
+                        class="${view === 'month'
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 hover:bg-gray-300'}"
                       >
                         Month
                       </button>
                       <button
-                        @click=${() => changeView("week")}
-                        class="${view === "week"
-        ? "bg-blue-500 text-white"
-        : "bg-gray-200 hover:bg-gray-300"}"
+                        @click=${() => changeView('week')}
+                        class="${view === 'week'
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 hover:bg-gray-300'}"
                       >
                         Week
                       </button>
                       <button
                         type="button"
-                        @click=${() => changeView("day")}
-                        class="${view === "day"
-        ? "bg-blue-500 text-white"
-        : "bg-gray-200 hover:bg-gray-300"}"
+                        @click=${() => changeView('day')}
+                        class="${view === 'day'
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 hover:bg-gray-300'}"
                       >
                         Day
                       </button>
@@ -487,9 +414,9 @@ export class CalendarDemo extends LitElement {
                   </tr>
                 </thead>
                 <tbody>
-                  ${view === "month" ? this.renderMonthView() : html``}
-                  ${view === "week" ? this.renderWeekView() : html``}
-                  ${view === "day" ? this.renderDayView() : html``}
+                  ${view === 'month' ? this.renderMonthView() : html``}
+                  ${view === 'week' ? this.renderWeekView() : html``}
+                  ${view === 'day' ? this.renderDayView() : html``}
                 </tbody>
               </table>
             </td>
@@ -500,7 +427,7 @@ export class CalendarDemo extends LitElement {
               <div style="height: 200px; overflow: auto;">
                 <div>
                   ${events.map(
-          (event) => html`
+                    (event) => html`
                       <div
                         key=${event.id}
                         style="background-color: ${event.color}; display: flex; margin-bottom: 8px; padding: 4px; justify-content: space-between; align-items: center;"
@@ -508,27 +435,21 @@ export class CalendarDemo extends LitElement {
                         <div>
                           <strong style="display: block;">${event.title}</strong>
                           <span style="font-size: 11px;">
-                            ${utils.formatDateTime(
-            event.start,
-            "dd MMM yyyy hh:mm a"
-          )}
-                            to
-                            ${utils.formatDateTime(
-            event.end,
-            "dd MMM yyyy hh:mm a"
-          )}
+                            ${utils.formatDateTime(event.start, 'dd MMM yyyy hh:mm a')} to
+                            ${utils.formatDateTime(event.end, 'dd MMM yyyy hh:mm a')}
                           </span>
                         </div>
 
                         <button
                           type="button"
-                          @click=${() => this._calendarState.calendar.deleteEvent(event.id as string)}
+                          @click=${() =>
+                            this._calendarState.calendar.deleteEvent(event.id as string)}
                         >
                           Delete
                         </button>
                       </div>
-                    `
-        )}
+                    `,
+                  )}
                 </div>
               </div>
             </td>
@@ -540,6 +461,6 @@ export class CalendarDemo extends LitElement {
 }
 declare global {
   interface HTMLElementTagNameMap {
-    'calendar-demo': CalendarDemo
+    'calendar-demo': CalendarDemo;
   }
 }

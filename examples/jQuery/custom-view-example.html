@@ -1,142 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery HeadlessCalendar - Raw Custom View Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jQuery HeadlessCalendar - Raw Custom View Demo</title>
 </head>
 
-<body style="font-family: sans-serif; padding: 20px;">
-    <div id="calendar-app">
-        <div>
-            <button id="prev">Prev</button>
-            <button id="today">Today</button>
-            <button id="next">Next</button>
-            <span style="margin-left: 20px;"><strong id="range-label"></strong></span>
-        </div>
-
-        <div style="margin: 20px 0;">
-            <strong>Presets:</strong>
-            <button class="preset" data-unit="day" data-count="2">2 Days</button>
-            <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">Work Week</button>
-            <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
-            <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">1 Month (WD)</button>
-            <button class="preset" data-unit="month" data-count="3">Quarter</button>
-        </div>
-
-        <div id="calendar-view"></div>
+<body style="font-family: sans-serif; padding: 20px">
+  <div id="calendar-app">
+    <div>
+      <button id="prev">Prev</button>
+      <button id="today">Today</button>
+      <button id="next">Next</button>
+      <span style="margin-left: 20px"><strong id="range-label"></strong></span>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../../packages/jquery-calendar/dist/index.umd.js"></script>
-    <script>
-        $(document).ready(function () {
-            const $calContainer = $('#calendar-app');
-            const $view = $('#calendar-view');
-            const $label = $('#range-label');
+    <div style="margin: 20px 0">
+      <strong>Presets:</strong>
+      <button class="preset" data-unit="day" data-count="2">2 Days</button>
+      <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">
+        Work Week
+      </button>
+      <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
+      <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">
+        1 Month (WD)
+      </button>
+      <button class="preset" data-unit="month" data-count="3">Quarter</button>
+    </div>
 
-            let customOptions = { unit: 'day', count: 2 };
+    <div id="calendar-view"></div>
+  </div>
 
-            function initCalendar() {
-                $calContainer.headlessCalendar({
-                    defaultView: 'custom',
-                    customViewOptions: customOptions,
-                    initialEvents: [
-                        { id: '1', title: 'Project Review', start: new Date(), end: new Date(new Date().getTime() + 3600000), color: '#8b5cf6' },
-                        { id: '2', title: 'Lunch Sync', start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: '#10b981' }
-                    ],
-                    onRender: function (calendar) {
-                        renderHTML(calendar);
-                    }
-                });
-            }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
+  <script>
+    $(document).ready(function () {
+      const $calContainer = $('#calendar-app');
+      const $view = $('#calendar-view');
+      const $label = $('#range-label');
 
-            function getTitle(cal) {
-                const opts = cal.customViewOptions;
-                if (!opts) return '';
-                if (opts.unit === 'month') return cal.monthData?.monthName;
-                if (opts.unit === 'week') return cal.weekData?.weekRange;
-                return cal.dayData?.dayName;
-            }
+      let customOptions = { unit: 'day', count: 2 };
 
-            function renderHTML(calendar) {
-                const utils = calendar.utils;
-                $label.text(getTitle(calendar));
-
-                let html = "";
-                const opts = calendar.customViewOptions;
-
-                if (opts.unit === 'month' && calendar.monthData) {
-                    const count = opts.count || 1;
-                    for (let i = 0; i < count; i++) {
-                        const mDate = utils.addMonths(calendar.currentDate, i);
-                        const m = mDate.getMonth();
-                        const y = mDate.getFullYear();
-
-                        html += `<div><h3>${utils.formatLocalizedMonth(mDate)}</h3>`;
-                        html += '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
-                        utils.daysofWeek('short').forEach(day => html += `<th>${day}</th>`);
-                        html += '</tr></thead><tbody>';
-
-                        calendar.monthData.weeks.forEach(week => {
-                            if (!week.some(d => d.getMonth() === m && d.getFullYear() === y)) return;
-
-                            html += '<tr>';
-                            [0, 1, 2, 3, 4, 5, 6].forEach(dayIdx => {
-                                const date = week.find(d => d.getDay() === dayIdx);
-                                const isInMonth = date && date.getMonth() === m && date.getFullYear() === y;
-                                const isToday = date && utils.isSameDay(date, new Date());
-
-                                if (isInMonth) {
-                                    const events = calendar.getEventsForDate(date);
-                                    html += `<td style="height: 80px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
-                                    html += `<div><strong>${date.getDate()}</strong></div>`;
-                                    events.forEach(e => html += `<div style="border: 1px solid; font-size: 10px; margin-bottom: 2px;">${e.title}</div>`);
-                                    html += `</td>`;
-                                } else {
-                                    html += '<td style="background: #f9fafb;"></td>';
-                                }
-                            });
-                            html += '</tr>';
-                        });
-                        html += '</tbody></table></div>';
-                    }
-                } else {
-                    const data = opts.unit === 'week' ? calendar.weekData : calendar.dayData;
-                    if (data) {
-                        html += '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
-                        data.dates.forEach(date => {
-                            html += `<th>${utils.formatDate(date, 'EEE d')}</th>`;
-                        });
-                        html += '</tr></thead><tbody><tr>';
-                        data.dates.forEach(date => {
-                            const isToday = utils.isSameDay(date, new Date());
-                            const events = calendar.getEventsForDate(date);
-                            html += `<td style="height: 100px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
-                            events.forEach(e => html += `<div style="border: 1px solid; font-size: 11px; margin-bottom: 2px;">${e.title}</div>`);
-                            html += `</td>`;
-                        });
-                        html += '</tr></tbody></table>';
-                    }
-                }
-                $view.html(html);
-            }
-
-            $('#prev').click(() => $calContainer.headlessCalendar('goToPrevious'));
-            $('#today').click(() => $calContainer.headlessCalendar('goToToday'));
-            $('#next').click(() => $calContainer.headlessCalendar('goToNext'));
-
-            $('.preset').click(function () {
-                const unit = $(this).data('unit');
-                const count = parseInt($(this).data('count'));
-                const include = $(this).data('include') ? $(this).data('include').toString().split(',').map(Number) : undefined;
-                $calContainer.headlessCalendar('changeView', 'custom', { unit, count, includeSpecificDays: include });
-            });
-
-            initCalendar();
+      function initCalendar() {
+        $calContainer.headlessCalendar({
+          defaultView: 'custom',
+          customViewOptions: customOptions,
+          initialEvents: [
+            {
+              id: '1',
+              title: 'Project Review',
+              start: new Date(),
+              end: new Date(new Date().getTime() + 3600000),
+              color: '#8b5cf6',
+            },
+            {
+              id: '2',
+              title: 'Lunch Sync',
+              start: new Date(new Date().setHours(12, 0)),
+              end: new Date(new Date().setHours(13, 0)),
+              color: '#10b981',
+            },
+          ],
+          onRender: function (calendar) {
+            renderHTML(calendar);
+          },
         });
-    </script>
+      }
+
+      function getTitle(cal) {
+        const opts = cal.customViewOptions;
+        if (!opts) return '';
+        if (opts.unit === 'month') return cal.monthData?.monthName;
+        if (opts.unit === 'week') return cal.weekData?.weekRange;
+        return cal.dayData?.dayName;
+      }
+
+      function renderHTML(calendar) {
+        const utils = calendar.utils;
+        $label.text(getTitle(calendar));
+
+        let html = '';
+        const opts = calendar.customViewOptions;
+
+        if (opts.unit === 'month' && calendar.monthData) {
+          const count = opts.count || 1;
+          for (let i = 0; i < count; i++) {
+            const mDate = utils.addMonths(calendar.currentDate, i);
+            const m = mDate.getMonth();
+            const y = mDate.getFullYear();
+
+            html += `<div><h3>${utils.formatLocalizedMonth(mDate)}</h3>`;
+            html +=
+              '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
+            utils.daysofWeek('short').forEach((day) => (html += `<th>${day}</th>`));
+            html += '</tr></thead><tbody>';
+
+            calendar.monthData.weeks.forEach((week) => {
+              if (!week.some((d) => d.getMonth() === m && d.getFullYear() === y)) return;
+
+              html += '<tr>';
+              [0, 1, 2, 3, 4, 5, 6].forEach((dayIdx) => {
+                const date = week.find((d) => d.getDay() === dayIdx);
+                const isInMonth = date && date.getMonth() === m && date.getFullYear() === y;
+                const isToday = date && utils.isSameDay(date, new Date());
+
+                if (isInMonth) {
+                  const events = calendar.getEventsForDate(date);
+                  html += `<td style="height: 80px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
+                  html += `<div><strong>${date.getDate()}</strong></div>`;
+                  events.forEach(
+                    (e) =>
+                      (html += `<div style="border: 1px solid; font-size: 10px; margin-bottom: 2px;">${e.title}</div>`),
+                  );
+                  html += `</td>`;
+                } else {
+                  html += '<td style="background: #f9fafb;"></td>';
+                }
+              });
+              html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+          }
+        } else {
+          const data = opts.unit === 'week' ? calendar.weekData : calendar.dayData;
+          if (data) {
+            html +=
+              '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
+            data.dates.forEach((date) => {
+              html += `<th>${utils.formatDate(date, 'EEE d')}</th>`;
+            });
+            html += '</tr></thead><tbody><tr>';
+            data.dates.forEach((date) => {
+              const isToday = utils.isSameDay(date, new Date());
+              const events = calendar.getEventsForDate(date);
+              html += `<td style="height: 100px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
+              events.forEach(
+                (e) =>
+                  (html += `<div style="border: 1px solid; font-size: 11px; margin-bottom: 2px;">${e.title}</div>`),
+              );
+              html += `</td>`;
+            });
+            html += '</tr></tbody></table>';
+          }
+        }
+        $view.html(html);
+      }
+
+      $('#prev').click(() => $calContainer.headlessCalendar('goToPrevious'));
+      $('#today').click(() => $calContainer.headlessCalendar('goToToday'));
+      $('#next').click(() => $calContainer.headlessCalendar('goToNext'));
+
+      $('.preset').click(function () {
+        const unit = $(this).data('unit');
+        const count = parseInt($(this).data('count'));
+        const include = $(this).data('include')
+          ? $(this).data('include').toString().split(',').map(Number)
+          : undefined;
+        $calContainer.headlessCalendar('changeView', 'custom', {
+          unit,
+          count,
+          includeSpecificDays: include,
+        });
+      });
+
+      initCalendar();
+    });
+  </script>
 </body>
 
 </html>

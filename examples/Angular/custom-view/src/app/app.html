@@ -1,26 +1,36 @@
-<div style="font-family: sans-serif; padding: 20px;">
+<div style="font-family: sans-serif; padding: 20px">
   <div>
     <button (click)="calendarHook.calendar().goToPrevious()">Prev</button>
     <button (click)="calendarHook.calendar().goToToday()">Today</button>
     <button (click)="calendarHook.calendar().goToNext()">Next</button>
-    <span style="margin-left: 20px;"><strong>{{ getTitle() }}</strong></span>
+    <span style="margin-left: 20px"
+      ><strong>{{ getTitle() }}</strong></span
+    >
   </div>
 
-  <div style="margin: 20px 0;">
+  <div style="margin: 20px 0">
     <strong>Presets:</strong>
     <button (click)="setPreset('day', 2)">2 Days</button>
-    <button (click)="setPreset('week', 1, [1,2,3,4,5])">Work Week</button>
+    <button (click)="setPreset('week', 1, [1, 2, 3, 4, 5])">Work Week</button>
     <button (click)="setPreset('week', 2)">2 Weeks</button>
-    <button (click)="setPreset('month', 1, [1,2,3,4,5])">1 Month (WD)</button>
+    <button (click)="setPreset('month', 1, [1, 2, 3, 4, 5])">1 Month (WD)</button>
     <button (click)="setPreset('month', 3)">Quarter</button>
   </div>
 
   <div class="view-content">
-    @if (calendarHook.calendar().customViewOptions?.unit === 'month' && calendarHook.calendar().monthData) {
+    @if (
+      calendarHook.calendar().customViewOptions?.unit === 'month' &&
+      calendarHook.calendar().monthData
+    ) {
       @for (m of getMonthsToDisplay(); track m.year + '-' + m.month) {
         <div>
           <h3>{{ calendarHook.calendar().utils.formatLocalizedMonth(m.date) }}</h3>
-          <table border="1" width="100%" cellpadding="5" style="border-collapse: collapse; text-align: center;">
+          <table
+            border="1"
+            width="100%"
+            cellpadding="5"
+            style="border-collapse: collapse; text-align: center"
+          >
             <thead>
               <tr>
                 @for (day of calendarHook.calendar().utils.daysofWeek('short'); track day) {
@@ -32,14 +42,18 @@
               @for (week of calendarHook.calendar().monthData?.weeks; track week) {
                 @if (weekHasMonthDays(week, m.month, m.year)) {
                   <tr>
-                    @for (dayIdx of [0,1,2,3,4,5,6]; track dayIdx) {
+                    @for (dayIdx of [0, 1, 2, 3, 4, 5, 6]; track dayIdx) {
                       @let date = getDay(week, dayIdx);
-                      <td [style.background]="date && isSameDay(date, todayDate) ? '#eee' : 'transparent'"
-                          style="height: 80px; vertical-align: top;">
+                      <td
+                        [style.background]="
+                          date && isSameDay(date, todayDate) ? '#eee' : 'transparent'
+                        "
+                        style="height: 80px; vertical-align: top"
+                      >
                         @if (date && date.getMonth() === m.month) {
                           <strong>{{ date.getDate() }}</strong>
                           @for (event of getEvents(date); track event.id) {
-                            <div style="font-size: 10px; border: 1px solid; margin-bottom: 2px;">
+                            <div style="font-size: 10px; border: 1px solid; margin-bottom: 2px">
                               {{ event.title }}
                             </div>
                           }
@@ -58,9 +72,17 @@
     } @else {
       @let opts = calendarHook.calendar().customViewOptions;
       @if (opts?.unit === 'week' || opts?.unit === 'day') {
-        @let data = opts?.unit === 'week' ? calendarHook.calendar().weekData : calendarHook.calendar().dayData;
+        @let data =
+          opts?.unit === 'week'
+            ? calendarHook.calendar().weekData
+            : calendarHook.calendar().dayData;
         @if (data) {
-          <table border="1" width="100%" cellpadding="5" style="border-collapse: collapse; text-align: center;">
+          <table
+            border="1"
+            width="100%"
+            cellpadding="5"
+            style="border-collapse: collapse; text-align: center"
+          >
             <thead>
               <tr>
                 @for (date of data.dates; track date.toISOString()) {
@@ -73,10 +95,12 @@
             <tbody>
               <tr>
                 @for (date of data.dates; track date.toISOString()) {
-                  <td [style.background]="isSameDay(date, todayDate) ? '#eee' : 'transparent'"
-                      style="height: 100px; vertical-align: top;">
+                  <td
+                    [style.background]="isSameDay(date, todayDate) ? '#eee' : 'transparent'"
+                    style="height: 100px; vertical-align: top"
+                  >
                     @for (event of getEvents(date); track event.id) {
-                      <div style="font-size: 11px; border: 1px solid; margin-bottom: 2px;">
+                      <div style="font-size: 11px; border: 1px solid; margin-bottom: 2px">
                         {{ event.title }}
                       </div>
                     }

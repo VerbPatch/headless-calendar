@@ -1,5 +1,5 @@
-import React, { JSX, useCallback, useEffect, useMemo, useState } from "react";
-import { useCalendar, CalendarEvent, generateId } from "@verbpatch/react-calendar";
+import React, { JSX, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCalendar, CalendarEvent, generateId } from '@verbpatch/react-calendar';
 
 const CalendarDemo: React.FC = () => {
   const initialEvents = useMemo<CalendarEvent[]>(() => {
@@ -11,21 +11,21 @@ const CalendarDemo: React.FC = () => {
     return [
       {
         id: generateId(),
-        title: "Team Meeting",
+        title: 'Team Meeting',
         start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0, 0),
         end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0),
-        description: "Weekly team sync",
+        description: 'Weekly team sync',
         allDay: false,
-        color: "#3b82f6",
-        timezone: "Europe/London",
+        color: '#3b82f6',
+        timezone: 'Europe/London',
       },
       {
         id: generateId(),
-        title: "Project Deadline",
+        title: 'Project Deadline',
         start: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         end: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         allDay: true,
-        color: "#ef4444",
+        color: '#ef4444',
         //timezone: "Asia/Calcutta",
       },
     ];
@@ -55,11 +55,11 @@ const CalendarDemo: React.FC = () => {
 
     utils: { formatDate, formatDateTime, daysofWeek, dateTimeInBetween, convertToTimeZone },
   } = useCalendar({
-    defaultView: "month",
+    defaultView: 'month',
     startOfWeek: 0, // 0 = Sunday, 1 = Monday
     timeSlotInterval: 60,
     initialEvents,
-    timezone: "Asia/Calcutta",
+    timezone: 'Asia/Calcutta',
     onViewChange: (view) => console.log(view),
     //onDateChange: (date) => console.log("Current date:", date),
     //onEvent: (events: CalendarEvent[]) => console.log("Events:", events),
@@ -69,7 +69,7 @@ const CalendarDemo: React.FC = () => {
 
   const generateColor = useCallback((): string => {
     const randomColorValue = Math.floor(Math.random() * 16777215);
-    const hexColor = randomColorValue.toString(16).padStart(6, "0");
+    const hexColor = randomColorValue.toString(16).padStart(6, '0');
     return `#${hexColor}`;
   }, []);
 
@@ -81,7 +81,7 @@ const CalendarDemo: React.FC = () => {
 
     createEvent({
       id: generateId(),
-      title: "New Event",
+      title: 'New Event',
       start: startTime,
       end: endTime,
       color: generateColor(),
@@ -89,7 +89,7 @@ const CalendarDemo: React.FC = () => {
   }, []);
 
   const handleEventDragStart = useCallback((event: CalendarEvent, e: React.DragEvent): void => {
-    startDrag(event, { type: "event" });
+    startDrag(event, { type: 'event' });
   }, []);
 
   const eventHandleDrop = useCallback((e: React.DragEvent, date: Date, time?: string): void => {
@@ -97,12 +97,12 @@ const CalendarDemo: React.FC = () => {
   }, []);
 
   const renderMonthView = (): JSX.Element | null => {
-    console.log("Rendering Month View", monthData);
+    console.log('Rendering Month View', monthData);
     if (!monthData) return null;
     return (
       <>
         <tr>
-          {daysofWeek("long").map((day) => (
+          {daysofWeek('long').map((day) => (
             <td align="center" key={day}>
               {day}
             </td>
@@ -121,18 +121,18 @@ const CalendarDemo: React.FC = () => {
                   align="center"
                   key={dayIndex}
                   style={{
-                    backgroundColor: isToday ? "#cecece" : "#fff",
-                    fontWeight: isToday ? "bold" : "normal",
-                    color: isCurrentMonth ? "#000" : "#888",
-                    cursor: "pointer",
-                    width: "100px",
-                    height: "50px",
+                    backgroundColor: isToday ? '#cecece' : '#fff',
+                    fontWeight: isToday ? 'bold' : 'normal',
+                    color: isCurrentMonth ? '#000' : '#888',
+                    cursor: 'pointer',
+                    width: '100px',
+                    height: '50px',
                   }}
                   onClick={() => handleDateClick(date)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => eventHandleDrop(e, date)}
                 >
-                  <div>{formatDate(date, "d")}</div>
+                  <div>{formatDate(date, 'd')}</div>
 
                   <div>
                     {dateEvents.slice(0, 2).map((event) => (
@@ -168,7 +168,7 @@ const CalendarDemo: React.FC = () => {
         <tr>
           <th></th>
           {weekData.dates.map((date, index) => (
-            <th key={index}>{formatDateTime(date, "d MMM")}</th>
+            <th key={index}>{formatDateTime(date, 'd MMM')}</th>
           ))}
         </tr>
 
@@ -183,7 +183,18 @@ const CalendarDemo: React.FC = () => {
               const slotEvents = getEventsForDate(date).filter((event, index) => {
                 const eventStart = new Date(event.start);
                 const eventEnd = new Date(event.end);
-                return dateTimeInBetween(new Date(date.getFullYear(), date.getMonth(), date.getDate(), slot.hour, slot.minute, 0), eventStart, eventEnd);
+                return dateTimeInBetween(
+                  new Date(
+                    date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate(),
+                    slot.hour,
+                    slot.minute,
+                    0,
+                  ),
+                  eventStart,
+                  eventEnd,
+                );
               });
               slotEvents.length > 0 && console.log(slotEvents);
               return (
@@ -201,7 +212,7 @@ const CalendarDemo: React.FC = () => {
 
                     createEvent({
                       id: generateId(),
-                      title: "New Event",
+                      title: 'New Event',
                       start: eventStart,
                       end: eventEnd,
                       color: generateColor(),
@@ -209,7 +220,13 @@ const CalendarDemo: React.FC = () => {
                   }}
                 >
                   {slotEvents.map((event) => (
-                    <div key={event.id} style={{ backgroundColor: event.color, height: "100%" }} draggable onDragStart={(e) => handleEventDragStart(event, e)} data-props={JSON.stringify(event)}>
+                    <div
+                      key={event.id}
+                      style={{ backgroundColor: event.color, height: '100%' }}
+                      draggable
+                      onDragStart={(e) => handleEventDragStart(event, e)}
+                      data-props={JSON.stringify(event)}
+                    >
                       {event.title}
                     </div>
                   ))}
@@ -238,7 +255,7 @@ const CalendarDemo: React.FC = () => {
             console.log(eventStart.getHours(), slot.hour, eventStart.getMinutes(), slot.minute);
             return eventStart.getHours() === slot.hour;
           });
-          slotEvents.length > 0 && console.log("day events=>", slotEvents);
+          slotEvents.length > 0 && console.log('day events=>', slotEvents);
           return (
             <tr key={slot.time}>
               <td>
@@ -258,18 +275,24 @@ const CalendarDemo: React.FC = () => {
 
                     createEvent({
                       id: generateId(),
-                      title: "New Event",
+                      title: 'New Event',
                       start: eventStart,
                       end: eventEnd,
                       color: generateColor(),
                     });
                   }}
                   style={{
-                    height: "100%",
+                    height: '100%',
                   }}
                 >
                   {slotEvents.map((event) => (
-                    <div data-time={JSON.stringify(event)} key={event.id} style={{ backgroundColor: event.color }} draggable onDragStart={(e) => handleEventDragStart(event, e)}>
+                    <div
+                      data-time={JSON.stringify(event)}
+                      key={event.id}
+                      style={{ backgroundColor: event.color }}
+                      draggable
+                      onDragStart={(e) => handleEventDragStart(event, e)}
+                    >
                       <div>{event.title}</div>
                       {event.description && <div>{event.description}</div>}
                     </div>
@@ -285,7 +308,7 @@ const CalendarDemo: React.FC = () => {
   };
 
   return (
-    <table border={0} style={{ width: 800, height: 800, margin: "0 auto" }}>
+    <table border={0} style={{ width: 800, height: 800, margin: '0 auto' }}>
       <tbody>
         <tr>
           <td style={{ height: 600 }}>
@@ -306,26 +329,26 @@ const CalendarDemo: React.FC = () => {
                       →
                     </button>
                   </td>
-                  <td colSpan={view === "week" ? 4 : 3} align="center">
+                  <td colSpan={view === 'week' ? 4 : 3} align="center">
                     <h3>
-                      {view === "month" && monthData?.monthName}
-                      {view === "week" && weekData?.weekRange}
-                      {view === "day" && dayData?.dayName}
+                      {view === 'month' && monthData?.monthName}
+                      {view === 'week' && weekData?.weekRange}
+                      {view === 'day' && dayData?.dayName}
                     </h3>
                   </td>
                   <td colSpan={2} align="center">
-                    <button onClick={() => changeView("month")}>Month</button>
-                    <button onClick={() => changeView("week")}>Week</button>
-                    <button type="button" onClick={() => changeView("day")}>
+                    <button onClick={() => changeView('month')}>Month</button>
+                    <button onClick={() => changeView('week')}>Week</button>
+                    <button type="button" onClick={() => changeView('day')}>
                       Day
                     </button>
                   </td>
                 </tr>
               </thead>
               <tbody>
-                {view === "month" && renderMonthView()}
-                {view === "week" && renderWeekView()}
-                {view === "day" && renderDayView()}
+                {view === 'month' && renderMonthView()}
+                {view === 'week' && renderWeekView()}
+                {view === 'day' && renderDayView()}
               </tbody>
             </table>
           </td>
@@ -333,7 +356,7 @@ const CalendarDemo: React.FC = () => {
         <tr>
           <td>
             <h3>Events ({events.length})</h3>
-            <div style={{ height: 200, overflow: "auto" }}>
+            <div style={{ height: 200, overflow: 'auto' }}>
               <div>
                 {events.map((event) => {
                   return (
@@ -341,21 +364,22 @@ const CalendarDemo: React.FC = () => {
                       key={event.id}
                       style={{
                         backgroundColor: event.color,
-                        display: "flex",
+                        display: 'flex',
                         marginBottom: 8,
                         padding: 4,
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                       }}
                     >
                       <div>
-                        <strong style={{ display: "block" }}>{event.title}</strong>
+                        <strong style={{ display: 'block' }}>{event.title}</strong>
                         <span style={{ fontSize: 11 }}>
                           {event.allDay ? (
-                            "Full Day"
+                            'Full Day'
                           ) : (
                             <>
-                              {formatDateTime(event.start, "dd MMM yyyy hh:mm a")} to {formatDateTime(event.end, "dd MMM yyyy hh:mm a")}
+                              {formatDateTime(event.start, 'dd MMM yyyy hh:mm a')} to{' '}
+                              {formatDateTime(event.end, 'dd MMM yyyy hh:mm a')}
                             </>
                           )}
                         </span>

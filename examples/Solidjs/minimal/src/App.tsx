@@ -1,5 +1,5 @@
-import { type Component } from "solid-js";
-import CalendarDemo from "./CalendarDemo";
+import { type Component } from 'solid-js';
+import CalendarDemo from './CalendarDemo';
 
 const App: Component = () => {
   return (

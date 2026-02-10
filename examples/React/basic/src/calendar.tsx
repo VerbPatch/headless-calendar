@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
-import { useCalendar, type ViewType } from "@verbpatch/react-calendar";
+import React, { JSX } from 'react';
+import { useCalendar, type ViewType } from '@verbpatch/react-calendar';
 
 export const CalendarDemo: React.FC = () => {
   const {
@@ -18,7 +18,7 @@ export const CalendarDemo: React.FC = () => {
 
     utils: { formatDate, formatDateTime, daysofWeek },
   } = useCalendar({
-    defaultView: "month",
+    defaultView: 'month',
     startOfWeek: 0, // 0 = Sunday, 1 = Monday
   });
 
@@ -26,19 +26,24 @@ export const CalendarDemo: React.FC = () => {
     if (!yearData) return null;
     return (
       <tr>
-        <td colSpan={7} style={{ borderBottom: "1px solid", borderRight: "1px solid" }}>
+        <td colSpan={7} style={{ borderBottom: '1px solid', borderRight: '1px solid' }}>
           {yearData.months.map((month, monthIndex) => {
             return (
-              <table key={monthIndex} cellPadding={1} cellSpacing={0} style={{ display: "inline-table", padding: "8px" }}>
+              <table
+                key={monthIndex}
+                cellPadding={1}
+                cellSpacing={0}
+                style={{ display: 'inline-table', padding: '8px' }}
+              >
                 <thead>
                   <tr>
-                    <th colSpan={7} style={{ textAlign: "center", borderBottom: "1px solid" }}>
+                    <th colSpan={7} style={{ textAlign: 'center', borderBottom: '1px solid' }}>
                       {month.monthName}
                     </th>
                   </tr>
                   <tr>
-                    {daysofWeek("short").map((day) => (
-                      <th style={{ width: "35px", borderBottom: "1px solid" }} key={day}>
+                    {daysofWeek('short').map((day) => (
+                      <th style={{ width: '35px', borderBottom: '1px solid' }} key={day}>
                         {day}
                       </th>
                     ))}
@@ -57,12 +62,12 @@ export const CalendarDemo: React.FC = () => {
                               align="center"
                               key={dayIndex}
                               style={{
-                                fontWeight: isToday ? "bold" : "normal",
-                                color: isCurrentMonth ? "black" : "gray",
-                                borderBottom: "1px solid",
+                                fontWeight: isToday ? 'bold' : 'normal',
+                                color: isCurrentMonth ? 'black' : 'gray',
+                                borderBottom: '1px solid',
                               }}
                             >
-                              <div>{isCurrentYear && formatDate(date, "d")}</div>
+                              <div>{isCurrentYear && formatDate(date, 'd')}</div>
                             </td>
                           );
                         })}
@@ -83,8 +88,11 @@ export const CalendarDemo: React.FC = () => {
     return (
       <>
         <tr>
-          {daysofWeek("long").map((day) => (
-            <td style={{ width: "120px", borderRight: "1px solid", borderBottom: "1px solid" }} key={day}>
+          {daysofWeek('long').map((day) => (
+            <td
+              style={{ width: '120px', borderRight: '1px solid', borderBottom: '1px solid' }}
+              key={day}
+            >
               {day}
             </td>
           ))}
@@ -101,13 +109,13 @@ export const CalendarDemo: React.FC = () => {
                   align="center"
                   key={dayIndex}
                   style={{
-                    fontWeight: isToday ? "bold" : "normal",
-                    color: isCurrentMonth ? "black" : "gray",
-                    borderRight: "1px solid",
-                    borderBottom: "1px solid",
+                    fontWeight: isToday ? 'bold' : 'normal',
+                    color: isCurrentMonth ? 'black' : 'gray',
+                    borderRight: '1px solid',
+                    borderBottom: '1px solid',
                   }}
                 >
-                  <div>{formatDate(date, "d")}</div>
+                  <div>{formatDate(date, 'd')}</div>
                 </td>
               );
             })}
@@ -122,27 +130,40 @@ export const CalendarDemo: React.FC = () => {
 
     return (
       <tr>
-        <td colSpan={7} style={{ borderRight: "1px solid" }}>
+        <td colSpan={7} style={{ borderRight: '1px solid' }}>
           <table cellPadding="5" cellSpacing="0" width="100%">
             <tbody>
               <tr>
                 <td></td>
                 {weekData.dates.map((date, index) => (
-                  <td key={index} style={{ fontWeight: weekData!.isToday(date) ? "bold" : "normal" }}>
-                    {formatDateTime(date, "d MMM")}
+                  <td
+                    key={index}
+                    style={{ fontWeight: weekData!.isToday(date) ? 'bold' : 'normal' }}
+                  >
+                    {formatDateTime(date, 'd MMM')}
                   </td>
                 ))}
               </tr>
 
               {timeSlots.map((slot) => (
                 <tr key={slot.label} data-key={slot.label}>
-                  <td style={{ borderBottom: "1px solid" }}>
+                  <td style={{ borderBottom: '1px solid' }}>
                     <div key={slot.time} data-slot={slot.time}>
                       {slot.label}
                     </div>
                   </td>
                   {weekData.dates.map((date, dateIndex) => {
-                    return <td key={dateIndex} data-date={formatDate(date)} data-slot={slot.time} style={{ borderBottom: "1px solid", fontWeight: weekData!.isToday(date) ? "bold" : "normal" }}></td>;
+                    return (
+                      <td
+                        key={dateIndex}
+                        data-date={formatDate(date)}
+                        data-slot={slot.time}
+                        style={{
+                          borderBottom: '1px solid',
+                          fontWeight: weekData!.isToday(date) ? 'bold' : 'normal',
+                        }}
+                      ></td>
+                    );
                   })}
                 </tr>
               ))}
@@ -158,14 +179,17 @@ export const CalendarDemo: React.FC = () => {
     return (
       <>
         <tr>
-          <td colSpan={7} style={{ borderRight: "1px solid", borderBottom: "1px solid", textAlign: "center" }}>
+          <td
+            colSpan={7}
+            style={{ borderRight: '1px solid', borderBottom: '1px solid', textAlign: 'center' }}
+          >
             {dayData.dayName}
           </td>
         </tr>
 
         {timeSlots.map((slot) => (
           <tr>
-            <td colSpan={7} style={{ borderRight: "1px solid", borderBottom: "1px solid" }}>
+            <td colSpan={7} style={{ borderRight: '1px solid', borderBottom: '1px solid' }}>
               <div key={slot.time} data-time={slot.time} data-day={formatDate(dayData.dates[0])}>
                 {slot.label}
               </div>
@@ -177,10 +201,16 @@ export const CalendarDemo: React.FC = () => {
   };
 
   return (
-    <table border={0} cellPadding={0} cellSpacing={0} width={840} style={{ height: "700px", borderLeft: "1px solid", borderTop: "1px solid" }}>
+    <table
+      border={0}
+      cellPadding={0}
+      cellSpacing={0}
+      width={840}
+      style={{ height: '700px', borderLeft: '1px solid', borderTop: '1px solid' }}
+    >
       <thead>
         <tr>
-          <th colSpan={2} style={{ borderBottom: "1px solid" }}>
+          <th colSpan={2} style={{ borderBottom: '1px solid' }}>
             <button type="button" onClick={goToPrevious}>
               ←
             </button>
@@ -192,31 +222,31 @@ export const CalendarDemo: React.FC = () => {
               →
             </button>
           </th>
-          <th colSpan={3} style={{ borderBottom: "1px solid" }}>
+          <th colSpan={3} style={{ borderBottom: '1px solid' }}>
             <h3>
-              {view === "year" && yearData?.year}
-              {view === "month" && monthData?.monthName}
-              {view === "week" && weekData?.weekRange}
-              {view === "day" && dayData?.dayName}
+              {view === 'year' && yearData?.year}
+              {view === 'month' && monthData?.monthName}
+              {view === 'week' && weekData?.weekRange}
+              {view === 'day' && dayData?.dayName}
             </h3>
           </th>
-          <th colSpan={2} style={{ borderBottom: "1px solid", borderRight: "1px solid" }}>
+          <th colSpan={2} style={{ borderBottom: '1px solid', borderRight: '1px solid' }}>
             <select
               onChange={(s) => {
                 const value = (s.target as HTMLSelectElement).value as ViewType;
                 changeView(value);
               }}
             >
-              <option value="year" selected={view === "year"}>
+              <option value="year" selected={view === 'year'}>
                 Year
               </option>
-              <option value="month" selected={view === "month"}>
+              <option value="month" selected={view === 'month'}>
                 Month
               </option>
-              <option value="week" selected={view === "week"}>
+              <option value="week" selected={view === 'week'}>
                 Week
               </option>
-              <option value="day" selected={view === "day"}>
+              <option value="day" selected={view === 'day'}>
                 Day
               </option>
             </select>
@@ -224,10 +254,10 @@ export const CalendarDemo: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        {view === "year" && renderYearView()}
-        {view === "month" && renderMonthView()}
-        {view === "week" && renderWeekView()}
-        {view === "day" && renderDayView()}
+        {view === 'year' && renderYearView()}
+        {view === 'month' && renderMonthView()}
+        {view === 'week' && renderWeekView()}
+        {view === 'day' && renderDayView()}
       </tbody>
     </table>
   );

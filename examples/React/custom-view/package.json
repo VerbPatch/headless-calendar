@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbpatch/react-calendar": "workspace:*",
+    "@verbpatch/react-calendar": "latest",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbpatch/lit-calendar": "workspace:*",
+    "@verbpatch/lit-calendar": "latest",
     "lit": "^3.1.2"
   },
   "devDependencies": {

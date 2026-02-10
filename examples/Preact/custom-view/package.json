@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbpatch/preact-calendar": "workspace:*",
+    "@verbpatch/preact-calendar": "latest",
     "preact": "^10.19.6"
   },
   "devDependencies": {

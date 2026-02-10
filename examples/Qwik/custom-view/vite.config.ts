@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
-import { qwikVite } from "@builder.io/qwik/optimizer";
+import { defineConfig } from 'vite';
+import { qwikVite } from '@builder.io/qwik/optimizer';
 
 export default defineConfig(() => {
   return {
     plugins: [qwikVite({ csr: true })],
     preview: {
       headers: {
-        "Cache-Control": "public, max-age=600",
+        'Cache-Control': 'public, max-age=600',
       },
     },
   };

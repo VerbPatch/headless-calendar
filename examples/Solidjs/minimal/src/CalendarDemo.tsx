@@ -1,5 +1,5 @@
-import { type Component, createMemo } from "solid-js";
-import { useCalendar, type CalendarEvent, generateId } from "@verbpatch/solidjs-calendar";
+import { type Component, createMemo } from 'solid-js';
+import { useCalendar, type CalendarEvent, generateId } from '@verbpatch/solidjs-calendar';
 
 const CalendarDemo: Component = () => {
   const initialEvents = createMemo<CalendarEvent[]>(() => {
@@ -11,28 +11,28 @@ const CalendarDemo: Component = () => {
     return [
       {
         id: generateId(),
-        title: "Team Meeting",
+        title: 'Team Meeting',
         start: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 16, 0, 0),
         end: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0),
-        description: "Weekly team sync",
+        description: 'Weekly team sync',
         allDay: false,
-        color: "#3b82f6",
-        timezone: "Asia/Calcutta",
+        color: '#3b82f6',
+        timezone: 'Asia/Calcutta',
       },
       {
         id: generateId(),
-        title: "Project Deadline",
+        title: 'Project Deadline',
         start: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         end: new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 0, 0, 0),
         allDay: true,
-        color: "#ef4444",
-        timezone: "Asia/Calcutta",
+        color: '#ef4444',
+        timezone: 'Asia/Calcutta',
       },
     ];
   });
 
   const calendar = useCalendar({
-    defaultView: "month",
+    defaultView: 'month',
     startOfWeek: 0, // 0 = Sunday, 1 = Monday
     timeSlotInterval: 30,
     initialEvents: initialEvents(),
@@ -45,13 +45,13 @@ const CalendarDemo: Component = () => {
       console.log(view);
     },
     onDateChange: (date) => {
-      console.log("Current date:", date);
+      console.log('Current date:', date);
       //setCurrentDate(date);
     },
-    locale: "en-IN",
-    timezone: "Asia/Calcutta",
+    locale: 'en-IN',
+    timezone: 'Asia/Calcutta',
     onEvent: (events: CalendarEvent[]) => {
-      console.log("Events:", events);
+      console.log('Events:', events);
       //setEvents(events);
     },
     //onEventUpdate: (event: CalendarEvent) => console.log("Event updated:", event),
@@ -60,7 +60,7 @@ const CalendarDemo: Component = () => {
 
   const generateColor = () => {
     const randomColorValue = Math.floor(Math.random() * 16777215);
-    const hexColor = randomColorValue.toString(16).padStart(6, "0");
+    const hexColor = randomColorValue.toString(16).padStart(6, '0');
     return `#${hexColor}`;
   };
 
@@ -72,7 +72,7 @@ const CalendarDemo: Component = () => {
 
     calendar()?.createEvent({
       id: generateId(),
-      title: "New Event",
+      title: 'New Event',
       start: startTime,
       end: endTime,
       color: generateColor(),
@@ -81,7 +81,7 @@ const CalendarDemo: Component = () => {
 
   const handleEventDragStart = (event: CalendarEvent, e: DragEvent): void => {
     console.log({ event, e });
-    calendar()?.startDrag(event, { type: "event" });
+    calendar()?.startDrag(event, { type: 'event' });
   };
 
   const eventHandleDrop = (e: DragEvent, date: Date, time?: string): void => {
@@ -90,14 +90,14 @@ const CalendarDemo: Component = () => {
   };
 
   const renderMonthView = () => {
-    console.log("Rendering Month View", calendar()?.monthData);
+    console.log('Rendering Month View', calendar()?.monthData);
     if (!calendar()?.monthData) return null;
     //console.log(calendar.monthData);
     return (
       <>
         <tr>
           {calendar()
-            ?.utils.daysofWeek("long")
+            ?.utils.daysofWeek('long')
             .map((day) => (
               <td align="center">{day}</td>
             ))}
@@ -114,23 +114,23 @@ const CalendarDemo: Component = () => {
                 <td
                   align="center"
                   style={{
-                    "background-color": isToday ? "#cecece" : "#fff",
-                    "font-weight": isToday ? "bold" : "normal",
-                    color: isCurrentMonth ? "#000" : "#888",
-                    cursor: "pointer",
-                    width: "100px",
-                    height: "50px",
+                    'background-color': isToday ? '#cecece' : '#fff',
+                    'font-weight': isToday ? 'bold' : 'normal',
+                    color: isCurrentMonth ? '#000' : '#888',
+                    cursor: 'pointer',
+                    width: '100px',
+                    height: '50px',
                   }}
                   onClick={() => handleDateClick(date)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => eventHandleDrop(e, date)}
                 >
-                  <div>{calendar()?.utils.formatDate(date, "d")}</div>
+                  <div>{calendar()?.utils.formatDate(date, 'd')}</div>
 
                   <div>
                     {dateEvents.slice(0, 2).map((event) => (
                       <div
-                        style={{ "background-color": event.color }}
+                        style={{ 'background-color': event.color }}
                         draggable="true"
                         onDragStart={(e) => handleEventDragStart(event, e)}
                         onClick={(e) => {
@@ -162,8 +162,16 @@ const CalendarDemo: Component = () => {
           <div></div>
           {calendar()?.weekData?.dates.map((date) => (
             <div>
-              <div class={`font-semibold ${calendar()?.weekData?.isToday(date) ? "text-blue-600" : ""}`}>{calendar()?.utils.formatDateTime(date, "EEE")}</div>
-              <div class={`text-sm ${calendar()?.weekData?.isToday(date) ? "text-blue-600" : "text-gray-600"}`}>{calendar()?.utils.formatDateTime(date, "d")}</div>
+              <div
+                class={`font-semibold ${calendar()?.weekData?.isToday(date) ? 'text-blue-600' : ''}`}
+              >
+                {calendar()?.utils.formatDateTime(date, 'EEE')}
+              </div>
+              <div
+                class={`text-sm ${calendar()?.weekData?.isToday(date) ? 'text-blue-600' : 'text-gray-600'}`}
+              >
+                {calendar()?.utils.formatDateTime(date, 'd')}
+              </div>
             </div>
           ))}
         </div>
@@ -185,7 +193,18 @@ const CalendarDemo: Component = () => {
                       .filter((event) => {
                         const eventStart = new Date(event.start);
                         const eventEnd = new Date(event.end);
-                        return calendar()?.utils.dateTimeInBetween(new Date(date.getFullYear(), date.getMonth(), date.getDate(), slot.hour, slot.minute, 0), eventStart, eventEnd);
+                        return calendar()?.utils.dateTimeInBetween(
+                          new Date(
+                            date.getFullYear(),
+                            date.getMonth(),
+                            date.getDate(),
+                            slot.hour,
+                            slot.minute,
+                            0,
+                          ),
+                          eventStart,
+                          eventEnd,
+                        );
                       }) || [];
                   slotEvents.length > 0 && console.log(slotEvents);
                   return (
@@ -197,11 +216,13 @@ const CalendarDemo: Component = () => {
                         const eventStart = new Date(date);
                         eventStart.setHours(slot.hour, slot.minute);
                         const eventEnd = new Date(eventStart);
-                        eventEnd.setMinutes(eventEnd.getMinutes() + (calendar()?.timeSlotInterval ?? 60));
+                        eventEnd.setMinutes(
+                          eventEnd.getMinutes() + (calendar()?.timeSlotInterval ?? 60),
+                        );
 
                         calendar()?.createEvent({
                           id: generateId(),
-                          title: "New Event",
+                          title: 'New Event',
                           start: eventStart,
                           end: eventEnd,
                           color: generateColor(),
@@ -209,7 +230,12 @@ const CalendarDemo: Component = () => {
                       }}
                     >
                       {slotEvents.map((event) => (
-                        <div style={{ "background-color": event.color }} draggable="true" onDragStart={(e) => handleEventDragStart(event, e)} data-props={JSON.stringify(event)}>
+                        <div
+                          style={{ 'background-color': event.color }}
+                          draggable="true"
+                          onDragStart={(e) => handleEventDragStart(event, e)}
+                          data-props={JSON.stringify(event)}
+                        >
                           {event.title}
                         </div>
                       ))}
@@ -230,7 +256,11 @@ const CalendarDemo: Component = () => {
     return (
       <div>
         <div>
-          <h2 class={`text-xl font-semibold ${calendar()?.dayData?.isToday ? "text-blue-600" : ""}`}>{calendar()?.dayData?.dayName}</h2>
+          <h2
+            class={`text-xl font-semibold ${calendar()?.dayData?.isToday ? 'text-blue-600' : ''}`}
+          >
+            {calendar()?.dayData?.dayName}
+          </h2>
         </div>
 
         <div>
@@ -247,13 +277,17 @@ const CalendarDemo: Component = () => {
                   ?.getEventsForDate(calendar()?.dayData?.dates[0] as Date)
                   .filter((event) => {
                     const eventStart = new Date(event.start);
-                    return eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute;
+                    return (
+                      eventStart.getHours() === slot.hour && eventStart.getMinutes() === slot.minute
+                    );
                   }) || [];
 
               return (
                 <div
                   onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => eventHandleDrop(e, calendar()?.dayData?.dates[0] as Date, slot.time)}
+                  onDrop={(e) =>
+                    eventHandleDrop(e, calendar()?.dayData?.dates[0] as Date, slot.time)
+                  }
                   onClick={() => {
                     const eventStart = new Date(calendar()?.dayData?.dates[0] as Date);
                     eventStart.setHours(slot.hour, slot.minute);
@@ -262,7 +296,7 @@ const CalendarDemo: Component = () => {
 
                     calendar()?.createEvent({
                       id: generateId(),
-                      title: "New Event",
+                      title: 'New Event',
                       start: eventStart,
                       end: eventEnd,
                       color: generateColor(),
@@ -270,7 +304,12 @@ const CalendarDemo: Component = () => {
                   }}
                 >
                   {slotEvents.map((event) => (
-                    <div data-time={JSON.stringify(event)} style={{ "background-color": event.color }} draggable="true" onDragStart={(e) => handleEventDragStart(event, e)}>
+                    <div
+                      data-time={JSON.stringify(event)}
+                      style={{ 'background-color': event.color }}
+                      draggable="true"
+                      onDragStart={(e) => handleEventDragStart(event, e)}
+                    >
                       <div>{event.title}</div>
                       {event.description && <div>{event.description}</div>}
                     </div>
@@ -285,10 +324,10 @@ const CalendarDemo: Component = () => {
   };
 
   return (
-    <table style={{ width: "800px", height: "800px", margin: "0 auto" }}>
+    <table style={{ width: '800px', height: '800px', margin: '0 auto' }}>
       <tbody>
         <tr>
-          <td style={{ height: "600px" }}>
+          <td style={{ height: '600px' }}>
             {/* Header */}
             <table>
               <thead>
@@ -308,23 +347,29 @@ const CalendarDemo: Component = () => {
                   </td>
                   <td colSpan={3} align="center">
                     <h3>
-                      {calendar()?.view === "month" && calendar()?.monthData?.monthName}
-                      {calendar()?.view === "week" && calendar()?.weekData?.weekRange}
-                      {calendar()?.view === "day" && calendar()?.dayData?.dayName}
+                      {calendar()?.view === 'month' && calendar()?.monthData?.monthName}
+                      {calendar()?.view === 'week' && calendar()?.weekData?.weekRange}
+                      {calendar()?.view === 'day' && calendar()?.dayData?.dayName}
                     </h3>
                     {/* {formatDateTime(currentDate, "EE dd MMM yyyy")} */}
                   </td>
                   <td colSpan={2} align="center">
-                    <button onClick={() => calendar()?.changeView("month")} class={`px-4 py-2 rounded ${calendar()?.view === "month" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
+                    <button
+                      onClick={() => calendar()?.changeView('month')}
+                      class={`px-4 py-2 rounded ${calendar()?.view === 'month' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    >
                       Month
                     </button>
-                    <button onClick={() => calendar()?.changeView("week")} class={`px-4 py-2 rounded ${calendar()?.view === "week" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}>
+                    <button
+                      onClick={() => calendar()?.changeView('week')}
+                      class={`px-4 py-2 rounded ${calendar()?.view === 'week' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                    >
                       Week
                     </button>
                     <button
                       type="button"
-                      onClick={() => calendar()?.changeView("day")}
-                      class={`px-4 py-2 rounded ${calendar()?.view === "day" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+                      onClick={() => calendar()?.changeView('day')}
+                      class={`px-4 py-2 rounded ${calendar()?.view === 'day' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                     >
                       Day
                     </button>
@@ -345,9 +390,9 @@ const CalendarDemo: Component = () => {
               </tr>*/}
               </thead>
               <tbody>
-                {calendar()?.view === "month" && renderMonthView()}
-                {calendar()?.view === "week" && renderWeekView()}
-                {calendar()?.view === "day" && renderDayView()}
+                {calendar()?.view === 'month' && renderMonthView()}
+                {calendar()?.view === 'week' && renderWeekView()}
+                {calendar()?.view === 'day' && renderDayView()}
               </tbody>
             </table>
           </td>
@@ -355,28 +400,32 @@ const CalendarDemo: Component = () => {
         <tr>
           <td>
             <h3>Events ({calendar()?.events.length})</h3>
-            <div style={{ height: "200px", overflow: "auto" }}>
+            <div style={{ height: '200px', overflow: 'auto' }}>
               <div>
                 {calendar()?.events.map((event) => {
                   return (
                     <div
                       style={{
-                        "background-color": event.color,
-                        display: "flex",
-                        "margin-bottom": "8px",
-                        padding: "4px",
-                        "justify-content": "space-between",
-                        "align-items": "center",
+                        'background-color': event.color,
+                        display: 'flex',
+                        'margin-bottom': '8px',
+                        padding: '4px',
+                        'justify-content': 'space-between',
+                        'align-items': 'center',
                       }}
                     >
                       <div>
-                        <strong style={{ display: "block" }}>{event.title}</strong>
-                        <span style={{ "font-size": "11px" }}>
-                          {calendar()?.utils.formatDateTime(event.start, "dd MMM yyyy hh:mm a")} to {calendar()?.utils.formatDateTime(event.end, "dd MMM yyyy hh:mm a")}
+                        <strong style={{ display: 'block' }}>{event.title}</strong>
+                        <span style={{ 'font-size': '11px' }}>
+                          {calendar()?.utils.formatDateTime(event.start, 'dd MMM yyyy hh:mm a')} to{' '}
+                          {calendar()?.utils.formatDateTime(event.end, 'dd MMM yyyy hh:mm a')}
                         </span>
                       </div>
 
-                      <button type="button" onClick={() => calendar()?.deleteEvent(event.id as string)}>
+                      <button
+                        type="button"
+                        onClick={() => calendar()?.deleteEvent(event.id as string)}
+                      >
                         Delete
                       </button>
                     </div>
