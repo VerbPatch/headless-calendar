@@ -5,7 +5,7 @@ export const CalendarDemo: FunctionalComponent = () => {
   const calendar = useCalendar({
     defaultView: 'custom',
     customViewOptions: {
-      unit: 'day',
+      type: 'day',
       count: 2,
     },
     initialEvents: [
@@ -44,7 +44,7 @@ export const CalendarDemo: FunctionalComponent = () => {
   };
 
   const getMonthsToDisplay = () => {
-    if (!customViewOptions || customViewOptions.unit !== 'month') return [];
+    if (!customViewOptions || customViewOptions.type !== 'month') return [];
     const count = customViewOptions.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -125,7 +125,7 @@ export const CalendarDemo: FunctionalComponent = () => {
   };
 
   const renderHorizontalView = () => {
-    const data = customViewOptions?.unit === 'week' ? weekData : dayData;
+    const data = customViewOptions?.type === 'week' ? weekData : dayData;
     if (!data) return null;
     return (
       <table
@@ -173,8 +173,8 @@ export const CalendarDemo: FunctionalComponent = () => {
 
   const getTitle = () => {
     if (!customViewOptions) return '';
-    if (customViewOptions.unit === 'month') return monthData?.monthName;
-    if (customViewOptions.unit === 'week') return weekData?.weekRange;
+    if (customViewOptions.type === 'month') return monthData?.monthName;
+    if (customViewOptions.type === 'week') return weekData?.weekRange;
     return dayData?.dayName;
   };
 
@@ -192,26 +192,26 @@ export const CalendarDemo: FunctionalComponent = () => {
 
       <div style={{ margin: '20px 0' }}>
         <strong>Presets:</strong>
-        <button onClick={() => setPreset({ unit: 'day', count: 2 })}>2 Days</button>
+        <button onClick={() => setPreset({ type: 'day', count: 2 })}>2 Days</button>
         <button
           onClick={() =>
-            setPreset({ unit: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
+            setPreset({ type: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
           }
         >
           Work Week
         </button>
-        <button onClick={() => setPreset({ unit: 'week', count: 2 })}>2 Weeks</button>
+        <button onClick={() => setPreset({ type: 'week', count: 2 })}>2 Weeks</button>
         <button
           onClick={() =>
-            setPreset({ unit: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
+            setPreset({ type: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
           }
         >
           1 Month (WD)
         </button>
-        <button onClick={() => setPreset({ unit: 'month', count: 3 })}>Quarter</button>
+        <button onClick={() => setPreset({ type: 'month', count: 3 })}>Quarter</button>
       </div>
 
-      <div>{customViewOptions?.unit === 'month' ? renderMonthViews() : renderHorizontalView()}</div>
+      <div>{customViewOptions?.type === 'month' ? renderMonthViews() : renderHorizontalView()}</div>
     </div>
   );
 };

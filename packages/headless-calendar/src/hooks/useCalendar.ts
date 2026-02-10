@@ -104,7 +104,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     onEventDelete,
     onViewChange,
     onDateChange,
-    customViewOptions = { unit: 'day', count: 1 },
+    customViewOptions = { type: 'day', count: 1 },
   } = options;
 
   // Use navigation hook
@@ -176,7 +176,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
           let current = navigation.currentDate;
           for (let i = 0; i < currentCustomOptions.count; i++) {
-            switch (currentCustomOptions.unit) {
+            switch (currentCustomOptions.type) {
               case 'day':
                 dates.push(current);
                 current = addDays(current, 1);
@@ -198,7 +198,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
           if (
             currentCustomOptions.includeSpecificDays?.length &&
-            ['week', 'month'].includes(currentCustomOptions.unit)
+            ['week', 'month'].includes(currentCustomOptions.type)
           ) {
             dates = dates.filter((date) =>
               currentCustomOptions.includeSpecificDays!.includes(date.getDay()),
@@ -349,7 +349,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       const currentCustomOptions = navigation.customViewOptions;
       if (
         navigation.view !== 'month' &&
-        (navigation.view !== 'custom' || currentCustomOptions.unit !== 'month')
+        (navigation.view !== 'custom' || currentCustomOptions.type !== 'month')
       )
         return null;
 
@@ -379,7 +379,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
         monthName:
           currentCustomOptions &&
           currentCustomOptions.count > 1 &&
-          currentCustomOptions.unit === 'month'
+          currentCustomOptions.type === 'month'
             ? `${formatLocalizedMonth(dates[0], locale, timezone)} - ${formatLocalizedMonth(dates[dates.length - 1], locale, timezone)}`
             : formatLocalizedMonth(navigation.currentDate, locale, timezone),
         isCurrentMonth: (date: Date) => isSameMonth(date, navigation.currentDate),
@@ -412,7 +412,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       const currentCustomOptions = navigation.customViewOptions;
       if (
         navigation.view !== 'week' &&
-        (navigation.view !== 'custom' || currentCustomOptions.unit !== 'week')
+        (navigation.view !== 'custom' || currentCustomOptions.type !== 'week')
       )
         return null;
 
@@ -451,7 +451,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       const currentCustomOptions = navigation.customViewOptions;
       if (
         navigation.view !== 'day' &&
-        (navigation.view !== 'custom' || currentCustomOptions.unit !== 'day')
+        (navigation.view !== 'custom' || currentCustomOptions.type !== 'day')
       )
         return null;
 

@@ -38,7 +38,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     defaultDate,
     onViewChange,
     onDateChange,
-    customViewOptions = { unit: 'day', count: 1 },
+    customViewOptions = { type: 'day', count: 1 },
   } = options;
   const [getCurrentDate, setCurrentDate] = createState<Date>(defaultDate, 'current-date');
   const [getView, setView] = createState<ViewType>(defaultView, 'view');
@@ -76,11 +76,11 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
           validateCustomView(currentCustomOptions);
 
           newDate = current;
-          if (currentCustomOptions.unit === 'day') {
+          if (currentCustomOptions.type === 'day') {
             newDate = addDays(current, currentCustomOptions.count);
-          } else if (currentCustomOptions.unit === 'week') {
+          } else if (currentCustomOptions.type === 'week') {
             newDate = addWeeks(current, currentCustomOptions.count);
-          } else if (currentCustomOptions.unit === 'month') {
+          } else if (currentCustomOptions.type === 'month') {
             newDate = addMonths(current, currentCustomOptions.count);
           }
 
@@ -123,11 +123,11 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
           validateCustomView(currentCustomOptions);
 
           newDate = current;
-          if (currentCustomOptions.unit === 'day') {
+          if (currentCustomOptions.type === 'day') {
             newDate = addDays(current, -currentCustomOptions.count);
-          } else if (currentCustomOptions.unit === 'week') {
+          } else if (currentCustomOptions.type === 'week') {
             newDate = addWeeks(current, -currentCustomOptions.count);
-          } else if (currentCustomOptions.unit === 'month') {
+          } else if (currentCustomOptions.type === 'month') {
             newDate = addMonths(current, -currentCustomOptions.count);
           }
 

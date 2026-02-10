@@ -28,7 +28,7 @@ export class CalendarDemo extends LitElement {
     super();
     this._calendarState = useCalendar(this, {
       defaultView: 'custom',
-      customViewOptions: { unit: 'day', count: 2 },
+      customViewOptions: { type: 'day', count: 2 },
       initialEvents: [
         {
           id: '1',
@@ -51,9 +51,9 @@ export class CalendarDemo extends LitElement {
     });
   }
 
-  private _setPreset(unit: 'day' | 'week' | 'month', count: number, include?: number[]) {
+  private _setPreset(type: 'day' | 'week' | 'month', count: number, include?: number[]) {
     this._calendarState.calendar.changeView('custom', {
-      unit,
+      type,
       count,
       includeSpecificDays: include,
     });
@@ -63,7 +63,7 @@ export class CalendarDemo extends LitElement {
   private _getMonthsToDisplay() {
     const { calendar } = this._calendarState;
     const opts = calendar.customViewOptions;
-    if (!opts || opts.unit !== 'month') return [];
+    if (!opts || opts.type !== 'month') return [];
     const count = opts.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -77,8 +77,8 @@ export class CalendarDemo extends LitElement {
     const { calendar } = this._calendarState;
     const opts = calendar.customViewOptions;
     if (!opts) return '';
-    if (opts.unit === 'month') return calendar.monthData?.monthName;
-    if (opts.unit === 'week') return calendar.weekData?.weekRange;
+    if (opts.type === 'month') return calendar.monthData?.monthName;
+    if (opts.type === 'week') return calendar.weekData?.weekRange;
     return calendar.dayData?.dayName;
   }
 
@@ -127,7 +127,7 @@ export class CalendarDemo extends LitElement {
         </div>
 
         <div>
-          ${opts?.unit === 'month'
+          ${opts?.type === 'month'
             ? calendar.monthData
               ? this._renderMonthViews()
               : html`Loading Month...`
@@ -203,7 +203,7 @@ export class CalendarDemo extends LitElement {
   private _renderHorizontalView() {
     const { calendar } = this._calendarState;
     const opts = calendar.customViewOptions;
-    const data = opts?.unit === 'week' ? calendar.weekData : calendar.dayData;
+    const data = opts?.type === 'week' ? calendar.weekData : calendar.dayData;
     if (!data) return '';
     return html`
       <table border="1" cellpadding="5">

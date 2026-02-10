@@ -18,15 +18,15 @@
 
       <div style="margin: 20px 0">
         <strong>Presets:</strong>
-        <button class="preset" data-unit="day" data-count="2">2 Days</button>
-        <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">
+        <button class="preset" data-type="day" data-count="2">2 Days</button>
+        <button class="preset" data-type="week" data-count="1" data-include="1,2,3,4,5">
           Work Week
         </button>
-        <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
-        <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">
+        <button class="preset" data-type="week" data-count="2">2 Weeks</button>
+        <button class="preset" data-type="month" data-count="1" data-include="1,2,3,4,5">
           1 Month (WD)
         </button>
-        <button class="preset" data-unit="month" data-count="3">Quarter</button>
+        <button class="preset" data-type="month" data-count="3">Quarter</button>
       </div>
 
       <div id="calendar-view"></div>
@@ -40,7 +40,7 @@
         const $view = $('#calendar-view');
         const $label = $('#range-label');
 
-        let customOptions = { unit: 'day', count: 2 };
+        let customOptions = { type: 'day', count: 2 };
 
         function initCalendar() {
           $calContainer.headlessCalendar({
@@ -71,8 +71,8 @@
         function getTitle(cal) {
           const opts = cal.customViewOptions;
           if (!opts) return '';
-          if (opts.unit === 'month') return cal.monthData?.monthName;
-          if (opts.unit === 'week') return cal.weekData?.weekRange;
+          if (opts.type === 'month') return cal.monthData?.monthName;
+          if (opts.type === 'week') return cal.weekData?.weekRange;
           return cal.dayData?.dayName;
         }
 
@@ -83,7 +83,7 @@
           let html = '';
           const opts = calendar.customViewOptions;
 
-          if (opts.unit === 'month' && calendar.monthData) {
+          if (opts.type === 'month' && calendar.monthData) {
             const count = opts.count || 1;
             for (let i = 0; i < count; i++) {
               const mDate = utils.addMonths(calendar.currentDate, i);
@@ -123,7 +123,7 @@
               html += '</tbody></table></div>';
             }
           } else {
-            const data = opts.unit === 'week' ? calendar.weekData : calendar.dayData;
+            const data = opts.type === 'week' ? calendar.weekData : calendar.dayData;
             if (data) {
               html +=
                 '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';
@@ -152,13 +152,13 @@
         $('#next').click(() => $calContainer.headlessCalendar('goToNext'));
 
         $('.preset').click(function () {
-          const unit = $(this).data('unit');
+          const type = $(this).data('type');
           const count = parseInt($(this).data('count'));
           const include = $(this).data('include')
             ? $(this).data('include').toString().split(',').map(Number)
             : undefined;
           $calContainer.headlessCalendar('changeView', 'custom', {
-            unit,
+            type,
             count,
             includeSpecificDays: include,
           });

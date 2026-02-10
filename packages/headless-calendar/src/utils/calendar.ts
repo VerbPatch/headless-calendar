@@ -282,7 +282,7 @@ export const getCalendarBounds = (
   view: ViewType,
   date: Date,
   startOfWeek: number = 0,
-  customViewOptions: CustomViewOptions = { unit: 'day', count: 1 },
+  customViewOptions: CustomViewOptions = { type: 'day', count: 1 },
 ): { start: Date; end: Date } => {
   switch (view) {
     case 'day':
@@ -315,7 +315,7 @@ export const getCalendarBounds = (
       let start: Date;
       let end: Date;
 
-      switch (customViewOptions.unit) {
+      switch (customViewOptions.type) {
         case 'day':
           start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
           end = addDays(start, customViewOptions.count - 1);
@@ -354,7 +354,7 @@ export const validateCustomView = (customViewOptions: CustomViewOptions) => {
     throw new Error(`customViewOptions must be set for custom view`);
   }
 
-  if (!['day', 'week', 'month'].includes(customViewOptions.unit)) {
-    throw new Error(`customViewOptions.unit must be set to either day or week or month`);
+  if (!['day', 'week', 'month'].includes(customViewOptions.type)) {
+    throw new Error(`customViewOptions.type must be set to either day or week or month`);
   }
 };

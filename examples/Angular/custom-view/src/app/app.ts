@@ -14,7 +14,7 @@ export class App {
 
   calendarHook: CalendarComposable = useCalendar({
     defaultView: 'custom',
-    customViewOptions: { unit: 'day', count: 2 },
+    customViewOptions: { type: 'day', count: 2 },
     initialEvents: [
       {
         id: '1',
@@ -33,16 +33,16 @@ export class App {
     ],
   });
 
-  setPreset(unit: 'day' | 'week' | 'month', count: number, include?: number[]) {
+  setPreset(type: 'day' | 'week' | 'month', count: number, include?: number[]) {
     this.calendarHook
       .calendar()
-      .changeView('custom', { unit, count, includeSpecificDays: include });
+      .changeView('custom', { type, count, includeSpecificDays: include });
   }
 
   getMonthsToDisplay() {
     const cal = this.calendarHook.calendar();
     const opts = cal.customViewOptions;
-    if (!cal || !opts || opts.unit !== 'month') return [];
+    if (!cal || !opts || opts.type !== 'month') return [];
 
     const count = opts.count || 1;
     const months = [];
@@ -77,8 +77,8 @@ export class App {
     const cal = this.calendarHook.calendar();
     const opts = cal.customViewOptions;
     if (!opts) return '';
-    if (opts.unit === 'month') return cal.monthData?.monthName;
-    if (opts.unit === 'week') return cal.weekData?.weekRange;
+    if (opts.type === 'month') return cal.monthData?.monthName;
+    if (opts.type === 'week') return cal.weekData?.weekRange;
     return cal.dayData?.dayName;
   }
 }

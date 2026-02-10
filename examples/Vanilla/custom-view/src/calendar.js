@@ -2,7 +2,7 @@ import { useCalendar, generateId } from '@verbpatch/headless-calendar';
 
 export function setupCalendar($elem) {
   let calendar;
-  let customOptions = { unit: 'day', count: 2 };
+  let customOptions = { type: 'day', count: 2 };
 
   function bindCalendar() {
     const options = {
@@ -50,13 +50,13 @@ export function setupCalendar($elem) {
     } else {
       const presetBtn = target.closest('.preset');
       if (presetBtn) {
-        const unit = presetBtn.dataset.unit;
+        const type = presetBtn.dataset.type;
         const count = parseInt(presetBtn.dataset.count);
         const include = presetBtn.dataset.include
           ? presetBtn.dataset.include.split(',').map(Number)
           : undefined;
 
-        customOptions = { unit, count, includeSpecificDays: include };
+        customOptions = { type, count, includeSpecificDays: include };
         calendar.changeView('custom', customOptions);
         bindCalendar();
       }
@@ -66,8 +66,8 @@ export function setupCalendar($elem) {
   function getTitle(cal) {
     const opts = cal.customViewOptions;
     if (!opts) return '';
-    if (opts.unit === 'month') return cal.monthData?.monthName;
-    if (opts.unit === 'week') return cal.weekData?.weekRange;
+    if (opts.type === 'month') return cal.monthData?.monthName;
+    if (opts.type === 'week') return cal.weekData?.weekRange;
     return cal.dayData?.dayName;
   }
 
@@ -88,16 +88,16 @@ export function setupCalendar($elem) {
 
         <div style="margin: 20px 0;">
           <strong>Presets:</strong>
-          <button class="preset" data-unit="day" data-count="2">2 Days</button>
-          <button class="preset" data-unit="week" data-count="1" data-include="1,2,3,4,5">Work Week</button>
-          <button class="preset" data-unit="week" data-count="2">2 Weeks</button>
-          <button class="preset" data-unit="month" data-count="1" data-include="1,2,3,4,5">1 Month (WD)</button>
-          <button class="preset" data-unit="month" data-count="3">Quarter</button>
+          <button class="preset" data-type="day" data-count="2">2 Days</button>
+          <button class="preset" data-type="week" data-count="1" data-include="1,2,3,4,5">Work Week</button>
+          <button class="preset" data-type="week" data-count="2">2 Weeks</button>
+          <button class="preset" data-type="month" data-count="1" data-include="1,2,3,4,5">1 Month (WD)</button>
+          <button class="preset" data-type="month" data-count="3">Quarter</button>
         </div>
 
         <div class="view-content">`;
 
-    if (opts?.unit === 'month' && calendar.monthData) {
+    if (opts?.type === 'month' && calendar.monthData) {
       const count = opts.count || 1;
       for (let i = 0; i < count; i++) {
         const mDate = utils.addMonths(calendar.currentDate, i);
@@ -142,7 +142,7 @@ export function setupCalendar($elem) {
         html += '</tbody></table></div>';
       }
     } else {
-      const data = opts?.unit === 'week' ? calendar.weekData : calendar.dayData;
+      const data = opts?.type === 'week' ? calendar.weekData : calendar.dayData;
       if (data) {
         html +=
           '<table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;"><thead><tr>';

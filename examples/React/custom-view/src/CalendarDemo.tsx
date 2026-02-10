@@ -24,7 +24,7 @@ const CalendarDemo: React.FC = () => {
 
   const calendar = useCalendar({
     defaultView: 'custom',
-    customViewOptions: { unit: 'day', count: 2 },
+    customViewOptions: { type: 'day', count: 2 },
     initialEvents,
   });
 
@@ -46,7 +46,7 @@ const CalendarDemo: React.FC = () => {
   };
 
   const getMonthsToDisplay = () => {
-    if (!customViewOptions || customViewOptions.unit !== 'month') return [];
+    if (!customViewOptions || customViewOptions.type !== 'month') return [];
     const count = customViewOptions.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -175,8 +175,8 @@ const CalendarDemo: React.FC = () => {
 
   const getTitle = () => {
     if (!customViewOptions) return '';
-    if (customViewOptions.unit === 'month') return monthData?.monthName;
-    if (customViewOptions.unit === 'week') return weekData?.weekRange;
+    if (customViewOptions.type === 'month') return monthData?.monthName;
+    if (customViewOptions.type === 'week') return weekData?.weekRange;
     return dayData?.dayName;
   };
 
@@ -194,29 +194,29 @@ const CalendarDemo: React.FC = () => {
 
       <div style={{ margin: '20px 0' }}>
         <strong>Presets:</strong>
-        <button onClick={() => setPreset({ unit: 'day', count: 2 })}>2 Days</button>
+        <button onClick={() => setPreset({ type: 'day', count: 2 })}>2 Days</button>
         <button
           onClick={() =>
-            setPreset({ unit: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
+            setPreset({ type: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
           }
         >
           Work Week
         </button>
-        <button onClick={() => setPreset({ unit: 'week', count: 2 })}>2 Weeks</button>
+        <button onClick={() => setPreset({ type: 'week', count: 2 })}>2 Weeks</button>
         <button
           onClick={() =>
-            setPreset({ unit: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
+            setPreset({ type: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })
           }
         >
           1 Month (WD)
         </button>
-        <button onClick={() => setPreset({ unit: 'month', count: 3 })}>Quarter</button>
+        <button onClick={() => setPreset({ type: 'month', count: 3 })}>Quarter</button>
       </div>
 
       <div>
-        {customViewOptions?.unit === 'month'
+        {customViewOptions?.type === 'month'
           ? renderMonthViews()
-          : renderHorizontalView(customViewOptions?.unit === 'week' ? weekData : dayData)}
+          : renderHorizontalView(customViewOptions?.type === 'week' ? weekData : dayData)}
       </div>
     </div>
   );

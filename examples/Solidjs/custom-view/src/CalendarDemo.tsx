@@ -4,7 +4,7 @@ import { useCalendar, generateId, type CustomViewOptions } from '@verbpatch/soli
 const CalendarDemo: Component = () => {
   const calendar = useCalendar({
     defaultView: 'custom',
-    customViewOptions: { unit: 'day', count: 2 },
+    customViewOptions: { type: 'day', count: 2 },
     initialEvents: [
       {
         id: '1',
@@ -26,7 +26,7 @@ const CalendarDemo: Component = () => {
   const getMonthsToDisplay = () => {
     const cal = calendar();
     const opts = cal?.customViewOptions;
-    if (!cal || !opts || opts.unit !== 'month') return [];
+    if (!cal || !opts || opts.type !== 'month') return [];
     const count = opts.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -40,8 +40,8 @@ const CalendarDemo: Component = () => {
     const cal = calendar();
     const opts = cal?.customViewOptions;
     if (!cal || !opts) return '';
-    if (opts.unit === 'month') return cal.monthData?.monthName;
-    if (opts.unit === 'week') return cal.weekData?.weekRange;
+    if (opts.type === 'month') return cal.monthData?.monthName;
+    if (opts.type === 'week') return cal.weekData?.weekRange;
     return cal.dayData?.dayName;
   };
 
@@ -59,13 +59,13 @@ const CalendarDemo: Component = () => {
 
       <div style={{ margin: '20px 0' }}>
         <strong>Presets:</strong>
-        <button onClick={() => calendar()?.changeView('custom', { unit: 'day', count: 2 })}>
+        <button onClick={() => calendar()?.changeView('custom', { type: 'day', count: 2 })}>
           2 Days
         </button>
         <button
           onClick={() =>
             calendar()?.changeView('custom', {
-              unit: 'week',
+              type: 'week',
               count: 1,
               includeSpecificDays: [1, 2, 3, 4, 5],
             })
@@ -73,13 +73,13 @@ const CalendarDemo: Component = () => {
         >
           Work Week
         </button>
-        <button onClick={() => calendar()?.changeView('custom', { unit: 'week', count: 2 })}>
+        <button onClick={() => calendar()?.changeView('custom', { type: 'week', count: 2 })}>
           2 Weeks
         </button>
         <button
           onClick={() =>
             calendar()?.changeView('custom', {
-              unit: 'month',
+              type: 'month',
               count: 1,
               includeSpecificDays: [1, 2, 3, 4, 5],
             })
@@ -87,21 +87,21 @@ const CalendarDemo: Component = () => {
         >
           1 Month (WD)
         </button>
-        <button onClick={() => calendar()?.changeView('custom', { unit: 'month', count: 3 })}>
+        <button onClick={() => calendar()?.changeView('custom', { type: 'month', count: 3 })}>
           Quarter
         </button>
       </div>
 
       <div>
         <Show
-          when={calendar()?.customViewOptions?.unit === 'month' && calendar()?.monthData}
+          when={calendar()?.customViewOptions?.type === 'month' && calendar()?.monthData}
           fallback={
             <table style={{ width: '100%', 'border-collapse': 'collapse', 'text-align': 'center' }}>
               <thead>
                 <tr>
                   <For
                     each={
-                      calendar()?.customViewOptions?.unit === 'week'
+                      calendar()?.customViewOptions?.type === 'week'
                         ? calendar()?.weekData?.dates
                         : calendar()?.dayData?.dates
                     }
@@ -114,7 +114,7 @@ const CalendarDemo: Component = () => {
                 <tr>
                   <For
                     each={
-                      calendar()?.customViewOptions?.unit === 'week'
+                      calendar()?.customViewOptions?.type === 'week'
                         ? calendar()?.weekData?.dates
                         : calendar()?.dayData?.dates
                     }

@@ -3,7 +3,7 @@
 
   const calendar = useCalendar({
     defaultView: "custom",
-    customViewOptions: { unit: "day", count: 2 },
+    customViewOptions: { type: "day", count: 2 },
     initialEvents: [
       { id: "1", title: "Project Review", start: new Date(), end: new Date(new Date().getTime() + 3600000), color: "#8b5cf6" },
       { id: "2", title: "Lunch Sync", start: new Date(new Date().setHours(12, 0)), end: new Date(new Date().setHours(13, 0)), color: "#10b981" },
@@ -16,7 +16,7 @@
 
   function getMonthsToDisplay() {
     const opts = $calendar.customViewOptions;
-    if (!opts || opts.unit !== "month") return [];
+    if (!opts || opts.type !== "month") return [];
     const count = opts.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -29,8 +29,8 @@
   function getTitle() {
     const opts = $calendar.customViewOptions;
     if (!opts) return "";
-    if (opts.unit === "month") return $calendar.monthData?.monthName;
-    if (opts.unit === "week") return $calendar.weekData?.weekRange;
+    if (opts.type === "month") return $calendar.monthData?.monthName;
+    if (opts.type === "week") return $calendar.weekData?.weekRange;
     return $calendar.dayData?.dayName;
   }
 </script>
@@ -45,15 +45,15 @@
 
   <div style="margin: 20px 0;">
     <strong>Presets:</strong>
-    <button onclick={() => setPreset({ unit: "day", count: 2 })}>2 Days</button>
-    <button onclick={() => setPreset({ unit: "week", count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })}>Work Week</button>
-    <button onclick={() => setPreset({ unit: "week", count: 2 })}>2 Weeks</button>
-    <button onclick={() => setPreset({ unit: "month", count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })}>1 Month (WD)</button>
-    <button onclick={() => setPreset({ unit: "month", count: 3 })}>Quarter</button>
+    <button onclick={() => setPreset({ type: "day", count: 2 })}>2 Days</button>
+    <button onclick={() => setPreset({ type: "week", count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })}>Work Week</button>
+    <button onclick={() => setPreset({ type: "week", count: 2 })}>2 Weeks</button>
+    <button onclick={() => setPreset({ type: "month", count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })}>1 Month (WD)</button>
+    <button onclick={() => setPreset({ type: "month", count: 3 })}>Quarter</button>
   </div>
 
   <div>
-    {#if $calendar.customViewOptions?.unit === "month" && $calendar.monthData}
+    {#if $calendar.customViewOptions?.type === "month" && $calendar.monthData}
       {#each getMonthsToDisplay() as m (m.year + "-" + m.month)}
         <div>
           <h3>{$calendar.utils.formatLocalizedMonth(m.date)}</h3>
@@ -90,7 +90,7 @@
         </div>
       {/each}
     {:else}
-      {@const data = $calendar.customViewOptions?.unit === "week" ? $calendar.weekData : $calendar.dayData}
+      {@const data = $calendar.customViewOptions?.type === "week" ? $calendar.weekData : $calendar.dayData}
       {#if data}
         <table border="1" cellpadding="5" width="100%" style="border-collapse: collapse; text-align: center;">
           <thead>

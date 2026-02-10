@@ -14,17 +14,17 @@ export type ViewType = 'year' | 'month' | 'week' | 'day' | 'custom';
  */
 export interface CustomViewOptions {
   /**
-   * The unit of time for the custom view.
+   * The type of view for the custom view.
    */
-  unit: 'day' | 'week' | 'month';
+  type: 'day' | 'week' | 'month';
   /**
-   * The number of units to display.
+   * The number of 'day' | 'week' | 'month' to display based on type.
    */
   count: number;
   /**
    * Specific days of the week to include (0 for Sunday, 1 for Monday, etc.).
    * If provided, only these days will be visible in the custom view.
-   * Only works if unit is set to either week or month
+   * Only works if type is set to either week or month
    */
   includeSpecificDays?: number[];
 }

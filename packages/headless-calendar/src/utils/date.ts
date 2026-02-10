@@ -215,9 +215,13 @@ export const formatDateTime = (
     .map((token) => token.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
     .join('|');
 
-  return format.replace(new RegExp(`\\[([^\\]]+)\\]|(${tokenRegexPattern})`, 'g'), (match) => {
-    return replacementMap[match] ?? match;
-  });
+  return format.replace(
+    new RegExp(`\\[([^\\]]+)\\]|(${tokenRegexPattern})`, 'g'),
+    (match, p1, p2) => {
+      if (p1) return p1;
+      return replacementMap[p2] ?? match;
+    },
+  );
 };
 
 /**

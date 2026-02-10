@@ -4,7 +4,7 @@ import { useCalendar, generateId } from '@verbpatch/qwik-calendar';
 export const App = component$(() => {
   const calendar = useCalendar({
     defaultView: 'custom',
-    customViewOptions: { unit: 'day', count: 2 },
+    customViewOptions: { type: 'day', count: 2 },
     initialEvents: [
       {
         id: '1',
@@ -25,7 +25,7 @@ export const App = component$(() => {
 
   const getMonthsToDisplay = () => {
     const opts = calendar.customViewOptions;
-    if (!opts || opts.unit !== 'month') return [];
+    if (!opts || opts.type !== 'month') return [];
     const count = opts.count || 1;
     const months = [];
     for (let i = 0; i < count; i++) {
@@ -38,8 +38,8 @@ export const App = component$(() => {
   const getTitle = () => {
     const opts = calendar.customViewOptions;
     if (!opts) return '';
-    if (opts.unit === 'month') return calendar.monthData?.monthName;
-    if (opts.unit === 'week') return calendar.weekData?.weekRange;
+    if (opts.type === 'month') return calendar.monthData?.monthName;
+    if (opts.type === 'week') return calendar.weekData?.weekRange;
     return calendar.dayData?.dayName;
   };
 
@@ -57,13 +57,13 @@ export const App = component$(() => {
 
       <div style={{ margin: '20px 0' }}>
         <strong>Presets:</strong>
-        <button onClick$={() => calendar.changeView('custom', { unit: 'day', count: 2 })}>
+        <button onClick$={() => calendar.changeView('custom', { type: 'day', count: 2 })}>
           2 Days
         </button>
         <button
           onClick$={() =>
             calendar.changeView('custom', {
-              unit: 'week',
+              type: 'week',
               count: 1,
               includeSpecificDays: [1, 2, 3, 4, 5],
             })
@@ -71,13 +71,13 @@ export const App = component$(() => {
         >
           Work Week
         </button>
-        <button onClick$={() => calendar.changeView('custom', { unit: 'week', count: 2 })}>
+        <button onClick$={() => calendar.changeView('custom', { type: 'week', count: 2 })}>
           2 Weeks
         </button>
         <button
           onClick$={() =>
             calendar.changeView('custom', {
-              unit: 'month',
+              type: 'month',
               count: 1,
               includeSpecificDays: [1, 2, 3, 4, 5],
             })
@@ -85,13 +85,13 @@ export const App = component$(() => {
         >
           1 Month (WD)
         </button>
-        <button onClick$={() => calendar.changeView('custom', { unit: 'month', count: 3 })}>
+        <button onClick$={() => calendar.changeView('custom', { type: 'month', count: 3 })}>
           Quarter
         </button>
       </div>
 
       <div>
-        {calendar.customViewOptions?.unit === 'month' && calendar.monthData ? (
+        {calendar.customViewOptions?.type === 'month' && calendar.monthData ? (
           <div>
             {getMonthsToDisplay().map((m) => (
               <div key={`${m.year}-${m.month}`}>
@@ -170,7 +170,7 @@ export const App = component$(() => {
           >
             <thead>
               <tr>
-                {(calendar.customViewOptions?.unit === 'week'
+                {(calendar.customViewOptions?.type === 'week'
                   ? calendar.weekData?.dates
                   : calendar.dayData?.dates
                 )?.map((date) => (
@@ -180,7 +180,7 @@ export const App = component$(() => {
             </thead>
             <tbody>
               <tr>
-                {(calendar.customViewOptions?.unit === 'week'
+                {(calendar.customViewOptions?.type === 'week'
                   ? calendar.weekData?.dates
                   : calendar.dayData?.dates
                 )?.map((date) => {

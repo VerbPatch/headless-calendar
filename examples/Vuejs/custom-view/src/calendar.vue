@@ -4,7 +4,7 @@ import { useCalendar, type CustomViewOptions, generateId } from '@verbpatch/vuej
 
 const calendar = useCalendar({
   defaultView: 'custom',
-  customViewOptions: { unit: 'day', count: 2 },
+  customViewOptions: { type: 'day', count: 2 },
   initialEvents: [
     {
       id: generateId(),
@@ -30,7 +30,7 @@ const setPreset = (options: CustomViewOptions) => {
 const monthsToDisplay = computed(() => {
   const cal = calendar.value;
   const opts = cal?.customViewOptions;
-  if (!cal || !opts || opts.unit !== 'month') return [];
+  if (!cal || !opts || opts.type !== 'month') return [];
   const count = opts.count || 1;
   const months = [];
   for (let i = 0; i < count; i++) {
@@ -44,8 +44,8 @@ const currentTitle = computed(() => {
   const cal = calendar.value;
   const opts = cal?.customViewOptions;
   if (!cal || !opts) return '';
-  if (opts.unit === 'month') return cal.monthData?.monthName;
-  if (opts.unit === 'week') return cal.weekData?.weekRange;
+  if (opts.type === 'month') return cal.monthData?.monthName;
+  if (opts.type === 'week') return cal.weekData?.weekRange;
   return cal.dayData?.dayName;
 });
 </script>
@@ -64,18 +64,18 @@ const currentTitle = computed(() => {
 
     <div style="margin: 20px 0">
       <strong>Presets:</strong>
-      <button @click="setPreset({ unit: 'day', count: 2 })">2 Days</button>
-      <button @click="setPreset({ unit: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })">
+      <button @click="setPreset({ type: 'day', count: 2 })">2 Days</button>
+      <button @click="setPreset({ type: 'week', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })">
         Work Week
       </button>
-      <button @click="setPreset({ unit: 'week', count: 2 })">2 Weeks</button>
-      <button @click="setPreset({ unit: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })">
+      <button @click="setPreset({ type: 'week', count: 2 })">2 Weeks</button>
+      <button @click="setPreset({ type: 'month', count: 1, includeSpecificDays: [1, 2, 3, 4, 5] })">
         1 Month Weekdays
       </button>
-      <button @click="setPreset({ unit: 'month', count: 3 })">Quarter</button>
+      <button @click="setPreset({ type: 'month', count: 3 })">Quarter</button>
     </div>
 
-    <div v-if="calendar.customViewOptions?.unit === 'month' && calendar.monthData">
+    <div v-if="calendar.customViewOptions?.type === 'month' && calendar.monthData">
       <div v-for="m in monthsToDisplay" :key="`${m.year}-${m.month}`">
         <h3>{{ calendar.utils.formatLocalizedMonth(m.date) }}</h3>
         <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%">
@@ -131,7 +131,7 @@ const currentTitle = computed(() => {
       <thead>
         <tr>
           <th
-            v-for="date in calendar.customViewOptions?.unit === 'week'
+            v-for="date in calendar.customViewOptions?.type === 'week'
               ? calendar.weekData?.dates
               : calendar.dayData?.dates"
             :key="date.toISOString()"
@@ -143,7 +143,7 @@ const currentTitle = computed(() => {
       <tbody>
         <tr>
           <td
-            v-for="date in calendar.customViewOptions?.unit === 'week'
+            v-for="date in calendar.customViewOptions?.type === 'week'
               ? calendar.weekData?.dates
               : calendar.dayData?.dates"
             :key="date.toISOString()"

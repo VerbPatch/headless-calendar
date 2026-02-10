@@ -20,7 +20,7 @@
 
   <div class="view-content">
     @if (
-      calendarHook.calendar().customViewOptions?.unit === 'month' &&
+      calendarHook.calendar().customViewOptions?.type === 'month' &&
       calendarHook.calendar().monthData
     ) {
       @for (m of getMonthsToDisplay(); track m.year + '-' + m.month) {
@@ -72,9 +72,9 @@
       }
     } @else {
       @let opts = calendarHook.calendar().customViewOptions;
-      @if (opts?.unit === 'week' || opts?.unit === 'day') {
+      @if (opts?.type === 'week' || opts?.type === 'day') {
         @let data =
-          opts?.unit === 'week'
+          opts?.type === 'week'
             ? calendarHook.calendar().weekData
             : calendarHook.calendar().dayData;
         @if (data) {
