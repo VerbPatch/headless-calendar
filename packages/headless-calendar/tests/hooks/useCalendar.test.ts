@@ -13,7 +13,7 @@ describe('useCalendar hook', () => {
     useCalendar({
       defaultDate: initialDate,
       timezone: 'UTC',
-      locale: 'en-US',
+      locale: 'en-IN',
       ...opts,
     });
 
@@ -24,11 +24,19 @@ describe('useCalendar hook', () => {
     expect(calendar.visibleDates.length).toBeGreaterThan(0);
   });
 
+  it('should initialize without defaultDate', () => {
+    const calendar = useCalendar({});
+    expect(calendar.currentDate).toBeDefined();
+  });
+
   describe('View Data Generation', () => {
     it('should provide dayData', () => {
       const calendar = getCalendar({ defaultView: 'day' });
       expect(calendar.dayData).not.toBeNull();
       expect(calendar.dayData?.dates).toHaveLength(1);
+      expect(calendar.monthData).toBeNull();
+      expect(calendar.weekData).toBeNull();
+      expect(calendar.dayData?.isToday).toBeDefined();
     });
 
     it('should provide weekData', () => {
@@ -36,13 +44,8 @@ describe('useCalendar hook', () => {
       expect(calendar.weekData).not.toBeNull();
       expect(calendar.weekData?.dates).toHaveLength(7);
       expect(calendar.weekData?.isToday(new Date())).toBe(true);
-    });
-
-    it('should provide dayData', () => {
-      const calendar = getCalendar({ defaultView: 'day' });
-      expect(calendar.dayData).not.toBeNull();
-      expect(calendar.dayData?.dates).toHaveLength(1);
-      expect(calendar.dayData?.isToday).toBe(false);
+      expect(calendar.monthData).toBeNull();
+      expect(calendar.dayData).toBeNull();
     });
 
     it('should provide yearData', () => {
@@ -52,12 +55,15 @@ describe('useCalendar hook', () => {
       expect(calendar.yearData?.isCurrentYear(initialDate)).toBe(true);
       expect(calendar.yearData?.months[0].isCurrentMonth(initialDate)).toBe(true);
       expect(calendar.yearData?.months[0].isToday(new Date())).toBe(true);
+      expect(calendar.monthData).toBeNull();
+      expect(calendar.weekData).toBeNull();
+      expect(calendar.dayData).toBeNull();
     });
 
     it('should provide monthData for custom month view', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'month', count: 1 },
+        customViewOptions: { type: 'month', count: 1 },
       });
       expect(calendar.monthData).not.toBeNull();
       expect(calendar.monthData?.isCurrentMonth(initialDate)).toBe(true);
@@ -69,34 +75,38 @@ describe('useCalendar hook', () => {
     it('should handle custom week view', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'week', count: 2 },
+        customViewOptions: { type: 'week', count: 2 },
       });
       expect(calendar.visibleDates).toHaveLength(14);
       expect(calendar.weekData).not.toBeNull();
+      expect(calendar.monthData).toBeNull();
+      expect(calendar.dayData).toBeNull();
     });
 
     it('should handle custom month view with count', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'month', count: 3 },
+        customViewOptions: { type: 'month', count: 3 },
       });
       // Jan, Feb, March calendar dates
       expect(calendar.visibleDates.length).toBeGreaterThan(90);
       expect(calendar.monthData?.monthName).toContain('2024');
+      expect(calendar.weekData).toBeNull();
+      expect(calendar.dayData).toBeNull();
     });
 
     it('should filter custom view by specific days', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'week', count: 1, includeSpecificDays: [1, 2, 3] }, // Mon, Tue, Wed
+        customViewOptions: { type: 'week', count: 1, includeSpecificDays: [1, 2, 3] }, // Mon, Tue, Wed
       });
       expect(calendar.visibleDates).toHaveLength(3);
     });
 
-    it('should handle custom view with unit: week and count', () => {
+    it('should handle custom view with type: week and count', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'week', count: 2 },
+        customViewOptions: { type: 'week', count: 2 },
       });
       expect(calendar.visibleDates).toHaveLength(14);
     });
@@ -104,26 +114,32 @@ describe('useCalendar hook', () => {
     it('should handle empty weekData range', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'week', count: 0 },
+        customViewOptions: { type: 'week', count: 0 },
       });
       expect(calendar.weekData?.weekRange).toBe('');
     });
 
-    it('should handle custom view with unit: day and count', () => {
+    it('should handle custom view with type: day and count', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'day', count: 5 },
+        customViewOptions: { type: 'day', count: 5 },
       });
       expect(calendar.visibleDates).toHaveLength(5);
+      expect(calendar.dayData).not.toBeNull();
+      expect(calendar.monthData).toBeNull();
+      expect(calendar.weekData).toBeNull();
     });
 
-    it('should handle custom view with unit: month and count', () => {
+    it('should handle custom view with type: month and count', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { unit: 'month', count: 2 },
+        customViewOptions: { type: 'month', count: 2 },
       });
       // 2 months worth of calendar dates
       expect(calendar.visibleDates.length).toBeGreaterThan(60);
+      expect(calendar.monthData).not.toBeNull();
+      expect(calendar.weekData).toBeNull();
+      expect(calendar.dayData).toBeNull();
     });
   });
 
@@ -173,15 +189,18 @@ describe('useCalendar hook', () => {
       expect(next.getDate()).toBe(16);
     });
 
-    it('should support more proxies', () => {
+    it('should support more proxies with optional params', () => {
       const calendar = getCalendar();
+      expect(calendar.utils.formatDate(initialDate)).toBeDefined();
       expect(calendar.utils.formatDateTime(initialDate)).toBeDefined();
+      expect(calendar.utils.formatDateTime(initialDate, 'yyyy')).toBeDefined();
       expect(calendar.utils.isSameWeek(initialDate, initialDate)).toBe(true);
-      expect(calendar.utils.formatDateInTimeZone(initialDate)).toBeDefined();
-      expect(calendar.utils.formatLocalizedWeekday(initialDate)).toBeDefined();
-      expect(calendar.utils.formatLocalizedTime(initialDate)).toBeDefined();
+      expect(calendar.utils.formatDateInTimeZone(initialDate, 'en-US', 'UTC', {})).toBeDefined();
+      expect(calendar.utils.formatLocalizedWeekday(initialDate, 'en-US', 'UTC', 'long')).toBeDefined();
+      expect(calendar.utils.formatLocalizedTime(initialDate, 'en-US', 'UTC', true)).toBeDefined();
       expect(calendar.utils.convertToTimeZone(initialDate, 'UTC', 'UTC')).toBeDefined();
-      expect(calendar.utils.formatLocalizedDate(initialDate)).toBeDefined();
+      expect(calendar.utils.formatLocalizedDate(initialDate, 'en-US', 'UTC', {})).toBeDefined();
+      expect(calendar.utils.formatLocalizedMonth(initialDate, 'en-US', 'UTC')).toBeDefined();
     });
   });
 

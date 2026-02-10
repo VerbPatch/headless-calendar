@@ -133,6 +133,14 @@ describe('Events Utilities', () => {
         expect(validateEvent(invalid)).toContain(
           'Weekly recurrence must specify weekDays array with at least one day',
         );
+
+        const withExtra: any = {
+          ...event1,
+          recurring: { repeat: 'weekly', every: 1, weekDays: [1], month: 1 },
+        };
+        expect(validateEvent(withExtra)).toContain(
+          'Weekly recurrence should not include day, week, or month properties',
+        );
       });
 
       it('should validate monthly recurrence complex rules', () => {
@@ -339,6 +347,13 @@ describe('Events Utilities', () => {
         expect(validateEvent(earlyEnd)).toContain(
           'Recurring "end" must be after the event end date',
         );
+
+        const noEventEnd: any = {
+          title: 'T',
+          start: new Date(),
+          recurring: { repeat: 'daily', every: 1, end: new Date() }
+        };
+        expect(validateEvent(noEventEnd)).not.toContain('Recurring "end" must be after the event end date');
       });
 
       it('should validate weekday lists', () => {

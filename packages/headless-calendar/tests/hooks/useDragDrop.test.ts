@@ -116,4 +116,22 @@ describe('useDragDrop hook', () => {
     const final = getDnd();
     expect(final.draggedEvent).toBeNull();
   });
+
+  it('should handle missing dataTransfer in drag/drop handlers', () => {
+    const dnd = getDnd();
+    const dragProps = dnd.getDragProps(event);
+    const dropProps = dnd.getDropProps(new Date());
+
+    // Should not throw
+    expect(() => dragProps.onDragStart({} as any)).not.toThrow();
+    expect(() => dropProps.onDragOver({ preventDefault: vi.fn() } as any)).not.toThrow();
+  });
+
+  it('should not call onEventMove if dropTarget has no date', () => {
+    const spy = vi.fn();
+    const dnd = getDnd({ onEventMove: spy });
+    dnd.startDrag(event);
+    dnd.handleDrop({ time: '10:00' } as any); // date is missing
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

@@ -30,6 +30,20 @@ describe('useEvents hook', () => {
     expect(manager.events[0].title).toBe('Initial Event');
   });
 
+  it('should initialize with empty events if none provided', () => {
+    const manager = useEvents({ calendarTimezone: 'UTC' });
+    expect(manager.events).toHaveLength(0);
+  });
+
+  it('should preserve existing ID and timezone in initial events', () => {
+    const manager = useEvents({
+      calendarTimezone: 'UTC',
+      initialEvents: [{ id: 'pre-id', timezone: 'UTC', title: 'T', start: new Date(), end: new Date() }]
+    });
+    expect(manager.events[0].id).toBe('pre-id');
+    expect(manager.events[0].timezone).toBe('UTC');
+  });
+
   it('should create event', () => {
     const manager = getEventsManager();
     const newEvent: CalendarEvent = {
@@ -57,6 +71,15 @@ describe('useEvents hook', () => {
     expect(updated.getEvent('1')?.title).toBe('Updated Title');
     expect(updateSpy).toHaveBeenCalled();
     expect(eventSpy).toHaveBeenCalled();
+  });
+
+  it('should not update other events when updating one', () => {
+    const manager = getEventsManager();
+    const event2: CalendarEvent = { id: '2', title: 'Other', start: new Date(), end: new Date() };
+    manager.setEvents([event2]);
+
+    manager.updateEvent('1', { ...manager.getEvent('1')!, title: 'Changed' });
+    expect(manager.getEvent('2')?.title).toBe('Other');
   });
 
   it('should delete event', () => {
@@ -94,6 +117,13 @@ describe('useEvents hook', () => {
     const manager = getEventsManager({ onEvent: spy });
     manager.moveEvent('1', new Date(2024, 0, 25));
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should handle move for non-existent event', () => {
+    const spy = vi.fn();
+    const manager = getEventsManager({ onEvent: spy });
+    manager.moveEvent('non-existent', new Date());
+    expect(spy).not.toHaveBeenCalled();
   });
 
   it('should handle duplicating non-existent event', () => {
@@ -143,5 +173,17 @@ describe('useEvents hook', () => {
     });
 
     expect(createSpy).toHaveBeenCalled();
+  });
+
+  it('should allow setting bulk events', () => {
+    const manager = getEventsManager();
+    const newEvents: CalendarEvent[] = [
+      { id: '2', title: 'Bulk 1', start: new Date(), end: new Date() },
+      { id: '3', title: 'Bulk 2', start: new Date(), end: new Date() },
+    ];
+    manager.setEvents(newEvents);
+
+    const updated = getEventsManager();
+    expect(updated.events).toHaveLength(3); // Initial (1) + New (2)
   });
 });

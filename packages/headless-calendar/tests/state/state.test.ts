@@ -5,7 +5,10 @@ import {
   clearAllCaches,
   createMemo,
   createEffect,
+  cleanupEffect,
+  cleanupAllEffects,
 } from '../../src/state/index';
+import { haveDepsChanged } from '../../src/state/util';
 
 describe('State Engine', () => {
   beforeEach(() => {
@@ -43,6 +46,23 @@ describe('State Engine', () => {
       setVal(1);
       expect(spy).toHaveBeenCalledWith(1);
     });
+
+    it('should allow unsubscribing', () => {
+      const [, setVal] = createState(0, 'unsub');
+      const spy = vi.fn();
+      const unsubscribe = subscribeToState('unsub', spy);
+
+      setVal(1);
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      unsubscribe();
+      setVal(2);
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw when subscribing to non-existent state', () => {
+      expect(() => subscribeToState('non-existent', () => {})).toThrow();
+    });
   });
 
   describe('createMemo', () => {
@@ -78,7 +98,6 @@ describe('State Engine', () => {
       const spy = vi.fn();
       let dep = 1;
 
-      // Vitest closure behavior: we'll simulate the calls
       createEffect(spy, [dep], 'e2');
       createEffect(spy, [dep], 'e2'); // No change
       expect(spy).toHaveBeenCalledTimes(1);
@@ -86,6 +105,62 @@ describe('State Engine', () => {
       dep = 2;
       createEffect(spy, [dep], 'e2'); // Changed
       expect(spy).toHaveBeenCalledTimes(2);
+    });
+
+    it('should run cleanup when deps change', () => {
+      const cleanup = vi.fn();
+      const effect = vi.fn(() => cleanup);
+
+      createEffect(effect, [1], 'cleanup-test');
+      expect(effect).toHaveBeenCalledTimes(1);
+      expect(cleanup).not.toHaveBeenCalled();
+
+      createEffect(effect, [2], 'cleanup-test');
+      expect(effect).toHaveBeenCalledTimes(2);
+      expect(cleanup).toHaveBeenCalledTimes(1);
+    });
+
+    it('should run cleanup via cleanupEffect', () => {
+      const cleanup = vi.fn();
+      createEffect(() => cleanup, [], 'specific-cleanup');
+
+      cleanupEffect('specific-cleanup');
+      expect(cleanup).toHaveBeenCalledTimes(1);
+    });
+
+    it('should run cleanup via cleanupAllEffects', () => {
+      const cleanup1 = vi.fn();
+      const cleanup2 = vi.fn();
+      createEffect(() => cleanup1, [], 'c1');
+      createEffect(() => cleanup2, [], 'c2');
+
+      cleanupAllEffects();
+      expect(cleanup1).toHaveBeenCalledTimes(1);
+      expect(cleanup2).toHaveBeenCalledTimes(1);
+    });
+
+    it('should handle cleanupEffect for non-existent effect', () => {
+      expect(() => cleanupEffect('non-existent')).not.toThrow();
+    });
+  });
+
+  describe('haveDepsChanged', () => {
+    it('should return true if either deps is undefined', () => {
+      expect(haveDepsChanged(undefined, [])).toBe(true);
+      expect(haveDepsChanged([], undefined)).toBe(true);
+      expect(haveDepsChanged(undefined, undefined)).toBe(true);
+    });
+
+    it('should return true if lengths differ', () => {
+      expect(haveDepsChanged([1], [1, 2])).toBe(true);
+    });
+
+    it('should return false if deps are identical', () => {
+      expect(haveDepsChanged([1, 'a'], [1, 'a'])).toBe(false);
+    });
+
+    it('should return true if deps differ', () => {
+      expect(haveDepsChanged([1], [2])).toBe(true);
     });
   });
 });

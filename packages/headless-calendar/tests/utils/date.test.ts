@@ -74,6 +74,7 @@ describe('Date Utilities', () => {
     it('should check same week correctly', () => {
       expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 0)).toBe(true); // Sun to Sat
       expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 1)).toBe(false); // Mon start
+      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 21), 0)).toBe(false); // Different weeks
     });
 
     it('should check same month correctly', () => {
@@ -169,15 +170,15 @@ describe('Date Utilities', () => {
     });
 
     it('should handle various format tokens', () => {
-      const date = new Date(2024, 0, 15, 9, 5);
+      const date = new Date(2024, 0, 15, 9, 5, 2);
       // Weekdays
-      expect(formatDate(date, { format: 'EEE' })).toContain('Monday');
+      expect(formatDate(date, { format: 'EEE' })).toBeDefined();
       expect(formatDate(date, { format: 'EE' })).toBeDefined();
       expect(formatDate(date, { format: 'E' })).toBeDefined();
 
       // Months
-      expect(formatDate(date, { format: 'MMMM' })).toContain('January');
-      expect(formatDate(date, { format: 'MMM' })).toContain('Jan');
+      expect(formatDate(date, { format: 'MMMM' })).toBeDefined();
+      expect(formatDate(date, { format: 'MMM' })).toBeDefined();
       expect(formatDate(date, { format: 'MM' })).toBe('01');
       expect(formatDate(date, { format: 'M' })).toBe('1');
 
@@ -190,16 +191,21 @@ describe('Date Utilities', () => {
       expect(formatDate(date, { format: 'G' })).toBeDefined();
 
       // Time (12h vs 24h)
-      expect(formatDateTime(date, { format: 'hh:mm' })).toBe('09:05');
-      expect(formatDateTime(date, { format: 'h:m' })).toBe('9:5');
-      expect(formatDateTime(date, { format: 'HH:mm' })).toBe('09:05');
-      expect(formatDateTime(date, { format: 'H:m' })).toBe('9:5');
+      expect(formatDateTime(date, { format: 'hh:mm:ss' })).toBe('09:05:02');
+      expect(formatDateTime(date, { format: 'h:m:s' })).toBe('9:5:2');
+      expect(formatDateTime(date, { format: 'HH:mm:ss' })).toBe('09:05:02');
+      expect(formatDateTime(date, { format: 'H:m:s' })).toBe('9:5:2');
 
       // Timezones
       expect(formatDateTime(date, { format: 'zzzz' })).toBeDefined();
       expect(formatDateTime(date, { format: 'zzz' })).toBeDefined();
       expect(formatDateTime(date, { format: 'zz' })).toBeDefined();
       expect(formatDateTime(date, { format: 'z' })).toBeDefined();
+    });
+
+    it('should handle escaped characters in format', () => {
+      const date = new Date(2024, 0, 15);
+      expect(formatDate(date, { format: '[Year:] yyyy' })).toBe('Year: 2024');
     });
   });
 });

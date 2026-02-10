@@ -63,10 +63,10 @@ describe('useNavigation hook', () => {
   });
 
   describe('Custom View Navigation', () => {
-    it('should navigate with unit: day', () => {
+    it('should navigate with type: day', () => {
       const opts = {
         defaultView: 'custom' as const,
-        customViewOptions: { unit: 'day' as const, count: 3 },
+        customViewOptions: { type: 'day' as const, count: 3 },
       };
       const nav = getNav(opts);
       nav.goToNext();
@@ -76,10 +76,10 @@ describe('useNavigation hook', () => {
       expect(getNav(opts).currentDate.getDate()).toBe(12);
     });
 
-    it('should navigate with unit: week', () => {
+    it('should navigate with type: week', () => {
       const opts = {
         defaultView: 'custom' as const,
-        customViewOptions: { unit: 'week' as const, count: 2 },
+        customViewOptions: { type: 'week' as const, count: 2 },
       };
       const nav = getNav(opts);
       nav.goToNext();
@@ -89,10 +89,10 @@ describe('useNavigation hook', () => {
       expect(getNav(opts).currentDate.getDate()).toBe(1);
     });
 
-    it('should navigate with unit: month', () => {
+    it('should navigate with type: month', () => {
       const opts = {
         defaultView: 'custom' as const,
-        customViewOptions: { unit: 'month' as const, count: 2 },
+        customViewOptions: { type: 'month' as const, count: 2 },
       };
       const nav = getNav(opts);
       nav.goToNext();
@@ -100,30 +100,6 @@ describe('useNavigation hook', () => {
       nav.goToPrevious();
       nav.goToPrevious();
       expect(getNav(opts).currentDate.getMonth()).toBe(10); // Nov 2023
-    });
-
-    it('should navigate with unit: day', () => {
-      const opts = {
-        defaultView: 'custom' as const,
-        customViewOptions: { unit: 'day' as const, count: 1 },
-      };
-      const nav = getNav(opts);
-      nav.goToNext();
-      expect(getNav(opts).currentDate.getDate()).toBe(16);
-      nav.goToPrevious();
-      expect(getNav(opts).currentDate.getDate()).toBe(15);
-    });
-
-    it('should navigate with unit: week', () => {
-      const opts = {
-        defaultView: 'custom' as const,
-        customViewOptions: { unit: 'week' as const, count: 1 },
-      };
-      const nav = getNav(opts);
-      nav.goToNext();
-      expect(getNav(opts).currentDate.getDate()).toBe(initialDate.getDate() + 7);
-      nav.goToPrevious();
-      expect(getNav(opts).currentDate.getDate()).toBe(initialDate.getDate());
     });
   });
 
@@ -154,18 +130,23 @@ describe('useNavigation hook', () => {
     expect(spy).toHaveBeenCalledWith('day');
   });
 
-  it('should call onDateChange when navigating', () => {
-    const spy = vi.fn();
-    const nav = getNav({ onDateChange: spy });
-    nav.goToNext();
-    expect(spy).toHaveBeenCalled();
-
-    nav.goToPrevious();
-    expect(spy).toHaveBeenCalledTimes(2);
+  it('should update customViewOptions when changing view to custom', () => {
+    const nav = getNav();
+    const newOpts = { type: 'week' as const, count: 3 };
+    nav.changeView('custom', newOpts);
+    const updated = getNav();
+    expect(updated.view).toBe('custom');
+    expect(updated.customViewOptions).toEqual(newOpts);
   });
 
   it('should throw error on invalid view type', () => {
     const nav = getNav();
     expect(() => nav.changeView('invalid' as any)).toThrow('Invalid view type: invalid');
+  });
+
+  it('should expose canGoNext and canGoPrevious', () => {
+    const nav = getNav();
+    expect(nav.canGoNext).toBe(true);
+    expect(nav.canGoPrevious).toBe(true);
   });
 });

@@ -26,11 +26,6 @@ describe('Calendar Utilities', () => {
 
     it('should generate month calendar dates correctly', () => {
       const dates = getMonthCalendarDates(baseDate, 0);
-      // Jan 2024 starts on Monday.
-      // With Sun start, it should include Dec 31 (Sun).
-      // Jan has 31 days. Feb 1 is Thu.
-      // With Sun start, Jan view ends on Feb 3 (Sat).
-      // Total: 1 (Dec) + 31 (Jan) + 3 (Feb) = 35 days (5 weeks)
       expect(dates.length).toBeGreaterThanOrEqual(35);
       expect(dates[0].getMonth()).toBe(11); // December
       expect(dates[dates.length - 1].getMonth()).toBe(1); // February
@@ -93,18 +88,38 @@ describe('Calendar Utilities', () => {
       const weekBounds = getCalendarBounds('week', baseDate, 0);
       expect(weekBounds.start.getDate()).toBe(14);
       expect(weekBounds.end.getDate()).toBe(20);
+
+      const monthBounds = getCalendarBounds('month', baseDate, 0);
+      expect(monthBounds.start.getMonth()).toBe(11); // Dec 31
+      expect(monthBounds.end.getMonth()).toBe(1); // Feb 3
+
+      const yearBounds = getCalendarBounds('year', baseDate);
+      expect(yearBounds.start.getMonth()).toBe(0);
+      expect(yearBounds.end.getMonth()).toBe(11);
     });
 
     it('should get calendar bounds for custom views', () => {
-      const customBounds = getCalendarBounds('custom', baseDate, 0, { unit: 'day', count: 3 });
-      expect(customBounds.start.getDate()).toBe(15);
-      expect(customBounds.end.getDate()).toBe(17);
+      const dayCustom = getCalendarBounds('custom', baseDate, 0, { type: 'day', count: 3 });
+      expect(dayCustom.start.getDate()).toBe(15);
+      expect(dayCustom.end.getDate()).toBe(17);
+
+      const weekCustom = getCalendarBounds('custom', baseDate, 0, { type: 'week', count: 2 });
+      expect(weekCustom.start.getDate()).toBe(14); // Jan 14
+      expect(weekCustom.end.getDate()).toBe(27); // Next Sat
+
+      const monthCustom = getCalendarBounds('custom', baseDate, 0, { type: 'month', count: 2 });
+      expect(monthCustom.start.getMonth()).toBe(0); // Jan 1
+      expect(monthCustom.end.getMonth()).toBe(1); // Feb 29
     });
 
     it('should validate custom view options', () => {
       expect(() => validateCustomView(null as any)).toThrow();
-      expect(() => validateCustomView({ unit: 'invalid' as any, count: 1 })).toThrow();
-      expect(() => validateCustomView({ unit: 'day', count: 1 })).not.toThrow();
+      expect(() => validateCustomView({ type: 'invalid' as any, count: 1 })).toThrow();
+      expect(() => validateCustomView({ type: 'day', count: 1 })).not.toThrow();
+    });
+
+    it('should throw error for unknown view type', () => {
+      expect(() => getCalendarBounds('invalid' as any, baseDate)).toThrow('Unknown view type: invalid');
     });
   });
 });
