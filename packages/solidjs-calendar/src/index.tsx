@@ -1,7 +1,11 @@
-import { createSignal, createEffect } from "solid-js";
-import { useCalendar as createCalendar, type CalendarOptions, type CalendarInstance } from "@verbpatch/headless-calendar";
+import { createSignal, createEffect } from 'solid-js';
+import {
+  useCalendar as createCalendar,
+  type CalendarOptions,
+  type CalendarInstance,
+} from '@verbpatch/headless-calendar';
 
-export * from "@verbpatch/headless-calendar";
+export * from '@verbpatch/headless-calendar';
 
 export function useCalendar(options?: CalendarOptions) {
   const [stateVersion, setStateVersion] = createSignal(0);

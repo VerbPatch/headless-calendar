@@ -1,8 +1,7 @@
-
 import { CalendarEvent, UseEventsOptions, UseEventsReturn } from '../types/events';
 import { generateId, validateEvent } from '../utils/events';
 import { convertToTimeZone } from '../utils/timezone';
-import { createCallback, createMemo, createState, } from '../state';
+import { createCallback, createMemo, createState } from '../state';
 
 /**
  * A hook for managing calendar events, including creating, updating, deleting, and moving events.
@@ -37,24 +36,39 @@ import { createCallback, createMemo, createState, } from '../state';
  * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
-  const { calendarTimezone, onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } = options;
+  const { calendarTimezone, onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } =
+    options;
 
-  const _initialEvents = createMemo<CalendarEvent[]>((): CalendarEvent[] => {
-    if (initialEvents && initialEvents.length > 0) {
-      const events = initialEvents.map(event => {
-        event.id ??= generateId();
-        event.timezone ??= calendarTimezone;
-        event.start = convertToTimeZone(event.start, (event.timezone ?? calendarTimezone) as string, calendarTimezone as string);
-        event.end = convertToTimeZone(event.end, (event.timezone ?? calendarTimezone) as string, calendarTimezone as string);
-        return event;
-      });
-      return events;
-    }
-    return [];
-  }, [], 'calendar-initial-events')
+  const _initialEvents = createMemo<CalendarEvent[]>(
+    (): CalendarEvent[] => {
+      if (initialEvents && initialEvents.length > 0) {
+        const events = initialEvents.map((event) => {
+          event.id ??= generateId();
+          event.timezone ??= calendarTimezone;
+          event.start = convertToTimeZone(
+            event.start,
+            (event.timezone ?? calendarTimezone) as string,
+            calendarTimezone as string,
+          );
+          event.end = convertToTimeZone(
+            event.end,
+            (event.timezone ?? calendarTimezone) as string,
+            calendarTimezone as string,
+          );
+          return event;
+        });
+        return events;
+      }
+      return [];
+    },
+    [],
+    'calendar-initial-events',
+  );
 
-
-  const [getEvents, setEvents] = createState<CalendarEvent[]>(_initialEvents || [], 'calendar-event');
+  const [getEvents, setEvents] = createState<CalendarEvent[]>(
+    _initialEvents || [],
+    'calendar-event',
+  );
 
   /**
    * Creates a new calendar event.
@@ -66,35 +80,45 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Create Event
    * @description Creates a new calendar event.
    */
-  const createEvent = createCallback((eventData: CalendarEvent): CalendarEvent => {
-    const errors = validateEvent(eventData);
-    if (errors.length > 0) {
-      throw new Error(`Invalid event data: ${errors.join(', ')}`);
-    }
+  const createEvent = createCallback(
+    (eventData: CalendarEvent): CalendarEvent => {
+      const errors = validateEvent(eventData);
+      if (errors.length > 0) {
+        throw new Error(`Invalid event data: ${errors.join(', ')}`);
+      }
 
-    const start = convertToTimeZone(eventData.start, (eventData.timezone ?? calendarTimezone) as string, calendarTimezone as string);
-    const end = convertToTimeZone(eventData.end, (eventData.timezone ?? calendarTimezone) as string, calendarTimezone as string);
+      const start = convertToTimeZone(
+        eventData.start,
+        (eventData.timezone ?? calendarTimezone) as string,
+        calendarTimezone as string,
+      );
+      const end = convertToTimeZone(
+        eventData.end,
+        (eventData.timezone ?? calendarTimezone) as string,
+        calendarTimezone as string,
+      );
 
-    const event: CalendarEvent = {
-      ...eventData,
-      id: generateId(),
-      title: eventData.title,
-      start,
-      end,
-      allDay: eventData.allDay || false,
-      description: eventData.description || '',
-      color: eventData.color || '#3174ad',
-      timezone: eventData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
-      recurring: "never"
-    };
+      const event: CalendarEvent = {
+        ...eventData,
+        id: generateId(),
+        title: eventData.title,
+        start,
+        end,
+        allDay: eventData.allDay || false,
+        description: eventData.description || '',
+        color: eventData.color || '#3174ad',
+        timezone: eventData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+        recurring: 'never',
+      };
 
-    setEvents(prev => [...prev, event]);
-    onEventCreate?.(event);
-    onEvent?.(getEvents());
-    return event;
-  },
+      setEvents((prev) => [...prev, event]);
+      onEventCreate?.(event);
+      onEvent?.(getEvents());
+      return event;
+    },
     [onEventCreate],
-    'create-event');
+    'create-event',
+  );
 
   /**
    * Updates an existing calendar event.
@@ -106,32 +130,34 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Update Event
    * @description Updates an existing calendar event.
    */
-  const updateEvent = createCallback((eventId: string, updates: CalendarEvent): void => {
-    const updatedEvents = getEvents().map(event => {
-      if (event.id === eventId) {
-        const updatedEvent = {
-          ...event,
-          ...updates,
-          start: updates.start,
-          end: updates.end
-        } as CalendarEvent;
+  const updateEvent = createCallback(
+    (eventId: string, updates: CalendarEvent): void => {
+      const updatedEvents = getEvents().map((event) => {
+        if (event.id === eventId) {
+          const updatedEvent = {
+            ...event,
+            ...updates,
+            start: updates.start,
+            end: updates.end,
+          } as CalendarEvent;
 
-        const errors = validateEvent(updatedEvent);
-        if (errors.length > 0) {
-          throw new Error(`Invalid event update: ${errors.join(', ')}`);
+          const errors = validateEvent(updatedEvent);
+          if (errors.length > 0) {
+            throw new Error(`Invalid event update: ${errors.join(', ')}`);
+          }
+
+          onEventUpdate?.(updatedEvent);
+          return updatedEvent;
         }
+        return event;
+      });
 
-        onEventUpdate?.(updatedEvent);
-        return updatedEvent;
-      }
-      return event;
-    });
-
-    setEvents(updatedEvents);
-    onEvent?.(getEvents());
-  },
+      setEvents(updatedEvents);
+      onEvent?.(getEvents());
+    },
     [getEvents, onEventUpdate],
-    'update-event');
+    'update-event',
+  );
 
   /**
    * Deletes a calendar event by its ID.
@@ -140,16 +166,18 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Delete Event
    * @description Deletes a calendar event by its ID.
    */
-  const deleteEvent = createCallback((eventId: string): void => {
-    const eventToDelete = getEvents().find(e => e.id === eventId);
-    if (eventToDelete) {
-      setEvents(prev => prev.filter(event => event.id !== eventId));
-      onEventDelete?.(eventToDelete);
-      onEvent?.(getEvents());
-    }
-  },
+  const deleteEvent = createCallback(
+    (eventId: string): void => {
+      const eventToDelete = getEvents().find((e) => e.id === eventId);
+      if (eventToDelete) {
+        setEvents((prev) => prev.filter((event) => event.id !== eventId));
+        onEventDelete?.(eventToDelete);
+        onEvent?.(getEvents());
+      }
+    },
     [getEvents, onEventDelete],
-    'delete-event');
+    'delete-event',
+  );
 
   /**
    * Moves an event to a new start and optional end date.
@@ -160,21 +188,23 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Move Event
    * @description Moves an event to a new start and optional end date.
    */
-  const moveEvent = createCallback((eventId: string, newStart: Date, newEnd?: Date): void => {
-    const event = getEvents().find(e => e.id === eventId);
-    if (!event) return;
+  const moveEvent = createCallback(
+    (eventId: string, newStart: Date, newEnd?: Date): void => {
+      const event = getEvents().find((e) => e.id === eventId);
+      if (!event) return;
 
-    const duration = event.end.getTime() - event.start.getTime();
-    const finalEnd = newEnd || new Date(newStart.getTime() + duration);
+      const duration = event.end.getTime() - event.start.getTime();
+      const finalEnd = newEnd || new Date(newStart.getTime() + duration);
 
-    updateEvent(eventId, {
-      start: newStart,
-      end: finalEnd
-    } as CalendarEvent);
-    onEvent?.(getEvents());
-  },
+      updateEvent(eventId, {
+        start: newStart,
+        end: finalEnd,
+      } as CalendarEvent);
+      onEvent?.(getEvents());
+    },
     [getEvents, updateEvent],
-    'move-event');
+    'move-event',
+  );
 
   /**
    * Duplicates an existing event.
@@ -185,23 +215,25 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Duplicate Event
    * @description Duplicates an existing event.
    */
-  const duplicateEvent = createCallback((eventId: string): CalendarEvent | null => {
-    const originalEvent = getEvents().find(e => e.id === eventId);
-    if (!originalEvent) return null;
+  const duplicateEvent = createCallback(
+    (eventId: string): CalendarEvent | null => {
+      const originalEvent = getEvents().find((e) => e.id === eventId);
+      if (!originalEvent) return null;
 
-    const duplicatedEvent: CalendarEvent = {
-      ...originalEvent,
-      id: generateId(),
-      title: `${originalEvent.title} (Copy)`
-    };
+      const duplicatedEvent: CalendarEvent = {
+        ...originalEvent,
+        id: generateId(),
+        title: `${originalEvent.title} (Copy)`,
+      };
 
-    setEvents(prev => [...prev, duplicatedEvent]);
-    onEventCreate?.(duplicatedEvent);
-    onEvent?.(getEvents());
-    return duplicatedEvent;
-  },
+      setEvents((prev) => [...prev, duplicatedEvent]);
+      onEventCreate?.(duplicatedEvent);
+      onEvent?.(getEvents());
+      return duplicatedEvent;
+    },
     [getEvents, onEventCreate],
-    'duplicate-event');
+    'duplicate-event',
+  );
 
   /**
    * Retrieves a specific event by its ID.
@@ -212,11 +244,13 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Get Event
    * @description Retrieves a specific event by its ID.
    */
-  const getEvent = createCallback((eventId: string): CalendarEvent | undefined => {
-    return getEvents().find(e => e.id === eventId);
-  },
+  const getEvent = createCallback(
+    (eventId: string): CalendarEvent | undefined => {
+      return getEvents().find((e) => e.id === eventId);
+    },
     [getEvents],
-    'get-event');
+    'get-event',
+  );
 
   /**
    * Clears all events from the calendar.
@@ -224,10 +258,14 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Clear Events
    * @description Clears all events from the calendar.
    */
-  const clearEvents = createCallback((): void => {
-    setEvents([]);
-    onEvent?.([]);
-  }, [], 'clear-events');
+  const clearEvents = createCallback(
+    (): void => {
+      setEvents([]);
+      onEvent?.([]);
+    },
+    [],
+    'clear-events',
+  );
 
   /**
    * Appends new events to the existing list of events.
@@ -237,12 +275,14 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @title Set Events
    * @description Appends new events to the existing list of events.
    */
-  const setEventsCallback = createCallback((newEvents: CalendarEvent[]): void => {
-    setEvents(prev => [...prev, ...newEvents]);
-    onEvent?.(getEvents());
-  },
+  const setEventsCallback = createCallback(
+    (newEvents: CalendarEvent[]): void => {
+      setEvents((prev) => [...prev, ...newEvents]);
+      onEvent?.(getEvents());
+    },
     [],
-    'set-event-callback');
+    'set-event-callback',
+  );
 
   return {
     events: getEvents(),
@@ -253,6 +293,6 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     duplicateEvent,
     getEvent,
     clearEvents,
-    setEvents: setEventsCallback
+    setEvents: setEventsCallback,
   };
 };

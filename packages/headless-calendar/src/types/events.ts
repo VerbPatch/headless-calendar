@@ -1,4 +1,4 @@
-import { DropTarget } from "./calendar";
+import { DropTarget } from './calendar';
 
 /**
  * Represents a calendar event.
@@ -46,167 +46,167 @@ export interface CalendarEvent {
   /**
    * Recurring event configuration. Use "never" for non-recurring events.
    */
-  recurring?: CalendarEventOccurance | "never";
+  recurring?: CalendarEventOccurance | 'never';
   // Allow additional properties
   [key: string]: any;
 }
 
 /**
-  * @group calendar-events
-  * @hideCategories
-  * @title CalendarEventOccurance
-  * @description Represents a calendar event occurance like when to repeat and on which days/weeks/months and between dates.
-  * @example 
-  * 1. Repeat every day until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "daily",
-  *     every: 1
-  * }
-  * ```
-  * 
-  * @example
-  * 2. Repeat every day until end date
-  * ```tsx
-  * recurring: {
-  *     repeat: "daily",
-  *     every: 1,
-  *     end: new Date(2025, 6, 1) // July 1, 2025 (month is 0-indexed)
-  * }
-  * ```
-  * 
-  * @example
-  * 3. Repeat every day until count completes
-  * ```tsx
-  * recurring: {
-  *     repeat: "daily",
-  *     every: 1,
-  *     count: 5 // Repeats 5 times and then stops 
-  * }
-  * ```
-  * 
-  * @example
-  * 4. Repeat every week on Monday & Friday until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "weekly",
-  *     weekDays: [1, 5], // Monday and Friday
-  *     every: 1
-  * }
-  * ```
-  * 
-  * @example
-  * 5. Repeat every 2 weeks on Tuesday for 3 occurrences
-  * ```tsx
-  * recurring: {
-  *     repeat: "weekly",
-  *     weekDays: [2], // Tuesday
-  *     every: 2,
-  *     count: 3 // Repeats 3 times and then stops 
-  * }
-  * ```
-  * 
-  * @example
-  * 6. Repeat every week on Sunday until end date
-  * ```tsx
-  * recurring: {
-  *     repeat: "weekly",
-  *     weekDays: [0], // Sunday
-  *     every: 1,
-  *     end: new Date(2025, 6, 1) // July 1, 2025
-  * }
-  * ```
-  * 
-  * @example
-  * 7. Repeat every month on the 5th day until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "monthly",
-  *     every: 1,
-  *     day: 5
-  * }
-  * ```
-  * 
-  * @example
-  * 8. Repeat every month on the last day for 4 times
-  * ```tsx
-  * recurring: {
-  *     repeat: "monthly",
-  *     every: 1,
-  *     day: -1, // Last day of the month
-  *     count: 4
-  * }
-  * ``` 
-  * 
-  * @example
-  * 9. Repeat every month on the last Saturday until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "monthly",
-  *     weekDays: [6], // Saturday
-  *     every: 1,
-  *     week: -1 // Last week of the month
-  * }
-  * ``` 
-  *
-  * @example
-  * 10. Repeat every 2 months on the 2nd Saturday until end date
-  * ```tsx
-  * recurring: {
-  *     repeat: "monthly",
-  *     weekDays: [6], // Saturday
-  *     every: 2,
-  *     week: 2, // Second week of the month
-  *     end: new Date(2027, 11, 31) // December 31, 2027
-  * }
-  * ``` 
-  *
-  * @example
-  * 11. Repeat every year on April 1st until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "yearly",
-  *     day: 1,
-  *     month: 3, // April (0-indexed: 0=Jan, 1=Feb, 2=Mar, 3=Apr)
-  *     every: 1
-  * }
-  * ``` 
-  *
-  * @example
-  * 12. Repeat every year on the last day of February until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "yearly",
-  *     day: -1, // Last day of the month
-  *     month: 1, // February (0-indexed)
-  *     every: 1
-  * }
-  * ```
-  *
-  * @example
-  * 13. Repeat every year on the last Friday of March until end of time
-  * ```tsx
-  * recurring: {
-  *     repeat: "yearly",
-  *     month: 2, // March (0-indexed)
-  *     weekDays: [5], // Friday
-  *     every: 1,
-  *     week: -1 // Last week of the month
-  * }
-  * ```  
-  */
+ * @group calendar-events
+ * @hideCategories
+ * @title CalendarEventOccurance
+ * @description Represents a calendar event occurance like when to repeat and on which days/weeks/months and between dates.
+ * @example
+ * 1. Repeat every day until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "daily",
+ *     every: 1
+ * }
+ * ```
+ *
+ * @example
+ * 2. Repeat every day until end date
+ * ```tsx
+ * recurring: {
+ *     repeat: "daily",
+ *     every: 1,
+ *     end: new Date(2025, 6, 1) // July 1, 2025 (month is 0-indexed)
+ * }
+ * ```
+ *
+ * @example
+ * 3. Repeat every day until count completes
+ * ```tsx
+ * recurring: {
+ *     repeat: "daily",
+ *     every: 1,
+ *     count: 5 // Repeats 5 times and then stops
+ * }
+ * ```
+ *
+ * @example
+ * 4. Repeat every week on Monday & Friday until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "weekly",
+ *     weekDays: [1, 5], // Monday and Friday
+ *     every: 1
+ * }
+ * ```
+ *
+ * @example
+ * 5. Repeat every 2 weeks on Tuesday for 3 occurrences
+ * ```tsx
+ * recurring: {
+ *     repeat: "weekly",
+ *     weekDays: [2], // Tuesday
+ *     every: 2,
+ *     count: 3 // Repeats 3 times and then stops
+ * }
+ * ```
+ *
+ * @example
+ * 6. Repeat every week on Sunday until end date
+ * ```tsx
+ * recurring: {
+ *     repeat: "weekly",
+ *     weekDays: [0], // Sunday
+ *     every: 1,
+ *     end: new Date(2025, 6, 1) // July 1, 2025
+ * }
+ * ```
+ *
+ * @example
+ * 7. Repeat every month on the 5th day until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "monthly",
+ *     every: 1,
+ *     day: 5
+ * }
+ * ```
+ *
+ * @example
+ * 8. Repeat every month on the last day for 4 times
+ * ```tsx
+ * recurring: {
+ *     repeat: "monthly",
+ *     every: 1,
+ *     day: -1, // Last day of the month
+ *     count: 4
+ * }
+ * ```
+ *
+ * @example
+ * 9. Repeat every month on the last Saturday until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "monthly",
+ *     weekDays: [6], // Saturday
+ *     every: 1,
+ *     week: -1 // Last week of the month
+ * }
+ * ```
+ *
+ * @example
+ * 10. Repeat every 2 months on the 2nd Saturday until end date
+ * ```tsx
+ * recurring: {
+ *     repeat: "monthly",
+ *     weekDays: [6], // Saturday
+ *     every: 2,
+ *     week: 2, // Second week of the month
+ *     end: new Date(2027, 11, 31) // December 31, 2027
+ * }
+ * ```
+ *
+ * @example
+ * 11. Repeat every year on April 1st until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "yearly",
+ *     day: 1,
+ *     month: 3, // April (0-indexed: 0=Jan, 1=Feb, 2=Mar, 3=Apr)
+ *     every: 1
+ * }
+ * ```
+ *
+ * @example
+ * 12. Repeat every year on the last day of February until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "yearly",
+ *     day: -1, // Last day of the month
+ *     month: 1, // February (0-indexed)
+ *     every: 1
+ * }
+ * ```
+ *
+ * @example
+ * 13. Repeat every year on the last Friday of March until end of time
+ * ```tsx
+ * recurring: {
+ *     repeat: "yearly",
+ *     month: 2, // March (0-indexed)
+ *     weekDays: [5], // Friday
+ *     every: 1,
+ *     week: -1 // Last week of the month
+ * }
+ * ```
+ */
 export interface CalendarEventOccurance {
-  /** 
+  /**
    * The type of recurrence pattern.
    */
-  repeat: "yearly" | "monthly" | "weekly" | "daily";
+  repeat: 'yearly' | 'monthly' | 'weekly' | 'daily';
 
-  /** 
+  /**
    * The interval for the recurrence (e.g., every 2 weeks, every 3 months).
    */
   every: number;
 
-  /** 
+  /**
    * The days of the week for weekly, monthly, or yearly recurrence.
    * 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
    * Required for weekly recurrence.
@@ -214,7 +214,7 @@ export interface CalendarEventOccurance {
    */
   weekDays?: number[];
 
-  /** 
+  /**
    * The day of the month for monthly or yearly recurrence.
    * Positive values: 1-31 (1st to 31st day).
    * Negative values: -1 to -31 (last day to 31st-to-last day).
@@ -223,7 +223,7 @@ export interface CalendarEventOccurance {
    */
   day?: number;
 
-  /** 
+  /**
    * The week of the month for monthly or yearly recurrence.
    * Positive values: 1-4 (1st to 4th week).
    * Negative values: -1 (last week).
@@ -232,24 +232,24 @@ export interface CalendarEventOccurance {
    */
   week?: number;
 
-  /** 
+  /**
    * The month of the year for yearly recurrence (required for yearly).
    * 0 = January, 1 = February, ..., 11 = December.
    */
   month?: number;
 
-  /** 
+  /**
    * The number of occurrences before the recurrence stops.
    * Mutually exclusive with the `end` property.
    */
   count?: number;
 
-  /** 
+  /**
    * The end date for the recurrence (must be after the event's end date).
    * Mutually exclusive with the `count` property.
    */
   end?: Date;
-};
+}
 /**
  * Represents an event that is currently being dragged.
  * @group calendar-events
@@ -324,7 +324,10 @@ export interface UseDragDropReturn {
     onDragStart: (e: DragEvent) => void;
     onDragEnd: (e: DragEvent) => void;
   };
-  getDropProps: (date: Date, time?: string) => {
+  getDropProps: (
+    date: Date,
+    time?: string,
+  ) => {
     onDragOver: (e: DragEvent) => void;
     onDrop: (e: DragEvent) => void;
   };

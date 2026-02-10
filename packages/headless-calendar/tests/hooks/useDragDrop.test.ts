@@ -8,7 +8,7 @@ describe('useDragDrop hook', () => {
     id: '1',
     title: 'Event',
     start: new Date(2024, 0, 15, 10),
-    end: new Date(2024, 0, 15, 11)
+    end: new Date(2024, 0, 15, 11),
   };
 
   beforeEach(() => {

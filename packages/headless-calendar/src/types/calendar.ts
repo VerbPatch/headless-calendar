@@ -28,7 +28,7 @@ export interface TimeSlot {
 
 /**
  * Represents the target of a drop operation.
- * @group calendar 
+ * @group calendar
  * @title DropTarget
  * @description Represents the target of a drop operation.
  */
@@ -137,11 +137,11 @@ export interface CalendarOptions {
   customViewOptions?: CustomViewOptions;
 }
 
-/** 
+/**
  * @group calendar
  * @title CalendarUtils
  * @description A collection of utility functions for date manipulation and formatting, bound to the calendar's locale and timezone.
-*/
+ */
 export interface CalendarUtils {
   /**
    * Formats a date object into a string based on the specified format, locale, and timezone.
@@ -260,7 +260,7 @@ export interface CalendarUtils {
    * @param {'short' | 'long'} [format='short'] - The format of the weekday names ('short' for 'Mon', 'long' for 'Monday').
    * @returns {string[]} - An array of localized weekday names.
    */
-  daysofWeek: (format?: "long" | "short" | "narrow", locale?: string) => string[];
+  daysofWeek: (format?: 'long' | 'short' | 'narrow', locale?: string) => string[];
   /**
    * Formats a date into a string according to the specified locale and timezone.
    * @function
@@ -270,7 +270,12 @@ export interface CalendarUtils {
    * @param {Intl.DateTimeFormatOptions} [options] - Additional formatting options.
    * @returns {string} - The formatted date string.
    */
-  formatDateInTimeZone: (date: Date, locale?: string, timeZone?: string, options?: Intl.DateTimeFormatOptions) => string;
+  formatDateInTimeZone: (
+    date: Date,
+    locale?: string,
+    timeZone?: string,
+    options?: Intl.DateTimeFormatOptions,
+  ) => string;
   /**
    * Converts a date from one timezone to another.
    * @function
@@ -293,7 +298,7 @@ export interface CalendarUtils {
     date: Date,
     locale?: string,
     timeZone?: string,
-    options?: Intl.DateTimeFormatOptions
+    options?: Intl.DateTimeFormatOptions,
   ) => string;
   /**
    * Formats a date into a localized month string.
@@ -303,11 +308,7 @@ export interface CalendarUtils {
    * @param {string} [timeZone] - The timezone to use for formatting.
    * @returns {string} - The localized month string.
    */
-  formatLocalizedMonth: (
-    date: Date,
-    locale?: string,
-    timeZone?: string
-  ) => string;
+  formatLocalizedMonth: (date: Date, locale?: string, timeZone?: string) => string;
   /**
    * Formats a date into a localized weekday string.
    * @function
@@ -321,7 +322,7 @@ export interface CalendarUtils {
     date: Date,
     locale?: string,
     timeZone?: string,
-    format?: 'long' | 'short' | 'narrow'
+    format?: 'long' | 'short' | 'narrow',
   ) => string;
   /**
    * Formats a date into a localized time string.
@@ -332,19 +333,14 @@ export interface CalendarUtils {
    * @param {boolean} [hour12] - Whether to use 12-hour format.
    * @returns {string} - The localized time string.
    */
-  formatLocalizedTime: (
-    date: Date,
-    locale?: string,
-    timeZone?: string,
-    hour12?: boolean
-  ) => string;
+  formatLocalizedTime: (date: Date, locale?: string, timeZone?: string, hour12?: boolean) => string;
 }
 
-/** 
- * @group calendar 
+/**
+ * @group calendar
  * @title CalendarInstance
  * @description The main object returned by the `useCalendar` hook, providing access to the calendar's state, navigation functions, event management functions, and other utilities.
-*/
+ */
 export interface CalendarInstance {
   /**
    * The currently selected date in the calendar.

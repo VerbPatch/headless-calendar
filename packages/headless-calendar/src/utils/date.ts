@@ -2,13 +2,16 @@ import { convertToTimeZone } from './timezone';
 
 const intlCache = new Map<string, Intl.DateTimeFormat>();
 
-const getIntlFormatter = (locale: string, options: Intl.DateTimeFormatOptions): Intl.DateTimeFormat => {
+const getIntlFormatter = (
+  locale: string,
+  options: Intl.DateTimeFormatOptions,
+): Intl.DateTimeFormat => {
   const cacheKey = JSON.stringify({ locale, ...options });
   if (!intlCache.has(cacheKey)) {
     intlCache.set(cacheKey, new Intl.DateTimeFormat(locale, options));
   }
   return intlCache.get(cacheKey)!;
-}
+};
 
 const toNumeric = (val: string | undefined) => {
   if (!val) return '';
@@ -19,7 +22,7 @@ const toNumeric = (val: string | undefined) => {
 /**
  * Parses a date format string into `Intl.DateTimeFormatOptions`.
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd").
- * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`. 
+ * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`.
  * @group dateTime-helper
  * @title parseDateFormat
  * @description Parses a date format string into `Intl.DateTimeFormatOptions`.
@@ -55,13 +58,13 @@ const parseDateFormat = (format: string): Intl.DateTimeFormatOptions => {
   }
 
   return options;
-}
+};
 
 /**
  * Parses a date and time format string into `Intl.DateTimeFormatOptions`.
  * @param {string} format - A date format string (e.g., "yyyy-MM-dd HH:mm:ss").
  * @returns {Intl.DateTimeFormatOptions} - Options object for `Intl.DateTimeFormat`.
- * @see {@link Intl.DateTimeFormatOptions} 
+ * @see {@link Intl.DateTimeFormatOptions}
  * @group dateTime-helper
  * @title parseDateTimeFormat
  * @description Parses a date and time format string into `Intl.DateTimeFormatOptions`.
@@ -93,7 +96,7 @@ const parseDateTimeFormat = (format: string): Intl.DateTimeFormatOptions => {
   }
 
   return options;
-}
+};
 
 /**
  * Formats a date object into a string based on the specified format, locale, and timezone.
@@ -107,20 +110,20 @@ const parseDateTimeFormat = (format: string): Intl.DateTimeFormatOptions => {
  * @example
  * ```ts
  * const formattedDate = formatDate(new Date('2024-01-15'), { format: 'MM/dd/yyyy' }); // "01/15/2024"
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title formatDate
  * @description Formats a date object into a string based on the specified format, locale, and timezone.
  */
 export const formatDate = (
   date: Date,
-  options?: { format?: string; locale?: string; timeZone?: string }
+  options?: { format?: string; locale?: string; timeZone?: string },
 ): string => {
   if (!options) {
-    options = { format: "yyyy-MM-dd" };
+    options = { format: 'yyyy-MM-dd' };
   }
   return formatDateTime(date, options);
-}
+};
 
 /**
  * Formats a date and time object into a string based on the specified format, locale, and timezone.
@@ -132,21 +135,21 @@ export const formatDate = (
  * @returns {string} - The formatted date and time string.
  * @example
  * ```ts
- * formatDateTime(new Date(), { 
+ * formatDateTime(new Date(), {
  *  format: "yyyy-MM-dd HH:mm:ss",
- *  locale: "en-US", 
- *  timeZone: "America/New_York" 
+ *  locale: "en-US",
+ *  timeZone: "America/New_York"
  * });
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title formatDateTime
  * @description Formats a date and time object into a string based on the specified format, locale, and timezone.
  */
 export const formatDateTime = (
   date: Date,
-  options?: { format?: string; locale?: string; timeZone?: string }
+  options?: { format?: string; locale?: string; timeZone?: string },
 ): string => {
-  const format = options?.format ?? "yyyy-MM-ddTHH:mm:ss";
+  const format = options?.format ?? 'yyyy-MM-ddTHH:mm:ss';
   const locale = options?.locale ?? Intl.DateTimeFormat().resolvedOptions().locale;
   const timeZone = options?.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   const formatOptions = parseDateTimeFormat(format);
@@ -154,64 +157,62 @@ export const formatDateTime = (
   const parts = formatter.formatToParts(date);
 
   const lookup: Record<string, string> = {};
-  parts.forEach(p => {
+  parts.forEach((p) => {
     lookup[p.type] = p.value;
   });
 
-
-
   const replacementMap: Record<string, string> = {
     // Year
-    'yyyy': lookup.year ?? '',
-    'yy': lookup.year?.slice(-2) ?? '',
+    yyyy: lookup.year ?? '',
+    yy: lookup.year?.slice(-2) ?? '',
 
     // Month
-    'MMMM': lookup.month ?? '',
-    'MMM': lookup.month ?? '',
-    'MM': lookup.month ?? '',
-    'M': toNumeric(lookup.month),
+    MMMM: lookup.month ?? '',
+    MMM: lookup.month ?? '',
+    MM: lookup.month ?? '',
+    M: toNumeric(lookup.month),
 
     // Day
-    'dd': lookup.day ?? '',
-    'd': toNumeric(lookup.day),
+    dd: lookup.day ?? '',
+    d: toNumeric(lookup.day),
 
     // Hour (24h)
-    'HH': lookup.hour ?? '',
-    'H': toNumeric(lookup.hour),
+    HH: lookup.hour ?? '',
+    H: toNumeric(lookup.hour),
 
     // Hour (12h)
-    'hh': lookup.hour ?? '',
-    'h': toNumeric(lookup.hour),
-    'a': lookup.dayPeriod ?? '',
+    hh: lookup.hour ?? '',
+    h: toNumeric(lookup.hour),
+    a: lookup.dayPeriod ?? '',
 
     // Minute
-    'mm': lookup.minute ?? '',
-    'm': toNumeric(lookup.minute),
+    mm: lookup.minute ?? '',
+    m: toNumeric(lookup.minute),
 
     // Second
-    'ss': lookup.second ?? '',
-    's': toNumeric(lookup.second),
+    ss: lookup.second ?? '',
+    s: toNumeric(lookup.second),
 
     // Time Zone
-    'zzzz': lookup.timeZoneName ?? '',
-    'zzz': lookup.timeZoneName ?? '',
-    'zz': lookup.timeZoneName ?? '',
-    'z': lookup.timeZoneName ?? '',
+    zzzz: lookup.timeZoneName ?? '',
+    zzz: lookup.timeZoneName ?? '',
+    zz: lookup.timeZoneName ?? '',
+    z: lookup.timeZoneName ?? '',
 
     // Weekday
-    'EEE': lookup.weekday ?? '',
-    'EE': lookup.weekday ?? '',
-    'E': lookup.weekday ?? '',
+    EEE: lookup.weekday ?? '',
+    EE: lookup.weekday ?? '',
+    E: lookup.weekday ?? '',
 
     // Era
-    'GGG': lookup.era ?? '',
-    'GG': lookup.era ?? '',
-    'G': lookup.era ?? '',
+    GGG: lookup.era ?? '',
+    GG: lookup.era ?? '',
+    G: lookup.era ?? '',
   };
 
   const tokenRegexPattern = Object.keys(replacementMap)
     .sort((a, b) => b.length - a.length)
-    .map(token => token.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
+    .map((token) => token.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
     .join('|');
 
   return format.replace(new RegExp(`\\[([^\\]]+)\\]|(${tokenRegexPattern})`, 'g'), (match) => {
@@ -228,7 +229,7 @@ export const formatDateTime = (
  * @example
  * ```ts
  * const day = getDay(new Date(), 'America/New_York', 'UTC');
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getDay
  * @description Returns a new Date object representing the start of the day (00:00:00) in the target timezone.
@@ -245,7 +246,7 @@ export const getDay = (date: Date, fromTimeZone: string, toTimeZone: string): Da
  * @example
  * ```ts
  * const date = parseDate('2024-01-15T12:00:00.000Z');
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title parseDate
  * @description Parses a date string into a Date object.
@@ -258,12 +259,12 @@ export const parseDate = (dateString: string): Date => {
  * Checks if two dates represent the same day, ignoring time.
  * @param {Date} date1 - The first date.
  * @param {Date} date2 - The second date.
- * @returns {boolean} - True if the dates are the same day, false otherwise. 
+ * @returns {boolean} - True if the dates are the same day, false otherwise.
  * @group dateTime-helper
  */
 const dateEquals = (date1: Date, date2: Date): boolean => {
   return formatDate(date1) === formatDate(date2);
-}
+};
 
 /**
  * Checks if two dates are the same day.
@@ -273,7 +274,7 @@ const dateEquals = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameDay(new Date('2024-01-15'), new Date('2024-01-15')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isSameDay
  * @description Checks if two dates are the same day.
@@ -292,7 +293,7 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameWeek(new Date('2024-01-15'), new Date('2024-01-17'), 1); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isSameWeek
  * @description Checks if two dates are in the same week.
@@ -312,7 +313,7 @@ export const isSameWeek = (date1: Date, date2: Date, startOfWeek: number = 0): b
  * @example
  * ```ts
  * const result = isSameMonth(new Date('2024-01-15'), new Date('2024-01-25')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isSameMonth
  * @description Checks if two dates are in the same month.
@@ -332,7 +333,7 @@ export const isSameMonth = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const result = isSameYear(new Date('2024-01-15'), new Date('2024-02-25')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isSameYear
  * @description Checks if two dates are in the same year.
@@ -350,7 +351,7 @@ export const isSameYear = (date1: Date, date2: Date): boolean => {
  * @example
  * ```ts
  * const start = getStartOfYear(new Date('2024-05-15')); // 2024-01-01
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getStartOfYear
  * @description Gets the start of the year for a given date.
@@ -366,7 +367,7 @@ export const getStartOfYear = (date: Date): Date => {
  * @example
  * ```ts
  * const end = getEndOfYear(new Date('2024-05-15')); // 2024-11-31
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getEndOfYear
  * @description Gets the end of the year for a given date.
@@ -383,7 +384,7 @@ export const getEndOfYear = (date: Date): Date => {
  * @example
  * ```ts
  * const start = getStartOfWeek(new Date('2024-01-15'), 1); // Monday, 2024-01-15
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getStartOfWeek
  * @description Gets the start of the week for a given date.
@@ -406,7 +407,7 @@ export const getStartOfWeek = (date: Date, startOfWeek: number = 0): Date => {
  * @example
  * ```ts
  * const end = getEndOfWeek(new Date('2024-01-15'), 1); // Sunday, 2024-01-21
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getEndOfWeek
  * @description Gets the end of the week for a given date.
@@ -423,7 +424,7 @@ export const getEndOfWeek = (date: Date, startOfWeek: number = 0): Date => {
  * @example
  * ```ts
  * const start = getStartOfMonth(new Date('2024-01-15')); // 2024-01-01
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getStartOfMonth
  * @description Gets the start of the month for a given date.
@@ -439,7 +440,7 @@ export const getStartOfMonth = (date: Date): Date => {
  * @example
  * ```ts
  * const end = getEndOfMonth(new Date('2024-01-15')); // 2024-01-31
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getEndOfMonth
  * @description Gets the end of the month for a given date.
@@ -455,7 +456,7 @@ export const getEndOfMonth = (date: Date): Date => {
  * @example
  * ```ts
  * const start = getStartOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T00:00:00
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getStartOfDay
  * @description Gets the start of the day for a given date (00:00:00).
@@ -473,7 +474,7 @@ export const getStartOfDay = (date: Date): Date => {
  * @example
  * ```ts
  * const end = getEndOfDay(new Date('2024-01-15T12:30:00')); // 2024-01-15T23:59:59.999
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getEndOfDay
  * @description Gets the end of the day for a given date (23:59:59:999).
@@ -491,7 +492,7 @@ export const getEndOfDay = (date: Date): Date => {
  * @example
  * ```ts
  * const days = getDaysInMonth(new Date('2024-01-15')); // 31
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getDaysInMonth
  * @description Gets the number of days in the month of a given date.
@@ -508,7 +509,7 @@ export const getDaysInMonth = (date: Date): number => {
  * @example
  * ```ts
  * const newDate = addDays(new Date('2024-01-15'), 5); // 2024-01-20
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title addDays
  * @description Adds a specified number of days to a date.
@@ -528,7 +529,7 @@ export const addDays = (date: Date, days: number): Date => {
  * @example
  * ```ts
  * const newDate = addWeeks(new Date('2024-01-15'), 2); // 2024-01-29
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title addWeeks
  * @description Adds a specified number of weeks to a date.
@@ -545,7 +546,7 @@ export const addWeeks = (date: Date, weeks: number): Date => {
  * @example
  * ```ts
  * const newDate = addMonths(new Date('2024-01-31'), 1); // 2024-02-29
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title addMonths
  * @description Adds a specified number of months to a date, clamping to the last day if necessary.
@@ -570,7 +571,7 @@ export const addMonths = (date: Date, months: number): Date => {
  * @example
  * ```ts
  * const newDate = addYears(new Date('2024-02-29'), 1); // 2025-02-28
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title addYears
  * @description Adds a specified number of years to a date.
@@ -596,7 +597,7 @@ export const addYears = (date: Date, years: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractDays(new Date('2024-01-15'), 5); // 2024-01-10
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title subtractDays
  * @description Subtracts a specified number of days from a date.
@@ -614,7 +615,7 @@ export const subtractDays = (date: Date, days: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractWeeks(new Date('2024-01-15'), 2); // 2024-01-01
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title subtractWeeks
  * @description Subtracts a specified number of weeks from a date.
@@ -632,7 +633,7 @@ export const subtractWeeks = (date: Date, weeks: number): Date => {
  * @example
  * ```ts
  * const newDate = subtractMonths(new Date('2024-01-15'), 3); // 2023-10-15
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title subtractMonths
  * @description Subtracts a specified number of months from a date.
@@ -649,7 +650,7 @@ export const subtractMonths = (date: Date, months: number): Date => {
  * @example
  * ```ts
  * const days = getDaysBetween(new Date('2024-01-15'), new Date('2024-01-20')); // 5
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title getDaysBetween
  * @description Calculates the number of full days between two dates.
@@ -667,7 +668,7 @@ export const getDaysBetween = (startDate: Date, endDate: Date): number => {
  * @example
  * ```ts
  * const result = isToday(new Date()); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isToday
  * @description Checks if a given date is today.
@@ -683,7 +684,7 @@ export const isToday = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isPast(new Date('2000-01-01')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isPast
  * @description Checks if a given date is in the past.
@@ -699,7 +700,7 @@ export const isPast = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isFuture(new Date('2100-01-01')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isFuture
  * @description Checks if a given date is in the future.
@@ -715,7 +716,7 @@ export const isFuture = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = isWeekend(new Date('2024-01-20')); // true (Saturday)
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title isWeekend
  * @description Checks if a given date falls on a weekend (Saturday or Sunday).
@@ -734,15 +735,19 @@ export const isWeekend = (date: Date): boolean => {
  * @example
  * ```ts
  * const result = dateTimeInBetween(new Date('2024-01-15T12:00:00'), new Date('2024-01-15T10:00:00'), new Date('2024-01-15T14:00:00')); // true
- * ``` 
+ * ```
  * @group dateTime-helper
  * @title dateTimeInBetween
  * @description Checks if a given date and time falls within a specified range (inclusive).
  */
-export const dateTimeInBetween = (between: Date, startDateTime: Date, endDateTime: Date): boolean => {
+export const dateTimeInBetween = (
+  between: Date,
+  startDateTime: Date,
+  endDateTime: Date,
+): boolean => {
   const d = between.getTime();
   const start = startDateTime.getTime();
   const end = endDateTime.getTime();
 
   return d >= start && d <= end;
-}
+};

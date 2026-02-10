@@ -1,30 +1,30 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json" with { type: "json" };
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json' with { type: 'json' };
 
 export default {
-  input: "src/index.ts",
+  input: 'src/index.ts',
   output: [
     {
-      file: "dist/index.cjs.js",
-      format: "cjs",
+      file: 'dist/index.cjs.js',
+      format: 'cjs',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
     {
-      file: "dist/index.esm.js",
-      format: "esm",
+      file: 'dist/index.esm.js',
+      format: 'esm',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
   ],
   external: [
-    "svelte",
-    "svelte/store",
-    "@verbpatch/headless-calendar",
+    'svelte',
+    'svelte/store',
+    '@verbpatch/headless-calendar',
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {}),
   ],
@@ -32,15 +32,15 @@ export default {
     peerDepsExternal(),
     resolve({
       browser: true,
-      dedupe: ["svelte", "svelte/store"],
+      dedupe: ['svelte', 'svelte/store'],
     }),
     commonjs(),
     typescript({
-      tsconfig: "./tsconfig.json",
+      tsconfig: './tsconfig.json',
       declaration: true,
       sourceMap: true,
-      declarationDir: "./dist",
-      rootDir: "src",
+      declarationDir: './dist',
+      rootDir: 'src',
     }),
     terser(),
   ],

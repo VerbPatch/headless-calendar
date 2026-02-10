@@ -1,5 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { createState, subscribeToState, clearAllCaches, createMemo, createEffect } from '../../src/state/index';
+import {
+  createState,
+  subscribeToState,
+  clearAllCaches,
+  createMemo,
+  createEffect,
+} from '../../src/state/index';
 
 describe('State Engine', () => {
   beforeEach(() => {
@@ -25,7 +31,7 @@ describe('State Engine', () => {
 
     it('should update with function', () => {
       const [getVal, setVal] = createState(10, 'counter');
-      setVal(prev => prev + 5);
+      setVal((prev) => prev + 5);
       expect(getVal()).toBe(15);
     });
 

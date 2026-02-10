@@ -5,18 +5,24 @@ import { CalendarEvent } from '../../src/types/events';
 
 describe('useEvents hook', () => {
   const initialEvents: CalendarEvent[] = [
-    { id: '1', title: 'Initial Event', start: new Date(2024, 0, 15, 10), end: new Date(2024, 0, 15, 11) }
+    {
+      id: '1',
+      title: 'Initial Event',
+      start: new Date(2024, 0, 15, 10),
+      end: new Date(2024, 0, 15, 11),
+    },
   ];
 
   beforeEach(() => {
     clearAllCaches();
   });
 
-  const getEventsManager = (opts: any = {}) => useEvents({
-    calendarTimezone: 'UTC',
-    initialEvents: initialEvents,
-    ...opts
-  });
+  const getEventsManager = (opts: any = {}) =>
+    useEvents({
+      calendarTimezone: 'UTC',
+      initialEvents: initialEvents,
+      ...opts,
+    });
 
   it('should initialize with events', () => {
     const manager = getEventsManager();
@@ -27,17 +33,17 @@ describe('useEvents hook', () => {
   it('should create event', () => {
     const manager = getEventsManager();
     const newEvent: CalendarEvent = {
-      id: "1",
+      id: '1',
       title: 'New Event',
       start: new Date(2024, 0, 16, 10),
-      end: new Date(2024, 0, 16, 11)
+      end: new Date(2024, 0, 16, 11),
     };
 
     manager.createEvent(newEvent);
 
     const updated = getEventsManager();
     expect(updated.events).toHaveLength(2);
-    expect(updated.events.some(e => e.title === 'New Event')).toBe(true);
+    expect(updated.events.some((e) => e.title === 'New Event')).toBe(true);
   });
 
   it('should update event', () => {
@@ -105,7 +111,9 @@ describe('useEvents hook', () => {
     const manager = getEventsManager();
     const event = manager.getEvent('1')!;
     const invalid: any = { ...event, title: '' };
-    expect(() => manager.updateEvent('1', invalid)).toThrow('Invalid event update: Event title is required');
+    expect(() => manager.updateEvent('1', invalid)).toThrow(
+      'Invalid event update: Event title is required',
+    );
   });
 
   it('should handle deleting non-existent event', () => {
@@ -128,10 +136,10 @@ describe('useEvents hook', () => {
     const manager = getEventsManager({ onEventCreate: createSpy });
 
     manager.createEvent({
-      id: "2",
+      id: '2',
       title: 'Event',
       start: new Date(2024, 0, 15, 12),
-      end: new Date(2024, 0, 15, 13)
+      end: new Date(2024, 0, 15, 13),
     });
 
     expect(createSpy).toHaveBeenCalled();

@@ -15,7 +15,11 @@
     "test": "vitest run --coverage",
     "publish": "pnpm --filter \"./packages/**\" -r publish  --no-git-checks --access public --publish-branch main",
     "docs": "typedoc",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "size-limit": [
     {
@@ -28,6 +32,7 @@
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@changesets/cli": "^2.29.7",
+    "@eslint/js": "^9.39.1",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -39,6 +44,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.3.0",
     "prettier": "^3.6.2",
     "prettier-plugin-svelte": "^3.4.0",
     "rimraf": "^6.1.0",

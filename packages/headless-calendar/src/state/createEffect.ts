@@ -1,5 +1,5 @@
-import type { DependencyList, EffectCache, EffectCallback } from "./types";
-import { haveDepsChanged } from "./util";
+import type { DependencyList, EffectCache, EffectCallback } from './types';
+import { haveDepsChanged } from './util';
 
 /**
  * A cache for storing effects.
@@ -21,33 +21,36 @@ export const effectCache = new Map<string | number, EffectCache>();
  * }, [], 'my-effect');
  * ```
  */
-export function createEffect(effect: EffectCallback, deps: DependencyList | undefined, effectId: string | number): void {
+export function createEffect(
+  effect: EffectCallback,
+  deps: DependencyList | undefined,
+  effectId: string | number,
+): void {
+  const cached = effectCache.get(effectId);
 
-    const cached = effectCache.get(effectId);
+  const shouldRun = !cached || haveDepsChanged(cached.deps, deps);
 
-    const shouldRun = !cached || haveDepsChanged(cached.deps, deps);
-
-    if (shouldRun) {
-        if (cached?.cleanup) {
-            cached.cleanup();
-        }
-
-        const cleanup = effect();
-
-        effectCache.set(effectId, { cleanup: cleanup || undefined, deps });
+  if (shouldRun) {
+    if (cached?.cleanup) {
+      cached.cleanup();
     }
+
+    const cleanup = effect();
+
+    effectCache.set(effectId, { cleanup: cleanup || undefined, deps });
+  }
 }
 
 /**
  * Cleans up all registered effects.
  */
 export function cleanupAllEffects(): void {
-    effectCache.forEach(cached => {
-        if (cached.cleanup) {
-            cached.cleanup();
-        }
-    });
-    effectCache.clear();
+  effectCache.forEach((cached) => {
+    if (cached.cleanup) {
+      cached.cleanup();
+    }
+  });
+  effectCache.clear();
 }
 
 /**
@@ -55,9 +58,9 @@ export function cleanupAllEffects(): void {
  * @param id - The unique identifier of the effect to clean up.
  */
 export function cleanupEffect(id: string | number): void {
-    const cached = effectCache.get(id);
-    if (cached?.cleanup) {
-        cached.cleanup();
-    }
-    effectCache.delete(id);
+  const cached = effectCache.get(id);
+  if (cached?.cleanup) {
+    cached.cleanup();
+  }
+  effectCache.delete(id);
 }

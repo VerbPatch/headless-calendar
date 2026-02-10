@@ -1,47 +1,50 @@
-import resolve from "@rollup/plugin-node-resolve";
-import babel from "@rollup/plugin-babel";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json" with { type: "json" };
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json' with { type: 'json' };
 
 export default {
-  input: "src/index.tsx",
+  input: 'src/index.tsx',
   output: [
     {
       file: pkg.main,
-      format: "cjs",
+      format: 'cjs',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
     {
       file: pkg.module,
-      format: "esm",
+      format: 'esm',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
   ],
-  external: ["preact", "@verbpatch/headless-calendar"],
+  external: ['preact', '@verbpatch/headless-calendar'],
   plugins: [
     peerDepsExternal(),
     resolve({
       browser: true,
     }),
     typescript({
-      tsconfig: "./tsconfig.json",
+      tsconfig: './tsconfig.json',
       declaration: true,
-      declarationDir: "./dist",
+      declarationDir: './dist',
     }),
     babel({
-      babelHelpers: "bundled",
-      exclude: "node_modules/**",
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
       presets: [
-        ["@babel/preset-env", { targets: { browsers: "> 0.25%, not dead" } }],
-        ["@babel/preset-react", {
-          "pragma": "h",
-          "pragmaFrag": "Fragment"
-        }],
-        "@babel/preset-typescript",
+        ['@babel/preset-env', { targets: { browsers: '> 0.25%, not dead' } }],
+        [
+          '@babel/preset-react',
+          {
+            pragma: 'h',
+            pragmaFrag: 'Fragment',
+          },
+        ],
+        '@babel/preset-typescript',
       ],
     }),
     terser(),

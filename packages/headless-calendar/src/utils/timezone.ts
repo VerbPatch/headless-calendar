@@ -13,9 +13,8 @@
  */
 export function daysofWeek(
   weekStart: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0,
-  format: 'long' | 'short' | 'narrow' = "short",
+  format: 'long' | 'short' | 'narrow' = 'short',
   locale: string,
-
 ): string[] {
   const formatter = new Intl.DateTimeFormat(locale, {
     weekday: format,
@@ -50,7 +49,7 @@ export const formatDateInTimeZone = (
   date: Date,
   locale = 'en-GB',
   timeZone = 'UTC',
-  options: Intl.DateTimeFormatOptions = {}
+  options: Intl.DateTimeFormatOptions = {},
 ): string => {
   const fmt = new Intl.DateTimeFormat(locale, {
     timeZone,
@@ -79,21 +78,31 @@ export const formatDateInTimeZone = (
  * @description Returns the timezone offset in minutes for a given date and timezone.
  */
 export function getTimeZoneOffset(date: Date, timeZone: string): number {
-  const parts = new Intl.DateTimeFormat("en-GB", {
+  const parts = new Intl.DateTimeFormat('en-GB', {
     timeZone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
     hour12: false,
   }).formatToParts(date);
 
-  const lookup = (type: string) => parts.find(p => p.type === type)!.value;
+  const lookup = (type: string) => parts.find((p) => p.type === type)!.value;
 
-  return Date.UTC(Number(lookup("year")), Number(lookup("month")) - 1, Number(lookup("day")), Number(lookup("hour")), Number(lookup("minute")), Number(lookup("second")), date.getMilliseconds()) - date.getTime();
-};
+  return (
+    Date.UTC(
+      Number(lookup('year')),
+      Number(lookup('month')) - 1,
+      Number(lookup('day')),
+      Number(lookup('hour')),
+      Number(lookup('minute')),
+      Number(lookup('second')),
+      date.getMilliseconds(),
+    ) - date.getTime()
+  );
+}
 
 /**
  * Converts a Date from one timezone to another.
@@ -137,7 +146,7 @@ export const formatLocalizedDate = (
   date: Date,
   locale: string,
   timeZone: string,
-  options: Intl.DateTimeFormatOptions = {}
+  options: Intl.DateTimeFormatOptions = {},
 ): string => {
   return new Intl.DateTimeFormat(locale, {
     ...options,
@@ -159,11 +168,7 @@ export const formatLocalizedDate = (
  * @title formatLocalizedMonth
  * @description Formats a date into a localized month string.
  */
-export const formatLocalizedMonth = (
-  date: Date,
-  locale: string,
-  timeZone: string
-): string => {
+export const formatLocalizedMonth = (date: Date, locale: string, timeZone: string): string => {
   return formatLocalizedDate(date, locale, timeZone, {
     month: 'long',
     year: 'numeric',
@@ -189,7 +194,7 @@ export const formatLocalizedWeekday = (
   date: Date,
   locale: string,
   timeZone: string,
-  format: 'long' | 'short' | 'narrow' = 'long'
+  format: 'long' | 'short' | 'narrow' = 'long',
 ): string => {
   return formatLocalizedDate(date, locale, timeZone, {
     weekday: format,
@@ -215,7 +220,7 @@ export const formatLocalizedTime = (
   date: Date,
   locale: string,
   timeZone: string,
-  hour12 = false
+  hour12 = false,
 ): string => {
   return formatLocalizedDate(date, locale, timeZone, {
     hour: '2-digit',

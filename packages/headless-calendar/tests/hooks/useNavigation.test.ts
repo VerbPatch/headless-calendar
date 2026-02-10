@@ -9,13 +9,14 @@ describe('useNavigation hook', () => {
     clearAllCaches();
   });
 
-  const getNav = (opts: any = {}) => useNavigation({
-    defaultView: 'month',
-    defaultDate: initialDate,
-    timezone: 'UTC',
-    locale: 'en-US',
-    ...opts
-  });
+  const getNav = (opts: any = {}) =>
+    useNavigation({
+      defaultView: 'month',
+      defaultDate: initialDate,
+      timezone: 'UTC',
+      locale: 'en-US',
+      ...opts,
+    });
 
   it('should initialize with default values', () => {
     const nav = getNav();
@@ -63,7 +64,10 @@ describe('useNavigation hook', () => {
 
   describe('Custom View Navigation', () => {
     it('should navigate with unit: day', () => {
-      const opts = { defaultView: 'custom' as const, customViewOptions: { unit: 'day' as const, count: 3 } };
+      const opts = {
+        defaultView: 'custom' as const,
+        customViewOptions: { unit: 'day' as const, count: 3 },
+      };
       const nav = getNav(opts);
       nav.goToNext();
       expect(getNav(opts).currentDate.getDate()).toBe(18);
@@ -73,7 +77,10 @@ describe('useNavigation hook', () => {
     });
 
     it('should navigate with unit: week', () => {
-      const opts = { defaultView: 'custom' as const, customViewOptions: { unit: 'week' as const, count: 2 } };
+      const opts = {
+        defaultView: 'custom' as const,
+        customViewOptions: { unit: 'week' as const, count: 2 },
+      };
       const nav = getNav(opts);
       nav.goToNext();
       expect(getNav(opts).currentDate.getDate()).toBe(29);
@@ -83,7 +90,10 @@ describe('useNavigation hook', () => {
     });
 
     it('should navigate with unit: month', () => {
-      const opts = { defaultView: 'custom' as const, customViewOptions: { unit: 'month' as const, count: 2 } };
+      const opts = {
+        defaultView: 'custom' as const,
+        customViewOptions: { unit: 'month' as const, count: 2 },
+      };
       const nav = getNav(opts);
       nav.goToNext();
       expect(getNav(opts).currentDate.getMonth()).toBe(2); // March
@@ -93,7 +103,10 @@ describe('useNavigation hook', () => {
     });
 
     it('should navigate with unit: day', () => {
-      const opts = { defaultView: 'custom' as const, customViewOptions: { unit: 'day' as const, count: 1 } };
+      const opts = {
+        defaultView: 'custom' as const,
+        customViewOptions: { unit: 'day' as const, count: 1 },
+      };
       const nav = getNav(opts);
       nav.goToNext();
       expect(getNav(opts).currentDate.getDate()).toBe(16);
@@ -102,7 +115,10 @@ describe('useNavigation hook', () => {
     });
 
     it('should navigate with unit: week', () => {
-      const opts = { defaultView: 'custom' as const, customViewOptions: { unit: 'week' as const, count: 1 } };
+      const opts = {
+        defaultView: 'custom' as const,
+        customViewOptions: { unit: 'week' as const, count: 1 },
+      };
       const nav = getNav(opts);
       nav.goToNext();
       expect(getNav(opts).currentDate.getDate()).toBe(initialDate.getDate() + 7);

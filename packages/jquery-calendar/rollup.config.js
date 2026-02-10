@@ -1,9 +1,9 @@
-import { defineConfig } from "rollup";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json" with { type: "json" };
-import commonjs from "@rollup/plugin-commonjs";
-import nodeResolve from "@rollup/plugin-node-resolve";
-import terser from "@rollup/plugin-terser";
+import { defineConfig } from 'rollup';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json' with { type: 'json' };
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 
 const banner = `/**
  * Headless Calendar jQuery v${pkg.version}
@@ -26,26 +26,21 @@ const banner = `/**
  */`;
 
 export default defineConfig({
-  input: "src/index.ts",
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
-      format: "umd",
-      name: "HeadlessCalendarJQuery",
+      format: 'umd',
+      name: 'HeadlessCalendarJQuery',
       globals: {
-        jquery: "jQuery",
-        "headless-calendar": "HeadlessCalendar",
+        jquery: 'jQuery',
+        'headless-calendar': 'HeadlessCalendar',
       },
       banner,
       //compact: false,
       //generatedCode: "es2015",
     },
   ],
-  external: ["jquery", "headless-calendar"],
-  plugins: [
-    nodeResolve(),
-    commonjs(),
-    typescript({ tsconfig: "./tsconfig.json" }),
-    terser(),
-  ],
+  external: ['jquery', 'headless-calendar'],
+  plugins: [nodeResolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' }), terser()],
 });

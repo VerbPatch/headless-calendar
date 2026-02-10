@@ -32,7 +32,11 @@ export const generateId = (): string => {
  * @title isEventInDateRange
  * @description Checks if a given event falls within a specified date range.
  */
-export const isEventInDateRange = (event: CalendarEvent, startDate: Date, endDate: Date): boolean => {
+export const isEventInDateRange = (
+  event: CalendarEvent,
+  startDate: Date,
+  endDate: Date,
+): boolean => {
   const eventStart = event.start;
   const eventEnd = event.end;
   return eventStart <= endDate && eventEnd >= startDate;
@@ -60,9 +64,7 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
   const startOfDay = getStartOfDay(date);
   const endOfDay = getEndOfDay(date);
 
-  return events.filter(event =>
-    isEventInDateRange(event, startOfDay, endOfDay)
-  );
+  return events.filter((event) => isEventInDateRange(event, startOfDay, endOfDay));
 };
 
 /**
@@ -82,10 +84,12 @@ export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarE
  * @title getEventsForDateRange
  * @description Retrieves all events that fall within a specified date range.
  */
-export const getEventsForDateRange = (events: CalendarEvent[], startDate: Date, endDate: Date): CalendarEvent[] => {
-  return events.filter(event =>
-    isEventInDateRange(event, startDate, endDate)
-  );
+export const getEventsForDateRange = (
+  events: CalendarEvent[],
+  startDate: Date,
+  endDate: Date,
+): CalendarEvent[] => {
+  return events.filter((event) => isEventInDateRange(event, startDate, endDate));
 };
 
 /**
@@ -188,14 +192,21 @@ export const isMultiDayEvent = (event: CalendarEvent): boolean => {
  * @title getEventsAtTime
  * @description Retrieves events that occur at a specific time on a given date.
  */
-export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: number, minute = 0): CalendarEvent[] => {
-  return events.filter(event => {
+export const getEventsAtTime = (
+  events: CalendarEvent[],
+  date: Date,
+  hour: number,
+  minute = 0,
+): CalendarEvent[] => {
+  return events.filter((event) => {
     const eventStart = event.start;
-    return eventStart.getDate() === date.getDate() &&
+    return (
+      eventStart.getDate() === date.getDate() &&
       eventStart.getMonth() === date.getMonth() &&
       eventStart.getFullYear() === date.getFullYear() &&
       eventStart.getHours() === hour &&
-      eventStart.getMinutes() === minute;
+      eventStart.getMinutes() === minute
+    );
   });
 };
 
@@ -217,17 +228,20 @@ export const getEventsAtTime = (events: CalendarEvent[], date: Date, hour: numbe
  * @title getOverlappingEvents
  * @description Finds all events that overlap with a target event.
  */
-export const getOverlappingEvents = (events: CalendarEvent[], targetEvent: CalendarEvent): CalendarEvent[] => {
+export const getOverlappingEvents = (
+  events: CalendarEvent[],
+  targetEvent: CalendarEvent,
+): CalendarEvent[] => {
   const targetStart = targetEvent.start;
   const targetEnd = targetEvent.end;
 
-  return events.filter(event => {
+  return events.filter((event) => {
     if (event.id === targetEvent.id) return false;
 
     const eventStart = event.start;
     const eventEnd = event.end;
 
-    return (eventStart < targetEnd && eventEnd > targetStart);
+    return eventStart < targetEnd && eventEnd > targetStart;
   });
 };
 
@@ -263,7 +277,11 @@ export const validateEvent = (event: CalendarEvent): string[] => {
 
   if (event.start && event.end) {
     if (event.allDay) {
-      const startDate = new Date(event.start.getFullYear(), event.start.getMonth(), event.start.getDate());
+      const startDate = new Date(
+        event.start.getFullYear(),
+        event.start.getMonth(),
+        event.start.getDate(),
+      );
       const endDate = new Date(event.end.getFullYear(), event.end.getMonth(), event.end.getDate());
 
       if (startDate > endDate) {
@@ -286,7 +304,10 @@ export const validateEvent = (event: CalendarEvent): string[] => {
       errors.push('Recurring "every" must be a positive integer');
     }
 
-    if (r.count !== undefined && (typeof r.count !== 'number' || r.count < 1 || !Number.isInteger(r.count))) {
+    if (
+      r.count !== undefined &&
+      (typeof r.count !== 'number' || r.count < 1 || !Number.isInteger(r.count))
+    ) {
       errors.push('Recurring "count" must be a positive integer if specified');
     }
 
@@ -304,8 +325,15 @@ export const validateEvent = (event: CalendarEvent): string[] => {
 
     switch (r.repeat) {
       case 'daily':
-        if (r.weekDays !== undefined || r.day !== undefined || r.week !== undefined || r.month !== undefined) {
-          errors.push('Daily recurrence should not include weekDays, day, week, or month properties');
+        if (
+          r.weekDays !== undefined ||
+          r.day !== undefined ||
+          r.week !== undefined ||
+          r.month !== undefined
+        ) {
+          errors.push(
+            'Daily recurrence should not include weekDays, day, week, or month properties',
+          );
         }
         break;
 
@@ -313,11 +341,13 @@ export const validateEvent = (event: CalendarEvent): string[] => {
         if (!Array.isArray(r.weekDays) || r.weekDays.length === 0) {
           errors.push('Weekly recurrence must specify weekDays array with at least one day');
         } else {
-          const invalidDays = r.weekDays.filter(day =>
-            typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6
+          const invalidDays = r.weekDays.filter(
+            (day) => typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6,
           );
           if (invalidDays.length > 0) {
-            errors.push('Weekly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)');
+            errors.push(
+              'Weekly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)',
+            );
           }
 
           const uniqueDays = new Set(r.weekDays);
@@ -331,13 +361,15 @@ export const validateEvent = (event: CalendarEvent): string[] => {
         }
         break;
 
-      case 'monthly':
+      case 'monthly': {
         const hasDay = r.day !== undefined;
         const hasWeekDays = r.weekDays !== undefined;
         const hasWeek = r.week !== undefined;
 
         if (hasDay && (hasWeekDays || hasWeek)) {
-          errors.push('Monthly recurrence cannot specify both "day" and "weekDays/week" properties');
+          errors.push(
+            'Monthly recurrence cannot specify both "day" and "weekDays/week" properties',
+          );
         }
 
         if (!hasDay && !hasWeekDays) {
@@ -352,27 +384,47 @@ export const validateEvent = (event: CalendarEvent): string[] => {
           errors.push('Monthly recurrence with "week" must also specify "weekDays"');
         }
 
-        if (r.day !== undefined && (typeof r.day !== 'number' || !Number.isInteger(r.day) || r.day === 0 || r.day < -31 || r.day > 31)) {
+        if (
+          r.day !== undefined &&
+          (typeof r.day !== 'number' ||
+            !Number.isInteger(r.day) ||
+            r.day === 0 ||
+            r.day < -31 ||
+            r.day > 31)
+        ) {
           errors.push('Monthly "day" must be an integer between -31 and 31, excluding 0');
         }
 
-        if (r.week !== undefined && (typeof r.week !== 'number' || !Number.isInteger(r.week) || (r.week < -1 || r.week === 0 || r.week > 4))) {
-          errors.push('Monthly "week" must be an integer: 1-4 for specific week, or -1 for last week');
+        if (
+          r.week !== undefined &&
+          (typeof r.week !== 'number' ||
+            !Number.isInteger(r.week) ||
+            r.week < -1 ||
+            r.week === 0 ||
+            r.week > 4)
+        ) {
+          errors.push(
+            'Monthly "week" must be an integer: 1-4 for specific week, or -1 for last week',
+          );
         }
 
         if (r.weekDays !== undefined) {
           if (!Array.isArray(r.weekDays) || r.weekDays.length === 0) {
             errors.push('Monthly "weekDays" must be a non-empty array');
           } else {
-            const invalidDays = r.weekDays.filter(day =>
-              typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6
+            const invalidDays = r.weekDays.filter(
+              (day) => typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6,
             );
             if (invalidDays.length > 0) {
-              errors.push('Monthly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)');
+              errors.push(
+                'Monthly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)',
+              );
             }
 
             if (r.weekDays.length > 1) {
-              errors.push('Monthly recurrence with "week" should typically specify only one day in "weekDays"');
+              errors.push(
+                'Monthly recurrence with "week" should typically specify only one day in "weekDays"',
+              );
             }
           }
         }
@@ -381,10 +433,18 @@ export const validateEvent = (event: CalendarEvent): string[] => {
           errors.push('Monthly recurrence should not include month property');
         }
         break;
-
-      case 'yearly':
-        if (r.month === undefined || typeof r.month !== 'number' || !Number.isInteger(r.month) || r.month < 0 || r.month > 11) {
-          errors.push('Yearly recurrence must specify "month" as integer between 0 (Jan) and 11 (Dec)');
+      }
+      case 'yearly': {
+        if (
+          r.month === undefined ||
+          typeof r.month !== 'number' ||
+          !Number.isInteger(r.month) ||
+          r.month < 0 ||
+          r.month > 11
+        ) {
+          errors.push(
+            'Yearly recurrence must specify "month" as integer between 0 (Jan) and 11 (Dec)',
+          );
         }
 
         const yearlyHasDay = r.day !== undefined;
@@ -407,31 +467,52 @@ export const validateEvent = (event: CalendarEvent): string[] => {
           errors.push('Yearly recurrence with "week" must also specify "weekDays"');
         }
 
-        if (r.day !== undefined && (typeof r.day !== 'number' || !Number.isInteger(r.day) || r.day === 0 || r.day < -31 || r.day > 31)) {
+        if (
+          r.day !== undefined &&
+          (typeof r.day !== 'number' ||
+            !Number.isInteger(r.day) ||
+            r.day === 0 ||
+            r.day < -31 ||
+            r.day > 31)
+        ) {
           errors.push('Yearly "day" must be an integer between -31 and 31, excluding 0');
         }
 
-        if (r.week !== undefined && (typeof r.week !== 'number' || !Number.isInteger(r.week) || (r.week < -1 || r.week === 0 || r.week > 4))) {
-          errors.push('Yearly "week" must be an integer: 1-4 for specific week, or -1 for last week');
+        if (
+          r.week !== undefined &&
+          (typeof r.week !== 'number' ||
+            !Number.isInteger(r.week) ||
+            r.week < -1 ||
+            r.week === 0 ||
+            r.week > 4)
+        ) {
+          errors.push(
+            'Yearly "week" must be an integer: 1-4 for specific week, or -1 for last week',
+          );
         }
 
         if (r.weekDays !== undefined) {
           if (!Array.isArray(r.weekDays) || r.weekDays.length === 0) {
             errors.push('Yearly "weekDays" must be a non-empty array');
           } else {
-            const invalidDays = r.weekDays.filter(day =>
-              typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6
+            const invalidDays = r.weekDays.filter(
+              (day) => typeof day !== 'number' || !Number.isInteger(day) || day < 0 || day > 6,
             );
             if (invalidDays.length > 0) {
-              errors.push('Yearly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)');
+              errors.push(
+                'Yearly "weekDays" must contain integers between 0 (Sunday) and 6 (Saturday)',
+              );
             }
 
             if (r.weekDays.length > 1) {
-              errors.push('Yearly recurrence with "week" should typically specify only one day in "weekDays"');
+              errors.push(
+                'Yearly recurrence with "week" should typically specify only one day in "weekDays"',
+              );
             }
           }
         }
         break;
+      }
     }
   }
 
@@ -457,6 +538,6 @@ export const validateEvent = (event: CalendarEvent): string[] => {
 export const cloneEvent = (event: CalendarEvent): CalendarEvent => {
   return {
     ...event,
-    id: generateId()
+    id: generateId(),
   };
 };

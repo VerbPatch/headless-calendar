@@ -4,10 +4,11 @@ import {
   CalendarInstance,
   ViewType as CalendarView,
   CalendarEvent,
-  CustomViewOptions
-} from "@verbpatch/headless-calendar";
+  CustomViewOptions,
+} from '@verbpatch/headless-calendar';
+import $ from 'jquery';
 
-export * from "@verbpatch/headless-calendar";
+export * from '@verbpatch/headless-calendar';
 
 interface JQueryCalendarOptions extends CalendarOptions {
   onRender?: (calendar: CalendarInstance) => void;
@@ -40,7 +41,7 @@ declare global {
     endHour: 24,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     locale: navigator.language,
-    initialEvents: []
+    initialEvents: [],
   });
 
   function initInstance(element: HTMLElement, options: JQueryCalendarOptions) {
@@ -62,7 +63,7 @@ declare global {
       defaultDate: calendar.currentDate,
       defaultView: calendar.view,
       customViewOptions: calendar.customViewOptions,
-      initialEvents: calendar.events
+      initialEvents: calendar.events,
     });
     state.calendar = newCalendar;
   }
@@ -142,7 +143,8 @@ declare global {
     getEvent: (s: JQueryCalendarState, id: string) => s.calendar.getEvent(id),
     getVisibleEvents: (s: JQueryCalendarState) => s.calendar.visibleEvents,
     getEventsForDate: (s: JQueryCalendarState, date: Date) => s.calendar.getEventsForDate(date),
-    getEventsForDateRange: (s: JQueryCalendarState, a: Date, b: Date) => s.calendar.getEventsForDateRange(a, b),
+    getEventsForDateRange: (s: JQueryCalendarState, a: Date, b: Date) =>
+      s.calendar.getEventsForDateRange(a, b),
     getCurrentDate: (s: JQueryCalendarState) => s.calendar.currentDate,
     getView: (s: JQueryCalendarState) => s.calendar.view,
     getCalendar: (s: JQueryCalendarState) => s.calendar,
@@ -159,15 +161,19 @@ declare global {
     destroy(state: JQueryCalendarState) {
       state.$el.removeData(DATA_KEY);
       state.$el.trigger('calendar:destroyed');
-    }
+    },
   };
 
-  $.fn.headlessCalendar = function (this: JQuery, optionsOrMethod?: JQueryCalendarOptions | string, ...args: any[]): any {
+  $.fn.headlessCalendar = function (
+    this: JQuery,
+    optionsOrMethod?: JQueryCalendarOptions | string,
+    ...args: any[]
+  ): any {
     let returnValue: any = this;
 
     this.each(function () {
       const $el = $(this);
-      let state = $el.data(DATA_KEY);
+      const state = $el.data(DATA_KEY);
 
       if (!state) {
         if (typeof optionsOrMethod === 'string') {
@@ -192,5 +198,4 @@ declare global {
 
     return returnValue;
   };
-
-})(jQuery);
+})($);

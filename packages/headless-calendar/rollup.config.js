@@ -1,9 +1,9 @@
-import resolve from "@rollup/plugin-node-resolve";
-import babel from "@rollup/plugin-babel";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json" with { type: "json" };
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json' with { type: 'json' };
 
 const mybanner = `/**
  * Headless Calendar v${pkg.version}
@@ -26,26 +26,26 @@ const mybanner = `/**
  */`;
 
 export default {
-  input: "src/index.ts",
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
-      format: "cjs",
+      format: 'cjs',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
       banner: mybanner,
     },
     {
       file: pkg.module,
-      format: "esm",
+      format: 'esm',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
       banner: mybanner,
     },
     {
       file: pkg.browser,
-      format: "umd",
-      name: "HeadlessCalendar",
+      format: 'umd',
+      name: 'HeadlessCalendar',
       sourcemap: true,
       //exports: "named",
       banner: mybanner,
@@ -59,17 +59,17 @@ export default {
       browser: true,
     }),
     typescript({
-      tsconfig: "./tsconfig.json",
+      tsconfig: './tsconfig.json',
       declaration: true,
-      declarationDir: "./dist",
-      rootDir: "./src",
+      declarationDir: './dist',
+      rootDir: './src',
     }),
     babel({
-      babelHelpers: "bundled",
-      exclude: "node_modules/**",
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
       presets: [
-        ["@babel/preset-env", { targets: { browsers: "> 0.25%, not dead" } }],
-        "@babel/preset-typescript",
+        ['@babel/preset-env', { targets: { browsers: '> 0.25%, not dead' } }],
+        '@babel/preset-typescript',
       ],
     }),
     terser(),

@@ -1,5 +1,5 @@
-import type { CallbackCache, DependencyList } from "./types";
-import { haveDepsChanged } from "./util";
+import type { CallbackCache, DependencyList } from './types';
+import { haveDepsChanged } from './util';
 
 /**
  * A cache for storing callbacks.
@@ -19,14 +19,17 @@ export const callbackCache = new Map<string | number, CallbackCache<any>>();
  * }, [], 'my-click-handler');
  * ```
  */
-export function createCallback<T extends (...args: any[]) => any>(callback: T, deps: DependencyList, callbackId: string | number): T {
+export function createCallback<T extends (...args: any[]) => any>(
+  callback: T,
+  deps: DependencyList,
+  callbackId: string | number,
+): T {
+  const cached = callbackCache.get(callbackId) as CallbackCache<T> | undefined;
 
-    const cached = callbackCache.get(callbackId) as CallbackCache<T> | undefined;
+  if (!cached || haveDepsChanged(cached.deps, deps)) {
+    callbackCache.set(callbackId, { callback, deps });
+    return callback;
+  }
 
-    if (!cached || haveDepsChanged(cached.deps, deps)) {
-        callbackCache.set(callbackId, { callback, deps });
-        return callback;
-    }
-
-    return cached.callback;
+  return cached.callback;
 }

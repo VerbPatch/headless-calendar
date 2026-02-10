@@ -29,7 +29,7 @@ import {
   getDay,
   parseDate,
   formatDate,
-  formatDateTime
+  formatDateTime,
 } from '../../src/utils/date';
 
 describe('Date Utilities', () => {

@@ -1,4 +1,9 @@
-import { UseNavigationOptions, UseNavigationReturn, ViewType, CustomViewOptions } from '../types/views';
+import {
+  UseNavigationOptions,
+  UseNavigationReturn,
+  ViewType,
+  CustomViewOptions,
+} from '../types/views';
 import { addDays, addWeeks, addMonths, getDay, addYears } from '../utils/date';
 import { createCallback, createState } from '../state';
 import { validateCustomView } from '../utils';
@@ -37,7 +42,10 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
   } = options;
   const [getCurrentDate, setCurrentDate] = createState<Date>(defaultDate, 'current-date');
   const [getView, setView] = createState<ViewType>(defaultView, 'view');
-  const [getCustomViewOptions, setCustomViewOptions] = createState<CustomViewOptions>(customViewOptions, 'custom-view-options');
+  const [getCustomViewOptions, setCustomViewOptions] = createState<CustomViewOptions>(
+    customViewOptions,
+    'custom-view-options',
+  );
 
   /**
    * Navigates the calendar to the next period (day, week, month, or year) based on the current view.
@@ -45,46 +53,46 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @title Go to Next
    * @description Navigates the calendar to the next period (day, week, month, or year) based on the current view.
    */
-  const goToNext = createCallback((): void => {
-    let newDate: Date;
-    const current = getCurrentDate();
-    const currentCustomOptions = getCustomViewOptions();
+  const goToNext = createCallback(
+    (): void => {
+      let newDate: Date;
+      const current = getCurrentDate();
+      const currentCustomOptions = getCustomViewOptions();
 
-    switch (getView()) {
-      case 'day':
-        newDate = addDays(current, 1);
-        break;
-      case 'week':
-        newDate = addWeeks(current, 1);
-        break;
-      case 'month':
-        newDate = addMonths(current, 1);
-        break;
-      case 'year':
-        newDate = addYears(current, 1);
-        break;
-      case 'custom':
-        validateCustomView(currentCustomOptions);
+      switch (getView()) {
+        case 'day':
+          newDate = addDays(current, 1);
+          break;
+        case 'week':
+          newDate = addWeeks(current, 1);
+          break;
+        case 'month':
+          newDate = addMonths(current, 1);
+          break;
+        case 'year':
+          newDate = addYears(current, 1);
+          break;
+        case 'custom':
+          validateCustomView(currentCustomOptions);
 
-        newDate = current;
-        if (currentCustomOptions.unit === 'day') {
-          newDate = addDays(current, currentCustomOptions.count);
-        }
-        else if (currentCustomOptions.unit === 'week') {
-          newDate = addWeeks(current, currentCustomOptions.count);
-        }
-        else if (currentCustomOptions.unit === 'month') {
-          newDate = addMonths(current, currentCustomOptions.count);
-        }
+          newDate = current;
+          if (currentCustomOptions.unit === 'day') {
+            newDate = addDays(current, currentCustomOptions.count);
+          } else if (currentCustomOptions.unit === 'week') {
+            newDate = addWeeks(current, currentCustomOptions.count);
+          } else if (currentCustomOptions.unit === 'month') {
+            newDate = addMonths(current, currentCustomOptions.count);
+          }
 
-        break;
-    }
+          break;
+      }
 
-    setCurrentDate(newDate);
-    onDateChange?.(newDate);
-  },
+      setCurrentDate(newDate);
+      onDateChange?.(newDate);
+    },
     [getCurrentDate, getView, onDateChange, getCustomViewOptions],
-    'go-to-next');
+    'go-to-next',
+  );
 
   /**
    * Navigates the calendar to the previous period (day, week, month, or year) based on the current view.
@@ -92,46 +100,46 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @title Go to Previous
    * @description Navigates the calendar to the previous period (day, week, month, or year) based on the current view.
    */
-  const goToPrevious = createCallback((): void => {
-    let newDate: Date;
-    const current = getCurrentDate();
-    const currentCustomOptions = getCustomViewOptions();
+  const goToPrevious = createCallback(
+    (): void => {
+      let newDate: Date;
+      const current = getCurrentDate();
+      const currentCustomOptions = getCustomViewOptions();
 
-    switch (getView()) {
-      case 'day':
-        newDate = addDays(current, -1);
-        break;
-      case 'week':
-        newDate = addWeeks(current, -1);
-        break;
-      case 'month':
-        newDate = addMonths(current, -1);
-        break;
-      case 'year':
-        newDate = addYears(current, -1);
-        break;
-      case 'custom':
-        validateCustomView(currentCustomOptions);
+      switch (getView()) {
+        case 'day':
+          newDate = addDays(current, -1);
+          break;
+        case 'week':
+          newDate = addWeeks(current, -1);
+          break;
+        case 'month':
+          newDate = addMonths(current, -1);
+          break;
+        case 'year':
+          newDate = addYears(current, -1);
+          break;
+        case 'custom':
+          validateCustomView(currentCustomOptions);
 
-        newDate = current;
-        if (currentCustomOptions.unit === 'day') {
-          newDate = addDays(current, -currentCustomOptions.count);
-        }
-        else if (currentCustomOptions.unit === 'week') {
-          newDate = addWeeks(current, -currentCustomOptions.count);
-        }
-        else if (currentCustomOptions.unit === 'month') {
-          newDate = addMonths(current, -currentCustomOptions.count);
-        }
+          newDate = current;
+          if (currentCustomOptions.unit === 'day') {
+            newDate = addDays(current, -currentCustomOptions.count);
+          } else if (currentCustomOptions.unit === 'week') {
+            newDate = addWeeks(current, -currentCustomOptions.count);
+          } else if (currentCustomOptions.unit === 'month') {
+            newDate = addMonths(current, -currentCustomOptions.count);
+          }
 
-        break;
-    }
+          break;
+      }
 
-    setCurrentDate(newDate);
-    onDateChange?.(newDate);
-  },
+      setCurrentDate(newDate);
+      onDateChange?.(newDate);
+    },
     [getCurrentDate, getView, onDateChange, getCustomViewOptions],
-    'go-to-previous');
+    'go-to-previous',
+  );
 
   /**
    * Navigates the calendar to today's date.
@@ -139,13 +147,15 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @title Go to Today
    * @description Navigates the calendar to today's date.
    */
-  const goToToday = createCallback((): void => {
-    const today = getDay(new Date(), options.timezone, options.timezone);
-    setCurrentDate(today);
-    onDateChange?.(today);
-  },
+  const goToToday = createCallback(
+    (): void => {
+      const today = getDay(new Date(), options.timezone, options.timezone);
+      setCurrentDate(today);
+      onDateChange?.(today);
+    },
     [onDateChange],
-    'go-to-today');
+    'go-to-today',
+  );
 
   /**
    * Navigates the calendar to a specific date.
@@ -154,13 +164,15 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @title Go to Date
    * @description Navigates the calendar to a specific date.
    */
-  const goToDate = createCallback((date: Date): void => {
-    const newDate = new Date(date);
-    setCurrentDate(newDate);
-    onDateChange?.(newDate);
-  },
+  const goToDate = createCallback(
+    (date: Date): void => {
+      const newDate = new Date(date);
+      setCurrentDate(newDate);
+      onDateChange?.(newDate);
+    },
     [onDateChange],
-    'go-to-date');
+    'go-to-date',
+  );
 
   /**
    * Changes the current view of the calendar.
@@ -171,19 +183,21 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @title Change View
    * @description Changes the current view of the calendar.
    */
-  const changeView = createCallback((newView: ViewType, newOptions?: CustomViewOptions): void => {
-    if (!['day', 'week', 'month', 'year', 'custom'].includes(newView)) {
-      throw new Error(`Invalid view type: ${newView}`);
-    }
+  const changeView = createCallback(
+    (newView: ViewType, newOptions?: CustomViewOptions): void => {
+      if (!['day', 'week', 'month', 'year', 'custom'].includes(newView)) {
+        throw new Error(`Invalid view type: ${newView}`);
+      }
 
-    setView(newView);
-    if (newOptions) {
-      setCustomViewOptions(newOptions);
-    }
-    onViewChange?.(newView);
-  },
+      setView(newView);
+      if (newOptions) {
+        setCustomViewOptions(newOptions);
+      }
+      onViewChange?.(newView);
+    },
     [onViewChange],
-    'change-view');
+    'change-view',
+  );
 
   // TODO: Implement date range limits
   const canGoNext = true;
@@ -199,6 +213,6 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
     goToDate,
     changeView,
     canGoNext,
-    canGoPrevious
+    canGoPrevious,
   };
 };

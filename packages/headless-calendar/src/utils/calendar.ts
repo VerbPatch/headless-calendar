@@ -1,6 +1,16 @@
 import { ViewType, CustomViewOptions } from '../types';
 import { TimeSlot } from '../types/calendar';
-import { getStartOfWeek, addDays, getStartOfMonth, getEndOfMonth, getEndOfWeek, getStartOfYear, getEndOfYear, addMonths, addWeeks } from './date';
+import {
+  getStartOfWeek,
+  addDays,
+  getStartOfMonth,
+  getEndOfMonth,
+  getEndOfWeek,
+  getStartOfYear,
+  getEndOfYear,
+  addMonths,
+  addWeeks,
+} from './date';
 
 /**
  * Generates an array of dates for the week containing the given date.
@@ -96,7 +106,6 @@ export const getYearCalendarDays = (date: Date, startOfWeek: number = 0): Date[]
   return dates;
 };
 
-
 /**
  * Generates an array of time slots for a given range of hours and interval.
  * @param {number} [startHour=0] - The starting hour (0-23).
@@ -123,7 +132,7 @@ export const getTimeSlots = (startHour = 0, endHour = 24, interval = 60): TimeSl
         hour,
         minute,
         time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`,
-        label: formatTimeSlotLabel(hour, minute)
+        label: formatTimeSlotLabel(hour, minute),
       });
     }
   }
@@ -269,34 +278,38 @@ export const calculateWeekNumber = (date: Date): number => {
  * @description Determines the start and end date bounds for a given calendar view.
  * @function
  */
-export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek: number = 0, customViewOptions: CustomViewOptions = { unit: 'day', count: 1 },
+export const getCalendarBounds = (
+  view: ViewType,
+  date: Date,
+  startOfWeek: number = 0,
+  customViewOptions: CustomViewOptions = { unit: 'day', count: 1 },
 ): { start: Date; end: Date } => {
   switch (view) {
     case 'day':
       return {
         start: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
-        end: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
+        end: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999),
       };
 
-    case 'week':
+    case 'week': {
       const weekStart = getStartOfWeek(date, startOfWeek);
       const weekEnd = getEndOfWeek(date, startOfWeek);
       return { start: weekStart, end: weekEnd };
-
-    case 'month':
+    }
+    case 'month': {
       const monthDates = getMonthCalendarDates(date, startOfWeek);
       return {
         start: monthDates[0],
-        end: monthDates[monthDates.length - 1]
+        end: monthDates[monthDates.length - 1],
       };
-
+    }
     case 'year':
       return {
         start: new Date(date.getFullYear(), 0, 1),
-        end: new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999)
+        end: new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999),
       };
 
-    case 'custom':
+    case 'custom': {
       validateCustomView(customViewOptions);
 
       let start: Date;
@@ -308,19 +321,21 @@ export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek: numbe
           end = addDays(start, customViewOptions.count - 1);
           end.setHours(23, 59, 59, 999);
           break;
-        case 'week':
+        case 'week': {
           start = getStartOfWeek(date, startOfWeek);
           const lastWeekStart = addWeeks(start, customViewOptions.count - 1);
           end = getEndOfWeek(lastWeekStart, startOfWeek);
           break;
-        case 'month':
+        }
+        case 'month': {
           start = getStartOfMonth(date);
           const lastMonthStart = addMonths(start, customViewOptions.count - 1);
           end = getEndOfMonth(lastMonthStart);
           break;
+        }
       }
       return { start, end };
-
+    }
     default:
       throw new Error(`Unknown view type: ${view}`);
   }
@@ -329,7 +344,7 @@ export const getCalendarBounds = (view: ViewType, date: Date, startOfWeek: numbe
 /**
  * Validate custom view before populating custom view data when view is set to 'custom'
  * @param {CustomViewOptions} customViewOptions - custom view option
- * @see {@link CustomViewOptions} 
+ * @see {@link CustomViewOptions}
  * @group calendar
  * @title validateCustomView
  * @description Validate custom view before populating custom view data when view is set to 'custom'
@@ -339,7 +354,7 @@ export const validateCustomView = (customViewOptions: CustomViewOptions) => {
     throw new Error(`customViewOptions must be set for custom view`);
   }
 
-  if (!["day", "week", "month"].includes(customViewOptions.unit)) {
+  if (!['day', 'week', 'month'].includes(customViewOptions.unit)) {
     throw new Error(`customViewOptions.unit must be set to either day or week or month`);
   }
-}
+};

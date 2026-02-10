@@ -7,7 +7,6 @@ import {
   CalendarInstance,
 } from '@verbpatch/headless-calendar';
 
-
 export function useCalendar(options?: CalendarOptions) {
   const calendar = ref<CalendarInstance>();
   const stateChanged = ref(0);

@@ -1,10 +1,17 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
-const IGNORED_DIRS = new Set(["node_modules", ".angular", ".svelte-kit", "jQuery", "dist", "build"]);
+const IGNORED_DIRS = new Set([
+  'node_modules',
+  '.angular',
+  '.svelte-kit',
+  'jQuery',
+  'dist',
+  'build',
+]);
 
 export function buildExamplesNav(pathPrefix) {
-  const rootDir = process.cwd() + "\\examples";
+  const rootDir = process.cwd() + '\\examples';
   if (!fs.statSync(rootDir).isDirectory()) {
     return null;
   }
@@ -13,7 +20,7 @@ export function buildExamplesNav(pathPrefix) {
 }
 
 function scan(dirPath, pathPrefix) {
-  const packageJsonPath = path.join(dirPath, "package.json");
+  const packageJsonPath = path.join(dirPath, 'package.json');
 
   const packageExists = fs.existsSync(packageJsonPath);
   if (packageExists) {
@@ -21,21 +28,24 @@ function scan(dirPath, pathPrefix) {
     return {
       title: name,
       path: dirPath,
-      label: "pro",
+      label: 'pro',
     };
   }
 
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true }).filter((f) => f.isDirectory() && !IGNORED_DIRS.has(f.name));
+  const entries = fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .filter((f) => f.isDirectory() && !IGNORED_DIRS.has(f.name));
 
   return entries.map((item) => {
-    const child = scan(item.path + "\\" + item.name, pathPrefix);
+    const child = scan(item.path + '\\' + item.name, pathPrefix);
     const result = {
       title: item.name,
-      group: "example",
+      group: 'example',
     };
 
-    if (child.label === "pro") {
-      result.path = "/" + pathPrefix + "/" + item.path.substr(dirPath.lastIndexOf("\\") + 1) + "/" + item.name;
+    if (child.label === 'pro') {
+      result.path =
+        '/' + pathPrefix + '/' + item.path.substr(dirPath.lastIndexOf('\\') + 1) + '/' + item.name;
     } else {
       result.children = child;
     }

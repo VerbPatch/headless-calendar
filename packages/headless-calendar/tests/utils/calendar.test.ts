@@ -10,7 +10,7 @@ import {
   getYearRange,
   calculateWeekNumber,
   getCalendarBounds,
-  validateCustomView
+  validateCustomView,
 } from '../../src/utils/calendar';
 
 describe('Calendar Utilities', () => {
@@ -26,7 +26,7 @@ describe('Calendar Utilities', () => {
 
     it('should generate month calendar dates correctly', () => {
       const dates = getMonthCalendarDates(baseDate, 0);
-      // Jan 2024 starts on Monday. 
+      // Jan 2024 starts on Monday.
       // With Sun start, it should include Dec 31 (Sun).
       // Jan has 31 days. Feb 1 is Thu.
       // With Sun start, Jan view ends on Feb 3 (Sat).

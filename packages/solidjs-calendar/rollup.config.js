@@ -1,42 +1,42 @@
-import resolve from "@rollup/plugin-node-resolve";
-import babel from "@rollup/plugin-babel";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import typescript from "@rollup/plugin-typescript";
-import pkg from "./package.json" with { type: "json" };
+import resolve from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from '@rollup/plugin-typescript';
+import pkg from './package.json' with { type: 'json' };
 
 export default {
-  input: "src/index.tsx",
+  input: 'src/index.tsx',
   output: [
     {
       file: pkg.main,
-      format: "cjs",
+      format: 'cjs',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
     {
       file: pkg.module,
-      format: "esm",
+      format: 'esm',
       sourcemap: true,
-      exports: "named",
+      exports: 'named',
     },
   ],
-  external: ["solid-js", "@verbpatch/headless-calendar"],
+  external: ['solid-js', '@verbpatch/headless-calendar'],
   plugins: [
     peerDepsExternal(),
     resolve({
       browser: true,
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
     typescript({
-      tsconfig: "./tsconfig.json",
+      tsconfig: './tsconfig.json',
       declaration: true,
-      declarationDir: "./dist",
+      declarationDir: './dist',
     }),
     babel({
-      babelHelpers: "bundled",
-      exclude: "node_modules/**",
-      presets: ["babel-preset-solid"],
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      presets: ['babel-preset-solid'],
     }),
     terser(),
   ],

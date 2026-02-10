@@ -1,6 +1,12 @@
 import { ReactiveController, ReactiveControllerHost } from 'lit';
-import { useCalendar as createCalendar, CalendarOptions, CalendarInstance, CalendarEvent, ViewType } from '@verbpatch/headless-calendar';
-export * from "@verbpatch/headless-calendar";
+import {
+  useCalendar as createCalendar,
+  CalendarOptions,
+  CalendarInstance,
+  CalendarEvent,
+  ViewType,
+} from '@verbpatch/headless-calendar';
+export * from '@verbpatch/headless-calendar';
 
 export class CalendarController implements ReactiveController {
   private host: ReactiveControllerHost;
