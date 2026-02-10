@@ -230,15 +230,15 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
   }, [], 'clear-events');
 
   /**
-   * Sets the entire list of events, replacing existing ones.
-   * @param {CalendarEvent[]} newEvents - The new array of events to set.
+   * Appends new events to the existing list of events.
+   * @param {CalendarEvent[]} newEvents - The new array of events to append.
    * @see {@link CalendarEvent}
    * @group Event Management
    * @title Set Events
-   * @description Sets the entire list of events, replacing existing ones.
+   * @description Appends new events to the existing list of events.
    */
   const setEventsCallback = createCallback((newEvents: CalendarEvent[]): void => {
-    setEvents(newEvents);
+    setEvents(prev => [...prev, ...newEvents]);
     onEvent?.(getEvents());
   },
     [],

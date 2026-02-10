@@ -407,6 +407,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
     // Event management
     getEvent: eventsManager.getEvent,
+    setEvents: eventsManager.setEvents,
     createEvent: eventsManager.createEvent,
     updateEvent: eventsManager.updateEvent,
     deleteEvent: eventsManager.deleteEvent,

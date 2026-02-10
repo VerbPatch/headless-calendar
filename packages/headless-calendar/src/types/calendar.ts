@@ -430,6 +430,13 @@ export interface CalendarInstance {
    */
   getEvent: (eventId: string) => CalendarEvent | undefined;
   /**
+   * Appends new events to the existing list of events.
+   * @function
+   * @param {CalendarEvent[]} events - The new array of events to append.
+   * @see {@link CalendarEvent}
+   */
+  setEvents: (events: CalendarEvent[]) => void;
+  /**
    * Creates a new calendar event.
    * @function
    * @param {CalendarEvent} eventData - The data for the new event.
