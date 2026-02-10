@@ -13,7 +13,6 @@ const config: Linter.Config[] = [
       '**/node_modules/**',
       '**/coverage/**',
       '**/.changeset/**',
-      '**/.nx/**',
       'examples/**',
       '**/.angular/**',
       '**/.svelte-kit/**',
@@ -33,7 +32,7 @@ const config: Linter.Config[] = [
       globals: {
         ...globals.browser,
         ...globals.node,
-        "jQuery": true
+        jQuery: true,
       },
     },
     plugins: {

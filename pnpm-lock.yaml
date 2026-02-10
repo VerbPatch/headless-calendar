@@ -612,7 +612,7 @@ importers:
         specifier: ^20.3.0
         version: 20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       tslib:
         specifier: ^2.8.1
@@ -633,7 +633,7 @@ importers:
   packages/jquery-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       jquery:
         specifier: '>=3.0.0'
@@ -646,7 +646,7 @@ importers:
   packages/lit-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       lit:
         specifier: '>=2.0.0'
@@ -655,7 +655,7 @@ importers:
   packages/preact-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       preact:
         specifier: '>=10.0.0'
@@ -667,13 +667,13 @@ importers:
         specifier: '>=1.0.0'
         version: 1.17.2(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
 
   packages/react-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       react:
         specifier: '>=16'
@@ -689,7 +689,7 @@ importers:
   packages/solidjs-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
       solid-js:
         specifier: '>=1.0.0'
@@ -698,7 +698,7 @@ importers:
   packages/svelte-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
     devDependencies:
       svelte:
@@ -708,7 +708,7 @@ importers:
   packages/vuejs-calendar:
     dependencies:
       '@verbpatch/headless-calendar':
-        specifier: latest
+        specifier: workspace:*
         version: link:../headless-calendar
     devDependencies:
       vue:

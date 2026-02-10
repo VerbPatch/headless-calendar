@@ -3,7 +3,6 @@ node_modules
 dist
 coverage
 .changeset
-.nx
 
 # Ignore markdown files
 **/*.md
