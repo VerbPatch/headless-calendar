@@ -92,7 +92,7 @@ export function getTimeZoneOffset(date: Date, timeZone: string): number {
 
   const lookup = (type: string) => parts.find(p => p.type === type)!.value;
 
-  return Date.UTC(Number(lookup("year")), Number(lookup("month")) - 1, Number(lookup("day")), Number(lookup("hour")), Number(lookup("minute")), Number(lookup("second")), date.getMilliseconds());
+  return Date.UTC(Number(lookup("year")), Number(lookup("month")) - 1, Number(lookup("day")), Number(lookup("hour")), Number(lookup("minute")), Number(lookup("second")), date.getMilliseconds()) - date.getTime();
 };
 
 /**
@@ -116,7 +116,7 @@ export function convertToTimeZone(date: Date, fromTimezone: string, toTimezone: 
   const fromOffset = getTimeZoneOffset(date, fromTimezone);
   const toOffset = getTimeZoneOffset(date, toTimezone);
 
-  return new Date(date.getTime() + (toOffset - fromOffset));
+  return new Date(date.getTime() + (fromOffset - toOffset));
 }
 
 /**

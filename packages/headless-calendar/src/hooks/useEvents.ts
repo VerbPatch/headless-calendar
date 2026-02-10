@@ -161,13 +161,19 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
    * @description Moves an event to a new start and optional end date.
    */
   const moveEvent = createCallback((eventId: string, newStart: Date, newEnd?: Date): void => {
+    const event = getEvents().find(e => e.id === eventId);
+    if (!event) return;
+
+    const duration = event.end.getTime() - event.start.getTime();
+    const finalEnd = newEnd || new Date(newStart.getTime() + duration);
+
     updateEvent(eventId, {
       start: newStart,
-      end: newEnd || newStart
+      end: finalEnd
     } as CalendarEvent);
     onEvent?.(getEvents());
   },
-    [updateEvent],
+    [getEvents, updateEvent],
     'move-event');
 
   /**

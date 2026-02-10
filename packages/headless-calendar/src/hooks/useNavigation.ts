@@ -78,8 +78,6 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
         }
 
         break;
-      default:
-        return;
     }
 
     setCurrentDate(newDate);
@@ -127,8 +125,6 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
         }
 
         break;
-      default:
-        return;
     }
 
     setCurrentDate(newDate);
@@ -176,6 +172,10 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
    * @description Changes the current view of the calendar.
    */
   const changeView = createCallback((newView: ViewType, newOptions?: CustomViewOptions): void => {
+    if (!['day', 'week', 'month', 'year', 'custom'].includes(newView)) {
+      throw new Error(`Invalid view type: ${newView}`);
+    }
+
     setView(newView);
     if (newOptions) {
       setCustomViewOptions(newOptions);
