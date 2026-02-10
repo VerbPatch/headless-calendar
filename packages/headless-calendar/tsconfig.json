@@ -6,13 +6,6 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "rollup.config.ts",
-    "eslint.config.ts"
-  ]
+  "include": ["src/**/*", "tests/**/*.test.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "rollup.config.ts", "eslint.config.ts"]
 }
