@@ -70,3 +70,16 @@ export const DATE_FORMAT_ISO = 'YYYY-MM-DD';
  * @ignore
  */
 export const DATETIME_FORMAT_ISO = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
+
+/**
+ * Maps weekDays to RFC 5545 day identifiers.
+ */
+export const dayMap: Record<number, string> = {
+  0: 'SU',
+  1: 'MO',
+  2: 'TU',
+  3: 'WE',
+  4: 'TH',
+  5: 'FR',
+  6: 'SA',
+};

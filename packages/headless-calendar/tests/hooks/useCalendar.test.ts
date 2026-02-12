@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useCalendar } from '../../src/hooks/useCalendar';
 import { clearAllCaches } from '../../src/state';
 
@@ -196,7 +196,9 @@ describe('useCalendar hook', () => {
       expect(calendar.utils.formatDateTime(initialDate, 'yyyy')).toBeDefined();
       expect(calendar.utils.isSameWeek(initialDate, initialDate)).toBe(true);
       expect(calendar.utils.formatDateInTimeZone(initialDate, 'en-US', 'UTC', {})).toBeDefined();
-      expect(calendar.utils.formatLocalizedWeekday(initialDate, 'en-US', 'UTC', 'long')).toBeDefined();
+      expect(
+        calendar.utils.formatLocalizedWeekday(initialDate, 'en-US', 'UTC', 'long'),
+      ).toBeDefined();
       expect(calendar.utils.formatLocalizedTime(initialDate, 'en-US', 'UTC', true)).toBeDefined();
       expect(calendar.utils.convertToTimeZone(initialDate, 'UTC', 'UTC')).toBeDefined();
       expect(calendar.utils.formatLocalizedDate(initialDate, 'en-US', 'UTC', {})).toBeDefined();
@@ -296,6 +298,30 @@ describe('useCalendar hook', () => {
       const final = getCalendar();
       expect(final.draggedEvent).toBeNull();
     });
+
+    it('should support ICS export', () => {
+      const calendar = getCalendar({
+        initialEvents: [{ id: '1', title: 'Export', start: new Date(), end: new Date() }],
+      });
+      const ics = calendar.exportToICS();
+      expect(ics).toContain('BEGIN:VCALENDAR');
+      expect(ics).toContain('SUMMARY:Export');
+    });
+
+    // it('should support ICS download', () => {
+    //   const calendar = getCalendar();
+    //   // Mock document.createElement and click
+    //   const link = { click: vi.fn(), href: '', download: '' };
+    //   vi.spyOn(document, 'createElement').mockReturnValue(link as any);
+    //   vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:url');
+    //   vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
+
+    //   calendar.downloadICS('test.ics');
+
+    //   expect(document.createElement).toHaveBeenCalledWith('a');
+    //   expect(link.download).toBe('test.ics');
+    //   expect(link.click).toHaveBeenCalled();
+    // });
   });
 
   describe('Timezone Handling', () => {

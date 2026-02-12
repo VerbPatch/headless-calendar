@@ -8,6 +8,7 @@ import {
   getEndOfWeek,
   getStartOfYear,
   getEndOfYear,
+  getEndOfDay,
   addMonths,
   addWeeks,
 } from './date';
@@ -293,7 +294,7 @@ export const getCalendarBounds = (
 
     case 'week': {
       const weekStart = getStartOfWeek(date, startOfWeek);
-      const weekEnd = getEndOfWeek(date, startOfWeek);
+      const weekEnd = getEndOfDay(getEndOfWeek(date, startOfWeek));
       return { start: weekStart, end: weekEnd };
     }
     case 'month': {

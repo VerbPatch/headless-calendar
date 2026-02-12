@@ -1,5 +1,6 @@
 import { CalendarEvent } from '../types/events';
 import { getStartOfDay, getEndOfDay } from './date';
+import { expandRecurringEvent } from './recurrence';
 
 /**
  * Generates a unique ID for a calendar event.
@@ -60,11 +61,15 @@ export const isEventInDateRange = (
  * @title getEventsForDate
  * @description Retrieves all events that occur on a specific date.
  */
-export const getEventsForDate = (events: CalendarEvent[], date: Date): CalendarEvent[] => {
+export const getEventsForDate = (
+  events: CalendarEvent[],
+  date: Date,
+  startofWeek: number,
+): CalendarEvent[] => {
   const startOfDay = getStartOfDay(date);
   const endOfDay = getEndOfDay(date);
 
-  return events.filter((event) => isEventInDateRange(event, startOfDay, endOfDay));
+  return getEventsForDateRange(events, startOfDay, endOfDay, startofWeek);
 };
 
 /**
@@ -88,8 +93,14 @@ export const getEventsForDateRange = (
   events: CalendarEvent[],
   startDate: Date,
   endDate: Date,
+  startofWeek: number,
 ): CalendarEvent[] => {
-  return events.filter((event) => isEventInDateRange(event, startDate, endDate));
+  return events.flatMap((event) => {
+    if (event.recurring && event.recurring !== 'never') {
+      return expandRecurringEvent(event, startDate, endDate, startofWeek);
+    }
+    return isEventInDateRange(event, startDate, endDate) ? [event] : [];
+  });
 };
 
 /**

@@ -28,6 +28,7 @@ import {
   dateTimeInBetween,
   formatDate,
   isSameYear,
+  formatDateTime,
 } from '../utils/date';
 import {
   DEFAULT_START_HOUR,
@@ -44,7 +45,7 @@ import {
   formatLocalizedTime,
   daysofWeek,
 } from '../utils/timezone';
-import { formatDateTime } from '../utils/date';
+import { exportToICS as exportEventsToICS } from '../utils/export';
 import { createMemo } from '../state';
 
 /**
@@ -232,7 +233,12 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
         startOfWeek,
         navigation.customViewOptions,
       );
-      const events = getEventsForDateRange(eventsManager.events, bounds.start, bounds.end);
+      const events = getEventsForDateRange(
+        eventsManager.events,
+        bounds.start,
+        bounds.end,
+        startOfWeek,
+      );
 
       const filteredEvents = events.filter((event) => {
         const eventStart = new Date(event.start);
@@ -280,7 +286,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @description Retrieves events within a specified date range.
    */
   const getEventsForSpecificDateRange = (startDate: Date, endDate: Date): CalendarEvent[] => {
-    return getEventsForDateRange(eventsManager.events, startDate, endDate);
+    return getEventsForDateRange(eventsManager.events, startDate, endDate, startOfWeek);
   };
 
   /**
@@ -292,7 +298,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
    * @description Retrieves events for a specific date.
    */
   const getEventsForSpecificDate = (date: Date): CalendarEvent[] => {
-    return getEventsForDate(eventsManager.events, date);
+    return getEventsForDate(eventsManager.events, date, startOfWeek);
   };
 
   /**
@@ -516,6 +522,18 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     // Data getters
     getEventsForDateRange: getEventsForSpecificDateRange,
     getEventsForDate: getEventsForSpecificDate,
+
+    // Export
+    exportToICS: (prodId?: string) => exportEventsToICS(eventsManager.events, prodId),
+    downloadICS: (filename: string = 'calendar.ics', prodId?: string) => {
+      const icsData = exportEventsToICS(eventsManager.events, prodId);
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    },
 
     // Computed values
     visibleDates,

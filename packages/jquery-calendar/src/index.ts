@@ -158,6 +158,12 @@ declare global {
       refreshCalendar(state);
       state.$el.trigger('calendar:refresh', [state.calendar]);
     },
+    exportToICS(state: JQueryCalendarState, prodId?: string) {
+      return state.calendar.exportToICS(prodId);
+    },
+    downloadICS(state: JQueryCalendarState, filename?: string, prodId?: string) {
+      state.calendar.downloadICS(filename, prodId);
+    },
     destroy(state: JQueryCalendarState) {
       state.$el.removeData(DATA_KEY);
       state.$el.trigger('calendar:destroyed');

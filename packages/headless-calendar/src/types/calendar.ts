@@ -516,6 +516,22 @@ export interface CalendarInstance {
   getEventsForDate: (date: Date) => CalendarEvent[];
 
   /**
+   * Exports the calendar events to iCalendar (.ics) format.
+   * @function
+   * @param {string} [prodId] - Optional product identifier.
+   * @returns {string} - The calendar in .ics format.
+   */
+  exportToICS: (prodId?: string) => string;
+
+  /**
+   * Downloads the calendar events as an .ics file.
+   * @function
+   * @param {string} [filename="calendar.ics"] - The name of the file to download.
+   * @param {string} [prodId] - Optional product identifier.
+   */
+  downloadICS: (filename?: string, prodId?: string) => void;
+
+  /**
    * An array of dates currently visible in the calendar, based on the current view.
    * @type {Date[]}
    */
