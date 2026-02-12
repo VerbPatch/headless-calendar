@@ -47,6 +47,7 @@
             defaultView: 'custom',
             customViewOptions: customOptions,
             initialEvents: [
+              // 1. A hour event
               {
                 id: '1',
                 title: 'Project Review',
@@ -54,12 +55,113 @@
                 end: new Date(new Date().getTime() + 3600000),
                 color: '#8b5cf6',
               },
+              // 2. A hour lunch event
               {
                 id: '2',
                 title: 'Lunch Sync',
                 start: new Date(new Date().setHours(12, 0)),
                 end: new Date(new Date().setHours(13, 0)),
                 color: '#10b981',
+              },
+              // 3. Multi-day event
+              {
+                id: '3',
+                title: 'Business Trip',
+                start: new Date(new Date().setHours(9, 0, 0, 0)),
+                end: new Date(
+                  new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).setHours(17, 0, 0, 0),
+                ),
+                color: '#10b981',
+              },
+              {
+                id: '4',
+                title: 'Daily Standup',
+                start: new Date(new Date().setHours(10, 0, 0, 0)),
+                end: new Date(new Date().setHours(10, 30, 0, 0)),
+                color: '#f59e0b',
+                recurring: {
+                  repeat: 'weekly',
+                  every: 1,
+                  weekDays: [1, 2, 3, 4, 5], // Mon-Fri
+                },
+              },
+              // 5. Weekly recurring event
+              {
+                id: '5',
+                title: 'Weekly Planning',
+                start: new Date(new Date().setHours(14, 0, 0, 0)),
+                end: new Date(new Date().setHours(15, 0, 0, 0)),
+                color: '#8b5cf6',
+                recurring: {
+                  repeat: 'weekly',
+                  every: 1,
+                  weekDays: [1], // Monday
+                  end: new Date(new Date().getFullYear(), 11, 31),
+                },
+              },
+              // 6. Monthly by day
+              {
+                id: '6',
+                title: 'Monthly Payday',
+                start: new Date(new Date().setDate(25)),
+                end: new Date(new Date().setDate(25)),
+                allDay: true,
+                color: '#ec4899',
+                recurring: {
+                  repeat: 'monthly',
+                  every: 1,
+                  day: 25,
+                },
+              },
+              // 7. Monthly by week position (2nd Friday)
+              {
+                id: '7',
+                title: 'Team Lunch',
+                start: new Date(new Date().setHours(12, 0, 0, 0)),
+                end: new Date(new Date().setHours(13, 0, 0, 0)),
+                color: '#6366f1',
+                recurring: {
+                  repeat: 'monthly',
+                  every: 1,
+                  week: 2,
+                  weekDays: [5], // Friday
+                },
+              },
+              // 8. Yearly recurring
+              {
+                id: '8',
+                title: 'New Year Party',
+                start: new Date(new Date().getFullYear(), 0, 1),
+                end: new Date(new Date().getFullYear(), 0, 1),
+                allDay: true,
+                color: '#f43f5e',
+                recurring: {
+                  repeat: 'yearly',
+                  every: 1,
+                  month: 0, // Jan
+                  day: 1,
+                },
+              },
+              // 9. Rich metadata
+              {
+                id: '9',
+                title: 'Client Demo',
+                start: new Date(new Date().setHours(15, 0, 0, 0)),
+                end: new Date(new Date().setHours(16, 0, 0, 0)),
+                description: 'Demo of the new product features.\nSee attachment for details.',
+                location: 'Conference Room A',
+                url: 'https://example.com/meeting',
+                color: '#06b6d4',
+              },
+              // 10. Timezone specific
+              {
+                id: '10',
+                title: 'Global Sync',
+                start: new Date(new Date().setHours(20, 0, 0, 0)),
+                end: new Date(new Date().setHours(21, 0, 0, 0)),
+                description: 'Late night sync for global teams',
+                color: '#64748b',
+                timezone: 'America/New_York',
               },
             ],
             onRender: function (calendar) {
@@ -111,7 +213,7 @@
                     html += `<div><strong>${date.getDate()}</strong></div>`;
                     events.forEach(
                       (e) =>
-                        (html += `<div style="border: 1px solid; font-size: 10px; margin-bottom: 2px;">${e.title}</div>`),
+                        (html += `<div style="border: 1px solid; font-size: 10px; margin-bottom: 2px;background: ${e.color || '#ccc'};color:#fff;">${e.title}</div>`),
                     );
                     html += `</td>`;
                   } else {
@@ -137,7 +239,7 @@
                 html += `<td style="height: 100px; vertical-align: top; background: ${isToday ? '#eee' : 'transparent'}">`;
                 events.forEach(
                   (e) =>
-                    (html += `<div style="border: 1px solid; font-size: 11px; margin-bottom: 2px;">${e.title}</div>`),
+                    (html += `<div style="border: 1px solid; font-size: 11px; margin-bottom: 2px;background: ${e.color || '#ccc'};color:#fff;">${e.title}</div>`),
                 );
                 html += `</td>`;
               });
