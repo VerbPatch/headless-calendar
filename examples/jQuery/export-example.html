@@ -17,63 +17,179 @@
 
   <body>
     <h1>jQuery Calendar Export Example</h1>
-    <div style="margin-bottom: 10px">
-      <button id="btn-export">Export to ICS</button>
+
+    <div style="display: flex; gap: 20px; align-items: flex-start">
+      <div id="calendar" style="flex: 0 0 840px"></div>
+      <div style="flex: 1; min-width: 300px; font-family: sans-serif">
+        <div
+          id="event-list-container"
+          style="
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+          "
+        >
+          <h3 style="margin-top: 0">Event List</h3>
+          <ul id="event-list" style="padding-left: 20px"></ul>
+        </div>
+        <div
+          id="ics-output-container"
+          style="border: 1px solid #ccc; padding: 10px; max-height: 400px; overflow-y: auto"
+        >
+          <h3 style="margin-top: 0">
+            ICS Output
+            <div style="margin-bottom: 10px; float: right">
+              <button id="btn-export">Export to ICS</button>
+            </div>
+          </h3>
+          <pre
+            id="ics-output"
+            style="
+              white-space: pre-wrap;
+              word-wrap: break-word;
+              font-size: 11px;
+              background: #f5f5f5;
+              padding: 5px;
+            "
+          ></pre>
+        </div>
+      </div>
     </div>
-    <div id="calendar"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
+    <script src="../../packages/jquery-calendar/dist/index.umd.js"></script>
     <script>
+      function formatRecurrence(r) {
+        if (!r || r === 'never') return 'None';
+
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+
+        const getNth = (n) => {
+          if (n === -1) return 'last';
+          const s = ['th', 'st', 'nd', 'rd'];
+          const v = n % 100;
+          return n + (s[(v - 20) % 10] || s[v] || s[0]);
+        };
+
+        const formatDays = (dList) => {
+          if (!dList) return '';
+          return dList
+            .map((d) => {
+              if (typeof d === 'number') return days[d];
+              const match = d.match(/^(-?\d+)([A-Z]{2})$/);
+              if (match) {
+                const nth = parseInt(match[1], 10);
+                const dayName = days[{ SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 }[match[2]]];
+                return `${getNth(nth)} ${dayName}`;
+              }
+              return d;
+            })
+            .join(', ');
+        };
+
+        let desc = '';
+        const interval = r.every > 1 ? `Every ${r.every} ` : '';
+
+        if (r.repeat === 'daily') {
+          desc = r.every > 1 ? `Every ${r.every} days` : 'Daily';
+        } else if (r.repeat === 'weekly') {
+          desc = r.every > 1 ? `Every ${r.every} weeks` : 'Weekly';
+          if (r.weekDays) desc += ` on ${formatDays(r.weekDays)}`;
+        } else if (r.repeat === 'monthly') {
+          desc = r.every > 1 ? `Every ${r.every} months` : 'Monthly';
+          if (r.day) {
+            desc += ` on day ${r.day}`;
+          } else if (r.week && r.weekDays) {
+            desc += ` on the ${getNth(r.week)} ${formatDays(r.weekDays)}`;
+          } else if (r.byDay) {
+            desc += ` on ${formatDays(r.byDay)}`;
+          }
+        } else if (r.repeat === 'yearly') {
+          desc = r.every > 1 ? `Every ${r.every} years` : 'Yearly';
+          if (r.month !== undefined) {
+            const mList = Array.isArray(r.month) ? r.month : [r.month];
+            desc += ` in ${mList.map((m) => months[m]).join(', ')}`;
+          }
+          if (r.day) {
+            desc += ` on day ${r.day}`;
+          } else if (r.week && r.weekDays) {
+            desc += ` on the ${getNth(r.week)} ${formatDays(r.weekDays)}`;
+          }
+        }
+
+        if (r.count) desc += `, ${r.count} times`;
+        if (r.end) desc += `, until ${r.end.toLocaleDateString()}`;
+
+        return desc;
+      }
+
       $(document).ready(function () {
+        const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
+        const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
         $('#calendar').headlessCalendar({
           defaultView: 'month',
-          startOfWeek: 1,
+          startOfWeek: 0,
           locale: 'en-IN',
           initialEvents: [
-            // 1. Single-day event
             {
               id: '1',
               title: 'Simple Meeting',
+              description: 'Single-day 1 hour event',
               start: new Date(new Date().setHours(9, 0, 0, 0)),
               end: new Date(new Date().setHours(10, 0, 0, 0)),
               color: '#3b82f6',
             },
-            // 2. All-day event
             {
               id: '2',
               title: 'Company Holiday',
+              description: 'All-day event',
               start: new Date(),
               end: new Date(),
               allDay: true,
               color: '#ef4444',
             },
-            // 3. Multi-day event
             {
               id: '3',
               title: 'Business Trip',
+              description: 'Multi-day event',
               start: new Date(new Date().setHours(9, 0, 0, 0)),
               end: new Date(
                 new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).setHours(17, 0, 0, 0),
               ),
               color: '#10b981',
             },
-            // 4. Daily Standup (Weekdays only)
             {
               id: '4',
               title: 'Daily Standup',
+              description: 'Daily Standup (Weekdays only)',
               start: new Date(new Date().setHours(10, 0, 0, 0)),
               end: new Date(new Date().setHours(10, 30, 0, 0)),
               color: '#f59e0b',
               recurring: {
                 repeat: 'weekly',
                 every: 1,
-                weekDays: [1, 2, 3, 4, 5], // Mon-Fri
+                weekDays: [1, 2, 3, 4, 5],
               },
             },
-            // 5. Weekly recurring event
             {
               id: '5',
               title: 'Weekly Planning',
+              description: 'Weekly recurring event',
               start: new Date(new Date().setHours(14, 0, 0, 0)),
               end: new Date(new Date().setHours(15, 0, 0, 0)),
               color: '#8b5cf6',
@@ -84,10 +200,10 @@
                 end: new Date(new Date().getFullYear(), 11, 31),
               },
             },
-            // 6. Monthly by day
             {
               id: '6',
               title: 'Monthly Payday',
+              description: 'Monthly by day 25',
               start: new Date(new Date().setDate(25)),
               end: new Date(new Date().setDate(25)),
               allDay: true,
@@ -98,10 +214,10 @@
                 day: 25,
               },
             },
-            // 7. Monthly by week position (2nd Friday)
             {
               id: '7',
               title: 'Team Lunch',
+              description: 'Monthly by week position (2nd Friday)',
               start: new Date(new Date().setHours(12, 0, 0, 0)),
               end: new Date(new Date().setHours(13, 0, 0, 0)),
               color: '#6366f1',
@@ -109,13 +225,13 @@
                 repeat: 'monthly',
                 every: 1,
                 week: 2,
-                weekDays: [5], // Friday
+                weekDays: [5],
               },
             },
-            // 8. Yearly recurring
             {
               id: '8',
               title: 'New Year Party',
+              description: 'Yearly recurring',
               start: new Date(new Date().getFullYear(), 0, 1),
               end: new Date(new Date().getFullYear(), 0, 1),
               allDay: true,
@@ -127,10 +243,10 @@
                 day: 1,
               },
             },
-            // 9. Rich metadata
             {
               id: '9',
               title: 'Client Demo',
+              description: 'Rich metadata',
               start: new Date(new Date().setHours(15, 0, 0, 0)),
               end: new Date(new Date().setHours(16, 0, 0, 0)),
               description: 'Demo of the new product features.\nSee attachment for details.',
@@ -138,19 +254,165 @@
               url: 'https://example.com/meeting',
               color: '#06b6d4',
             },
-            // 10. Timezone specific
             {
               id: '10',
               title: 'Global Sync',
-              start: new Date(new Date().setHours(20, 0, 0, 0)),
-              end: new Date(new Date().setHours(21, 0, 0, 0)),
-              description: 'Late night sync for global teams',
+              description: `Late night sync for global teams, Timezone specific -> Actual event is ${tzDate.toDateString()} ${tzDate.toTimeString().substring(0, 8)} - ${tzEndDate.toDateString()} ${tzEndDate.toTimeString().substring(0, 8)} in America/New_York timezone, translated to local calendar timezone.`,
+              start: tzDate,
+              end: tzEndDate,
               color: '#64748b',
               timezone: 'America/New_York',
             },
+            {
+              id: '11',
+              title: 'Daily Huddle (Excl. specific days)',
+              description: 'Recurring with EXDATE (Exclude specific dates)',
+              start: new Date(new Date().setHours(9, 30, 0, 0)),
+              end: new Date(new Date().setHours(9, 45, 0, 0)),
+              color: '#db2777',
+              recurring: {
+                repeat: 'daily',
+                every: 1,
+              },
+              exdate: [
+                new Date(new Date().setDate(new Date().getDate() + 2)),
+                new Date(new Date().setDate(new Date().getDate() + 4)),
+              ],
+            },
+            {
+              id: '12',
+              title: 'Ad-hoc Review',
+              description: 'Recurring with RDATE (Additional dates)',
+              start: new Date(new Date().setHours(13, 0, 0, 0)),
+              end: new Date(new Date().setHours(14, 0, 0, 0)),
+              color: '#d97706',
+              recurring: {
+                repeat: 'weekly',
+                every: 1,
+                weekDays: [3],
+              },
+              rdate: [new Date(new Date().setDate(new Date().getDate() + 1))],
+            },
+
+            {
+              id: '13',
+              title: 'Tentative Monthly Sync',
+              description: 'Test: Strict RFC RRULE with Status & Transparency',
+              start: new Date(new Date().setHours(11, 0, 0, 0)),
+              end: new Date(new Date().setHours(12, 0, 0, 0)),
+              color: '#7c3aed',
+
+              recurring: {
+                repeat: 'monthly',
+                every: 1,
+                byDay: ['1FR'],
+              },
+              status: 'TENTATIVE',
+              transparency: 'TRANSPARENT',
+            },
+            {
+              id: '14',
+              title: 'Rescheduled Instance',
+              description:
+                'This specific instance was moved to 3pm, Recurrence Exception (RECURRENCE-ID) representation',
+              start: new Date(new Date().setHours(15, 0, 0, 0)),
+              end: new Date(new Date().setHours(16, 0, 0, 0)),
+              color: '#059669',
+              recurrenceId: new Date(new Date().setHours(14, 0, 0, 0)),
+            },
           ],
           onRender: function (cal) {
-            const { view, monthData, weekData, dayData, timeSlots, utils, visibleEvents } = cal;
+            const { view, monthData, weekData, dayData, timeSlots, utils, visibleEvents, events } =
+              cal;
+
+            const $list = $('#event-list');
+
+            $list.empty();
+
+            events.forEach((e) => {
+              let recurrenceInfo = formatRecurrence(e.recurring);
+
+              if (e.exdate && e.exdate.length > 0) {
+                const excludedDates = e.exdate.map((d) => utils.formatDate(d)).join(', ');
+
+                recurrenceInfo += `<br><strong>Excl:</strong> ${excludedDates}`;
+              }
+
+              if (e.rdate && e.rdate.length > 0) {
+                const addedDates = e.rdate.map((d) => utils.formatDate(d)).join(', ');
+
+                recurrenceInfo += `<br><strong>Add:</strong> ${addedDates}`;
+              }
+
+              if (e.status) recurrenceInfo += `<br><strong>Status:</strong> ${e.status}`;
+
+              let timeDisplay = '';
+
+              if (e.allDay) {
+                timeDisplay = `${utils.formatDate(e.start)} All Day`;
+
+                if (!utils.isSameDay(e.start, e.end)) {
+                  timeDisplay = `${utils.formatDate(e.start)} - ${utils.formatDate(e.end)} All Day`;
+                }
+              } else {
+                const startDate = utils.formatDate(e.start);
+
+                const startTime = utils.formatLocalizedTime(e.start, undefined, undefined, false);
+
+                if (utils.isSameDay(e.start, e.end)) {
+                  const endTime = utils.formatLocalizedTime(e.end, undefined, undefined, false);
+
+                  timeDisplay = `${startDate} ${startTime} - ${endTime}`;
+                } else {
+                  const endDate = utils.formatDate(e.end);
+
+                  const endTime = utils.formatLocalizedTime(e.end, undefined, undefined, false);
+
+                  timeDisplay = `${startDate} ${startTime} - ${endDate} ${endTime}`;
+                }
+              }
+
+              $list.append(`
+
+                            <li style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+
+                                <div style="display: flex; align-items: center; gap: 5px;">
+
+                                    <span style="display: inline-block; width: 10px; height: 10px; background-color: ${e.color || '#3174ad'}; border-radius: 2px;"></span>
+
+                                    <strong>${e.title}</strong>
+
+                                </div>
+
+                                <div style="font-size: 0.85em; color: #666; margin-left: 15px;">
+
+                                    ${timeDisplay}
+
+                                </div>
+
+                                ${
+                                  e.description
+                                    ? `<div style="font-size: 0.8em; color: #555; margin-left: 15px; margin-top: 2px; font-style: italic;">${e.description.replace(/\n/g, '<br>')}</div>`
+                                    : ''
+                                }
+
+                                ${
+                                  e.recurring && e.recurring !== 'never'
+                                    ? `<div style="font-size: 0.8em; color: #007bff; margin-top:2px; margin-left: 15px;">${recurrenceInfo}</div>`
+                                    : ''
+                                }
+
+                                 ${
+                                   e.recurrenceId
+                                     ? `<div style="font-size: 0.8em; color: #d63384; margin-top:2px; margin-left: 15px;">Recurrence-ID: ${typeof e.recurrenceId === 'string' ? e.recurrenceId : utils.formatDateTime(e.recurrenceId)}</div>`
+                                     : ''
+                                 }
+                            </li>
+                        `);
+            });
+
+            const icsData = cal.exportToICS();
+            $('#ics-output').text(icsData);
 
             let html = `
             <table border="0" width="840" cellspacing="0" style="height:700px; border-left:1px solid; border-top:1px solid;">
@@ -193,7 +455,7 @@
                   const isCurrentMonth = monthData.isCurrentMonth(date);
                   const isToday = monthData.isToday(date);
                   const events = cal.getEventsForDate(date);
-                  //console.log({ date, events });
+
                   html += `
                   <td style="
                     ${!isCurrentMonth ? 'color: gray;' : ''}
@@ -253,25 +515,21 @@
                                       <td style="border-bottom: 1px solid;">${slot.label}</td>
                                       ${weekData.dates
                                         .map((date) => {
-                                          // Filter events for this specific time slot
                                           const slotEvents = cal
                                             .getEventsForDate(date)
                                             .filter((event) => {
-                                              if (event.allDay) return false; // Skip all-day events in time slots
+                                              if (event.allDay) return false;
 
-                                              // Construct slot date/time
-                                              const slotTime = new Date(date);
-                                              slotTime.setHours(slot.hour, slot.minute, 0, 0);
+                                              const slotStart = new Date(date);
+                                              slotStart.setHours(slot.hour, slot.minute, 0, 0);
+                                              const slotEnd = new Date(
+                                                slotStart.getTime() + cal.timeSlotInterval * 60000,
+                                              );
 
                                               const eventStart = new Date(event.start);
                                               const eventEnd = new Date(event.end);
 
-                                              // Check if slot time falls within event range
-                                              return utils.dateTimeInBetween(
-                                                slotTime,
-                                                eventStart,
-                                                eventEnd,
-                                              );
+                                              return eventStart < slotEnd && eventEnd > slotStart;
                                             });
 
                                           return `
@@ -327,17 +585,20 @@
                           const slotEvents = cal.getEventsForDate(date).filter((event) => {
                             if (event.allDay) return false;
 
-                            const slotTime = new Date(date);
-                            slotTime.setHours(slot.hour, slot.minute, 0, 0);
+                            const slotStart = new Date(date);
+                            slotStart.setHours(slot.hour, slot.minute, 0, 0);
+                            const slotEnd = new Date(
+                              slotStart.getTime() + cal.timeSlotInterval * 60000,
+                            );
                             const eventStart = new Date(event.start);
                             const eventEnd = new Date(event.end);
-                            // Inclusive start, exclusive end
-                            return slotTime >= eventStart && slotTime < eventEnd;
+
+                            return eventStart < slotEnd && eventEnd > slotStart;
                           });
 
                           return `                        <tr>
                           <td width="25%" style="border-bottom: 1px solid; vertical-align: top;">
-                            ${slot.label} 
+                            ${slot.label}
                           </td>
                           <td style="border-bottom: 1px solid;">
                              ${slotEvents
