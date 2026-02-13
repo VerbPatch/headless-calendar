@@ -28,11 +28,226 @@ const parseByDay = (val: string | number): { nth: number; day: number } => {
   return { nth, day: map[dayStr] };
 };
 
+const MAX_OCCURRENCES = 3650;
+
+const setTimeToEventStart = (date: Date, eventStart: Date): Date => {
+  const target = new Date(date);
+  target.setHours(
+    eventStart.getHours(),
+    eventStart.getMinutes(),
+    eventStart.getSeconds(),
+    eventStart.getMilliseconds(),
+  );
+  return target;
+};
+
+const getDailyCandidates = (current: Date, weekDays: number[], eventStart: Date): Date[] => {
+  if (weekDays.length === 0 || weekDays.includes(current.getDay())) {
+    return [setTimeToEventStart(current, eventStart)];
+  }
+  return [];
+};
+
+const getWeeklyCandidates = (
+  current: Date,
+  weekDays: number[],
+  eventStart: Date,
+  startOfWeek: number,
+): Date[] => {
+  if (weekDays.length === 0) {
+    return [setTimeToEventStart(current, eventStart)];
+  }
+
+  const firstDayOfWeek = getStartOfWeek(current, startOfWeek);
+  return weekDays
+    .map((wd) => {
+      const target = new Date(firstDayOfWeek);
+      target.setDate(firstDayOfWeek.getDate() + ((wd - startOfWeek + 7) % 7));
+      return setTimeToEventStart(target, eventStart);
+    })
+    .sort((a, b) => a.getTime() - b.getTime());
+};
+
+const getMonthlyCandidates = (
+  current: Date,
+  rule: CalendarEventOccurance,
+  eventStart: Date,
+  y: number,
+  m: number,
+): Date[] => {
+  const candidates: Date[] = [];
+  if (rule.day) {
+    const days = Array.isArray(rule.day) ? rule.day : [rule.day];
+    days.forEach((dVal) => {
+      let d = dVal;
+      if (d < 0) {
+        d = new Date(y, m + 1, 0).getDate() + 1 + d;
+      }
+      const target = setTimeToEventStart(new Date(y, m, d), eventStart);
+      if (target.getMonth() === m) {
+        candidates.push(target);
+      }
+    });
+  } else if (rule.weekDays && rule.weekDays.length > 0) {
+    const rawRules: (string | number)[] = rule.weekDays;
+    const processedRules = rawRules.map((r) => {
+      const parsed = parseByDay(r);
+      if (parsed.nth === 0 && rule.week) {
+        parsed.nth = Array.isArray(rule.week) ? rule.week[0] : rule.week;
+      }
+      return parsed;
+    });
+
+    processedRules.forEach(({ nth, day }) => {
+      const firstDayOfMonth = new Date(y, m, 1);
+      let dayOffset = (day - firstDayOfMonth.getDay() + 7) % 7;
+      const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
+
+      if (nth !== 0) {
+        let targetDate = firstOccurrence;
+        if (nth > 0) {
+          targetDate += (nth - 1) * 7;
+        } else {
+          const allOccurrences = [];
+          let dateIter = firstOccurrence;
+          const daysInMonth = new Date(y, m + 1, 0).getDate();
+          while (dateIter <= daysInMonth) {
+            allOccurrences.push(dateIter);
+            dateIter += 7;
+          }
+          if (Math.abs(nth) <= allOccurrences.length) {
+            targetDate = allOccurrences[allOccurrences.length + nth];
+          } else {
+            targetDate = -1;
+          }
+        }
+
+        if (targetDate > 0) {
+          const target = setTimeToEventStart(new Date(y, m, targetDate), eventStart);
+          if (target.getMonth() === m) {
+            candidates.push(target);
+          }
+        }
+      } else {
+        let dateIter = firstOccurrence;
+        const daysInMonth = new Date(y, m + 1, 0).getDate();
+        while (dateIter <= daysInMonth) {
+          const target = setTimeToEventStart(new Date(y, m, dateIter), eventStart);
+          if (target.getMonth() === m) {
+            candidates.push(target);
+          }
+          dateIter += 7;
+        }
+      }
+    });
+  } else {
+    candidates.push(setTimeToEventStart(current, eventStart));
+  }
+  return candidates;
+};
+
+const getYearlyCandidates = (
+  current: Date,
+  rule: CalendarEventOccurance,
+  eventStart: Date,
+  startOfWeek: number,
+): Date[] => {
+  const candidates: Date[] = [];
+  const year = current.getFullYear();
+
+  if (rule.byYearDay) {
+    rule.byYearDay.forEach((d: number) => {
+      const target = setTimeToEventStart(new Date(year, 0, 1), eventStart);
+      if (d > 0) {
+        target.setDate(d);
+      } else {
+        const daysInYear =
+          (new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) /
+          (1000 * 60 * 60 * 24);
+        target.setDate(daysInYear + d + 1);
+      }
+      if (target.getFullYear() === year) {
+        candidates.push(target);
+      }
+    });
+  } else if (rule.byWeekNo) {
+    const week1Start = getStartOfWeek(new Date(year, 0, 4), startOfWeek || 1);
+    rule.byWeekNo.forEach((wn: number) => {
+      if (wn <= 0) return;
+      const targetWeekStart = addWeeks(week1Start, wn - 1);
+      const daysToFind =
+        rule.weekDays && rule.weekDays.length > 0
+          ? rule.weekDays.map(parseDay)
+          : [eventStart.getDay()];
+
+      daysToFind.forEach((wd) => {
+        const target = getStartOfWeek(targetWeekStart, startOfWeek);
+        const offset = (wd - startOfWeek + 7) % 7;
+        target.setDate(target.getDate() + offset);
+        const finalTarget = setTimeToEventStart(target, eventStart);
+        if (finalTarget.getFullYear() === year) {
+          candidates.push(finalTarget);
+        }
+      });
+    });
+  } else {
+    let months: number[] = [];
+    if (rule.month !== undefined) {
+      months = Array.isArray(rule.month) ? rule.month : [rule.month as number];
+    } else {
+      months = [eventStart.getMonth()];
+    }
+
+    months.forEach((m) => {
+      const monthStart = new Date(year, m, 1);
+      if (rule.day) {
+        const days = Array.isArray(rule.day) ? rule.day : [rule.day as number];
+        days.forEach((d) => {
+          const t = setTimeToEventStart(new Date(year, m, d), eventStart);
+          if (t.getMonth() === m) candidates.push(t);
+        });
+      } else if (rule.week && rule.weekDays && rule.weekDays.length > 0) {
+        const weekDays = rule.weekDays.map(parseDay);
+        weekDays.forEach((wd) => {
+          const firstDayOfMonth = new Date(year, m, 1);
+          let dayOffset = (wd - firstDayOfMonth.getDay() + 7) % 7;
+          const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
+          const weeks = Array.isArray(rule.week) ? rule.week : [rule.week as number];
+          weeks.forEach((w) => {
+            let targetDate = firstOccurrence;
+            if (w > 0) {
+              targetDate += (w - 1) * 7;
+            } else {
+              const allOccurrences = [];
+              let dateIter = firstOccurrence;
+              const daysInMonth = new Date(year, m + 1, 0).getDate();
+              while (dateIter <= daysInMonth) {
+                allOccurrences.push(dateIter);
+                dateIter += 7;
+              }
+              if (w === -1) targetDate = allOccurrences[allOccurrences.length - 1];
+            }
+            const newTarget = setTimeToEventStart(new Date(year, m, targetDate), eventStart);
+            if (newTarget.getMonth() === m) {
+              candidates.push(newTarget);
+            }
+          });
+        });
+      } else {
+        const t = setTimeToEventStart(new Date(year, m, eventStart.getDate()), eventStart);
+        if (t.getMonth() === m) candidates.push(t);
+      }
+    });
+  }
+  return candidates;
+};
+
 /**
  * Expands a recurring event into multiple instances within a specific date range.
  * @param event - The recurring event to expand.
  * @param rangeStart - The start of the range to find instances for.
  * @param rangeEnd - The end of the range to find instances for.
+ * @param startOfWeek - The day to start the week on.
  * @returns An array of CalendarEvent instances.
  */
 export const expandRecurringEvent = (
@@ -47,12 +262,11 @@ export const expandRecurringEvent = (
   if (event.rdate && event.rdate.length > 0) {
     event.rdate.forEach((date) => {
       if (date >= rangeStart && date <= rangeEnd) {
-        const instanceEnd = new Date(date.getTime() + duration);
         instances.push({
           ...event,
           id: `${event.id}_rdate_${date.getTime()}`,
           start: date,
-          end: instanceEnd,
+          end: new Date(date.getTime() + duration),
           recurring: 'never',
         });
       }
@@ -67,307 +281,83 @@ export const expandRecurringEvent = (
     month: rawRule.byMonth || rawRule.month,
     day: rawRule.byMonthDay || rawRule.day,
     weekDays: rawRule.byDay || rawRule.weekDays,
-    byYearDay: rawRule.byYearDay,
-    byWeekNo: rawRule.byWeekNo,
-    bySetPos: rawRule.bySetPos,
-  };
+  } as CalendarEventOccurance;
 
   let current = new Date(event.start);
   let count = 0;
-  const MAX_OCCURRENCES = 3650; // Safety limit (e.g. 10 years of daily events)
 
-  if (current > rangeEnd && !rule.count) return instances;
+  if (current < rangeStart && !rule.count) {
+    const timeDiff = rangeStart.getTime() - current.getTime();
+    switch (rule.repeat) {
+      case 'daily': {
+        const daysToSkip = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * rule.every));
+        if (daysToSkip > 0) current = addDays(current, daysToSkip * rule.every);
+        break;
+      }
+      case 'weekly': {
+        const weeksToSkip = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 7 * rule.every));
+        if (weeksToSkip > 0) current = addWeeks(current, weeksToSkip * rule.every);
+        break;
+      }
+      case 'monthly': {
+        const monthsToSkip =
+          (rangeStart.getFullYear() - current.getFullYear()) * 12 +
+          (rangeStart.getMonth() - current.getMonth());
+        const skipIntervals = Math.floor(monthsToSkip / rule.every);
+        if (skipIntervals > 0) current = addMonths(current, skipIntervals * rule.every);
+        break;
+      }
+      case 'yearly': {
+        const yearsToSkip = rangeStart.getFullYear() - current.getFullYear();
+        const skipIntervals = Math.floor(yearsToSkip / rule.every);
+        if (skipIntervals > 0) current = addYears(current, skipIntervals * rule.every);
+        break;
+      }
+    }
+  }
 
   while (count < (rule.count ?? MAX_OCCURRENCES)) {
-    if (!rule.count && current > rangeEnd) break;
+    if (current > rangeEnd && !rule.count) break;
+
+    if (rule.end && current > rule.end) break;
 
     let candidates: Date[] = [];
     const weekDays = rule.weekDays ? rule.weekDays.map(parseDay) : [];
 
-    if (rule.repeat === 'daily') {
-      if (weekDays.length === 0 || weekDays.includes(current.getDay())) {
-        const target = new Date(current);
-        target.setHours(
-          event.start.getHours(),
-          event.start.getMinutes(),
-          event.start.getSeconds(),
-          event.start.getMilliseconds(),
+    switch (rule.repeat) {
+      case 'daily':
+        candidates = getDailyCandidates(current, weekDays, event.start);
+        break;
+      case 'weekly':
+        candidates = getWeeklyCandidates(current, weekDays, event.start, startOfWeek);
+        break;
+      case 'monthly':
+        candidates = getMonthlyCandidates(
+          current,
+          rule,
+          event.start,
+          current.getFullYear(),
+          current.getMonth(),
         );
-        candidates.push(target);
-      }
-    } else if (rule.repeat === 'weekly') {
-      if (weekDays.length > 0) {
-        const d = new Date(current);
-        const day = d.getDay();
-        const diff = d.getDate() - day;
-        const sunday = new Date(d.setDate(diff));
-
-        weekDays.forEach((wd) => {
-          const target = new Date(sunday);
-          target.setDate(sunday.getDate() + wd);
-          target.setHours(
-            event.start.getHours(),
-            event.start.getMinutes(),
-            event.start.getSeconds(),
-            event.start.getMilliseconds(),
-          );
-          candidates.push(target);
-        });
-        candidates.sort((a, b) => a.getTime() - b.getTime());
-      } else {
-        candidates.push(new Date(current));
-      }
-    } else if (rule.repeat === 'monthly') {
-      const y = current.getFullYear();
-      const m = current.getMonth();
-
-      if (rule.day) {
-        let days: number[] = [];
-        if (Array.isArray(rule.day)) {
-          days = rule.day;
-        } else {
-          days = [rule.day];
-        }
-
-        days.forEach((dVal) => {
-          let d = dVal;
-          if (d < 0) {
-            d = new Date(y, m + 1, 0).getDate() + 1 + d;
-          }
-          const target = new Date(
-            y,
-            m,
-            d,
-            event.start.getHours(),
-            event.start.getMinutes(),
-            event.start.getSeconds(),
-            event.start.getMilliseconds(),
-          );
-          if (target.getMonth() === m) {
-            candidates.push(target);
-          }
-        });
-      } else if (rule.weekDays && rule.weekDays.length > 0) {
-        const rawRules: (string | number)[] = rule.weekDays;
-
-        const processedRules = rawRules.map((r) => {
-          const parsed = parseByDay(r);
-          if (parsed.nth === 0 && rule.week) {
-            parsed.nth = rule.week;
-          }
-          return parsed;
-        });
-
-        processedRules.forEach(({ nth, day }) => {
-          const firstDayOfMonth = new Date(y, m, 1);
-          let dayOffset = day - firstDayOfMonth.getDay();
-          if (dayOffset < 0) dayOffset += 7;
-          const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
-
-          if (nth !== 0) {
-            let targetDate = firstOccurrence;
-            if (nth > 0) {
-              targetDate += (nth - 1) * 7;
-            } else {
-              const allOccurrences = [];
-              let dateIter = firstOccurrence;
-              const daysInMonth = new Date(y, m + 1, 0).getDate();
-              while (dateIter <= daysInMonth) {
-                allOccurrences.push(dateIter);
-                dateIter += 7;
-              }
-              if (Math.abs(nth) <= allOccurrences.length) {
-                targetDate = allOccurrences[allOccurrences.length + nth];
-              } else {
-                targetDate = -1;
-              }
-            }
-
-            if (targetDate > 0) {
-              const target = new Date(
-                y,
-                m,
-                targetDate,
-                event.start.getHours(),
-                event.start.getMinutes(),
-                event.start.getSeconds(),
-                event.start.getMilliseconds(),
-              );
-              if (target.getMonth() === m) {
-                candidates.push(target);
-              }
-            }
-          } else {
-            let dateIter = firstOccurrence;
-            const daysInMonth = new Date(y, m + 1, 0).getDate();
-            while (dateIter <= daysInMonth) {
-              const target = new Date(
-                y,
-                m,
-                dateIter,
-                event.start.getHours(),
-                event.start.getMinutes(),
-                event.start.getSeconds(),
-                event.start.getMilliseconds(),
-              );
-              if (target.getMonth() === m) {
-                candidates.push(target);
-              }
-              dateIter += 7;
-            }
-          }
-        });
-      } else {
-        candidates.push(new Date(current));
-      }
-    } else if (rule.repeat === 'yearly') {
-      const year = current.getFullYear();
-
-      if (rule.byYearDay) {
-        rule.byYearDay.forEach((d) => {
-          const target = new Date(
-            year,
-            0,
-            1,
-            event.start.getHours(),
-            event.start.getMinutes(),
-            event.start.getSeconds(),
-            event.start.getMilliseconds(),
-          );
-          if (d > 0) {
-            target.setDate(d);
-          } else {
-            const daysInYear =
-              (new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) /
-              (1000 * 60 * 60 * 24);
-            target.setDate(daysInYear + d + 1);
-          }
-          if (target.getFullYear() === year) {
-            candidates.push(target);
-          }
-        });
-      } else if (rule.byWeekNo) {
-        const week1Start = getStartOfWeek(new Date(year, 0, 4), startOfWeek || 1);
-
-        rule.byWeekNo.forEach((wn) => {
-          let targetWeekStart = new Date(week1Start);
-          if (wn > 0) {
-            targetWeekStart = addWeeks(targetWeekStart, wn - 1);
-          } else {
-            return;
-          }
-
-          const daysToFind =
-            rule.weekDays && rule.weekDays.length > 0
-              ? rule.weekDays.map(parseDay)
-              : [event.start.getDay()];
-
-          daysToFind.forEach((wd) => {
-            const target = getStartOfWeek(targetWeekStart, startOfWeek);
-            const offset = (wd - startOfWeek + 7) % 7;
-            target.setDate(target.getDate() + offset);
-
-            target.setHours(
-              event.start.getHours(),
-              event.start.getMinutes(),
-              event.start.getSeconds(),
-              event.start.getMilliseconds(),
-            );
-
-            if (target.getFullYear() === year) {
-              candidates.push(target);
-            }
-          });
-        });
-      } else {
-        let months: number[] = [];
-        if (rule.month !== undefined) {
-          months = Array.isArray(rule.month) ? rule.month : [rule.month as number];
-        } else {
-          months = [event.start.getMonth()];
-        }
-
-        months.forEach((m) => {
-          const target = new Date(
-            year,
-            m,
-            1,
-            event.start.getHours(),
-            event.start.getMinutes(),
-            event.start.getSeconds(),
-            event.start.getMilliseconds(),
-          );
-
-          if (rule.day) {
-            const days = Array.isArray(rule.day) ? rule.day : [rule.day as number];
-            days.forEach((d) => {
-              const t = new Date(target);
-              t.setDate(d);
-              if (t.getMonth() === m) candidates.push(t);
-            });
-          } else if (rule.week && weekDays.length > 0) {
-            weekDays.forEach((wd) => {
-              const firstDayOfMonth = new Date(year, m, 1);
-              let dayOffset = wd - firstDayOfMonth.getDay();
-              if (dayOffset < 0) dayOffset += 7;
-              const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
-
-              const weeks = Array.isArray(rule.week) ? rule.week : [rule.week as number];
-              weeks.forEach((w) => {
-                let targetDate = firstOccurrence;
-                if (w > 0) {
-                  targetDate += (w - 1) * 7;
-                } else {
-                  const allOccurrences = [];
-                  let dateIter = firstOccurrence;
-                  const daysInMonth = new Date(year, m + 1, 0).getDate();
-                  while (dateIter <= daysInMonth) {
-                    allOccurrences.push(dateIter);
-                    dateIter += 7;
-                  }
-                  if (w === -1) targetDate = allOccurrences[allOccurrences.length - 1];
-                }
-
-                const newTarget = new Date(target);
-                newTarget.setDate(targetDate);
-
-                if (newTarget.getMonth() === m) {
-                  candidates.push(newTarget);
-                }
-              });
-            });
-          } else {
-            const t = new Date(target);
-            t.setDate(event.start.getDate());
-            if (t.getMonth() === m) candidates.push(t);
-          }
-        });
-      }
+        break;
+      case 'yearly':
+        candidates = getYearlyCandidates(current, rule, event.start, startOfWeek);
+        break;
     }
 
     if (rule.bySetPos && rule.bySetPos.length > 0 && candidates.length > 0) {
       candidates.sort((a, b) => a.getTime() - b.getTime());
-      const filtered: Date[] = [];
-      rule.bySetPos.forEach((pos) => {
-        if (pos > 0) {
-          if (pos <= candidates.length) filtered.push(candidates[pos - 1]);
-        } else if (pos < 0) {
-          const idx = candidates.length + pos;
-          if (idx >= 0) filtered.push(candidates[idx]);
-        }
-      });
-      candidates = filtered;
+      candidates = rule.bySetPos
+        .map((pos: number) => (pos > 0 ? candidates[pos - 1] : candidates[candidates.length + pos]))
+        .filter(Boolean);
     }
 
     for (const date of candidates) {
       if (rule.count && count >= rule.count) break;
       if (rule.end && date > rule.end) break;
-
       count++;
 
-      if (event.exdate && event.exdate.some((ex) => isSameDay(ex, date))) {
-        continue;
-      }
+      if (event.exdate?.some((ex) => isSameDay(ex, date))) continue;
 
       const instanceEnd = new Date(date.getTime() + duration);
       if (date <= rangeEnd && instanceEnd >= rangeStart) {
@@ -381,10 +371,7 @@ export const expandRecurringEvent = (
       }
     }
 
-    if (candidates.length > 0) {
-      const last = candidates[candidates.length - 1];
-      if (rule.end && last > rule.end) break;
-    }
+    if (!rule.count && current > rangeEnd) break;
 
     switch (rule.repeat) {
       case 'daily':
