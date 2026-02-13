@@ -100,7 +100,7 @@ const getMonthlyCandidates = (
 
     processedRules.forEach(({ nth, day }) => {
       const firstDayOfMonth = new Date(y, m, 1);
-      let dayOffset = (day - firstDayOfMonth.getDay() + 7) % 7;
+      const dayOffset = (day - firstDayOfMonth.getDay() + 7) % 7;
       const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
 
       if (nth !== 0) {
@@ -199,7 +199,6 @@ const getYearlyCandidates = (
     }
 
     months.forEach((m) => {
-      const monthStart = new Date(year, m, 1);
       if (rule.day) {
         const days = Array.isArray(rule.day) ? rule.day : [rule.day as number];
         days.forEach((d) => {
@@ -210,7 +209,7 @@ const getYearlyCandidates = (
         const weekDays = rule.weekDays.map(parseDay);
         weekDays.forEach((wd) => {
           const firstDayOfMonth = new Date(year, m, 1);
-          let dayOffset = (wd - firstDayOfMonth.getDay() + 7) % 7;
+          const dayOffset = (wd - firstDayOfMonth.getDay() + 7) % 7;
           const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
           const weeks = Array.isArray(rule.week) ? rule.week : [rule.week as number];
           weeks.forEach((w) => {
