@@ -92,6 +92,9 @@ describe('Calendar Utilities', () => {
       const monthBounds = getCalendarBounds('month', baseDate, 0);
       expect(monthBounds.start.getMonth()).toBe(11);
       expect(monthBounds.end.getMonth()).toBe(1);
+      expect(monthBounds.end.getHours()).toBe(23);
+      expect(monthBounds.end.getMinutes()).toBe(59);
+      expect(monthBounds.end.getSeconds()).toBe(59);
 
       const yearBounds = getCalendarBounds('year', baseDate);
       expect(yearBounds.start.getMonth()).toBe(0);
@@ -106,10 +109,12 @@ describe('Calendar Utilities', () => {
       const weekCustom = getCalendarBounds('custom', baseDate, 0, { type: 'week', count: 2 });
       expect(weekCustom.start.getDate()).toBe(14);
       expect(weekCustom.end.getDate()).toBe(27);
+      expect(weekCustom.end.getHours()).toBe(23);
 
       const monthCustom = getCalendarBounds('custom', baseDate, 0, { type: 'month', count: 2 });
       expect(monthCustom.start.getMonth()).toBe(0);
       expect(monthCustom.end.getMonth()).toBe(1);
+      expect(monthCustom.end.getHours()).toBe(23);
     });
 
     it('should validate custom view options', () => {

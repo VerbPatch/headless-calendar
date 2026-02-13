@@ -301,7 +301,7 @@ export const getCalendarBounds = (
       const monthDates = getMonthCalendarDates(date, startOfWeek);
       return {
         start: monthDates[0],
-        end: monthDates[monthDates.length - 1],
+        end: getEndOfDay(monthDates[monthDates.length - 1]),
       };
     }
     case 'year':
@@ -325,13 +325,13 @@ export const getCalendarBounds = (
         case 'week': {
           start = getStartOfWeek(date, startOfWeek);
           const lastWeekStart = addWeeks(start, customViewOptions.count - 1);
-          end = getEndOfWeek(lastWeekStart, startOfWeek);
+          end = getEndOfDay(getEndOfWeek(lastWeekStart, startOfWeek));
           break;
         }
         case 'month': {
           start = getStartOfMonth(date);
           const lastMonthStart = addMonths(start, customViewOptions.count - 1);
-          end = getEndOfMonth(lastMonthStart);
+          end = getEndOfDay(getEndOfMonth(lastMonthStart));
           break;
         }
       }
