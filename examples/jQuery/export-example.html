@@ -60,6 +60,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../../packages/jquery-calendar/dist/index.umd.js"></script>
     <script>
+      const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
+      const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
+
       function formatRecurrence(r) {
         if (!r || r === 'never') return 'None';
 
@@ -139,8 +142,6 @@
       }
 
       $(document).ready(function () {
-        const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
-        const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
         $('#calendar').headlessCalendar({
           defaultView: 'month',
           startOfWeek: 0,
@@ -152,7 +153,7 @@
               description: 'Single-day 1 hour event',
               start: new Date(new Date().setHours(9, 0, 0, 0)),
               end: new Date(new Date().setHours(10, 0, 0, 0)),
-              color: '#3b82f6',
+              color: '#E6194B',
             },
             {
               id: '2',
@@ -161,7 +162,7 @@
               start: new Date(),
               end: new Date(),
               allDay: true,
-              color: '#ef4444',
+              color: '#FFE119',
             },
             {
               id: '3',
@@ -171,7 +172,7 @@
               end: new Date(
                 new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).setHours(17, 0, 0, 0),
               ),
-              color: '#10b981',
+              color: '#4363D8',
             },
             {
               id: '4',
@@ -179,7 +180,7 @@
               description: 'Daily Standup (Weekdays only)',
               start: new Date(new Date().setHours(10, 0, 0, 0)),
               end: new Date(new Date().setHours(10, 30, 0, 0)),
-              color: '#f59e0b',
+              color: '#F58231',
               recurring: {
                 repeat: 'weekly',
                 every: 1,
@@ -192,11 +193,11 @@
               description: 'Weekly recurring event',
               start: new Date(new Date().setHours(14, 0, 0, 0)),
               end: new Date(new Date().setHours(15, 0, 0, 0)),
-              color: '#8b5cf6',
+              color: '#911EB4',
               recurring: {
                 repeat: 'weekly',
                 every: 1,
-                weekDays: [1], // Monday
+                weekDays: [1],
                 end: new Date(new Date().getFullYear(), 11, 31),
               },
             },
@@ -207,7 +208,7 @@
               start: new Date(new Date().setDate(25)),
               end: new Date(new Date().setDate(25)),
               allDay: true,
-              color: '#ec4899',
+              color: '#42D4F4',
               recurring: {
                 repeat: 'monthly',
                 every: 1,
@@ -220,7 +221,7 @@
               description: 'Monthly by week position (2nd Friday)',
               start: new Date(new Date().setHours(12, 0, 0, 0)),
               end: new Date(new Date().setHours(13, 0, 0, 0)),
-              color: '#6366f1',
+              color: '#F032E6',
               recurring: {
                 repeat: 'monthly',
                 every: 1,
@@ -235,11 +236,11 @@
               start: new Date(new Date().getFullYear(), 0, 1),
               end: new Date(new Date().getFullYear(), 0, 1),
               allDay: true,
-              color: '#f43f5e',
+              color: '#9A6324',
               recurring: {
                 repeat: 'yearly',
                 every: 1,
-                month: 0, // Jan
+                month: 0,
                 day: 1,
               },
             },
@@ -252,7 +253,7 @@
               description: 'Demo of the new product features.\nSee attachment for details.',
               location: 'Conference Room A',
               url: 'https://example.com/meeting',
-              color: '#06b6d4',
+              color: '#000075',
             },
             {
               id: '10',
@@ -455,7 +456,6 @@
                   const isCurrentMonth = monthData.isCurrentMonth(date);
                   const isToday = monthData.isToday(date);
                   const events = cal.getEventsForDate(date);
-
                   html += `
                   <td style="
                     ${!isCurrentMonth ? 'color: gray;' : ''}
