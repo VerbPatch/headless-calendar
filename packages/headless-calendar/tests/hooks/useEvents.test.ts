@@ -38,7 +38,9 @@ describe('useEvents hook', () => {
   it('should preserve existing ID and timezone in initial events', () => {
     const manager = useEvents({
       calendarTimezone: 'UTC',
-      initialEvents: [{ id: 'pre-id', timezone: 'UTC', title: 'T', start: new Date(), end: new Date() }]
+      initialEvents: [
+        { id: 'pre-id', timezone: 'UTC', title: 'T', start: new Date(), end: new Date() },
+      ],
     });
     expect(manager.events[0].id).toBe('pre-id');
     expect(manager.events[0].timezone).toBe('UTC');
@@ -184,6 +186,6 @@ describe('useEvents hook', () => {
     manager.setEvents(newEvents);
 
     const updated = getEventsManager();
-    expect(updated.events).toHaveLength(3); // Initial (1) + New (2)
+    expect(updated.events).toHaveLength(3);
   });
 });

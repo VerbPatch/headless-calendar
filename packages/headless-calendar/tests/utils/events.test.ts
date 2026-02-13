@@ -16,6 +16,7 @@ import {
 import { CalendarEvent } from '../../src/types/events';
 
 describe('Events Utilities', () => {
+  const startOfWeek = 0;
   const event1: CalendarEvent = {
     id: '1',
     title: 'Event 1',
@@ -56,13 +57,18 @@ describe('Events Utilities', () => {
     });
 
     it('should get events for date', () => {
-      const result = getEventsForDate(events, new Date(2024, 0, 15));
+      const result = getEventsForDate(events, new Date(2024, 0, 15), startOfWeek);
       expect(result).toHaveLength(4);
     });
 
     it('should get events for date range', () => {
-      const result = getEventsForDateRange(events, new Date(2024, 0, 16), new Date(2024, 0, 17));
-      expect(result).toHaveLength(1); // Only multi-day ends here
+      const result = getEventsForDateRange(
+        events,
+        new Date(2024, 0, 16),
+        new Date(2024, 0, 17),
+        startOfWeek,
+      );
+      expect(result).toHaveLength(1);
       expect(result[0].id).toBe('4');
     });
 
@@ -351,9 +357,11 @@ describe('Events Utilities', () => {
         const noEventEnd: any = {
           title: 'T',
           start: new Date(),
-          recurring: { repeat: 'daily', every: 1, end: new Date() }
+          recurring: { repeat: 'daily', every: 1, end: new Date() },
         };
-        expect(validateEvent(noEventEnd)).not.toContain('Recurring "end" must be after the event end date');
+        expect(validateEvent(noEventEnd)).not.toContain(
+          'Recurring "end" must be after the event end date',
+        );
       });
 
       it('should validate weekday lists', () => {

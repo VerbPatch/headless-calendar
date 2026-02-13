@@ -9,25 +9,22 @@ import {
 } from '../../src/utils/timezone';
 
 describe('Timezone and Localization Utilities', () => {
-  const baseDate = new Date('2024-01-15T12:00:00Z'); // Jan 15, 2024 12:00 UTC
+  const baseDate = new Date('2024-01-15T12:00:00Z');
 
   it('should get localized days of week', () => {
-    const days = daysofWeek(1, 'long', 'en-US'); // Mon start
+    const days = daysofWeek(1, 'long', 'en-US');
     expect(days[0]).toBe('Monday');
     expect(days).toHaveLength(7);
   });
 
   it('should format date in specific timezone', () => {
     const formatted = formatDateInTimeZone(baseDate, 'en-US', 'America/New_York');
-    // If environment supports TZ, it should be 07:00. If not, it might stay 12:00.
-    // We check if it correctly shifted OR if we are in a limited environment
     const isShifted = formatted.includes('07:00');
     const isUnshifted = formatted.includes('12:00');
     expect(isShifted || isUnshifted).toBe(true);
   });
 
   it('should handle convertToTimeZone', () => {
-    // Test identity
     const converted = convertToTimeZone(baseDate, 'UTC', 'UTC');
     expect(converted.getTime()).toBe(baseDate.getTime());
   });

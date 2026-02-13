@@ -1,9 +1,9 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { useCalendar } from '../../src/hooks/useCalendar';
 import { clearAllCaches } from '../../src/state';
 
 describe('useCalendar hook', () => {
-  const initialDate = new Date(2024, 0, 15); // Jan 15, 2024 (Monday)
+  const initialDate = new Date(2024, 0, 15);
 
   beforeEach(() => {
     clearAllCaches();
@@ -88,7 +88,6 @@ describe('useCalendar hook', () => {
         defaultView: 'custom',
         customViewOptions: { type: 'month', count: 3 },
       });
-      // Jan, Feb, March calendar dates
       expect(calendar.visibleDates.length).toBeGreaterThan(90);
       expect(calendar.monthData?.monthName).toContain('2024');
       expect(calendar.weekData).toBeNull();
@@ -98,7 +97,7 @@ describe('useCalendar hook', () => {
     it('should filter custom view by specific days', () => {
       const calendar = getCalendar({
         defaultView: 'custom',
-        customViewOptions: { type: 'week', count: 1, includeSpecificDays: [1, 2, 3] }, // Mon, Tue, Wed
+        customViewOptions: { type: 'week', count: 1, includeSpecificDays: [1, 2, 3] },
       });
       expect(calendar.visibleDates).toHaveLength(3);
     });
@@ -135,7 +134,6 @@ describe('useCalendar hook', () => {
         defaultView: 'custom',
         customViewOptions: { type: 'month', count: 2 },
       });
-      // 2 months worth of calendar dates
       expect(calendar.visibleDates.length).toBeGreaterThan(60);
       expect(calendar.monthData).not.toBeNull();
       expect(calendar.weekData).toBeNull();
@@ -160,13 +158,12 @@ describe('useCalendar hook', () => {
 
   it('should handle time slots', () => {
     const calendar = getCalendar({ startHour: 8, endHour: 10, timeSlotInterval: 30 });
-    expect(calendar.timeSlots).toHaveLength(4); // 8:00, 8:30, 9:00, 9:30
+    expect(calendar.timeSlots).toHaveLength(4);
   });
 
   describe('Utils Proxy', () => {
     it('should format date via proxy', () => {
       const calendar = getCalendar();
-      // Use a date string to avoid TZ issues in local Date objects
       expect(calendar.utils.formatDate(new Date('2024-01-15T00:00:00Z'))).toBe('2024-01-15');
     });
 
@@ -329,7 +326,7 @@ describe('useCalendar hook', () => {
       const eventDate = new Date('2024-01-15T12:00:00Z');
       const calendar = useCalendar({
         defaultDate: eventDate,
-        timezone: 'America/New_York', // -5h
+        timezone: 'America/New_York',
         initialEvents: [{ id: '1', title: 'TZ Event', start: eventDate, end: eventDate }],
       });
 

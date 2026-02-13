@@ -33,7 +33,7 @@ import {
 } from '../../src/utils/date';
 
 describe('Date Utilities', () => {
-  const baseDate = new Date(2024, 0, 15); // Jan 15, 2024 (Monday)
+  const baseDate = new Date(2024, 0, 15);
 
   describe('Manipulation', () => {
     it('should add days correctly', () => {
@@ -49,8 +49,8 @@ describe('Date Utilities', () => {
 
     it('should add months correctly', () => {
       expect(addMonths(baseDate, 1)).toEqual(new Date(2024, 1, 15));
-      expect(addMonths(new Date(2024, 0, 31), 1)).toEqual(new Date(2024, 1, 29)); // Leap year
-      expect(addMonths(new Date(2023, 0, 31), 1)).toEqual(new Date(2023, 1, 28)); // Non-leap year
+      expect(addMonths(new Date(2024, 0, 31), 1)).toEqual(new Date(2024, 1, 29));
+      expect(addMonths(new Date(2023, 0, 31), 1)).toEqual(new Date(2023, 1, 28)); 
     });
 
     it('should add years correctly', () => {
@@ -72,9 +72,9 @@ describe('Date Utilities', () => {
     });
 
     it('should check same week correctly', () => {
-      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 0)).toBe(true); // Sun to Sat
-      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 1)).toBe(false); // Mon start
-      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 21), 0)).toBe(false); // Different weeks
+      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 0)).toBe(true); 
+      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 1)).toBe(false);
+      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 21), 0)).toBe(false);
     });
 
     it('should check same month correctly', () => {
@@ -100,11 +100,11 @@ describe('Date Utilities', () => {
     });
 
     it('should get start and end of week', () => {
-      const sunStart = getStartOfWeek(baseDate, 0); // Jan 14
+      const sunStart = getStartOfWeek(baseDate, 0); 
       expect(sunStart.getDate()).toBe(14);
       expect(sunStart.getDay()).toBe(0);
 
-      const monStart = getStartOfWeek(baseDate, 1); // Jan 15
+      const monStart = getStartOfWeek(baseDate, 1); 
       expect(monStart.getDate()).toBe(15);
       expect(monStart.getDay()).toBe(1);
 
@@ -125,8 +125,8 @@ describe('Date Utilities', () => {
 
   describe('Information', () => {
     it('should get days in month', () => {
-      expect(getDaysInMonth(new Date(2024, 1, 1))).toBe(29); // Feb 2024
-      expect(getDaysInMonth(new Date(2023, 1, 1))).toBe(28); // Feb 2023
+      expect(getDaysInMonth(new Date(2024, 1, 1))).toBe(29);
+      expect(getDaysInMonth(new Date(2023, 1, 1))).toBe(28);
     });
 
     it('should calculate days between', () => {
@@ -148,9 +148,9 @@ describe('Date Utilities', () => {
     });
 
     it('should check weekend', () => {
-      expect(isWeekend(new Date(2024, 0, 13))).toBe(true); // Sat
-      expect(isWeekend(new Date(2024, 0, 14))).toBe(true); // Sun
-      expect(isWeekend(new Date(2024, 0, 15))).toBe(false); // Mon
+      expect(isWeekend(new Date(2024, 0, 13))).toBe(true); 
+      expect(isWeekend(new Date(2024, 0, 14))).toBe(true); 
+      expect(isWeekend(new Date(2024, 0, 15))).toBe(false); 
     });
 
     it('should check dateTimeInBetween', () => {
@@ -171,32 +171,27 @@ describe('Date Utilities', () => {
 
     it('should handle various format tokens', () => {
       const date = new Date(2024, 0, 15, 9, 5, 2);
-      // Weekdays
+
       expect(formatDate(date, { format: 'EEE' })).toBeDefined();
       expect(formatDate(date, { format: 'EE' })).toBeDefined();
       expect(formatDate(date, { format: 'E' })).toBeDefined();
 
-      // Months
       expect(formatDate(date, { format: 'MMMM' })).toBeDefined();
       expect(formatDate(date, { format: 'MMM' })).toBeDefined();
       expect(formatDate(date, { format: 'MM' })).toBe('01');
       expect(formatDate(date, { format: 'M' })).toBe('1');
 
-      // Years
       expect(formatDate(date, { format: 'yy' })).toBe('24');
 
-      // Era
       expect(formatDate(date, { format: 'GGG' })).toBeDefined();
       expect(formatDate(date, { format: 'GG' })).toBeDefined();
       expect(formatDate(date, { format: 'G' })).toBeDefined();
 
-      // Time (12h vs 24h)
       expect(formatDateTime(date, { format: 'hh:mm:ss' })).toBe('09:05:02');
       expect(formatDateTime(date, { format: 'h:m:s' })).toBe('9:5:2');
       expect(formatDateTime(date, { format: 'HH:mm:ss' })).toBe('09:05:02');
       expect(formatDateTime(date, { format: 'H:m:s' })).toBe('9:5:2');
 
-      // Timezones
       expect(formatDateTime(date, { format: 'zzzz' })).toBeDefined();
       expect(formatDateTime(date, { format: 'zzz' })).toBeDefined();
       expect(formatDateTime(date, { format: 'zz' })).toBeDefined();

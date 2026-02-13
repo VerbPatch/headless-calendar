@@ -14,21 +14,21 @@ import {
 } from '../../src/utils/calendar';
 
 describe('Calendar Utilities', () => {
-  const baseDate = new Date(2024, 0, 15); // Jan 15, 2024 (Monday)
+  const baseDate = new Date(2024, 0, 15); 
 
   describe('Date Generation', () => {
     it('should generate week dates correctly', () => {
-      const dates = getWeekDates(baseDate, 0); // Start Sunday
+      const dates = getWeekDates(baseDate, 0); 
       expect(dates).toHaveLength(7);
-      expect(dates[0].getDate()).toBe(14); // Jan 14
-      expect(dates[6].getDate()).toBe(20); // Jan 20
+      expect(dates[0].getDate()).toBe(14); 
+      expect(dates[6].getDate()).toBe(20); 
     });
 
     it('should generate month calendar dates correctly', () => {
       const dates = getMonthCalendarDates(baseDate, 0);
       expect(dates.length).toBeGreaterThanOrEqual(35);
-      expect(dates[0].getMonth()).toBe(11); // December
-      expect(dates[dates.length - 1].getMonth()).toBe(1); // February
+      expect(dates[0].getMonth()).toBe(11); 
+      expect(dates[dates.length - 1].getMonth()).toBe(1);
     });
 
     it('should generate year calendar days correctly', () => {
@@ -40,7 +40,7 @@ describe('Calendar Utilities', () => {
   describe('Time Slots', () => {
     it('should generate time slots correctly', () => {
       const slots = getTimeSlots(9, 11, 30);
-      expect(slots).toHaveLength(4); // 9:00, 9:30, 10:00, 10:30
+      expect(slots).toHaveLength(4); 
       expect(slots[0].time).toBe('09:00');
       expect(slots[3].time).toBe('10:30');
     });
@@ -62,9 +62,9 @@ describe('Calendar Utilities', () => {
     });
 
     it('should get quarter dates', () => {
-      const q = getQuarterDates(new Date(2024, 4, 15)); // May
-      expect(q.start.getMonth()).toBe(3); // April
-      expect(q.end.getMonth()).toBe(5); // June
+      const q = getQuarterDates(new Date(2024, 4, 15)); 
+      expect(q.start.getMonth()).toBe(3); 
+      expect(q.end.getMonth()).toBe(5);
     });
 
     it('should get year range', () => {
@@ -90,8 +90,8 @@ describe('Calendar Utilities', () => {
       expect(weekBounds.end.getDate()).toBe(20);
 
       const monthBounds = getCalendarBounds('month', baseDate, 0);
-      expect(monthBounds.start.getMonth()).toBe(11); // Dec 31
-      expect(monthBounds.end.getMonth()).toBe(1); // Feb 3
+      expect(monthBounds.start.getMonth()).toBe(11);
+      expect(monthBounds.end.getMonth()).toBe(1);
 
       const yearBounds = getCalendarBounds('year', baseDate);
       expect(yearBounds.start.getMonth()).toBe(0);
@@ -104,12 +104,12 @@ describe('Calendar Utilities', () => {
       expect(dayCustom.end.getDate()).toBe(17);
 
       const weekCustom = getCalendarBounds('custom', baseDate, 0, { type: 'week', count: 2 });
-      expect(weekCustom.start.getDate()).toBe(14); // Jan 14
-      expect(weekCustom.end.getDate()).toBe(27); // Next Sat
+      expect(weekCustom.start.getDate()).toBe(14); 
+      expect(weekCustom.end.getDate()).toBe(27);
 
       const monthCustom = getCalendarBounds('custom', baseDate, 0, { type: 'month', count: 2 });
-      expect(monthCustom.start.getMonth()).toBe(0); // Jan 1
-      expect(monthCustom.end.getMonth()).toBe(1); // Feb 29
+      expect(monthCustom.start.getMonth()).toBe(0); 
+      expect(monthCustom.end.getMonth()).toBe(1); 
     });
 
     it('should validate custom view options', () => {

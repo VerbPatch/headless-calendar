@@ -3,7 +3,7 @@ import { useNavigation } from '../../src/hooks/useNavigation';
 import { clearAllCaches } from '../../src/state';
 
 describe('useNavigation hook', () => {
-  const initialDate = new Date(2024, 0, 15); // Jan 15, 2024
+  const initialDate = new Date(2024, 0, 15);
 
   beforeEach(() => {
     clearAllCaches();
@@ -96,10 +96,10 @@ describe('useNavigation hook', () => {
       };
       const nav = getNav(opts);
       nav.goToNext();
-      expect(getNav(opts).currentDate.getMonth()).toBe(2); // March
+      expect(getNav(opts).currentDate.getMonth()).toBe(2);
       nav.goToPrevious();
       nav.goToPrevious();
-      expect(getNav(opts).currentDate.getMonth()).toBe(10); // Nov 2023
+      expect(getNav(opts).currentDate.getMonth()).toBe(10);
     });
   });
 

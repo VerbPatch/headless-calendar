@@ -21,7 +21,6 @@ describe('useDragDrop hook', () => {
     const dnd = getDnd();
     dnd.startDrag(event);
 
-    // Check state by re-invoking or checking return
     const updated = getDnd();
     expect(updated.draggedEvent?.event.id).toBe('1');
   });
@@ -95,7 +94,6 @@ describe('useDragDrop hook', () => {
     expect(dragProps.draggable).toBe(true);
     expect(typeof dragProps.onDragStart).toBe('function');
 
-    // Simulate handlers
     const dragEvent = { dataTransfer: { setData: vi.fn(), effectAllowed: '' } };
     dragProps.onDragStart(dragEvent as any);
     expect(dragEvent.dataTransfer.setData).toHaveBeenCalledWith('text/plain', '1');
@@ -122,7 +120,6 @@ describe('useDragDrop hook', () => {
     const dragProps = dnd.getDragProps(event);
     const dropProps = dnd.getDropProps(new Date());
 
-    // Should not throw
     expect(() => dragProps.onDragStart({} as any)).not.toThrow();
     expect(() => dropProps.onDragOver({ preventDefault: vi.fn() } as any)).not.toThrow();
   });
@@ -131,7 +128,7 @@ describe('useDragDrop hook', () => {
     const spy = vi.fn();
     const dnd = getDnd({ onEventMove: spy });
     dnd.startDrag(event);
-    dnd.handleDrop({ time: '10:00' } as any); // date is missing
+    dnd.handleDrop({ time: '10:00' } as any);
     expect(spy).not.toHaveBeenCalled();
   });
 });

@@ -47,6 +47,31 @@ export interface CalendarEvent {
    * Recurring event configuration. Use "never" for non-recurring events.
    */
   recurring?: CalendarEventOccurance | 'never';
+  /**
+   * List of dates to exclude from the recurrence.
+   * Corresponds to RFC 5545 EXDATE.
+   */
+  exdate?: Date[];
+  /**
+   * List of additional dates to include in the recurrence.
+   * Corresponds to RFC 5545 RDATE.
+   */
+  rdate?: Date[];
+  /**
+   * The recurrence identifier for a specific instance of a recurring event.
+   * Corresponds to RFC 5545 RECURRENCE-ID.
+   */
+  recurrenceId?: Date | string;
+  /**
+   * The status of the event.
+   * Corresponds to RFC 5545 STATUS.
+   */
+  status?: 'TENTATIVE' | 'CONFIRMED' | 'CANCELLED';
+  /**
+   * The transparency of the event.
+   * Corresponds to RFC 5545 TRANSP.
+   */
+  transparency?: 'OPAQUE' | 'TRANSPARENT';
   // Allow additional properties
   [key: string]: any;
 }
@@ -56,6 +81,8 @@ export interface CalendarEvent {
  * @hideCategories
  * @title CalendarEventOccurance
  * @description Represents a calendar event occurance like when to repeat and on which days/weeks/months and between dates.
+ * Contains both simplified properties and full RFC 5545 compliant properties.
+ *
  * @example
  * 1. Repeat every day until end of time
  * ```tsx
@@ -198,57 +225,97 @@ export interface CalendarEvent {
 export interface CalendarEventOccurance {
   /**
    * The type of recurrence pattern.
+   * Corresponds to RFC 5545 FREQ.
    */
-  repeat: 'yearly' | 'monthly' | 'weekly' | 'daily';
+  repeat: 'yearly' | 'monthly' | 'weekly' | 'daily' | 'hourly' | 'minutely' | 'secondly';
 
   /**
-   * The interval for the recurrence (e.g., every 2 weeks, every 3 months).
+   * The interval for the recurrence.
+   * Corresponds to RFC 5545 INTERVAL.
+   * @default 1
    */
   every: number;
 
   /**
-   * The days of the week for weekly, monthly, or yearly recurrence.
-   * 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
-   * Required for weekly recurrence.
-   * Optional for monthly/yearly when used with the `week` property.
+   * The days of the week for recurrence.
+   * Supports both 0-6 integers and RFC 5545 string format (e.g., 'SU', '1MO', '-1FR').
+   * Corresponds to RFC 5545 BYDAY.
    */
-  weekDays?: number[];
+  weekDays?: (number | string)[];
 
   /**
-   * The day of the month for monthly or yearly recurrence.
-   * Positive values: 1-31 (1st to 31st day).
-   * Negative values: -1 to -31 (last day to 31st-to-last day).
-   * Cannot be 0.
-   * Mutually exclusive with the `weekDays` + `week` combination.
+   * The day of the month.
+   * Corresponds to RFC 5545 BYMONTHDAY.
    */
-  day?: number;
+  day?: number | number[];
 
   /**
-   * The week of the month for monthly or yearly recurrence.
-   * Positive values: 1-4 (1st to 4th week).
-   * Negative values: -1 (last week).
-   * Cannot be 0.
-   * Must be used with the `weekDays` property.
+   * The week number within the month or year.
+   * Used with weekDays for complex patterns.
+   * Can also be mapped to RFC 5545 BYSETPOS in some contexts or BYWEEKNO in yearly.
    */
-  week?: number;
+  week?: number | number[];
 
   /**
-   * The month of the year for yearly recurrence (required for yearly).
-   * 0 = January, 1 = February, ..., 11 = December.
+   * The month of the year.
+   * 0-11 for compatibility, or 1-12 for RFC 5545 strictness (logic should handle both).
+   * Corresponds to RFC 5545 BYMONTH.
    */
-  month?: number;
+  month?: number | number[];
 
   /**
    * The number of occurrences before the recurrence stops.
-   * Mutually exclusive with the `end` property.
+   * Corresponds to RFC 5545 COUNT.
    */
   count?: number;
 
   /**
-   * The end date for the recurrence (must be after the event's end date).
-   * Mutually exclusive with the `count` property.
+   * The end date for the recurrence.
+   * Corresponds to RFC 5545 UNTIL.
    */
   end?: Date;
+
+  /**
+   * The day that the work week starts.
+   * Corresponds to RFC 5545 WKST.
+   */
+  wkst?: 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
+
+  /**
+   * The day of the year (1 to 366 or -366 to -1).
+   * Corresponds to RFC 5545 BYYEARDAY.
+   */
+  byYearDay?: number[];
+
+  /**
+   * The week number of the year (1 to 53 or -53 to -1).
+   * Corresponds to RFC 5545 BYWEEKNO.
+   */
+  byWeekNo?: number[];
+
+  /**
+   * The position of the occurrence in the set of events.
+   * Corresponds to RFC 5545 BYSETPOS.
+   */
+  bySetPos?: number[];
+
+  /**
+   * Alias for weekDays.
+   * Corresponds to RFC 5545 BYDAY.
+   */
+  byDay?: (number | string)[];
+
+  /**
+   * Alias for month.
+   * Corresponds to RFC 5545 BYMONTH.
+   */
+  byMonth?: number[];
+
+  /**
+   * Alias for day.
+   * Corresponds to RFC 5545 BYMONTHDAY.
+   */
+  byMonthDay?: number[];
 }
 /**
  * Represents an event that is currently being dragged.

@@ -79,10 +79,10 @@ describe('State Engine', () => {
       };
 
       createMemo(factory, [1], 'm1');
-      createMemo(factory, [1], 'm1'); // Same dep
+      createMemo(factory, [1], 'm1');
       expect(count).toBe(1);
 
-      createMemo(factory, [2], 'm1'); // New dep
+      createMemo(factory, [2], 'm1');
       expect(count).toBe(2);
     });
   });
@@ -99,11 +99,11 @@ describe('State Engine', () => {
       let dep = 1;
 
       createEffect(spy, [dep], 'e2');
-      createEffect(spy, [dep], 'e2'); // No change
+      createEffect(spy, [dep], 'e2');
       expect(spy).toHaveBeenCalledTimes(1);
 
       dep = 2;
-      createEffect(spy, [dep], 'e2'); // Changed
+      createEffect(spy, [dep], 'e2');
       expect(spy).toHaveBeenCalledTimes(2);
     });
 

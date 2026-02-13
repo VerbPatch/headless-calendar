@@ -63,21 +63,58 @@ const formatRRULE = (recurring: CalendarEventOccurance | 'never'): string | null
     parts.push(`UNTIL=${formatICSDate(recurring.end)}`);
   }
 
-  if (recurring.repeat === 'weekly' && recurring.weekDays) {
-    parts.push(`BYDAY=${recurring.weekDays.map((d) => dayMap[d]).join(',')}`);
+  if (recurring.weekDays && recurring.weekDays.length > 0) {
+    const byDay = recurring.weekDays.map((d) => {
+      if (typeof d === 'number') return dayMap[d];
+      return d;
+    });
+
+    if (recurring.week !== undefined && !recurring.bySetPos) {
+      const prefix = recurring.week === -1 ? '-1' : recurring.week;
+      const prefixedDays = recurring.weekDays.map((d) => {
+        if (typeof d === 'number') return `${prefix}${dayMap[d]}`;
+        return `${prefix}${d}`;
+      });
+      parts.push(`BYDAY=${prefixedDays.join(',')}`);
+    } else {
+      parts.push(`BYDAY=${byDay.join(',')}`);
+    }
+  } else if (recurring.byDay && recurring.byDay.length > 0) {
+    const formattedByDay = recurring.byDay.map((d) => {
+      if (typeof d === 'number') return dayMap[d];
+      return d;
+    });
+    parts.push(`BYDAY=${formattedByDay.join(',')}`);
   }
 
-  if (recurring.repeat === 'monthly' || recurring.repeat === 'yearly') {
-    if (recurring.day) {
-      parts.push(`BYMONTHDAY=${recurring.day}`);
-    } else if (recurring.weekDays && recurring.week) {
-      const prefix = recurring.week === -1 ? '-1' : recurring.week;
-      parts.push(`BYDAY=${recurring.weekDays.map((d) => `${prefix}${dayMap[d]}`).join(',')}`);
-    }
+  if (recurring.day !== undefined) {
+    const days = Array.isArray(recurring.day) ? recurring.day : [recurring.day];
+    parts.push(`BYMONTHDAY=${days.join(',')}`);
+  } else if (recurring.byMonthDay && recurring.byMonthDay.length > 0) {
+    parts.push(`BYMONTHDAY=${recurring.byMonthDay.join(',')}`);
+  }
 
-    if (recurring.repeat === 'yearly' && recurring.month !== undefined) {
-      parts.push(`BYMONTH=${recurring.month + 1}`);
-    }
+  if (recurring.month !== undefined) {
+    const months = Array.isArray(recurring.month) ? recurring.month : [recurring.month];
+    parts.push(`BYMONTH=${months.map((m) => m + 1).join(',')}`);
+  } else if (recurring.byMonth && recurring.byMonth.length > 0) {
+    parts.push(`BYMONTH=${recurring.byMonth.join(',')}`);
+  }
+
+  if (recurring.byYearDay && recurring.byYearDay.length > 0) {
+    parts.push(`BYYEARDAY=${recurring.byYearDay.join(',')}`);
+  }
+
+  if (recurring.byWeekNo && recurring.byWeekNo.length > 0) {
+    parts.push(`BYWEEKNO=${recurring.byWeekNo.join(',')}`);
+  }
+
+  if (recurring.bySetPos && recurring.bySetPos.length > 0) {
+    parts.push(`BYSETPOS=${recurring.bySetPos.join(',')}`);
+  }
+
+  if (recurring.wkst) {
+    parts.push(`WKST=${recurring.wkst}`);
   }
 
   return `RRULE:${parts.join(';')}`;
@@ -126,6 +163,32 @@ export const exportToICS = (
     if (event.recurring && event.recurring !== 'never') {
       const rrule = formatRRULE(event.recurring);
       if (rrule) lines.push(rrule);
+    }
+
+    if (event.exdate && event.exdate.length > 0) {
+      const exdates = event.exdate.map((d) => formatICSDate(d, event.allDay)).join(',');
+      lines.push(`EXDATE:${exdates}`);
+    }
+
+    if (event.rdate && event.rdate.length > 0) {
+      const rdates = event.rdate.map((d) => formatICSDate(d, event.allDay)).join(',');
+      lines.push(`RDATE:${rdates}`);
+    }
+
+    if (event.recurrenceId) {
+      const rid =
+        event.recurrenceId instanceof Date
+          ? formatICSDate(event.recurrenceId, event.allDay)
+          : event.recurrenceId;
+      lines.push(`RECURRENCE-ID:${rid}`);
+    }
+
+    if (event.status) {
+      lines.push(`STATUS:${event.status}`);
+    }
+
+    if (event.transparency) {
+      lines.push(`TRANSP:${event.transparency}`);
     }
 
     if (event.location) lines.push(`LOCATION:${escapeICSString(event.location)}`);
