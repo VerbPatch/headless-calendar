@@ -50,7 +50,7 @@ describe('Date Utilities', () => {
     it('should add months correctly', () => {
       expect(addMonths(baseDate, 1)).toEqual(new Date(2024, 1, 15));
       expect(addMonths(new Date(2024, 0, 31), 1)).toEqual(new Date(2024, 1, 29));
-      expect(addMonths(new Date(2023, 0, 31), 1)).toEqual(new Date(2023, 1, 28)); 
+      expect(addMonths(new Date(2023, 0, 31), 1)).toEqual(new Date(2023, 1, 28));
     });
 
     it('should add years correctly', () => {
@@ -72,7 +72,7 @@ describe('Date Utilities', () => {
     });
 
     it('should check same week correctly', () => {
-      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 0)).toBe(true); 
+      expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 0)).toBe(true);
       expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 20), 1)).toBe(false);
       expect(isSameWeek(new Date(2024, 0, 14), new Date(2024, 0, 21), 0)).toBe(false);
     });
@@ -100,11 +100,11 @@ describe('Date Utilities', () => {
     });
 
     it('should get start and end of week', () => {
-      const sunStart = getStartOfWeek(baseDate, 0); 
+      const sunStart = getStartOfWeek(baseDate, 0);
       expect(sunStart.getDate()).toBe(14);
       expect(sunStart.getDay()).toBe(0);
 
-      const monStart = getStartOfWeek(baseDate, 1); 
+      const monStart = getStartOfWeek(baseDate, 1);
       expect(monStart.getDate()).toBe(15);
       expect(monStart.getDay()).toBe(1);
 
@@ -148,9 +148,9 @@ describe('Date Utilities', () => {
     });
 
     it('should check weekend', () => {
-      expect(isWeekend(new Date(2024, 0, 13))).toBe(true); 
-      expect(isWeekend(new Date(2024, 0, 14))).toBe(true); 
-      expect(isWeekend(new Date(2024, 0, 15))).toBe(false); 
+      expect(isWeekend(new Date(2024, 0, 13))).toBe(true);
+      expect(isWeekend(new Date(2024, 0, 14))).toBe(true);
+      expect(isWeekend(new Date(2024, 0, 15))).toBe(false);
     });
 
     it('should check dateTimeInBetween', () => {

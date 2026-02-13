@@ -304,21 +304,6 @@ describe('useCalendar hook', () => {
       expect(ics).toContain('BEGIN:VCALENDAR');
       expect(ics).toContain('SUMMARY:Export');
     });
-
-    // it('should support ICS download', () => {
-    //   const calendar = getCalendar();
-    //   // Mock document.createElement and click
-    //   const link = { click: vi.fn(), href: '', download: '' };
-    //   vi.spyOn(document, 'createElement').mockReturnValue(link as any);
-    //   vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:url');
-    //   vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
-
-    //   calendar.downloadICS('test.ics');
-
-    //   expect(document.createElement).toHaveBeenCalledWith('a');
-    //   expect(link.download).toBe('test.ics');
-    //   expect(link.click).toHaveBeenCalled();
-    // });
   });
 
   describe('Timezone Handling', () => {

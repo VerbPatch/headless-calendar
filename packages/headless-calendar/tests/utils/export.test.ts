@@ -203,5 +203,119 @@ describe('Export Utilities (RFC 5545)', () => {
       const ics = exportToICS([event]);
       expect(ics).toContain('RRULE:FREQ=MONTHLY;BYDAY=1SU,-1MO');
     });
+
+    it('should format RRULE with byDay only (no weekDays)', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: { repeat: 'monthly', every: 1, byDay: ['MO'] },
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('RRULE:FREQ=MONTHLY;BYDAY=MO');
+    });
+
+    it('should format RRULE with byMonthDay array', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: { repeat: 'monthly', every: 1, byMonthDay: [1, 15] },
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('RRULE:FREQ=MONTHLY;BYMONTHDAY=1,15');
+    });
+
+    it('should format RRULE with byMonth array', () => {
+      // 0-indexed in object (Jan=0, Feb=1), 1-indexed in export
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: { repeat: 'yearly', every: 1, byMonth: [0, 11] },
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('RRULE:FREQ=YEARLY;BYMONTH=1,12');
+    });
+
+    it('should format RRULE with byYearDay', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: { repeat: 'yearly', every: 1, byYearDay: [1, -1] },
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('RRULE:FREQ=YEARLY;BYYEARDAY=1,-1');
+    });
+
+    it('should format RRULE with byWeekNo', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: { repeat: 'yearly', every: 1, byWeekNo: [1, 52] },
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('RRULE:FREQ=YEARLY;BYWEEKNO=1,52');
+    });
+
+    it('should handle empty exdate/rdate arrays', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        exdate: [],
+        rdate: [],
+      };
+      const ics = exportToICS([event]);
+      expect(ics).not.toContain('EXDATE');
+      expect(ics).not.toContain('RDATE');
+    });
+
+    it('should prefer bySetPos over legacy week prefix in BYDAY', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: {
+          repeat: 'monthly',
+          every: 1,
+          weekDays: [1], // Monday
+          week: 1, // Legacy "1st"
+          bySetPos: [1], // RFC "1st"
+        },
+      };
+      const ics = exportToICS([event]);
+      // Should output BYDAY=MO;BYSETPOS=1 (or similar) NOT BYDAY=1MO
+      // My implementation outputs BYDAY=MO first, then BYSETPOS=1 later.
+      expect(ics).toContain('BYDAY=MO');
+      expect(ics).not.toContain('BYDAY=1MO');
+      expect(ics).toContain('BYSETPOS=1');
+    });
+
+    it('should format EXDATE with all-day event (DATE value)', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        allDay: true,
+        exdate: [new Date('2024-01-16T00:00:00Z')],
+      };
+      const ics = exportToICS([event]);
+      // Should look like EXDATE:20240116
+      // Note: formatICSDate for allDay uses yyyyMMdd
+      expect(ics).toContain('EXDATE:20240116');
+    });
+
+    it('should apply legacy week prefix to string weekDays', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        recurring: {
+          repeat: 'monthly',
+          every: 1,
+          weekDays: ['SU'], // String format
+          week: 1, // Legacy prefix
+        },
+      };
+      const ics = exportToICS([event]);
+      // Should prefix 'SU' with '1' -> '1SU'
+      expect(ics).toContain('BYDAY=1SU');
+    });
+
+    it('should export DESCRIPTION and X-COLOR', () => {
+      const event: CalendarEvent = {
+        ...baseEvent,
+        description: 'This is a description',
+        color: '#ff0000',
+      };
+      const ics = exportToICS([event]);
+      expect(ics).toContain('DESCRIPTION:This is a description');
+      expect(ics).toContain('X-COLOR:#ff0000');
+    });
   });
 });

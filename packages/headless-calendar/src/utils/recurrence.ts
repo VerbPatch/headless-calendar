@@ -41,7 +41,6 @@ export const expandRecurringEvent = (
   rangeEnd: Date,
   startOfWeek: number,
 ): CalendarEvent[] => {
-  // Handle RDATEs first
   const instances: CalendarEvent[] = [];
   const duration = event.end.getTime() - event.start.getTime();
 
@@ -63,7 +62,6 @@ export const expandRecurringEvent = (
   const rawRule = event.recurring as CalendarEventOccurance;
   if (!rawRule || event.recurring === 'never') return instances;
 
-  // Normalize aliases and types
   const rule = {
     ...rawRule,
     month: rawRule.byMonth || rawRule.month,
@@ -84,7 +82,6 @@ export const expandRecurringEvent = (
     if (!rule.count && current > rangeEnd) break;
 
     let candidates: Date[] = [];
-    // Normalize weekDays to numbers
     const weekDays = rule.weekDays ? rule.weekDays.map(parseDay) : [];
 
     if (rule.repeat === 'daily') {
@@ -102,7 +99,7 @@ export const expandRecurringEvent = (
       if (weekDays.length > 0) {
         const d = new Date(current);
         const day = d.getDay();
-        const diff = d.getDate() - day; // Align to Sunday
+        const diff = d.getDate() - day;
         const sunday = new Date(d.setDate(diff));
 
         weekDays.forEach((wd) => {
@@ -151,7 +148,6 @@ export const expandRecurringEvent = (
           }
         });
       } else if (rule.weekDays && rule.weekDays.length > 0) {
-        // rule.weekDays is already normalized above, but we need raw rules for "Nth" logic
         const rawRules: (string | number)[] = rule.weekDays;
 
         const processedRules = rawRules.map((r) => {
@@ -169,7 +165,6 @@ export const expandRecurringEvent = (
           const firstOccurrence = firstDayOfMonth.getDate() + dayOffset;
 
           if (nth !== 0) {
-            // Nth occurrence
             let targetDate = firstOccurrence;
             if (nth > 0) {
               targetDate += (nth - 1) * 7;
@@ -184,7 +179,7 @@ export const expandRecurringEvent = (
               if (Math.abs(nth) <= allOccurrences.length) {
                 targetDate = allOccurrences[allOccurrences.length + nth];
               } else {
-                targetDate = -1; // Invalid, skips
+                targetDate = -1;
               }
             }
 
@@ -203,7 +198,6 @@ export const expandRecurringEvent = (
               }
             }
           } else {
-            // Every occurrence of this day in the month
             let dateIter = firstOccurrence;
             const daysInMonth = new Date(y, m + 1, 0).getDate();
             while (dateIter <= daysInMonth) {
@@ -243,8 +237,6 @@ export const expandRecurringEvent = (
           if (d > 0) {
             target.setDate(d);
           } else {
-            // Negative: d=-1 is Dec 31
-            // Simple logic:
             const daysInYear =
               (new Date(year + 1, 0, 1).getTime() - new Date(year, 0, 1).getTime()) /
               (1000 * 60 * 60 * 24);
@@ -255,21 +247,16 @@ export const expandRecurringEvent = (
           }
         });
       } else if (rule.byWeekNo) {
-        // Basic ISO week support (simplified)
-        const week1Start = getStartOfWeek(new Date(year, 0, 4), startOfWeek || 1); // ISO approximation (Jan 4 is always in week 1)
+        const week1Start = getStartOfWeek(new Date(year, 0, 4), startOfWeek || 1);
 
         rule.byWeekNo.forEach((wn) => {
           let targetWeekStart = new Date(week1Start);
           if (wn > 0) {
             targetWeekStart = addWeeks(targetWeekStart, wn - 1);
           } else {
-            // Negative week number logic (from end of year)
-            // Skip for now or implement if easy.
             return;
           }
 
-          // In this week, find days.
-          // If byDay/weekDays is present, use them. Else use event.start.getDay().
           const daysToFind =
             rule.weekDays && rule.weekDays.length > 0
               ? rule.weekDays.map(parseDay)
@@ -277,10 +264,6 @@ export const expandRecurringEvent = (
 
           daysToFind.forEach((wd) => {
             const target = getStartOfWeek(targetWeekStart, startOfWeek);
-            // target is start of week. Find 'wd' in this week.
-            //const diff = wd - target.getDay();
-            // let finalDiff = diff;
-            // if (diff < 0) finalDiff += 7;
             const offset = (wd - startOfWeek + 7) % 7;
             target.setDate(target.getDate() + offset);
 
@@ -297,7 +280,6 @@ export const expandRecurringEvent = (
           });
         });
       } else {
-        // ... existing yearly logic ...
         let months: number[] = [];
         if (rule.month !== undefined) {
           months = Array.isArray(rule.month) ? rule.month : [rule.month as number];
@@ -363,7 +345,6 @@ export const expandRecurringEvent = (
       }
     }
 
-    // Apply BYSETPOS
     if (rule.bySetPos && rule.bySetPos.length > 0 && candidates.length > 0) {
       candidates.sort((a, b) => a.getTime() - b.getTime());
       const filtered: Date[] = [];
@@ -384,7 +365,6 @@ export const expandRecurringEvent = (
 
       count++;
 
-      // check EXDATE
       if (event.exdate && event.exdate.some((ex) => isSameDay(ex, date))) {
         continue;
       }

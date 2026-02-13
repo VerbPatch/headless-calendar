@@ -446,4 +446,157 @@ describe('Recurrence Utilities', () => {
     expect(result).toHaveLength(1);
     expect(result[0].start.getDate()).toBe(8);
   });
+
+  it('should ignore negative byWeekNo (not implemented)', () => {
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'yearly', every: 1, byWeekNo: [-1] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 11, 31),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(0);
+  });
+
+  it('should handle invalid Nth weekday in monthly (e.g. 5th Friday)', () => {
+    // Feb 2024 has 4 Fridays (2, 9, 16, 23). 5th Friday doesn't exist.
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'monthly', every: 1, byDay: ['5FR'] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 1, 1), // Feb 1
+      new Date(2024, 1, 29),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(0);
+  });
+
+  it('should handle invalid byYearDay', () => {
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'yearly', every: 1, byYearDay: [400] }, // Invalid day
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 11, 31),
+      startOfWeek,
+    );
+    // Should be filtered out by date logic (year mismatch) or just fail to create valid date
+    // new Date(2024, 0, 400) -> goes to 2025.
+    // Logic checks if (target.getFullYear() === year). So it should return 0.
+    expect(result).toHaveLength(0);
+  });
+
+  it('should handle bySetPos out of bounds', () => {
+    // 4 Fridays in Jan 2024.
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'monthly', every: 1, byDay: ['FR'], bySetPos: [10, -10] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 0, 31),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(0);
+  });
+
+  it('should expand yearly with defaults (no day/month specified)', () => {
+    // Defaults to same month/day as start date.
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'yearly', every: 1 },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2026, 0, 1, 23, 59), // Extend to end of day to include the 10am event
+      startOfWeek,
+    );
+    // Jan 1 2024, Jan 1 2025, Jan 1 2026
+    expect(result).toHaveLength(3);
+    expect(result[1].start.getFullYear()).toBe(2025);
+    expect(result[1].start.getMonth()).toBe(0);
+    expect(result[1].start.getDate()).toBe(1);
+  });
+
+  it('should support byWeekNo without specific weekDays (defaults to start day)', () => {
+    // Event starts on Monday Jan 1 2024.
+    // byWeekNo: [2]. Week 2 of 2024.
+    // Should find Monday of Week 2.
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'yearly', every: 1, byWeekNo: [2] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 11, 31),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(1);
+    // Week 2 of 2024 starts Jan 8 (Monday).
+    // Event start day is Monday.
+    // So result should be Jan 8.
+    expect(result[0].start.getDate()).toBe(8);
+  });
+
+  it('should skip monthly occurrences that do not exist (e.g. 31st in Feb)', () => {
+    const event: CalendarEvent = {
+      ...baseEvent,
+      start: new Date(2024, 0, 31), // Jan 31
+      recurring: { repeat: 'monthly', every: 1, day: 31 },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 2, 31), // End of March
+      startOfWeek,
+    );
+    // Should include Jan 31, Skip Feb (no 31st), Include Mar 31.
+    expect(result).toHaveLength(2);
+    expect(result[0].start.getMonth()).toBe(0); // Jan
+    expect(result[1].start.getMonth()).toBe(2); // Mar
+  });
+
+  it('should support negative byYearDay (e.g. -1 for Dec 31)', () => {
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'yearly', every: 1, byYearDay: [-1] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 11, 31, 23, 59),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].start.getMonth()).toBe(11); // Dec
+    expect(result[0].start.getDate()).toBe(31);
+  });
+
+  it('should support multiple bySetPos values', () => {
+    // Every Friday in Jan 2024: 5, 12, 19, 26.
+    // bySetPos: [1, -1] -> 1st (5) and last (26).
+    const event: CalendarEvent = {
+      ...baseEvent,
+      recurring: { repeat: 'monthly', every: 1, byDay: ['FR'], bySetPos: [1, -1] },
+    };
+    const result = expandRecurringEvent(
+      event,
+      new Date(2024, 0, 1),
+      new Date(2024, 0, 31),
+      startOfWeek,
+    );
+    expect(result).toHaveLength(2);
+    expect(result[0].start.getDate()).toBe(5);
+    expect(result[1].start.getDate()).toBe(26);
+  });
 });

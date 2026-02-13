@@ -14,20 +14,20 @@ import {
 } from '../../src/utils/calendar';
 
 describe('Calendar Utilities', () => {
-  const baseDate = new Date(2024, 0, 15); 
+  const baseDate = new Date(2024, 0, 15);
 
   describe('Date Generation', () => {
     it('should generate week dates correctly', () => {
-      const dates = getWeekDates(baseDate, 0); 
+      const dates = getWeekDates(baseDate, 0);
       expect(dates).toHaveLength(7);
-      expect(dates[0].getDate()).toBe(14); 
-      expect(dates[6].getDate()).toBe(20); 
+      expect(dates[0].getDate()).toBe(14);
+      expect(dates[6].getDate()).toBe(20);
     });
 
     it('should generate month calendar dates correctly', () => {
       const dates = getMonthCalendarDates(baseDate, 0);
       expect(dates.length).toBeGreaterThanOrEqual(35);
-      expect(dates[0].getMonth()).toBe(11); 
+      expect(dates[0].getMonth()).toBe(11);
       expect(dates[dates.length - 1].getMonth()).toBe(1);
     });
 
@@ -40,7 +40,7 @@ describe('Calendar Utilities', () => {
   describe('Time Slots', () => {
     it('should generate time slots correctly', () => {
       const slots = getTimeSlots(9, 11, 30);
-      expect(slots).toHaveLength(4); 
+      expect(slots).toHaveLength(4);
       expect(slots[0].time).toBe('09:00');
       expect(slots[3].time).toBe('10:30');
     });
@@ -62,8 +62,8 @@ describe('Calendar Utilities', () => {
     });
 
     it('should get quarter dates', () => {
-      const q = getQuarterDates(new Date(2024, 4, 15)); 
-      expect(q.start.getMonth()).toBe(3); 
+      const q = getQuarterDates(new Date(2024, 4, 15));
+      expect(q.start.getMonth()).toBe(3);
       expect(q.end.getMonth()).toBe(5);
     });
 
@@ -104,12 +104,12 @@ describe('Calendar Utilities', () => {
       expect(dayCustom.end.getDate()).toBe(17);
 
       const weekCustom = getCalendarBounds('custom', baseDate, 0, { type: 'week', count: 2 });
-      expect(weekCustom.start.getDate()).toBe(14); 
+      expect(weekCustom.start.getDate()).toBe(14);
       expect(weekCustom.end.getDate()).toBe(27);
 
       const monthCustom = getCalendarBounds('custom', baseDate, 0, { type: 'month', count: 2 });
-      expect(monthCustom.start.getMonth()).toBe(0); 
-      expect(monthCustom.end.getMonth()).toBe(1); 
+      expect(monthCustom.start.getMonth()).toBe(0);
+      expect(monthCustom.end.getMonth()).toBe(1);
     });
 
     it('should validate custom view options', () => {
@@ -119,7 +119,9 @@ describe('Calendar Utilities', () => {
     });
 
     it('should throw error for unknown view type', () => {
-      expect(() => getCalendarBounds('invalid' as any, baseDate)).toThrow('Unknown view type: invalid');
+      expect(() => getCalendarBounds('invalid' as any, baseDate)).toThrow(
+        'Unknown view type: invalid',
+      );
     });
   });
 });

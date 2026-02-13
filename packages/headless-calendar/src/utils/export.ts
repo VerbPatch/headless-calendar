@@ -98,7 +98,7 @@ const formatRRULE = (recurring: CalendarEventOccurance | 'never'): string | null
     const months = Array.isArray(recurring.month) ? recurring.month : [recurring.month];
     parts.push(`BYMONTH=${months.map((m) => m + 1).join(',')}`);
   } else if (recurring.byMonth && recurring.byMonth.length > 0) {
-    parts.push(`BYMONTH=${recurring.byMonth.join(',')}`);
+    parts.push(`BYMONTH=${recurring.byMonth.map((m) => m + 1).join(',')}`);
   }
 
   if (recurring.byYearDay && recurring.byYearDay.length > 0) {
