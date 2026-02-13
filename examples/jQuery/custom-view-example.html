@@ -35,6 +35,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@verbpatch/jquery-calendar/dist/index.umd.js"></script>
     <script>
+      const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
+      const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
       $(document).ready(function () {
         const $calContainer = $('#calendar-app');
         const $view = $('#calendar-view');
@@ -47,121 +49,179 @@
             defaultView: 'custom',
             customViewOptions: customOptions,
             initialEvents: [
-              // 1. A hour event
               {
                 id: '1',
-                title: 'Project Review',
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                color: '#8b5cf6',
+                title: 'Simple Meeting',
+                description: 'Single-day 1 hour event',
+                start: new Date(new Date().setHours(9, 0, 0, 0)),
+                end: new Date(new Date().setHours(10, 0, 0, 0)),
+                color: '#E6194B',
               },
-              // 2. A hour lunch event
               {
                 id: '2',
-                title: 'Lunch Sync',
-                start: new Date(new Date().setHours(12, 0)),
-                end: new Date(new Date().setHours(13, 0)),
-                color: '#10b981',
+                title: 'Company Holiday',
+                description: 'All-day event',
+                start: new Date(),
+                end: new Date(),
+                allDay: true,
+                color: '#FFE119',
               },
-              // 3. Multi-day event
               {
                 id: '3',
                 title: 'Business Trip',
+                description: 'Multi-day event',
                 start: new Date(new Date().setHours(9, 0, 0, 0)),
                 end: new Date(
                   new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).setHours(17, 0, 0, 0),
                 ),
-                color: '#10b981',
+                color: '#4363D8',
               },
               {
                 id: '4',
                 title: 'Daily Standup',
+                description: 'Daily Standup (Weekdays only)',
                 start: new Date(new Date().setHours(10, 0, 0, 0)),
                 end: new Date(new Date().setHours(10, 30, 0, 0)),
-                color: '#f59e0b',
+                color: '#F58231',
                 recurring: {
                   repeat: 'weekly',
                   every: 1,
-                  weekDays: [1, 2, 3, 4, 5], // Mon-Fri
+                  weekDays: [1, 2, 3, 4, 5],
                 },
               },
-              // 5. Weekly recurring event
               {
                 id: '5',
                 title: 'Weekly Planning',
+                description: 'Weekly recurring event',
                 start: new Date(new Date().setHours(14, 0, 0, 0)),
                 end: new Date(new Date().setHours(15, 0, 0, 0)),
-                color: '#8b5cf6',
+                color: '#911EB4',
                 recurring: {
                   repeat: 'weekly',
                   every: 1,
-                  weekDays: [1], // Monday
+                  weekDays: [1],
                   end: new Date(new Date().getFullYear(), 11, 31),
                 },
               },
-              // 6. Monthly by day
               {
                 id: '6',
                 title: 'Monthly Payday',
+                description: 'Monthly by day 25',
                 start: new Date(new Date().setDate(25)),
                 end: new Date(new Date().setDate(25)),
                 allDay: true,
-                color: '#ec4899',
+                color: '#42D4F4',
                 recurring: {
                   repeat: 'monthly',
                   every: 1,
                   day: 25,
                 },
               },
-              // 7. Monthly by week position (2nd Friday)
               {
                 id: '7',
                 title: 'Team Lunch',
+                description: 'Monthly by week position (2nd Friday)',
                 start: new Date(new Date().setHours(12, 0, 0, 0)),
                 end: new Date(new Date().setHours(13, 0, 0, 0)),
-                color: '#6366f1',
+                color: '#F032E6',
                 recurring: {
                   repeat: 'monthly',
                   every: 1,
                   week: 2,
-                  weekDays: [5], // Friday
+                  weekDays: [5],
                 },
               },
-              // 8. Yearly recurring
               {
                 id: '8',
                 title: 'New Year Party',
+                description: 'Yearly recurring',
                 start: new Date(new Date().getFullYear(), 0, 1),
                 end: new Date(new Date().getFullYear(), 0, 1),
                 allDay: true,
-                color: '#f43f5e',
+                color: '#9A6324',
                 recurring: {
                   repeat: 'yearly',
                   every: 1,
-                  month: 0, // Jan
+                  month: 0,
                   day: 1,
                 },
               },
-              // 9. Rich metadata
               {
                 id: '9',
                 title: 'Client Demo',
+                description: 'Rich metadata',
                 start: new Date(new Date().setHours(15, 0, 0, 0)),
                 end: new Date(new Date().setHours(16, 0, 0, 0)),
                 description: 'Demo of the new product features.\nSee attachment for details.',
                 location: 'Conference Room A',
                 url: 'https://example.com/meeting',
-                color: '#06b6d4',
+                color: '#000075',
               },
-              // 10. Timezone specific
               {
                 id: '10',
                 title: 'Global Sync',
-                start: new Date(new Date().setHours(20, 0, 0, 0)),
-                end: new Date(new Date().setHours(21, 0, 0, 0)),
-                description: 'Late night sync for global teams',
+                description: `Late night sync for global teams, Timezone specific -> Actual event is ${tzDate.toDateString()} ${tzDate.toTimeString().substring(0, 8)} - ${tzEndDate.toDateString()} ${tzEndDate.toTimeString().substring(0, 8)} in America/New_York timezone, translated to local calendar timezone.`,
+                start: tzDate,
+                end: tzEndDate,
                 color: '#64748b',
                 timezone: 'America/New_York',
+              },
+              {
+                id: '11',
+                title: 'Daily Huddle (Excl. specific days)',
+                description: 'Recurring with EXDATE (Exclude specific dates)',
+                start: new Date(new Date().setHours(9, 30, 0, 0)),
+                end: new Date(new Date().setHours(9, 45, 0, 0)),
+                color: '#db2777',
+                recurring: {
+                  repeat: 'daily',
+                  every: 1,
+                },
+                exdate: [
+                  new Date(new Date().setDate(new Date().getDate() + 2)),
+                  new Date(new Date().setDate(new Date().getDate() + 4)),
+                ],
+              },
+              {
+                id: '12',
+                title: 'Ad-hoc Review',
+                description: 'Recurring with RDATE (Additional dates)',
+                start: new Date(new Date().setHours(13, 0, 0, 0)),
+                end: new Date(new Date().setHours(14, 0, 0, 0)),
+                color: '#d97706',
+                recurring: {
+                  repeat: 'weekly',
+                  every: 1,
+                  weekDays: [3],
+                },
+                rdate: [new Date(new Date().setDate(new Date().getDate() + 1))],
+              },
+
+              {
+                id: '13',
+                title: 'Tentative Monthly Sync',
+                description: 'Test: Strict RFC RRULE with Status & Transparency',
+                start: new Date(new Date().setHours(11, 0, 0, 0)),
+                end: new Date(new Date().setHours(12, 0, 0, 0)),
+                color: '#7c3aed',
+
+                recurring: {
+                  repeat: 'monthly',
+                  every: 1,
+                  byDay: ['1FR'],
+                },
+                status: 'TENTATIVE',
+                transparency: 'TRANSPARENT',
+              },
+              {
+                id: '14',
+                title: 'Rescheduled Instance',
+                description:
+                  'This specific instance was moved to 3pm, Recurrence Exception (RECURRENCE-ID) representation',
+                start: new Date(new Date().setHours(15, 0, 0, 0)),
+                end: new Date(new Date().setHours(16, 0, 0, 0)),
+                color: '#059669',
+                recurrenceId: new Date(new Date().setHours(14, 0, 0, 0)),
               },
             ],
             onRender: function (calendar) {
