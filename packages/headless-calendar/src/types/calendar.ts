@@ -516,6 +516,13 @@ export interface CalendarInstance {
   getEventsForDate: (date: Date) => CalendarEvent[];
 
   /**
+   * Imports events from an iCalendar (.ics) string and adds them to the calendar.
+   * @function
+   * @param {string} icsContent - The content of the iCalendar file.
+   */
+  importFromICS: (icsContent: string) => void;
+
+  /**
    * Exports the calendar events to iCalendar (.ics) format.
    * @function
    * @param {string} [prodId] - Optional product identifier.

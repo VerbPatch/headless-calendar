@@ -511,4 +511,10 @@ export interface UseEventsReturn {
    * @see {@link CalendarEvent}
    */
   setEvents: (events: CalendarEvent[]) => void;
+  /**
+   * Imports events from an iCalendar (.ics) string and adds them to the calendar.
+   * @function
+   * @param {string} icsContent - The content of the iCalendar file.
+   */
+  importFromICS: (icsContent: string) => void;
 }

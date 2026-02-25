@@ -45,7 +45,7 @@ import {
   formatLocalizedTime,
   daysofWeek,
 } from '../utils/timezone';
-import { exportToICS as exportEventsToICS } from '../utils/export';
+import { exportToICS as exportEventsToICS } from '../utils/ics';
 import { createMemo } from '../state';
 
 /**
@@ -523,7 +523,8 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
     getEventsForDateRange: getEventsForSpecificDateRange,
     getEventsForDate: getEventsForSpecificDate,
 
-    // Export
+    // ICS
+    importFromICS: eventsManager.importFromICS,
     exportToICS: (prodId?: string) => exportEventsToICS(eventsManager.events, prodId),
     downloadICS: (filename: string = 'calendar.ics', prodId?: string) => {
       const icsData = exportEventsToICS(eventsManager.events, prodId);

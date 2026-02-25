@@ -1,6 +1,7 @@
 import { CalendarEvent, UseEventsOptions, UseEventsReturn } from '../types/events';
 import { generateId, validateEvent } from '../utils/events';
 import { convertToTimeZone } from '../utils/timezone';
+import { importFromICS as importFromICSUtility } from '../utils/ics';
 import { createCallback, createMemo, createState } from '../state';
 
 /**
@@ -284,6 +285,26 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     'set-event-callback',
   );
 
+  /**
+   * Imports events from an iCalendar (.ics) string and adds them to the calendar.
+   * @param {string} icsContent - The content of the iCalendar file.
+   * @group Event Management
+   * @title Import From ICS
+   * @description Imports events from an iCalendar (.ics) string and adds them to the calendar.
+   */
+  const importFromICS = createCallback(
+    (icsContent: string): void => {
+      const importedEvents = importFromICSUtility(icsContent);
+      const eventsWithIds = importedEvents.map((event) => ({
+        ...event,
+        id: generateId(),
+      }));
+      setEventsCallback(eventsWithIds);
+    },
+    [setEventsCallback],
+    'import-from-ics',
+  );
+
   return {
     events: getEvents(),
     createEvent,
@@ -294,5 +315,6 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
     getEvent,
     clearEvents,
     setEvents: setEventsCallback,
+    importFromICS,
   };
 };
