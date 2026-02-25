@@ -164,6 +164,14 @@ declare global {
     downloadICS(state: JQueryCalendarState, filename?: string, prodId?: string) {
       state.calendar.downloadICS(filename, prodId);
     },
+    importFromICS(state: JQueryCalendarState, icsContent: string) {
+      updateAfter(state, () => state.calendar.importFromICS(icsContent));
+      state.$el.trigger('calendar:icsImported', [icsContent]);
+    },
+    setEvents(state: JQueryCalendarState, events: CalendarEvent[]) {
+      updateAfter(state, () => state.calendar.setEvents(events));
+      state.$el.trigger('calendar:eventsSet', [events]);
+    },
     destroy(state: JQueryCalendarState) {
       state.$el.removeData(DATA_KEY);
       state.$el.trigger('calendar:destroyed');
