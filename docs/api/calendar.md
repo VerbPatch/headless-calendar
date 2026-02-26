@@ -17,6 +17,7 @@
 - [getWeeksInMonth](/calendar/docs/api/calendar/getWeeksInMonth)
 - [getYearCalendarDays](/calendar/docs/api/calendar/getYearCalendarDays)
 - [getYearRange](/calendar/docs/api/calendar/getYearRange)
+- [validateCustomView](/calendar/docs/api/calendar/validateCustomView)
 
 ## calendar-events
 
@@ -28,12 +29,15 @@
 - [UseEventsOptions](/calendar/docs/api/calendar-events/UseEventsOptions)
 - [UseEventsReturn](/calendar/docs/api/calendar-events/UseEventsReturn)
 - [cloneEvent](/calendar/docs/api/calendar-events/cloneEvent)
+- [expandRecurringEvent](/calendar/docs/api/calendar-events/expandRecurringEvent)
+- [exportToICS](/calendar/docs/api/calendar-events/exportToICS)
 - [generateId](/calendar/docs/api/calendar-events/generateId)
 - [getEventDuration](/calendar/docs/api/calendar-events/getEventDuration)
 - [getEventsAtTime](/calendar/docs/api/calendar-events/getEventsAtTime)
 - [getEventsForDate](/calendar/docs/api/calendar-events/getEventsForDate)
 - [getEventsForDateRange](/calendar/docs/api/calendar-events/getEventsForDateRange)
 - [getOverlappingEvents](/calendar/docs/api/calendar-events/getOverlappingEvents)
+- [importFromICS](/calendar/docs/api/calendar-events/importFromICS)
 - [isAllDayEvent](/calendar/docs/api/calendar-events/isAllDayEvent)
 - [isEventInDateRange](/calendar/docs/api/calendar-events/isEventInDateRange)
 - [isMultiDayEvent](/calendar/docs/api/calendar-events/isMultiDayEvent)
@@ -82,6 +86,7 @@
 
 ## navigation
 
+- [CustomViewOptions](/calendar/docs/api/navigation/CustomViewOptions)
 - [DayData](/calendar/docs/api/navigation/DayData)
 - [MonthData](/calendar/docs/api/navigation/MonthData)
 - [UseNavigationOptions](/calendar/docs/api/navigation/UseNavigationOptions)

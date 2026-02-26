@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.0.1-beta.11] - 2026-02-26
+
+### Added
+
+- Custom view support with event recurring options
+- ICS support with import and export functions
+
+---
+
 ## [v0.0.1-beta.10] - 2026-01-08
 
 ### Added
@@ -98,6 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JQuery Wrapper of calendar headless libray with examples
 - Svelte Wrapper of calendar headless libray with examples
 
+[v0.0.1-beta.11]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.11
 [v0.0.1-beta.10]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.10
 [v0.0.1-beta.9]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.9
 [v0.0.1-beta.8]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.8

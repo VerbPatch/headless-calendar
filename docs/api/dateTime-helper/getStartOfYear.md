@@ -7,7 +7,7 @@ description: Gets the start of the year for a given date.
 
 > **getStartOfYear**(`date`): `Date`
 
-Defined in: [utils/date.ts:357](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/date.ts#L357)
+Defined in: [utils/date.ts:363](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L363)
 
 Gets the start of the year for a given date.
 

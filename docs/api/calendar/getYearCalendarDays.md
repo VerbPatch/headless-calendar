@@ -7,7 +7,7 @@ description: Generates an array of dates in a year, including days from the prev
 
 > **getYearCalendarDays**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:81](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/calendar.ts#L81)
+Defined in: [utils/calendar.ts:92](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/calendar.ts#L92)
 
 Generates an array of dates in a year, including days from the previous and next years to complete the weeks.
 

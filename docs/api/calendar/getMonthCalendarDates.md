@@ -7,7 +7,7 @@ description: Generates an array of dates for the calendar month view, including 
 
 > **getMonthCalendarDates**(`date`, `startOfWeek?`): `Date`[]
 
-Defined in: [utils/calendar.ts:46](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/calendar.ts#L46)
+Defined in: [utils/calendar.ts:57](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/calendar.ts#L57)
 
 Generates an array of dates for the calendar month view, including days from the previous and next months to complete the weeks.
 

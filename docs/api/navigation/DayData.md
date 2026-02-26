@@ -5,19 +5,19 @@ description: Represents the data structure for the day view, including the curre
 
 # DayData
 
-Defined in: [types/views.ts:90](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L90)
+Defined in: [types/views.ts:113](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/views.ts#L113)
 
 Data specific to the day view.
 
 ## Properties
 
-### date
+### dates
 
-> **date**: `Date`
+> **dates**: `Date`[]
 
-Defined in: [types/views.ts:94](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L94)
+Defined in: [types/views.ts:117](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/views.ts#L117)
 
-The current date.
+An array of dates visible in the day view (useful for custom multi-day views).
 
 ***
 
@@ -25,9 +25,9 @@ The current date.
 
 > **dayName**: `string`
 
-Defined in: [types/views.ts:98](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L98)
+Defined in: [types/views.ts:121](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/views.ts#L121)
 
-The localized name of the day.
+The localized name of the day or range.
 
 ***
 
@@ -35,6 +35,6 @@ The localized name of the day.
 
 > **isToday**: `boolean`
 
-Defined in: [types/views.ts:102](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/views.ts#L102)
+Defined in: [types/views.ts:125](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/views.ts#L125)
 
-Indicates if the date is today.
+Indicates if the primary date is today.

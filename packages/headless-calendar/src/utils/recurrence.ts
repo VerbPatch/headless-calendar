@@ -248,6 +248,9 @@ const getYearlyCandidates = (
  * @param rangeEnd - The end of the range to find instances for.
  * @param startOfWeek - The day to start the week on.
  * @returns An array of CalendarEvent instances.
+ * @group calendar-events
+ * @title expandRecurringEvent
+ * @description Expands a recurring event into multiple instances within a specific date range.
  */
 export const expandRecurringEvent = (
   event: CalendarEvent,

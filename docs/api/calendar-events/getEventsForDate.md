@@ -5,9 +5,9 @@ description: Retrieves all events that occur on a specific date.
 
 # getEventsForDate()
 
-> **getEventsForDate**(`events`, `date`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **getEventsForDate**(`events`, `date`, `startofWeek`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:59](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/events.ts#L59)
+Defined in: [utils/events.ts:64](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/events.ts#L64)
 
 Retrieves all events that occur on a specific date.
 
@@ -24,6 +24,10 @@ An array of calendar events.
 `Date`
 
 The date to filter events by.
+
+### startofWeek
+
+`number`
 
 ## Returns
 

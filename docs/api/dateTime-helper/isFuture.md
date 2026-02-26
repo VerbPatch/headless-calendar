@@ -7,7 +7,7 @@ description: Checks if a given date is in the future.
 
 > **isFuture**(`date`): `boolean`
 
-Defined in: [utils/date.ts:694](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/date.ts#L694)
+Defined in: [utils/date.ts:712](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L712)
 
 Checks if a given date is in the future.
 

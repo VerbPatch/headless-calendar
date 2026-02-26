@@ -7,7 +7,7 @@ description: Adds a specified number of days to a date.
 
 > **addDays**(`date`, `days`): `Date`
 
-Defined in: [utils/date.ts:515](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/date.ts#L515)
+Defined in: [utils/date.ts:521](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L521)
 
 Adds a specified number of days to a date.
 

@@ -157,6 +157,12 @@
         "kind": 64,
         "path": "/calendar/docs/api/calendar/getYearRange",
         "isDeprecated": false
+      },
+      {
+        "title": "validateCustomView",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/validateCustomView",
+        "isDeprecated": false
       }
     ],
     "group": "api"
@@ -213,6 +219,18 @@
         "isDeprecated": false
       },
       {
+        "title": "expandRecurringEvent",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/expandRecurringEvent",
+        "isDeprecated": false
+      },
+      {
+        "title": "exportToICS",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/exportToICS",
+        "isDeprecated": false
+      },
+      {
         "title": "generateId",
         "kind": 64,
         "path": "/calendar/docs/api/calendar-events/generateId",
@@ -246,6 +264,12 @@
         "title": "getOverlappingEvents",
         "kind": 64,
         "path": "/calendar/docs/api/calendar-events/getOverlappingEvents",
+        "isDeprecated": false
+      },
+      {
+        "title": "importFromICS",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar-events/importFromICS",
         "isDeprecated": false
       },
       {
@@ -471,6 +495,12 @@
     "title": "navigation",
     "children": [
       {
+        "title": "CustomViewOptions",
+        "kind": 256,
+        "path": "/calendar/docs/api/navigation/CustomViewOptions",
+        "isDeprecated": false
+      },
+      {
         "title": "DayData",
         "kind": 256,
         "path": "/calendar/docs/api/navigation/DayData",
@@ -520,6 +550,16 @@
     "group": "example",
     "children": [
       {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Angular/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Angular/ICS"
+      },
+      {
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Angular/minimal"
@@ -530,6 +570,16 @@
     "title": "Lit",
     "group": "example",
     "children": [
+      {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Lit/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Lit/ICS"
+      },
       {
         "title": "minimal",
         "group": "example",
@@ -542,6 +592,16 @@
     "group": "example",
     "children": [
       {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Preact/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Preact/ICS"
+      },
+      {
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Preact/minimal"
@@ -552,6 +612,16 @@
     "title": "Qwik",
     "group": "example",
     "children": [
+      {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Qwik/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Qwik/ICS"
+      },
       {
         "title": "minimal",
         "group": "example",
@@ -569,6 +639,16 @@
         "path": "/calendar/examples/React/basic"
       },
       {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/React/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/React/ICS"
+      },
+      {
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/React/minimal"
@@ -579,6 +659,16 @@
     "title": "Solidjs",
     "group": "example",
     "children": [
+      {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Solidjs/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Solidjs/ICS"
+      },
       {
         "title": "minimal",
         "group": "example",
@@ -591,9 +681,19 @@
     "group": "example",
     "children": [
       {
-        "title": "basic",
+        "title": "custom-view",
         "group": "example",
-        "path": "/calendar/examples/Svelte/basic"
+        "path": "/calendar/examples/Svelte/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Svelte/ICS"
+      },
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/Svelte/minimal"
       }
     ]
   },
@@ -601,6 +701,16 @@
     "title": "Vanilla",
     "group": "example",
     "children": [
+      {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/Vanilla/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Vanilla/ICS"
+      },
       {
         "title": "minimal",
         "group": "example",
@@ -613,9 +723,19 @@
     "group": "example",
     "children": [
       {
-        "title": "basic",
+        "title": "custom-view",
         "group": "example",
-        "path": "/calendar/examples/Vuejs/basic"
+        "path": "/calendar/examples/Vuejs/custom-view"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/Vuejs/ICS"
+      },
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/Vuejs/minimal"
       }
     ]
   }

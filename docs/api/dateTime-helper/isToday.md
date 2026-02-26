@@ -7,7 +7,7 @@ description: Checks if a given date is today.
 
 > **isToday**(`date`): `boolean`
 
-Defined in: [utils/date.ts:662](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/date.ts#L662)
+Defined in: [utils/date.ts:680](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L680)
 
 Checks if a given date is today.
 

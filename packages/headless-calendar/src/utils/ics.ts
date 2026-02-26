@@ -207,7 +207,11 @@ const parseRRULE = (rrule: string): CalendarEventOccurance | 'never' => {
 };
 
 /**
- * Exports an array of calendar events to iCalendar (.ics) format.
+ * Exports an array of calendar events to iCalendar (.ics) format, RFC5545.
+ * @link https://datatracker.ietf.org/doc/html/rfc5545
+ * @group calendar-events
+ * @title exportToICS
+ * @description Exports an array of calendar events to iCalendar (.ics) format.
  */
 export const exportToICS = (
   events: CalendarEvent[],
@@ -290,6 +294,11 @@ export const exportToICS = (
 
 /**
  * Imports events from an iCalendar (.ics) string.
+ * @param {string} icsContent - RFC5545 (link: https://datatracker.ietf.org/doc/html/rfc5545) standard content.
+ * @returns {CalendarEvent} - ics content converted to calendarevent in array
+ * @group calendar-events
+ * @title importFromICS
+ * @description Imports events from an iCalendar (.ics) string.
  */
 export const importFromICS = (icsContent: string): CalendarEvent[] => {
   const unfolded = unfoldICS(icsContent);

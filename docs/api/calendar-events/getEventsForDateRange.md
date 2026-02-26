@@ -5,9 +5,9 @@ description: Retrieves all events that fall within a specified date range.
 
 # getEventsForDateRange()
 
-> **getEventsForDateRange**(`events`, `startDate`, `endDate`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
+> **getEventsForDateRange**(`events`, `startDate`, `endDate`, `startofWeek`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:85](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/utils/events.ts#L85)
+Defined in: [utils/events.ts:92](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/events.ts#L92)
 
 Retrieves all events that fall within a specified date range.
 
@@ -30,6 +30,10 @@ The start date of the range.
 `Date`
 
 The end date of the range.
+
+### startofWeek
+
+`number`
 
 ## Returns
 

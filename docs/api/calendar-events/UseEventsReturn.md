@@ -7,7 +7,7 @@ description: |-
 
 # UseEventsReturn
 
-Defined in: [types/events.ts:379](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L379)
+Defined in: [types/events.ts:449](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L449)
 
 ## Properties
 
@@ -15,7 +15,7 @@ Defined in: [types/events.ts:379](https://github.com/VerbPatch/headless-calendar
 
 > **clearEvents**: () => `void`
 
-Defined in: [types/events.ts:436](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L436)
+Defined in: [types/events.ts:506](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L506)
 
 **`Function`**
 
@@ -31,7 +31,7 @@ Clears all events from the calendar.
 
 > **createEvent**: (`eventData`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [types/events.ts:393](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L393)
+Defined in: [types/events.ts:463](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L463)
 
 **`Function`**
 
@@ -61,7 +61,7 @@ The data for the new event.
 
 > **deleteEvent**: (`eventId`) => `void`
 
-Defined in: [types/events.ts:407](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L407)
+Defined in: [types/events.ts:477](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L477)
 
 **`Function`**
 
@@ -85,7 +85,7 @@ The ID of the event to delete.
 
 > **duplicateEvent**: (`eventId`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `null`
 
-Defined in: [types/events.ts:423](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L423)
+Defined in: [types/events.ts:493](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L493)
 
 **`Function`**
 
@@ -115,7 +115,7 @@ The ID of the event to duplicate.
 
 > **events**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/events.ts:385](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L385)
+Defined in: [types/events.ts:455](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L455)
 
 An array of all events currently managed by the calendar.
 
@@ -129,7 +129,7 @@ An array of all events currently managed by the calendar.
 
 > **getEvent**: (`eventId`) => [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent) \| `undefined`
 
-Defined in: [types/events.ts:431](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L431)
+Defined in: [types/events.ts:501](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L501)
 
 **`Function`**
 
@@ -155,11 +155,35 @@ The ID of the event to retrieve.
 
 ***
 
+### importFromICS()
+
+> **importFromICS**: (`icsContent`) => `void`
+
+Defined in: [types/events.ts:519](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L519)
+
+**`Function`**
+
+Imports events from an iCalendar (.ics) string and adds them to the calendar.
+
+#### Parameters
+
+##### icsContent
+
+`string`
+
+The content of the iCalendar file.
+
+#### Returns
+
+`void`
+
+***
+
 ### moveEvent()
 
 > **moveEvent**: (`eventId`, `newStart`, `newEnd?`) => `void`
 
-Defined in: [types/events.ts:415](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L415)
+Defined in: [types/events.ts:485](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L485)
 
 **`Function`**
 
@@ -195,7 +219,7 @@ The new end date for the event (optional, defaults to newStart if not provided).
 
 > **setEvents**: (`events`) => `void`
 
-Defined in: [types/events.ts:443](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L443)
+Defined in: [types/events.ts:513](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L513)
 
 **`Function`**
 
@@ -223,7 +247,7 @@ The new array of events to set.
 
 > **updateEvent**: (`eventId`, `updates`) => `void`
 
-Defined in: [types/events.ts:401](https://github.com/VerbPatch/headless-calendar/blob/1d1fdeeff70f283ab0cc89fb67593f08bec9893b/packages/headless-calendar/src/types/events.ts#L401)
+Defined in: [types/events.ts:471](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L471)
 
 **`Function`**
 
