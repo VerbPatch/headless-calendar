@@ -297,11 +297,24 @@ const CalendarDemo: Component = () => {
     ],
   });
 
+  const handleImport = (e: Event) => {
+    const target = e.currentTarget as HTMLInputElement;
+    const file = target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        calendar()?.importFromICS(content);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   return (
     <Show when={calendar()}>
       {(cal) => (
         <>
-          <h1>Solidjs Calendar Export Example</h1>
+          <h1>Solidjs Calendar ICS Example</h1>
 
           <div style={{ display: 'flex', gap: '20px', 'align-items': 'flex-start' }}>
             <div id="calendar" style={{ flex: '0 0 840px' }}>
@@ -735,8 +748,12 @@ const CalendarDemo: Component = () => {
                 }}
               >
                 <h3 style={{ 'margin-top': 0 }}>
-                  ICS Output
-                  <div style={{ 'margin-bottom': '10px', float: 'right' }}>
+                  ICS Tools
+                  <div style={{ 'margin-bottom': '10px', float: 'right', display: 'flex', gap: '10px' }}>
+                    <div style={{ 'font-size': '12px' }}>
+                      <label style={{ display: 'block', 'margin-bottom': '2px' }}>Import:</label>
+                      <input type="file" accept=".ics" onChange={handleImport} style={{ 'font-size': '10px' }} />
+                    </div>
                     <button onClick={() => cal().downloadICS('my-calendar-events.ics')}>
                       Export to ICS
                     </button>

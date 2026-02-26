@@ -1,5 +1,5 @@
-import { component$ } from '@builder.io/qwik';
-import { useCalendar, type ViewType } from '@verbpatch/qwik-calendar';
+import React, { useState } from 'react';
+import { useCalendar, ViewType, CalendarEvent } from '@verbpatch/react-calendar';
 
 const formatRecurrence = (r: any) => {
   if (!r || r === 'never') return 'None';
@@ -81,7 +81,7 @@ const formatRecurrence = (r: any) => {
   return desc;
 };
 
-export const App = component$(() => {
+const CalendarDemo: React.FC = () => {
   const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
   const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
 
@@ -276,57 +276,67 @@ export const App = component$(() => {
     goToToday,
     goToNext,
     changeView,
-    utils,
+    utils: { formatDate, formatLocalizedTime, isSameDay, daysofWeek },
     events,
     exportToICS,
     downloadICS,
+    importFromICS,
     getEventsForDate,
     timeSlotInterval,
   } = calendar;
 
-  const renderViewText = () => {
-    if (view === 'month') return monthData?.monthName;
-    else if (view === 'week') return weekData?.weekRange;
-    else if (view === 'day') return dayData?.dayName;
-    else return 'Unkwown view';
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        importFromICS(content);
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
     <>
-      <h1>Qwik Calendar Export Example</h1>
+      <h1>React Calendar ICS Example</h1>
 
-      <div style={{ display: 'flex', gap: '20px', 'align-items': 'flex-start' }}>
+      <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
         <div style={{ flex: '0 0 840px' }}>
           <table
-            border="0"
+            border={0}
             width="840"
             cellSpacing="0"
-            style={{ height: '700px', 'border-left': '1px solid', 'border-top': '1px solid' }}
+            style={{ height: '700px', borderLeft: '1px solid', borderTop: '1px solid' }}
           >
             <thead>
               <tr>
-                <th colSpan={2} style={{ 'border-bottom': '1px solid' }}>
-                  <button type="button" onClick$={() => goToPrevious()}>
+                <th colSpan={2} style={{ borderBottom: '1px solid' }}>
+                  <button type="button" onClick={goToPrevious}>
                     {' '}
                     ←{' '}
                   </button>
-                  <button type="button" onClick$={() => goToToday()}>
+                  <button type="button" onClick={goToToday}>
                     {' '}
                     Today{' '}
                   </button>
-                  <button type="button" onClick$={() => goToNext()}>
+                  <button type="button" onClick={goToNext}>
                     {' '}
                     →{' '}
                   </button>
                 </th>
-                <th colSpan={3} style={{ 'border-bottom': '1px solid' }}>
-                  <h3>{renderViewText()}</h3>
+                <th colSpan={3} style={{ borderBottom: '1px solid' }}>
+                  <h3>
+                    {view === 'month' ? monthData?.monthName : ''}
+                    {view === 'week' ? weekData?.weekRange : ''}
+                    {view === 'day' ? dayData?.dayName : ''}
+                  </h3>
                 </th>
-                <th colSpan={2} style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}>
+                <th colSpan={2} style={{ borderBottom: '1px solid', borderRight: '1px solid' }}>
                   <select
                     value={view}
-                    onChange$={(e) => {
-                      changeView((e.target as HTMLSelectElement).value as ViewType);
+                    onChange={(e) => {
+                      changeView(e.target.value as ViewType);
                     }}
                   >
                     <option value="month">Month</option>
@@ -340,13 +350,13 @@ export const App = component$(() => {
               {view === 'month' && monthData && (
                 <>
                   <tr>
-                    {utils?.daysofWeek('short').map((day) => (
+                    {daysofWeek('short').map((day) => (
                       <th
                         key={day}
                         style={{
                           width: '120px',
-                          'border-right': '1px solid',
-                          'border-bottom': '1px solid',
+                          borderRight: '1px solid',
+                          borderBottom: '1px solid',
                         }}
                       >
                         {day}
@@ -362,19 +372,19 @@ export const App = component$(() => {
                             key={j}
                             style={{
                               color: !monthData.isCurrentMonth(date) ? 'gray' : undefined,
-                              'font-weight': monthData.isToday(date) ? 'bold' : 'normal',
-                              'border-right': '1px solid',
-                              'border-bottom': '1px solid',
-                              'vertical-align': 'top',
+                              fontWeight: monthData.isToday(date) ? 'bold' : 'normal',
+                              borderRight: '1px solid',
+                              borderBottom: '1px solid',
+                              verticalAlign: 'top',
                               height: '100px',
                             }}
                           >
-                            <div>{utils?.formatDate(date, 'd')}</div>
+                            <div>{formatDate(date, 'd')}</div>
                             {cellEvents.map((e) => (
                               <div
                                 key={e.id}
                                 style={{
-                                  'font-size': '10px',
+                                  fontSize: '10px',
                                   background: e.color || '#ccc',
                                   color: 'white',
                                   margin: '2px 0',
@@ -394,7 +404,7 @@ export const App = component$(() => {
 
               {view === 'week' && weekData && (
                 <tr>
-                  <td colSpan={7} style={{ 'border-right': '1px solid' }}>
+                  <td colSpan={7} style={{ borderRight: '1px solid' }}>
                     <table cellPadding="5" cellSpacing="0" width="100%">
                       <tbody>
                         <tr>
@@ -402,24 +412,24 @@ export const App = component$(() => {
                           {weekData.dates.map((date, i) => (
                             <td
                               key={i}
-                              style={{ 'font-weight': weekData.isToday(date) ? 'bold' : 'normal' }}
+                              style={{ fontWeight: weekData.isToday(date) ? 'bold' : 'normal' }}
                             >
-                              {utils?.formatDate(date, 'EEE d')}
+                              {formatDate(date, 'EEE d')}
                             </td>
                           ))}
                         </tr>
                         {/* All Day Row */}
                         <tr>
-                          <td style={{ 'border-bottom': '1px solid', 'font-size': '11px' }}>All Day</td>
+                          <td style={{ borderBottom: '1px solid', fontSize: '11px' }}>All Day</td>
                           {weekData.dates.map((date, i) => {
                             const allDayEvents = getEventsForDate(date).filter((e) => e.allDay);
                             return (
                               <td
                                 key={i}
                                 style={{
-                                  'border-bottom': '1px solid',
-                                  'border-left': '1px solid',
-                                  'vertical-align': 'top',
+                                  borderBottom: '1px solid',
+                                  borderLeft: '1px solid',
+                                  verticalAlign: 'top',
                                   background: '#fafafa',
                                 }}
                               >
@@ -427,12 +437,12 @@ export const App = component$(() => {
                                   <div
                                     key={e.id}
                                     style={{
-                                      'font-size': '10px',
+                                      fontSize: '10px',
                                       background: e.color || '#ccc',
                                       color: 'white',
                                       margin: '1px 0',
                                       padding: '2px',
-                                      'border-radius': '2px',
+                                      borderRadius: '2px',
                                     }}
                                   >
                                     {e.title}
@@ -444,7 +454,7 @@ export const App = component$(() => {
                         </tr>
                         {timeSlots.map((slot) => (
                           <tr key={slot.time}>
-                            <td style={{ 'border-bottom': '1px solid' }}>{slot.label}</td>
+                            <td style={{ borderBottom: '1px solid' }}>{slot.label}</td>
                             {weekData.dates.map((date, i) => {
                               const slotEvents = getEventsForDate(date).filter((event) => {
                                 if (event.allDay) return false;
@@ -462,17 +472,17 @@ export const App = component$(() => {
                                 <td
                                   key={i}
                                   style={{
-                                    'font-weight': weekData.isToday(date) ? 'bold' : 'normal',
-                                    'border-bottom': '1px solid',
-                                    'border-left': '1px solid',
-                                    'vertical-align': 'top',
+                                    fontWeight: weekData.isToday(date) ? 'bold' : 'normal',
+                                    borderBottom: '1px solid',
+                                    borderLeft: '1px solid',
+                                    verticalAlign: 'top',
                                   }}
                                 >
                                   {slotEvents.map((e) => (
                                     <div
                                       key={e.id}
                                       style={{
-                                        'font-size': '10px',
+                                        fontSize: '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '1px 0',
@@ -499,13 +509,13 @@ export const App = component$(() => {
                     <td
                       colSpan={7}
                       align="center"
-                      style={{ 'border-right': '1px solid', 'border-bottom': '1px solid' }}
+                      style={{ borderRight: '1px solid', borderBottom: '1px solid' }}
                     >
                       {dayData.dayName}
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={7} style={{ 'border-right': '1px solid' }}>
+                    <td colSpan={7} style={{ borderRight: '1px solid' }}>
                       <table width="100%" cellSpacing="0" style={{ height: '100%' }}>
                         <tbody>
                           {/* All Day Row */}
@@ -515,8 +525,8 @@ export const App = component$(() => {
                               <td
                                 width="25%"
                                 style={{
-                                  'border-bottom': '1px solid',
-                                  'font-size': '11px',
+                                  borderBottom: '1px solid',
+                                  fontSize: '11px',
                                   padding: '5px',
                                 }}
                               >
@@ -524,7 +534,7 @@ export const App = component$(() => {
                               </td>
                               <td
                                 style={{
-                                  'border-bottom': '1px solid',
+                                  borderBottom: '1px solid',
                                   background: '#fafafa',
                                   padding: '5px',
                                 }}
@@ -535,12 +545,12 @@ export const App = component$(() => {
                                     <div
                                       key={e.id}
                                       style={{
-                                        'font-size': '10px',
+                                        fontSize: '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '2px 0',
                                         padding: '2px',
-                                        'border-radius': '2px',
+                                        borderRadius: '2px',
                                       }}
                                     >
                                       {e.title}
@@ -567,16 +577,16 @@ export const App = component$(() => {
                               <tr key={slot.time}>
                                 <td
                                   width="25%"
-                                  style={{ 'border-bottom': '1px solid', 'vertical-align': 'top' }}
+                                  style={{ borderBottom: '1px solid', verticalAlign: 'top' }}
                                 >
                                   {slot.label}
                                 </td>
-                                <td style={{ 'border-bottom': '1px solid' }}>
+                                <td style={{ borderBottom: '1px solid' }}>
                                   {slotEvents.map((e) => (
                                     <div
                                       key={e.id}
                                       style={{
-                                        'font-size': '10px',
+                                        fontSize: '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '1px 0',
@@ -600,42 +610,42 @@ export const App = component$(() => {
           </table>
         </div>
 
-        <div style={{ flex: '1', 'min-width': '300px', 'font-family': 'sans-serif' }}>
+        <div style={{ flex: '1', minWidth: '300px', fontFamily: 'sans-serif' }}>
           <div
             style={{
               border: '1px solid #ccc',
               padding: '10px',
-              'margin-bottom': '20px',
-              'max-height': '400px',
-              'overflow-y': 'auto',
+              marginBottom: '20px',
+              maxHeight: '400px',
+              overflowY: 'auto',
             }}
           >
-            <h3 style={{ 'margin-top': 0 }}>Event List</h3>
-            <ul style={{ 'padding-left': '20px' }}>
+            <h3 style={{ marginTop: 0 }}>Event List</h3>
+            <ul style={{ paddingLeft: '20px' }}>
               {events.map((e) => {
                 let recurrenceInfo = formatRecurrence(e.recurring);
                 if (e.exdate && e.exdate.length > 0) {
-                  recurrenceInfo += ` (Excl: ${e.exdate.map((d) => utils?.formatDate(d)).join(', ')})`;
+                  recurrenceInfo += ` (Excl: ${e.exdate.map((d) => formatDate(d)).join(', ')})`;
                 }
                 if (e.rdate && e.rdate.length > 0) {
-                  recurrenceInfo += ` (Add: ${e.rdate.map((d) => utils?.formatDate(d)).join(', ')})`;
+                  recurrenceInfo += ` (Add: ${e.rdate.map((d) => formatDate(d)).join(', ')})`;
                 }
 
                 let timeDisplay = '';
                 if (e.allDay) {
-                  timeDisplay = `${utils?.formatDate(e.start)} All Day`;
-                  if (!utils?.isSameDay(e.start, e.end)) {
-                    timeDisplay = `${utils?.formatDate(e.start)} - ${utils?.formatDate(e.end)} All Day`;
+                  timeDisplay = `${formatDate(e.start)} All Day`;
+                  if (!isSameDay(e.start, e.end)) {
+                    timeDisplay = `${formatDate(e.start)} - ${formatDate(e.end)} All Day`;
                   }
                 } else {
-                  const startDate = utils?.formatDate(e.start);
-                  const startTime = utils?.formatLocalizedTime(e.start, undefined, undefined, false);
-                  if (utils?.isSameDay(e.start, e.end)) {
-                    const endTime = utils?.formatLocalizedTime(e.end, undefined, undefined, false);
+                  const startDate = formatDate(e.start);
+                  const startTime = formatLocalizedTime(e.start, undefined, undefined, false);
+                  if (isSameDay(e.start, e.end)) {
+                    const endTime = formatLocalizedTime(e.end, undefined, undefined, false);
                     timeDisplay = `${startDate} ${startTime} - ${endTime}`;
                   } else {
-                    const endDate = utils?.formatDate(e.end);
-                    const endTime = utils?.formatLocalizedTime(e.end, undefined, undefined, false);
+                    const endDate = formatDate(e.end);
+                    const endTime = formatLocalizedTime(e.end, undefined, undefined, false);
                     timeDisplay = `${startDate} ${startTime} - ${endDate} ${endTime}`;
                   }
                 }
@@ -644,34 +654,34 @@ export const App = component$(() => {
                   <li
                     key={e.id}
                     style={{
-                      'margin-bottom': '10px',
-                      'border-bottom': '1px solid #eee',
-                      'padding-bottom': '5px',
+                      marginBottom: '10px',
+                      borderBottom: '1px solid #eee',
+                      paddingBottom: '5px',
                     }}
                   >
-                    <div style={{ display: 'flex', 'align-items': 'center', gap: '5px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                       <span
                         style={{
                           display: 'inline-block',
                           width: '10px',
                           height: '10px',
-                          'background-color': e.color || '#3174ad',
-                          'border-radius': '2px',
+                          backgroundColor: e.color || '#3174ad',
+                          borderRadius: '2px',
                         }}
                       ></span>
                       <strong>{e.title}</strong>
                     </div>
-                    <div style={{ 'font-size': '0.85em', color: '#666', 'margin-left': '15px' }}>
+                    <div style={{ fontSize: '0.85em', color: '#666', marginLeft: '15px' }}>
                       {timeDisplay}
                     </div>
                     {e.description && (
                       <div
                         style={{
-                          'font-size': '0.8em',
+                          fontSize: '0.8em',
                           color: '#555',
-                          'margin-left': '15px',
-                          'margin-top': '2px',
-                          'font-style': 'italic',
+                          marginLeft: '15px',
+                          marginTop: '2px',
+                          fontStyle: 'italic',
                         }}
                       >
                         {e.description}
@@ -680,10 +690,10 @@ export const App = component$(() => {
                     {e.recurring && e.recurring !== 'never' && (
                       <div
                         style={{
-                          'font-size': '0.8em',
+                          fontSize: '0.8em',
                           color: '#007bff',
-                          'margin-top': '2px',
-                          'margin-left': '15px',
+                          marginTop: '2px',
+                          marginLeft: '15px',
                         }}
                       >
                         {recurrenceInfo}
@@ -692,10 +702,10 @@ export const App = component$(() => {
                     {e.recurrenceId && (
                       <div
                         style={{
-                          'font-size': '0.8em',
+                          fontSize: '0.8em',
                           color: '#d63384',
-                          'margin-top': '2px',
-                          'margin-left': '15px',
+                          marginTop: '2px',
+                          marginLeft: '15px',
                         }}
                       >
                         Recurrence-ID:{' '}
@@ -713,21 +723,25 @@ export const App = component$(() => {
             style={{
               border: '1px solid #ccc',
               padding: '10px',
-              'max-height': '400px',
-              'overflow-y': 'auto',
+              maxHeight: '400px',
+              overflowY: 'auto',
             }}
           >
-            <h3 style={{ 'margin-top': 0 }}>
-              ICS Output
-              <div style={{ 'margin-bottom': '10px', float: 'right' }}>
-                <button onClick$={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
+            <h3 style={{ marginTop: 0 }}>
+              ICS Tools
+              <div style={{ marginBottom: '10px', float: 'right', display: 'flex', gap: '10px' }}>
+                <div style={{ fontSize: '12px' }}>
+                  <label style={{ display: 'block', marginBottom: '2px' }}>Import:</label>
+                  <input type="file" accept=".ics" onChange={handleImport} style={{ fontSize: '10px' }} />
+                </div>
+                <button onClick={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
               </div>
             </h3>
             <pre
               style={{
-                'white-space': 'pre-wrap',
-                'word-wrap': 'break-word',
-                'font-size': '11px',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word',
+                fontSize: '11px',
                 background: '#f5f5f5',
                 padding: '5px',
               }}
@@ -739,4 +753,6 @@ export const App = component$(() => {
       </div>
     </>
   );
-});
+};
+
+export default CalendarDemo;

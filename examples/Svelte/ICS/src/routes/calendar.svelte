@@ -292,9 +292,22 @@
     const eventEnd = new Date(event.end);
     return eventStart < slotEnd && eventEnd > slotStart;
   }
+
+  function handleImport(e: Event) {
+    const target = e.currentTarget as HTMLInputElement;
+    const file = target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        $calendar.importFromICS(content);
+      };
+      reader.readAsText(file);
+    }
+  }
 </script>
 
-<h1>Svelte Calendar Export Example</h1>
+<h1>Svelte Calendar ICS Example</h1>
 
 <div style="display: flex; gap: 20px; align-items: flex-start">
   <div style="flex: 0 0 840px">
@@ -486,14 +499,19 @@
         {/each}
       </ul>
     </div>
-    <div style="border: 1px solid #ccc; padding: 10px; max-height: 400px; overflow-y: auto;">
-      <h3 style="margin-top: 0">
-        ICS Output
-        <div style="margin-bottom: 10px; float: right">
-          <button onclick={() => $calendar.downloadICS('my-calendar-events.ics')}>Export to ICS</button>
-        </div>
-      </h3>
-      <pre style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; background: #f5f5f5; padding: 5px;">{$calendar.exportToICS()}</pre>
+        <div style="border: 1px solid #ccc; padding: 10px; max-height: 400px; overflow-y: auto;">
+          <h3 style="margin-top: 0">
+            ICS Tools
+            <div style="margin-bottom: 10px; float: right; display: flex; gap: 10px;">
+              <div style="font-size: 12px;">
+                <label style="display: block; margin-bottom: 2px;">Import:</label>
+                <input type="file" accept=".ics" onchange={handleImport} style="font-size: 10px;" />
+              </div>
+              <button onclick={() => $calendar.downloadICS('my-calendar-events.ics')}>Export to ICS</button>
+            </div>
+          </h3>
+          <pre
+     style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; background: #f5f5f5; padding: 5px;">{$calendar.exportToICS()}</pre>
     </div>
   </div>
 </div>

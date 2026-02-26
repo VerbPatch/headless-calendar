@@ -105,7 +105,7 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@24.10.1)(jiti@2.6.1)(jsdom@28.0.0)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Angular/custom-view:
+  examples/Angular/ICS:
     dependencies:
       '@angular/common':
         specifier: ^20.3.12
@@ -172,7 +172,7 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
-  examples/Angular/export:
+  examples/Angular/custom-view:
     dependencies:
       '@angular/common':
         specifier: ^20.3.12
@@ -306,6 +306,22 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
+  examples/Lit/ICS:
+    dependencies:
+      '@verbpatch/lit-calendar':
+        specifier: latest
+        version: link:../../../packages/lit-calendar
+      lit:
+        specifier: ^3.3.1
+        version: 3.3.1
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Lit/custom-view:
     dependencies:
       '@verbpatch/lit-calendar':
@@ -334,6 +350,22 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/Preact/ICS:
+    dependencies:
+      '@verbpatch/preact-calendar':
+        specifier: latest
+        version: link:../../../packages/preact-calendar
+      preact:
+        specifier: ^10.27.2
+        version: 10.27.2
+    devDependencies:
+      '@preact/preset-vite':
+        specifier: ^2.10.2
+        version: 2.10.2(@babel/core@7.28.5)(preact@10.27.2)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
       vite:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
@@ -373,7 +405,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Qwik/custom-view:
+  examples/Qwik/ICS:
     dependencies:
       '@builder.io/qwik':
         specifier: ^1.17.2
@@ -395,7 +427,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Qwik/export:
+  examples/Qwik/custom-view:
     dependencies:
       '@builder.io/qwik':
         specifier: ^1.17.2
@@ -434,6 +466,34 @@ importers:
         version: 14.2.5
       typescript:
         specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/React/ICS:
+    dependencies:
+      '@verbpatch/react-calendar':
+        specifier: latest
+        version: link:../../../packages/react-calendar
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.5
+        version: 19.2.5
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.5)
+      '@vitejs/plugin-react':
+        specifier: ^5.1.1
+        version: 5.1.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      typescript:
+        specifier: ^5.9.3
         version: 5.9.3
       vite:
         specifier: ^7.2.2
@@ -495,34 +555,6 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/React/export:
-    dependencies:
-      '@verbpatch/react-calendar':
-        specifier: latest
-        version: link:../../../packages/react-calendar
-      react:
-        specifier: ^19.2.0
-        version: 19.2.0
-      react-dom:
-        specifier: ^19.2.0
-        version: 19.2.0(react@19.2.0)
-    devDependencies:
-      '@types/react':
-        specifier: ^19.2.5
-        version: 19.2.5
-      '@types/react-dom':
-        specifier: ^19.2.3
-        version: 19.2.3(@types/react@19.2.5)
-      '@vitejs/plugin-react':
-        specifier: ^5.1.1
-        version: 5.1.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.2
-        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
-
   examples/React/minimal:
     dependencies:
       '@verbpatch/react-calendar':
@@ -551,26 +583,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Solidjs/custom-view:
-    dependencies:
-      '@verbpatch/solidjs-calendar':
-        specifier: latest
-        version: link:../../../packages/solidjs-calendar
-      solid-js:
-        specifier: ^1.8.15
-        version: 1.9.10
-    devDependencies:
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.2
-        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
-      vite-plugin-solid:
-        specifier: ^2.10.2
-        version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
-
-  examples/Solidjs/export:
+  examples/Solidjs/ICS:
     dependencies:
       '@verbpatch/solidjs-calendar':
         specifier: latest
@@ -590,6 +603,25 @@ importers:
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
       vite-plugin-solid:
         specifier: ^2.11.10
+        version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+
+  examples/Solidjs/custom-view:
+    dependencies:
+      '@verbpatch/solidjs-calendar':
+        specifier: latest
+        version: link:../../../packages/solidjs-calendar
+      solid-js:
+        specifier: ^1.8.15
+        version: 1.9.10
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+      vite-plugin-solid:
+        specifier: ^2.10.2
         version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
 
   examples/Solidjs/minimal:
@@ -614,34 +646,7 @@ importers:
         specifier: ^2.11.10
         version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
 
-  examples/Svelte/custom-view:
-    devDependencies:
-      '@sveltejs/adapter-auto':
-        specifier: ^3.0.0
-        version: 3.3.1(@sveltejs/kit@2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))
-      '@sveltejs/kit':
-        specifier: ^2.0.0
-        version: 2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^6.2.1
-        version: 6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
-      '@verbpatch/svelte-calendar':
-        specifier: latest
-        version: link:../../../packages/svelte-calendar
-      svelte:
-        specifier: ^5.0.0
-        version: 5.43.6
-      svelte-check:
-        specifier: ^4.0.0
-        version: 4.3.4(picomatch@4.0.3)(svelte@5.43.6)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.2
-        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
-
-  examples/Svelte/export:
+  examples/Svelte/ICS:
     dependencies:
       '@verbpatch/svelte-calendar':
         specifier: latest
@@ -670,6 +675,33 @@ importers:
         version: 5.43.6
       svelte-check:
         specifier: ^4.3.4
+        version: 4.3.4(picomatch@4.0.3)(svelte@5.43.6)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/Svelte/custom-view:
+    devDependencies:
+      '@sveltejs/adapter-auto':
+        specifier: ^3.0.0
+        version: 3.3.1(@sveltejs/kit@2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))
+      '@sveltejs/kit':
+        specifier: ^2.0.0
+        version: 2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^6.2.1
+        version: 6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      '@verbpatch/svelte-calendar':
+        specifier: latest
+        version: link:../../../packages/svelte-calendar
+      svelte:
+        specifier: ^5.0.0
+        version: 5.43.6
+      svelte-check:
+        specifier: ^4.0.0
         version: 4.3.4(picomatch@4.0.3)(svelte@5.43.6)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.3
@@ -715,6 +747,16 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Vanilla/ICS:
+    dependencies:
+      '@verbpatch/headless-calendar':
+        specifier: latest
+        version: link:../../../packages/headless-calendar
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Vanilla/custom-view:
     dependencies:
       '@verbpatch/headless-calendar':
@@ -735,29 +777,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
-  examples/Vuejs/custom-view:
-    dependencies:
-      '@verbpatch/vuejs-calendar':
-        specifier: latest
-        version: link:../../../packages/vuejs-calendar
-      vue:
-        specifier: ^3.4.21
-        version: 3.5.24(typescript@5.9.3)
-    devDependencies:
-      '@vitejs/plugin-vue':
-        specifier: ^5.0.4
-        version: 5.2.4(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))(vue@3.5.24(typescript@5.9.3))
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.2
-        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
-      vue-tsc:
-        specifier: ^2.0.6
-        version: 2.2.12(typescript@5.9.3)
-
-  examples/Vuejs/export:
+  examples/Vuejs/ICS:
     dependencies:
       '@verbpatch/vuejs-calendar':
         specifier: latest
@@ -784,6 +804,28 @@ importers:
       vue-tsc:
         specifier: ^3.1.3
         version: 3.1.3(typescript@5.9.3)
+
+  examples/Vuejs/custom-view:
+    dependencies:
+      '@verbpatch/vuejs-calendar':
+        specifier: latest
+        version: link:../../../packages/vuejs-calendar
+      vue:
+        specifier: ^3.4.21
+        version: 3.5.24(typescript@5.9.3)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.4
+        version: 5.2.4(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))(vue@3.5.24(typescript@5.9.3))
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+      vue-tsc:
+        specifier: ^2.0.6
+        version: 2.2.12(typescript@5.9.3)
 
   examples/Vuejs/minimal:
     dependencies:
@@ -4539,7 +4581,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
@@ -6991,10 +7033,10 @@ snapshots:
       '@babel/helper-compilation-targets': 7.27.2
       '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
       '@babel/helpers': 7.28.4
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.29.0
       '@babel/template': 7.27.2
       '@babel/traverse': 7.28.5
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
       convert-source-map: 2.0.0
       debug: 4.4.3
       gensync: 1.0.0-beta.2

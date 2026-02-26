@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useCalendar, ViewType, CalendarEvent } from '@verbpatch/react-calendar';
+import { component$, $ } from '@builder.io/qwik';
+import { useCalendar, type ViewType } from '@verbpatch/qwik-calendar';
 
 const formatRecurrence = (r: any) => {
   if (!r || r === 'never') return 'None';
@@ -81,7 +81,7 @@ const formatRecurrence = (r: any) => {
   return desc;
 };
 
-const CalendarDemo: React.FC = () => {
+export const App = component$(() => {
   const tzDate = new Date(new Date().setHours(20, 0, 0, 0));
   const tzEndDate = new Date(new Date().setHours(21, 0, 0, 0));
 
@@ -276,54 +276,71 @@ const CalendarDemo: React.FC = () => {
     goToToday,
     goToNext,
     changeView,
-    utils: { formatDate, formatLocalizedTime, isSameDay, daysofWeek },
+    utils,
     events,
     exportToICS,
     downloadICS,
+    importFromICS,
     getEventsForDate,
     timeSlotInterval,
   } = calendar;
 
+  const handleImport = $((e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        importFromICS(content);
+      };
+      reader.readAsText(file);
+    }
+  });
+
+  const renderViewText = () => {
+    if (view === 'month') return monthData?.monthName;
+    else if (view === 'week') return weekData?.weekRange;
+    else if (view === 'day') return dayData?.dayName;
+    else return 'Unkwown view';
+  };
+
   return (
     <>
-      <h1>React Calendar Export Example</h1>
+      <h1>Qwik Calendar ICS Example</h1>
 
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: '20px', 'align-items': 'flex-start' }}>
         <div style={{ flex: '0 0 840px' }}>
           <table
-            border={0}
+            border="0"
             width="840"
             cellSpacing="0"
-            style={{ height: '700px', borderLeft: '1px solid', borderTop: '1px solid' }}
+            style={{ height: '700px', 'border-left': '1px solid', 'border-top': '1px solid' }}
           >
             <thead>
               <tr>
-                <th colSpan={2} style={{ borderBottom: '1px solid' }}>
-                  <button type="button" onClick={goToPrevious}>
+                <th colSpan={2} style={{ 'border-bottom': '1px solid' }}>
+                  <button type="button" onClick$={() => goToPrevious()}>
                     {' '}
                     ←{' '}
                   </button>
-                  <button type="button" onClick={goToToday}>
+                  <button type="button" onClick$={() => goToToday()}>
                     {' '}
                     Today{' '}
                   </button>
-                  <button type="button" onClick={goToNext}>
+                  <button type="button" onClick$={() => goToNext()}>
                     {' '}
                     →{' '}
                   </button>
                 </th>
-                <th colSpan={3} style={{ borderBottom: '1px solid' }}>
-                  <h3>
-                    {view === 'month' ? monthData?.monthName : ''}
-                    {view === 'week' ? weekData?.weekRange : ''}
-                    {view === 'day' ? dayData?.dayName : ''}
-                  </h3>
+                <th colSpan={3} style={{ 'border-bottom': '1px solid' }}>
+                  <h3>{renderViewText()}</h3>
                 </th>
-                <th colSpan={2} style={{ borderBottom: '1px solid', borderRight: '1px solid' }}>
+                <th colSpan={2} style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}>
                   <select
                     value={view}
-                    onChange={(e) => {
-                      changeView(e.target.value as ViewType);
+                    onChange$={(e) => {
+                      changeView((e.target as HTMLSelectElement).value as ViewType);
                     }}
                   >
                     <option value="month">Month</option>
@@ -337,13 +354,13 @@ const CalendarDemo: React.FC = () => {
               {view === 'month' && monthData && (
                 <>
                   <tr>
-                    {daysofWeek('short').map((day) => (
+                    {utils?.daysofWeek('short').map((day) => (
                       <th
                         key={day}
                         style={{
                           width: '120px',
-                          borderRight: '1px solid',
-                          borderBottom: '1px solid',
+                          'border-right': '1px solid',
+                          'border-bottom': '1px solid',
                         }}
                       >
                         {day}
@@ -359,19 +376,19 @@ const CalendarDemo: React.FC = () => {
                             key={j}
                             style={{
                               color: !monthData.isCurrentMonth(date) ? 'gray' : undefined,
-                              fontWeight: monthData.isToday(date) ? 'bold' : 'normal',
-                              borderRight: '1px solid',
-                              borderBottom: '1px solid',
-                              verticalAlign: 'top',
+                              'font-weight': monthData.isToday(date) ? 'bold' : 'normal',
+                              'border-right': '1px solid',
+                              'border-bottom': '1px solid',
+                              'vertical-align': 'top',
                               height: '100px',
                             }}
                           >
-                            <div>{formatDate(date, 'd')}</div>
+                            <div>{utils?.formatDate(date, 'd')}</div>
                             {cellEvents.map((e) => (
                               <div
                                 key={e.id}
                                 style={{
-                                  fontSize: '10px',
+                                  'font-size': '10px',
                                   background: e.color || '#ccc',
                                   color: 'white',
                                   margin: '2px 0',
@@ -391,7 +408,7 @@ const CalendarDemo: React.FC = () => {
 
               {view === 'week' && weekData && (
                 <tr>
-                  <td colSpan={7} style={{ borderRight: '1px solid' }}>
+                  <td colSpan={7} style={{ 'border-right': '1px solid' }}>
                     <table cellPadding="5" cellSpacing="0" width="100%">
                       <tbody>
                         <tr>
@@ -399,24 +416,24 @@ const CalendarDemo: React.FC = () => {
                           {weekData.dates.map((date, i) => (
                             <td
                               key={i}
-                              style={{ fontWeight: weekData.isToday(date) ? 'bold' : 'normal' }}
+                              style={{ 'font-weight': weekData.isToday(date) ? 'bold' : 'normal' }}
                             >
-                              {formatDate(date, 'EEE d')}
+                              {utils?.formatDate(date, 'EEE d')}
                             </td>
                           ))}
                         </tr>
                         {/* All Day Row */}
                         <tr>
-                          <td style={{ borderBottom: '1px solid', fontSize: '11px' }}>All Day</td>
+                          <td style={{ 'border-bottom': '1px solid', 'font-size': '11px' }}>All Day</td>
                           {weekData.dates.map((date, i) => {
                             const allDayEvents = getEventsForDate(date).filter((e) => e.allDay);
                             return (
                               <td
                                 key={i}
                                 style={{
-                                  borderBottom: '1px solid',
-                                  borderLeft: '1px solid',
-                                  verticalAlign: 'top',
+                                  'border-bottom': '1px solid',
+                                  'border-left': '1px solid',
+                                  'vertical-align': 'top',
                                   background: '#fafafa',
                                 }}
                               >
@@ -424,12 +441,12 @@ const CalendarDemo: React.FC = () => {
                                   <div
                                     key={e.id}
                                     style={{
-                                      fontSize: '10px',
+                                      'font-size': '10px',
                                       background: e.color || '#ccc',
                                       color: 'white',
                                       margin: '1px 0',
                                       padding: '2px',
-                                      borderRadius: '2px',
+                                      'border-radius': '2px',
                                     }}
                                   >
                                     {e.title}
@@ -441,7 +458,7 @@ const CalendarDemo: React.FC = () => {
                         </tr>
                         {timeSlots.map((slot) => (
                           <tr key={slot.time}>
-                            <td style={{ borderBottom: '1px solid' }}>{slot.label}</td>
+                            <td style={{ 'border-bottom': '1px solid' }}>{slot.label}</td>
                             {weekData.dates.map((date, i) => {
                               const slotEvents = getEventsForDate(date).filter((event) => {
                                 if (event.allDay) return false;
@@ -459,17 +476,17 @@ const CalendarDemo: React.FC = () => {
                                 <td
                                   key={i}
                                   style={{
-                                    fontWeight: weekData.isToday(date) ? 'bold' : 'normal',
-                                    borderBottom: '1px solid',
-                                    borderLeft: '1px solid',
-                                    verticalAlign: 'top',
+                                    'font-weight': weekData.isToday(date) ? 'bold' : 'normal',
+                                    'border-bottom': '1px solid',
+                                    'border-left': '1px solid',
+                                    'vertical-align': 'top',
                                   }}
                                 >
                                   {slotEvents.map((e) => (
                                     <div
                                       key={e.id}
                                       style={{
-                                        fontSize: '10px',
+                                        'font-size': '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '1px 0',
@@ -496,13 +513,13 @@ const CalendarDemo: React.FC = () => {
                     <td
                       colSpan={7}
                       align="center"
-                      style={{ borderRight: '1px solid', borderBottom: '1px solid' }}
+                      style={{ 'border-right': '1px solid', 'border-bottom': '1px solid' }}
                     >
                       {dayData.dayName}
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={7} style={{ borderRight: '1px solid' }}>
+                    <td colSpan={7} style={{ 'border-right': '1px solid' }}>
                       <table width="100%" cellSpacing="0" style={{ height: '100%' }}>
                         <tbody>
                           {/* All Day Row */}
@@ -512,8 +529,8 @@ const CalendarDemo: React.FC = () => {
                               <td
                                 width="25%"
                                 style={{
-                                  borderBottom: '1px solid',
-                                  fontSize: '11px',
+                                  'border-bottom': '1px solid',
+                                  'font-size': '11px',
                                   padding: '5px',
                                 }}
                               >
@@ -521,7 +538,7 @@ const CalendarDemo: React.FC = () => {
                               </td>
                               <td
                                 style={{
-                                  borderBottom: '1px solid',
+                                  'border-bottom': '1px solid',
                                   background: '#fafafa',
                                   padding: '5px',
                                 }}
@@ -532,12 +549,12 @@ const CalendarDemo: React.FC = () => {
                                     <div
                                       key={e.id}
                                       style={{
-                                        fontSize: '10px',
+                                        'font-size': '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '2px 0',
                                         padding: '2px',
-                                        borderRadius: '2px',
+                                        'border-radius': '2px',
                                       }}
                                     >
                                       {e.title}
@@ -564,16 +581,16 @@ const CalendarDemo: React.FC = () => {
                               <tr key={slot.time}>
                                 <td
                                   width="25%"
-                                  style={{ borderBottom: '1px solid', verticalAlign: 'top' }}
+                                  style={{ 'border-bottom': '1px solid', 'vertical-align': 'top' }}
                                 >
                                   {slot.label}
                                 </td>
-                                <td style={{ borderBottom: '1px solid' }}>
+                                <td style={{ 'border-bottom': '1px solid' }}>
                                   {slotEvents.map((e) => (
                                     <div
                                       key={e.id}
                                       style={{
-                                        fontSize: '10px',
+                                        'font-size': '10px',
                                         background: e.color || '#ccc',
                                         color: 'white',
                                         margin: '1px 0',
@@ -597,42 +614,42 @@ const CalendarDemo: React.FC = () => {
           </table>
         </div>
 
-        <div style={{ flex: '1', minWidth: '300px', fontFamily: 'sans-serif' }}>
+        <div style={{ flex: '1', 'min-width': '300px', 'font-family': 'sans-serif' }}>
           <div
             style={{
               border: '1px solid #ccc',
               padding: '10px',
-              marginBottom: '20px',
-              maxHeight: '400px',
-              overflowY: 'auto',
+              'margin-bottom': '20px',
+              'max-height': '400px',
+              'overflow-y': 'auto',
             }}
           >
-            <h3 style={{ marginTop: 0 }}>Event List</h3>
-            <ul style={{ paddingLeft: '20px' }}>
+            <h3 style={{ 'margin-top': 0 }}>Event List</h3>
+            <ul style={{ 'padding-left': '20px' }}>
               {events.map((e) => {
                 let recurrenceInfo = formatRecurrence(e.recurring);
                 if (e.exdate && e.exdate.length > 0) {
-                  recurrenceInfo += ` (Excl: ${e.exdate.map((d) => formatDate(d)).join(', ')})`;
+                  recurrenceInfo += ` (Excl: ${e.exdate.map((d) => utils?.formatDate(d)).join(', ')})`;
                 }
                 if (e.rdate && e.rdate.length > 0) {
-                  recurrenceInfo += ` (Add: ${e.rdate.map((d) => formatDate(d)).join(', ')})`;
+                  recurrenceInfo += ` (Add: ${e.rdate.map((d) => utils?.formatDate(d)).join(', ')})`;
                 }
 
                 let timeDisplay = '';
                 if (e.allDay) {
-                  timeDisplay = `${formatDate(e.start)} All Day`;
-                  if (!isSameDay(e.start, e.end)) {
-                    timeDisplay = `${formatDate(e.start)} - ${formatDate(e.end)} All Day`;
+                  timeDisplay = `${utils?.formatDate(e.start)} All Day`;
+                  if (!utils?.isSameDay(e.start, e.end)) {
+                    timeDisplay = `${utils?.formatDate(e.start)} - ${utils?.formatDate(e.end)} All Day`;
                   }
                 } else {
-                  const startDate = formatDate(e.start);
-                  const startTime = formatLocalizedTime(e.start, undefined, undefined, false);
-                  if (isSameDay(e.start, e.end)) {
-                    const endTime = formatLocalizedTime(e.end, undefined, undefined, false);
+                  const startDate = utils?.formatDate(e.start);
+                  const startTime = utils?.formatLocalizedTime(e.start, undefined, undefined, false);
+                  if (utils?.isSameDay(e.start, e.end)) {
+                    const endTime = utils?.formatLocalizedTime(e.end, undefined, undefined, false);
                     timeDisplay = `${startDate} ${startTime} - ${endTime}`;
                   } else {
-                    const endDate = formatDate(e.end);
-                    const endTime = formatLocalizedTime(e.end, undefined, undefined, false);
+                    const endDate = utils?.formatDate(e.end);
+                    const endTime = utils?.formatLocalizedTime(e.end, undefined, undefined, false);
                     timeDisplay = `${startDate} ${startTime} - ${endDate} ${endTime}`;
                   }
                 }
@@ -641,34 +658,34 @@ const CalendarDemo: React.FC = () => {
                   <li
                     key={e.id}
                     style={{
-                      marginBottom: '10px',
-                      borderBottom: '1px solid #eee',
-                      paddingBottom: '5px',
+                      'margin-bottom': '10px',
+                      'border-bottom': '1px solid #eee',
+                      'padding-bottom': '5px',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <div style={{ display: 'flex', 'align-items': 'center', gap: '5px' }}>
                       <span
                         style={{
                           display: 'inline-block',
                           width: '10px',
                           height: '10px',
-                          backgroundColor: e.color || '#3174ad',
-                          borderRadius: '2px',
+                          'background-color': e.color || '#3174ad',
+                          'border-radius': '2px',
                         }}
                       ></span>
                       <strong>{e.title}</strong>
                     </div>
-                    <div style={{ fontSize: '0.85em', color: '#666', marginLeft: '15px' }}>
+                    <div style={{ 'font-size': '0.85em', color: '#666', 'margin-left': '15px' }}>
                       {timeDisplay}
                     </div>
                     {e.description && (
                       <div
                         style={{
-                          fontSize: '0.8em',
+                          'font-size': '0.8em',
                           color: '#555',
-                          marginLeft: '15px',
-                          marginTop: '2px',
-                          fontStyle: 'italic',
+                          'margin-left': '15px',
+                          'margin-top': '2px',
+                          'font-style': 'italic',
                         }}
                       >
                         {e.description}
@@ -677,10 +694,10 @@ const CalendarDemo: React.FC = () => {
                     {e.recurring && e.recurring !== 'never' && (
                       <div
                         style={{
-                          fontSize: '0.8em',
+                          'font-size': '0.8em',
                           color: '#007bff',
-                          marginTop: '2px',
-                          marginLeft: '15px',
+                          'margin-top': '2px',
+                          'margin-left': '15px',
                         }}
                       >
                         {recurrenceInfo}
@@ -689,10 +706,10 @@ const CalendarDemo: React.FC = () => {
                     {e.recurrenceId && (
                       <div
                         style={{
-                          fontSize: '0.8em',
+                          'font-size': '0.8em',
                           color: '#d63384',
-                          marginTop: '2px',
-                          marginLeft: '15px',
+                          'margin-top': '2px',
+                          'margin-left': '15px',
                         }}
                       >
                         Recurrence-ID:{' '}
@@ -710,21 +727,37 @@ const CalendarDemo: React.FC = () => {
             style={{
               border: '1px solid #ccc',
               padding: '10px',
-              maxHeight: '400px',
-              overflowY: 'auto',
+              'max-height': '400px',
+              'overflow-y': 'auto',
             }}
           >
-            <h3 style={{ marginTop: 0 }}>
-              ICS Output
-              <div style={{ marginBottom: '10px', float: 'right' }}>
-                <button onClick={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
+            <h3 style={{ 'margin-top': 0 }}>
+              ICS Tools
+              <div
+                style={{
+                  'margin-bottom': '10px',
+                  float: 'right',
+                  display: 'flex',
+                  gap: '10px',
+                }}
+              >
+                <div style={{ 'font-size': '12px' }}>
+                  <label style={{ display: 'block', 'margin-bottom': '2px' }}>Import:</label>
+                  <input
+                    type="file"
+                    accept=".ics"
+                    onChange$={handleImport}
+                    style={{ 'font-size': '10px' }}
+                  />
+                </div>
+                <button onClick$={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
               </div>
             </h3>
             <pre
               style={{
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word',
-                fontSize: '11px',
+                'white-space': 'pre-wrap',
+                'word-wrap': 'break-word',
+                'font-size': '11px',
                 background: '#f5f5f5',
                 padding: '5px',
               }}
@@ -736,6 +769,4 @@ const CalendarDemo: React.FC = () => {
       </div>
     </>
   );
-};
-
-export default CalendarDemo;
+});

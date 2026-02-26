@@ -326,4 +326,17 @@ export class App {
   formatRecurrenceId(id: any): string {
     return id instanceof Date ? id.toISOString() : id;
   }
+
+  handleImport(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        this.cal.importFromICS(content);
+      };
+      reader.readAsText(file);
+    }
+  }
 }
