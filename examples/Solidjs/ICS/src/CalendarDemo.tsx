@@ -749,10 +749,22 @@ const CalendarDemo: Component = () => {
               >
                 <h3 style={{ 'margin-top': 0 }}>
                   ICS Tools
-                  <div style={{ 'margin-bottom': '10px', float: 'right', display: 'flex', gap: '10px' }}>
+                  <div
+                    style={{
+                      'margin-bottom': '10px',
+                      float: 'right',
+                      display: 'flex',
+                      gap: '10px',
+                    }}
+                  >
                     <div style={{ 'font-size': '12px' }}>
                       <label style={{ display: 'block', 'margin-bottom': '2px' }}>Import:</label>
-                      <input type="file" accept=".ics" onChange={handleImport} style={{ 'font-size': '10px' }} />
+                      <input
+                        type="file"
+                        accept=".ics"
+                        onChange={handleImport}
+                        style={{ 'font-size': '10px' }}
+                      />
                     </div>
                     <button onClick={() => cal().downloadICS('my-calendar-events.ics')}>
                       Export to ICS

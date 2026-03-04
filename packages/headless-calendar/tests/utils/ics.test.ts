@@ -13,83 +13,160 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
   describe('exportToICS', () => {
     it('covers formatRRULE all branches', () => {
       // interval
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'daily', every: 2 } }])).toContain('INTERVAL=2');
-      
+      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'daily', every: 2 } }])).toContain(
+        'INTERVAL=2',
+      );
+
       // count
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'daily', every: 1, count: 5 } }])).toContain('COUNT=5');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'daily', every: 1, count: 5 } }]),
+      ).toContain('COUNT=5');
 
       // until
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'daily', every: 1, end: new Date(Date.UTC(2024, 0, 20)) } }])).toContain('UNTIL=20240120');
+      expect(
+        exportToICS([
+          {
+            ...baseEvent,
+            recurring: { repeat: 'daily', every: 1, end: new Date(Date.UTC(2024, 0, 20)) },
+          },
+        ]),
+      ).toContain('UNTIL=20240120');
 
       // weekly prefix (numeric weekDays, week)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [1], week: 2 } }])).toContain('BYDAY=2MO');
-      
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [1], week: 2 } },
+        ]),
+      ).toContain('BYDAY=2MO');
+
       // weekly prefix (string weekDays, week -1)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: ['FR'], week: -1 } }])).toContain('BYDAY=-1FR');
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: ['FR'], week: -1 } },
+        ]),
+      ).toContain('BYDAY=-1FR');
 
       // weekly WITHOUT week prefix
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [1, 'WE'] } }])).toContain('BYDAY=MO,WE');
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [1, 'WE'] } },
+        ]),
+      ).toContain('BYDAY=MO,WE');
 
       // empty weekDays array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [] } }])).not.toContain('BYDAY=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, weekDays: [] } }]),
+      ).not.toContain('BYDAY=');
 
       // byDay array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: ['MO'] } }])).toContain('BYDAY=MO');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: ['MO'] } }]),
+      ).toContain('BYDAY=MO');
       // byDay array with numbers
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: [2] } }])).toContain('BYDAY=TU');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: [2] } }]),
+      ).toContain('BYDAY=TU');
       // empty byDay array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: [] } }])).not.toContain('BYDAY=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byDay: [] } }]),
+      ).not.toContain('BYDAY=');
 
       // day property (number)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: 10 } }])).toContain('BYMONTHDAY=10');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: 10 } }]),
+      ).toContain('BYMONTHDAY=10');
       // day property (array)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: [10, 12] } }])).toContain('BYMONTHDAY=10,12');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: [10, 12] } }]),
+      ).toContain('BYMONTHDAY=10,12');
       // empty day array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: [] } }])).not.toContain('BYMONTHDAY=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, day: [] } }]),
+      ).not.toContain('BYMONTHDAY=');
 
       // byMonthDay array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byMonthDay: [1, -1] } }])).toContain('BYMONTHDAY=1,-1');
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'monthly', every: 1, byMonthDay: [1, -1] } },
+        ]),
+      ).toContain('BYMONTHDAY=1,-1');
       // empty byMonthDay array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byMonthDay: [] } }])).not.toContain('BYMONTHDAY=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, byMonthDay: [] } }]),
+      ).not.toContain('BYMONTHDAY=');
 
       // month property (number)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: 5 } }])).toContain('BYMONTH=6');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: 5 } }]),
+      ).toContain('BYMONTH=6');
       // month property (array)
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: [5, 6] } }])).toContain('BYMONTH=6,7');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: [5, 6] } }]),
+      ).toContain('BYMONTH=6,7');
       // empty month array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: [] } }])).not.toContain('BYMONTH=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, month: [] } }]),
+      ).not.toContain('BYMONTH=');
 
       // byMonth array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byMonth: [0, 11] } }])).toContain('BYMONTH=1,12');
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'yearly', every: 1, byMonth: [0, 11] } },
+        ]),
+      ).toContain('BYMONTH=1,12');
       // empty byMonth array
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byMonth: [] } }])).not.toContain('BYMONTH=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byMonth: [] } }]),
+      ).not.toContain('BYMONTH=');
 
       // byYearDay
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byYearDay: [100] } }])).toContain('BYYEARDAY=100');
+      expect(
+        exportToICS([
+          { ...baseEvent, recurring: { repeat: 'yearly', every: 1, byYearDay: [100] } },
+        ]),
+      ).toContain('BYYEARDAY=100');
       // empty byYearDay
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byYearDay: [] } }])).not.toContain('BYYEARDAY=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byYearDay: [] } }]),
+      ).not.toContain('BYYEARDAY=');
 
       // byWeekNo
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byWeekNo: [20] } }])).toContain('BYWEEKNO=20');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byWeekNo: [20] } }]),
+      ).toContain('BYWEEKNO=20');
       // empty byWeekNo
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byWeekNo: [] } }])).not.toContain('BYWEEKNO=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'yearly', every: 1, byWeekNo: [] } }]),
+      ).not.toContain('BYWEEKNO=');
 
       // bySetPos
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, bySetPos: [-1] } }])).toContain('BYSETPOS=-1');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, bySetPos: [-1] } }]),
+      ).toContain('BYSETPOS=-1');
       // empty bySetPos
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, bySetPos: [] } }])).not.toContain('BYSETPOS=');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'monthly', every: 1, bySetPos: [] } }]),
+      ).not.toContain('BYSETPOS=');
 
       // wkst
-      expect(exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, wkst: 'SU' } }])).toContain('WKST=SU');
+      expect(
+        exportToICS([{ ...baseEvent, recurring: { repeat: 'weekly', every: 1, wkst: 'SU' } }]),
+      ).toContain('WKST=SU');
     });
 
     it('covers recurrenceId Date branch', () => {
-      expect(exportToICS([{ ...baseEvent, recurrenceId: new Date(Date.UTC(2024, 0, 15, 10, 0, 0)) }])).toContain('RECURRENCE-ID:20240115T100000Z');
-      expect(exportToICS([{ ...baseEvent, recurrenceId: 'STRINGID' }])).toContain('RECURRENCE-ID:STRINGID');
+      expect(
+        exportToICS([{ ...baseEvent, recurrenceId: new Date(Date.UTC(2024, 0, 15, 10, 0, 0)) }]),
+      ).toContain('RECURRENCE-ID:20240115T100000Z');
+      expect(exportToICS([{ ...baseEvent, recurrenceId: 'STRINGID' }])).toContain(
+        'RECURRENCE-ID:STRINGID',
+      );
     });
 
     it('covers line folding', () => {
-      expect(exportToICS([{ ...baseEvent, description: 'A'.repeat(80) + ' ' + 'B'.repeat(80) }])).toContain('\r\n ');
+      expect(
+        exportToICS([{ ...baseEvent, description: 'A'.repeat(80) + ' ' + 'B'.repeat(80) }]),
+      ).toContain('\r\n ');
     });
 
     it('covers all fields', () => {
@@ -102,7 +179,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         transparency: 'OPAQUE',
         color: '#f00',
         exdate: [new Date(Date.UTC(2024, 0, 16))],
-        rdate: [new Date(Date.UTC(2024, 0, 17))]
+        rdate: [new Date(Date.UTC(2024, 0, 17))],
       };
       const ics = exportToICS([e]);
       expect(ics).toContain('SUMMARY:Title\\, with\\; semi\\nand newline');
@@ -123,7 +200,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         end: new Date(Date.UTC(2024, 0, 15)),
         exdate: [new Date(Date.UTC(2024, 0, 16))],
         rdate: [new Date(Date.UTC(2024, 0, 17))],
-        recurrenceId: new Date(Date.UTC(2024, 0, 15))
+        recurrenceId: new Date(Date.UTC(2024, 0, 15)),
       };
       const ics = exportToICS([e]);
       expect(ics).toContain('DTSTART;VALUE=DATE:20240115');
@@ -161,7 +238,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'X-COLOR:red',
         'LOCATION:Loc',
         'URL:http://u.com',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       expect(importFromICS(ics)).toHaveLength(0);
     });
@@ -176,7 +253,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'DTSTART:20240115T100000Z',
         'DTEND:20240115T110000Z',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const events = importFromICS(ics);
       expect(events[0].id).toBe('U123');
@@ -195,7 +272,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'BEGIN:VEVENT',
         'RRULE:',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const events = importFromICS(ics);
       const r = events[0].recurring as any;
@@ -220,7 +297,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'DTSTART;VALUE=DATE:20240115',
         'DTEND;VALUE=DATE:20240116',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const e = importFromICS(ics)[0];
       expect(e.allDay).toBe(true);
@@ -234,7 +311,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'BEGIN:VEVENT',
         'DTSTART:20240115T100000',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const e = importFromICS(ics)[0];
       expect(e.start.getFullYear()).toBe(2024);
@@ -253,7 +330,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'X-COLOR:red',
         'RECURRENCE-ID:20240115T100000Z',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const e = importFromICS(ics)[0];
       expect(e.exdate).toHaveLength(2);
@@ -273,7 +350,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'SUMMARY:A\\, B\\; C\\nN',
         'DESCRIPTION:D\\N E',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       const e = importFromICS(ics)[0];
       expect(e.title).toBe('A, B; C\nN');
@@ -289,7 +366,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'SUMMARY:Folded ',
         ' Text',
         'END:VEVENT',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       expect(importFromICS(ics)[0].title).toBe('Folded Text');
     });
@@ -317,7 +394,7 @@ describe('ICS Utilities (RFC 5545) - 100% Coverage Target', () => {
         'X-COLOR:red',
         'LOCATION:Loc',
         'URL:http://u.com',
-        'END:VCALENDAR'
+        'END:VCALENDAR',
       ].join('\r\n');
       expect(importFromICS(ics)).toHaveLength(0);
     });

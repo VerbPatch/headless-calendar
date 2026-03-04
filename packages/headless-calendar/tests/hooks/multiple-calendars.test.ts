@@ -28,8 +28,8 @@ describe('multiple calendars support', () => {
 
     // Navigate cal1
     cal1.goToNext();
-    
-    // Refresh instances (since they are hooks, in a real app they'd re-render, 
+
+    // Refresh instances (since they are hooks, in a real app they'd re-render,
     // here we call again with same options to get latest state from cache)
     const cal1Updated = useCalendar({
       calendarId: 'cal-1',
@@ -49,7 +49,7 @@ describe('multiple calendars support', () => {
 
   it('should conflict states when same calendarId (or default) is used', () => {
     const date1 = new Date(2024, 0, 1);
-    
+
     // Both use default-calendar ID
     const cal1 = useCalendar({
       defaultDate: date1,
@@ -69,7 +69,7 @@ describe('multiple calendars support', () => {
     });
 
     // cal2 should have been affected because they share the same state ID
-    expect(cal2Updated.currentDate.getMonth()).toBe(1); 
+    expect(cal2Updated.currentDate.getMonth()).toBe(1);
   });
 
   it('should maintain independent events', () => {
@@ -77,6 +77,7 @@ describe('multiple calendars support', () => {
       calendarId: 'cal-1',
     });
 
+    // eslint-disable-next-line
     const cal2 = useCalendar({
       calendarId: 'cal-2',
     });

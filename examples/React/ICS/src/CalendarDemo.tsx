@@ -732,7 +732,12 @@ const CalendarDemo: React.FC = () => {
               <div style={{ marginBottom: '10px', float: 'right', display: 'flex', gap: '10px' }}>
                 <div style={{ fontSize: '12px' }}>
                   <label style={{ display: 'block', marginBottom: '2px' }}>Import:</label>
-                  <input type="file" accept=".ics" onChange={handleImport} style={{ fontSize: '10px' }} />
+                  <input
+                    type="file"
+                    accept=".ics"
+                    onChange={handleImport}
+                    style={{ fontSize: '10px' }}
+                  />
                 </div>
                 <button onClick={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
               </div>

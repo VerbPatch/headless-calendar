@@ -336,7 +336,10 @@ export const App = component$(() => {
                 <th colSpan={3} style={{ 'border-bottom': '1px solid' }}>
                   <h3>{renderViewText()}</h3>
                 </th>
-                <th colSpan={2} style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}>
+                <th
+                  colSpan={2}
+                  style={{ 'border-bottom': '1px solid', 'border-right': '1px solid' }}
+                >
                   <select
                     value={view}
                     onChange$={(e) => {
@@ -424,7 +427,9 @@ export const App = component$(() => {
                         </tr>
                         {/* All Day Row */}
                         <tr>
-                          <td style={{ 'border-bottom': '1px solid', 'font-size': '11px' }}>All Day</td>
+                          <td style={{ 'border-bottom': '1px solid', 'font-size': '11px' }}>
+                            All Day
+                          </td>
                           {weekData.dates.map((date, i) => {
                             const allDayEvents = getEventsForDate(date).filter((e) => e.allDay);
                             return (
@@ -643,7 +648,12 @@ export const App = component$(() => {
                   }
                 } else {
                   const startDate = utils?.formatDate(e.start);
-                  const startTime = utils?.formatLocalizedTime(e.start, undefined, undefined, false);
+                  const startTime = utils?.formatLocalizedTime(
+                    e.start,
+                    undefined,
+                    undefined,
+                    false,
+                  );
                   if (utils?.isSameDay(e.start, e.end)) {
                     const endTime = utils?.formatLocalizedTime(e.end, undefined, undefined, false);
                     timeDisplay = `${startDate} ${startTime} - ${endTime}`;
@@ -750,7 +760,9 @@ export const App = component$(() => {
                     style={{ 'font-size': '10px' }}
                   />
                 </div>
-                <button onClick$={() => downloadICS('my-calendar-events.ics')}>Export to ICS</button>
+                <button onClick$={() => downloadICS('my-calendar-events.ics')}>
+                  Export to ICS
+                </button>
               </div>
             </h3>
             <pre

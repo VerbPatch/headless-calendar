@@ -500,7 +500,10 @@ export class CalendarDemo extends LitElement {
               ${getEventsForDate(date).filter((e) => e.allDay).length > 0
                 ? html`
                     <tr>
-                      <td width="25%" style="border-bottom: 1px solid; font-size: 11px; padding: 5px;">
+                      <td
+                        width="25%"
+                        style="border-bottom: 1px solid; font-size: 11px; padding: 5px;"
+                      >
                         All Day
                       </td>
                       <td style="border-bottom: 1px solid; background: #fafafa; padding: 5px;">
@@ -625,7 +628,9 @@ export class CalendarDemo extends LitElement {
                 }
 
                 return html`
-                  <li style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+                  <li
+                    style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;"
+                  >
                     <div style="display: flex; align-items: center; gap: 5px;">
                       <span
                         style="display: inline-block; width: 10px; height: 10px; background-color: ${e.color ||
