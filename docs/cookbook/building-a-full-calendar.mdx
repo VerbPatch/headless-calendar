@@ -1,0 +1,197 @@
+---
+title: Building a Full Calendar
+description: A comprehensive example combining multiple views, event management, drag-and-drop, and ICS integration.
+---
+
+# Building a Full Calendar
+
+This cookbook recipe demonstrates how to bring together the various features of Headless Calendar to build a complete, interactive calendar application. This example includes view switching, navigation, event rendering, drag-and-drop rescheduling, and ICS import/export.
+
+## The Strategy
+
+To build a full calendar, we will:
+
+1.  **Initialize State**: Use `useCalendar` to set up our initial events and configuration.
+2.  **Build a Toolbar**: Create a header area containing navigation controls, view switchers, and import/export buttons.
+3.  **Handle Views**: Conditionally render a Month Grid or a Time Grid (for Week/Day views) based on the current `view` state.
+4.  **Integrate Drag and Drop**: Wrap our events and drop targets with the provided drag-and-drop helper props.
+
+## Complete Example (React)
+
+<CodeBlock>
+```tsx
+import React, { useState } from 'react';
+import { useCalendar, importFromICS, exportToICS } from '@verbpatch/react-calendar';
+
+function FullCalendar() {
+  const {
+    view,
+    changeView,
+    currentDate,
+    goToNext,
+    goToPrevious,
+    goToToday,
+    monthData,
+    weekData,
+    timeSlots,
+    visibleEvents,
+    events,
+    setEvents,
+    getDragProps,
+    getDropProps,
+    updateEvent,
+    utils
+  } = useCalendar({
+    defaultView: 'month',
+    initialEvents: [
+      { id: '1', title: 'Team Meeting', start: new Date(new Date().setHours(10, 0, 0, 0)), end: new Date(new Date().setHours(11, 0, 0, 0)), color: '#4f46e5' },
+    ],
+    onEventMove: (eventId, newStart, newEnd) => {
+      updateEvent(eventId, { start: newStart, end: newEnd });
+    }
+  });
+
+  const handleExport = () => {
+    const icsData = exportToICS(events);
+    const blob = new Blob([icsData], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-calendar.ics';
+    a.click();
+  };
+
+  const handleImport = async (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const text = await file.text();
+      const importedEvents = importFromICS(text);
+      setEvents([...events, ...importedEvents]);
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: 'sans-serif', color: '#333' }}>
+      {/* Toolbar */}
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
+        <div>
+          <button onClick={goToPrevious} style={{ marginRight: '0.5rem' }}>&larr; Prev</button>
+          <button onClick={goToToday} style={{ marginRight: '0.5rem' }}>Today</button>
+          <button onClick={goToNext}>Next &rarr;</button>
+        </div>
+        
+        <h2 style={{ margin: 0 }}>
+          {view === 'month' && monthData?.monthName}
+          {view === 'week' && weekData?.weekRange}
+          {view === 'day' && utils.formatDate(currentDate, 'MMMM d, yyyy')}
+        </h2>
+
+        <div>
+          <select value={view} onChange={(e) => changeView(e.target.value)} style={{ marginRight: '1rem', padding: '4px' }}>
+            <option value="month">Month</option>
+            <option value="week">Week</option>
+            <option value="day">Day</option>
+          </select>
+          <button onClick={handleExport} style={{ marginRight: '0.5rem' }}>Export ICS</button>
+          <label style={{ cursor: 'pointer', backgroundColor: '#eee', padding: '4px 8px', border: '1px solid #ccc', borderRadius: '4px' }}>
+            Import ICS
+            <input type="file" accept=".ics" onChange={handleImport} style={{ display: 'none' }} />
+          </label>
+        </div>
+      </header>
+
+      {/* Calendar Body */}
+      <div style={{ border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
+        
+        {/* Month View Rendering */}
+        {view === 'month' && monthData && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', backgroundColor: '#ddd', gap: '1px' }}>
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} style={{ backgroundColor: '#f8f9fa', padding: '0.5rem', textAlign: 'center', fontWeight: 'bold' }}>{day}</div>
+            ))}
+            {monthData.weeks.map((week, wIndex) => (
+              <React.Fragment key={wIndex}>
+                {week.map((date, dIndex) => (
+                  <div
+                    key={dIndex}
+                    {...getDropProps({ date })}
+                    style={{
+                      minHeight: '120px',
+                      backgroundColor: monthData.isToday(date) ? '#f0f7ff' : 'white',
+                      padding: '0.5rem',
+                      opacity: monthData.isCurrentMonth(date) ? 1 : 0.4,
+                    }}
+                  >
+                    <div style={{ textAlign: 'right', marginBottom: '4px' }}>{date.getDate()}</div>
+                    {/* Render events for this day */}
+                    {visibleEvents.filter(e => utils.isSameDay(e.start, date)).map(event => (
+                      <div
+                        key={event.id}
+                        {...getDragProps(event)}
+                        style={{
+                          backgroundColor: event.color || '#3174ad',
+                          color: 'white',
+                          padding: '2px 4px',
+                          borderRadius: '4px',
+                          fontSize: '0.75rem',
+                          marginBottom: '2px',
+                          cursor: 'grab',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis'
+                        }}
+                      >
+                        {event.title}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </React.Fragment>
+            ))}
+          </div>
+        )}
+
+        {/* Week/Day View Rendering */}
+        {(view === 'week' || view === 'day') && weekData && (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* Header Row */}
+            <div style={{ display: 'flex', borderBottom: '1px solid #ddd', backgroundColor: '#f8f9fa' }}>
+              <div style={{ width: '60px', flexShrink: 0 }}></div>
+              {view === 'week' ? weekData.dates.map(date => (
+                <div key={date.toISOString()} style={{ flex: 1, padding: '0.5rem', textAlign: 'center', borderLeft: '1px solid #ddd', fontWeight: weekData.isToday(date) ? 'bold' : 'normal' }}>
+                  {utils.formatDate(date, 'EEE, MMM d')}
+                </div>
+              )) : (
+                <div style={{ flex: 1, padding: '0.5rem', textAlign: 'center', borderLeft: '1px solid #ddd', fontWeight: 'bold' }}>
+                  {utils.formatDate(currentDate, 'EEEE, MMMM d')}
+                </div>
+              )}
+            </div>
+
+            {/* Time Slots Grid */}
+            <div style={{ height: '600px', overflowY: 'auto' }}>
+              {timeSlots.map(slot => (
+                <div key={slot.time} style={{ display: 'flex', height: '48px', borderBottom: '1px solid #eee' }}>
+                  <div style={{ width: '60px', flexShrink: 0, textAlign: 'right', paddingRight: '0.5rem', fontSize: '0.75rem', color: '#666', transform: 'translateY(-0.5rem)' }}>
+                    {slot.label}
+                  </div>
+                  {(view === 'week' ? weekData.dates : [currentDate]).map(date => (
+                    <div 
+                      key={date.toISOString()} 
+                      {...getDropProps({ date, time: slot.time })}
+                      style={{ flex: 1, borderLeft: '1px solid #eee', position: 'relative' }}
+                    >
+                      {/* Note: Absolute positioning logic for events would go here based on the slot time */}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>

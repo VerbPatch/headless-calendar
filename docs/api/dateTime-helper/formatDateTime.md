@@ -5,9 +5,9 @@ description: Formats a date and time object into a string based on the specified
 
 # formatDateTime()
 
-> **formatDateTime**(`date`, `options?`): `string`
+> **formatDateTime**(`date`, `format?`, `locale?`, `timeZone?`): `string`
 
-Defined in: [utils/date.ts:148](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L148)
+Defined in: [utils/date.ts:141](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L141)
 
 Formats a date and time object into a string based on the specified format, locale, and timezone.
 
@@ -19,23 +19,19 @@ Formats a date and time object into a string based on the specified format, loca
 
 The date object to format.
 
-### options?
+### format?
 
-Formatting options.
-
-#### format?
-
-`string`
+`string` = `'yyyy-MM-ddTHH:mm:ss'`
 
 The format string (e.g., "yyyy-MM-dd HH:mm:ss").
 
-#### locale?
+### locale?
 
 `string`
 
 The locale to use for formatting.
 
-#### timeZone?
+### timeZone?
 
 `string`
 
@@ -50,9 +46,5 @@ The timezone to use for formatting.
 ## Example
 
 ```ts
-formatDateTime(new Date(), {
- format: "yyyy-MM-dd HH:mm:ss",
- locale: "en-US",
- timeZone: "America/New_York"
-});
+formatDateTime(new Date(), "yyyy-MM-dd HH:mm:ss", "en-US", "America/New_York");
 ```

@@ -1,0 +1,140 @@
+---
+title: Event Styling and Positioning
+description: Tips and strategies for styling and positioning calendar events, including overlapping and multi-day events.
+---
+
+# Event Styling and Positioning
+
+One of the biggest advantages of Headless Calendar is that you have complete control over how events are styled and positioned within your UI. This allows for highly customized and visually appealing calendar experiences.
+
+## Basic Styling
+
+You can use the properties in each `CalendarEvent` to apply basic styles, such as background color, text color, and borders.
+
+<CodeBlock>
+```tsx
+function Event({ event }) {
+  return (
+    <div
+      style={{ backgroundColor: event.color || '#3174ad', padding: '4px', borderRadius: '4px', color: 'white' }}
+    >
+      <div style={{ fontWeight: 'bold', fontSize: '0.9em' }}>{event.title}</div>
+      <div style={{ fontSize: '0.8em' }}>
+        {event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>
+
+## Positioning Events in Time-Grid Views (Day/Week)
+
+In views with time slots, events are typically positioned absolutely based on their start time and duration.
+
+### 1. Calculate Top Position
+
+Determine the vertical offset of the event from the top of the grid.
+
+<CodeBlock>
+```typescript
+const top = (event.start.getHours() * 60 + event.start.getMinutes() - startHour * 60) / (totalHours * 60) * 100;
+```
+</CodeBlock>
+
+### 2. Calculate Height
+
+Determine the height of the event based on its duration.
+
+<CodeBlock>
+```typescript
+const durationInMinutes = (event.end.getTime() - event.start.getTime()) / (1000 * 60);
+const height = (durationInMinutes / (totalHours * 60)) * 100;
+```
+</CodeBlock>
+
+## Handling Overlapping Events
+
+When multiple events occur at the same time, you need logic to prevent them from completely covering each other. A common approach is to use "event levels" or "columns."
+
+### 1. Group Overlapping Events
+
+Use the `getOverlappingEvents` utility to find groups of events that conflict.
+
+<CodeBlock>
+```typescript
+import { getOverlappingEvents } from '@verbpatch/headless-calendar';
+
+const groups = getOverlappingEvents(visibleEvents);
+```
+</CodeBlock>
+
+### 2. Assign Width and Horizontal Position
+
+For each event in a group, calculate its width and left offset based on its position within the group.
+
+<CodeBlock>
+```typescript
+const width = 100 / groupSize;
+const left = indexInGroup * width;
+```
+</CodeBlock>
+
+## Multi-Day and All-Day Events
+
+Multi-day and all-day events are often displayed in a separate "all-day" section at the top of the calendar.
+
+### 1. Identify Multi-Day Events
+
+Use the `isMultiDayEvent` or `isAllDayEvent` utilities to filter events for the all-day section.
+
+### 2. Render in a Dedicated Row
+
+Render these events as horizontal bars that span across multiple day columns.
+
+<CodeBlock>
+```tsx
+<div style={{ position: 'relative', height: '24px', marginBottom: '2px' }}>
+  {allDayEvents.map(event => (
+    <div
+      key={event.id}
+      style={{
+        position: 'absolute',
+        width: `${eventDurationInDays * 100 / 7}%`,
+        left: `${startDayOffset * 100 / 7}%`,
+        backgroundColor: event.color || '#3174ad',
+        color: 'white',
+        padding: '2px 4px',
+        borderRadius: '3px',
+        fontSize: '0.8em',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+      }}
+    >
+      {event.title}
+    </div>
+  ))}
+</div>
+```
+</CodeBlock>
+
+## Interactive Styling
+
+Apply different styles to events based on their state, such as when they are being dragged or when they are selected.
+
+<CodeBlock>
+```tsx
+const { draggedEvent } = useCalendar();
+
+const isBeingDragged = draggedEvent?.id === event.id;
+
+<div style={{ opacity: isBeingDragged ? 0.5 : 1 }}>
+  {event.title}
+</div>
+```
+</CodeBlock>
+
+## Accessibility (a11y)
+
+Don't forget to include appropriate ARIA attributes for your events, such as `role="button"` and `aria-label`, to ensure they are accessible to screen readers.

@@ -1,0 +1,112 @@
+---
+title: Building a Weekday View
+description: Learn how to build a weekday view (Monday-Friday) using custom views.
+---
+
+# Building a Weekday View
+
+A weekday view (or work week view) is a common requirement for business and scheduling applications. It displays a multi-column layout, similar to a standard week view, but typically excludes weekends (Saturday and Sunday). 
+
+Headless Calendar makes this simple using the powerful custom view configuration.
+
+## Configuration
+
+To create a weekday view, we use the `'custom'` view type combined with the `includeSpecificDays` property in `customViewOptions`.
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: {
+    type: 'week',
+    count: 1,
+    includeSpecificDays: [1, 2, 3, 4, 5] // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri
+  },
+  timeSlotInterval: 60,
+  startHour: 8, // Often work weeks start at 8 or 9 AM
+  endHour: 18,
+});
+```
+</CodeBlock>
+
+By setting `type: 'week'` and providing `includeSpecificDays`, the core engine will automatically filter out the weekends from the `visibleDates` and recalculate navigation appropriately.
+
+## Using the Data
+
+When you configure this custom view, the data you use to render the grid will be slightly different from a standard week view. Instead of using `weekData` (which is built for standard 7-day structures), you should rely on `visibleDates` and `timeSlots`.
+
+* `visibleDates`: An array of exactly 5 `Date` objects representing Monday through Friday.
+* `timeSlots`: The time divisions for the view based on your `startHour` and `endHour`.
+
+## Example (React)
+
+Here is how you might render a 5-day grid using inline styles.
+
+<CodeBlock>
+```tsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function WeekdayView() {
+  const { visibleDates, timeSlots, goToPrevious, goToNext, utils } = useCalendar({
+    defaultView: 'custom',
+    customViewOptions: {
+      type: 'week',
+      count: 1,
+      includeSpecificDays: [1, 2, 3, 4, 5]
+    },
+    startHour: 9,
+    endHour: 17,
+  });
+
+  if (!visibleDates || visibleDates.length === 0) return null;
+
+  // Derive a header label from the visible dates
+  const headerLabel = `${utils.formatDate(visibleDates[0], 'MMM dd')} - ${utils.formatDate(visibleDates[visibleDates.length - 1], 'MMM dd, yyyy')}`;
+
+  return (
+    <div>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <button onClick={goToPrevious}>Prev Week</button>
+        <h2>{headerLabel}</h2>
+        <button onClick={goToNext}>Next Week</button>
+      </header>
+
+      {/* Header row with day names */}
+      <div style={{ display: 'flex', borderBottom: '1px solid #eee', paddingBottom: '0.5rem' }}>
+        <div style={{ width: '60px' }}></div> {/* Spacer for time labels */}
+        {visibleDates.map(date => (
+          <div 
+            key={date.toISOString()} 
+            style={{ flex: 1, textAlign: 'center', fontWeight: utils.isToday(date) ? 'bold' : 'normal', color: utils.isToday(date) ? 'blue' : 'inherit' }}
+          >
+            {utils.formatDate(date, 'EEE, MMM d')}
+          </div>
+        ))}
+      </div>
+
+      {/* Grid container */}
+      <div style={{ position: 'relative' }}>
+        {timeSlots.map(slot => (
+          <div key={slot.time} style={{ display: 'flex', borderBottom: '1px solid #eee', height: '48px' }}>
+            <div style={{ width: '60px', textAlign: 'right', paddingRight: '0.5rem', fontSize: '0.8rem', color: '#666' }}>
+              {slot.label}
+            </div>
+            {visibleDates.map(date => (
+              <div key={date.toISOString()} style={{ flex: 1, borderLeft: '1px solid #eee' }}>
+                {/* Find and render events in this slot matching `date` */}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>
+
+## Key Takeaways
+
+* **Flexibility**: Custom views are not limited to generic offsets; they can structurally reshape the data provided by the calendar engine.
+* **Navigation**: Even though only 5 days are displayed, `goToNext()` and `goToPrevious()` will properly advance by a full 7-day week, keeping the view aligned with actual calendar weeks.
+* **`visibleDates`**: In custom views, always use the generic `visibleDates` array for your column mappings rather than `weekData`.

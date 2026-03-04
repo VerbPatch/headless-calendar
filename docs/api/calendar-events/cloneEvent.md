@@ -7,7 +7,7 @@ description: Creates a deep clone of a calendar event, assigning a new unique ID
 
 > **cloneEvent**(`event`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)
 
-Defined in: [utils/events.ts:549](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/events.ts#L549)
+Defined in: [utils/events.ts:549](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/events.ts#L549)
 
 Creates a deep clone of a calendar event, assigning a new unique ID.
 

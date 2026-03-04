@@ -1,0 +1,125 @@
+---
+title: Drag and Drop
+description: Implementing drag-and-drop functionality for your calendar events.
+---
+
+# Drag and Drop
+
+Headless Calendar includes built-in support for drag-and-drop functionality, allowing users to intuitively reschedule events by dragging them across the calendar UI. Because it's a headless library, it provides the logic and state, while you control the implementation of the drag-and-drop behavior.
+
+## How It Works
+
+The drag-and-drop system is managed by the `useDragDrop` hook, which is integrated into the main `useCalendar` hook. It handles the state of the currently dragged event and calculates the new date/time when dropped.
+
+### Key State and Methods
+
+* `draggedEvent`: The event that's currently being dragged.
+* `getDragProps(event)`: A helper method that returns standard HTML5 drag-and-drop attributes for a draggable event.
+* `getDropProps(date, time?)`: A helper method that returns standard HTML5 drag-and-drop attributes for a drop target.
+
+## Independent Hook Usage
+
+If you are using the `useDragDrop` hook independently of `useCalendar`.
+
+<CodeBlock>
+```typescript
+const { draggedEvent, getDragProps, getDropProps } = useDragDrop({
+  onEventMove: (eventId, newStart, newEnd) => {
+    // Handle move
+  }
+});
+```
+</CodeBlock>
+
+## Basic Implementation
+
+To implement drag-and-drop, you need to apply the appropriate props to your event elements and drop targets.
+
+### 1. Make Events Draggable
+
+For each event rendered in your calendar, call `getDragProps` and spread the resulting object onto the event's DOM element.
+
+<CodeBlock>
+```typescript
+// Example: React
+const { getDragProps, visibleEvents } = useCalendar();
+
+{visibleEvents.map(event => (
+  <div key={event.id} {...getDragProps(event)}>
+    {event.title}
+  </div>
+))}
+```
+</CodeBlock>
+
+### 2. Set Up Drop Targets
+
+A drop target can be a day cell (in month view) or a specific time slot (in week/day view). Call `getDropProps` with the date and optional time for that target.
+
+<CodeBlock>
+```typescript
+// Example: React
+const { getDropProps } = useCalendar();
+
+// In a Month View
+<div {...getDropProps(dateCell.date)}>
+  {/* Day content */}
+</div>
+
+// In a Week View
+<div {...getDropProps(timeSlot.date, timeSlot.time)}>
+  {/* Slot content */}
+</div>
+```
+</CodeBlock>
+
+## Handling the Move
+
+When an event is dropped, Headless Calendar will automatically call the `onEventMove` callback if provided. You can then update your events accordingly.
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  onEventMove: (eventId, newStart, newEnd) => {
+    // Perform update logic, like an API call
+    console.log(`Event ${eventId} moved to ${newStart}`);
+    calendar.updateEvent(eventId, { start: newStart, end: newEnd });
+  }
+});
+```
+</CodeBlock>
+
+## Custom Drag-and-Drop Libraries
+
+While Headless Calendar provides helpers for the native HTML5 Drag and Drop API, you can easily integrate it with libraries like `dnd-kit`, `react-beautiful-dnd`, or `SortableJS`.
+
+Instead of `getDragProps` and `getDropProps`, you would manually call `startDrag` and `handleDrop` from the `CalendarInstance`.
+
+<CodeBlock>
+```typescript
+// Integration with custom DND library
+const { startDrag, handleDrop } = useCalendar();
+
+// When drag starts in your custom library:
+startDrag(event);
+
+// When drop occurs:
+handleDrop({ date: dropDate, time: dropTime });
+```
+</CodeBlock>
+
+## Styling the Drag State
+
+You can use the `draggedEvent` state to apply custom styles to the original event or the drop target while a drag operation is active.
+
+<CodeBlock>
+```typescript
+const { draggedEvent } = useCalendar();
+
+const isBeingDragged = draggedEvent?.id === event.id;
+
+<div style={{ opacity: isBeingDragged ? 0.5 : 1 }}>
+  {event.title}
+</div>
+```
+</CodeBlock>

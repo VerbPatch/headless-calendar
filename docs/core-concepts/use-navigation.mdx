@@ -1,0 +1,90 @@
+---
+title: Navigation State
+description: Understand how the useNavigation hook manages the calendar's active view and date.
+---
+
+# Navigation State
+
+At the heart of Headless Calendar's ability to move through time is the `useNavigation` hook. While it is automatically integrated into the main `useCalendar` hook, understanding how it works conceptually is key to building complex calendar interactions or specialized navigation components.
+
+## The Core Concept
+
+To render any calendar layout, the engine needs to know two primary pieces of information at all times:
+1. **What are we looking at?** (The `view` - month, week, day, or custom).
+2. **When are we looking?** (The `currentDate` - a specific point in time used as an anchor).
+
+The `useNavigation` hook encapsulates these states and provides a standardized set of methods to transition them.
+
+## Accessing Navigation
+
+Typically, you access navigation properties directly from the `useCalendar` hook.
+
+<CodeBlock>
+```tsx
+const { currentDate, view, goToNext, goToPrevious, goToToday, changeView } = useCalendar();
+```
+</CodeBlock>
+
+### The Anchor Date (`currentDate`)
+
+The `currentDate` is not necessarily "today's date." Instead, it is the *anchor date* around which the current view is built. 
+*   In a **Month view**, the `currentDate` is used to determine which month to calculate days for.
+*   In a **Week view**, the `currentDate` determines which week's bounds to calculate.
+
+When you call `goToNext()` or `goToPrevious()`, the hook calculates the appropriate math (e.g., adding 1 month or 1 week) and updates the `currentDate`.
+
+### Switching Views (`changeView`)
+
+The `changeView` method does more than just update a string. When you switch views, the calendar recalculates the required date ranges based on the *existing* `currentDate`.
+
+<CodeBlock>
+```typescript
+// Switch from month to week view. The calendar will focus on the week containing the current anchor date.
+changeView('week');
+```
+</CodeBlock>
+
+## Independent Usage
+
+One of the most powerful architectural features of Headless Calendar is that `useNavigation` is entirely independent of event management. 
+
+You can use the `useNavigation` hook standalone to build lightweight "mini-calendars," date pickers, or synchronization layers that don't need the overhead of processing complex recurring events.
+
+<CodeBlock>
+```typescript
+import { useNavigation } from '@verbpatch/headless-calendar';
+
+function DatePicker() {
+  const { currentDate, goToNext, goToPrevious } = useNavigation({
+    defaultView: 'month',
+    defaultDate: new Date(),
+    timezone: 'UTC',
+    locale: 'en-US'
+  });
+
+  // Render a simple grid without needing to configure an event store
+}
+```
+</CodeBlock>
+
+## Syncing Multiple Views
+
+Because `useNavigation` drives the date math, you can lift the state up or sync multiple `useCalendar` instances by hooking into the navigation callbacks.
+
+For example, if you want a sidebar Mini-Calendar to drive the main Full Calendar, you can listen to date changes:
+
+<CodeBlock>
+```typescript
+const miniCalendar = useCalendar({
+  defaultView: 'month',
+  onDateChange: (newDate) => {
+    // When the mini calendar changes dates, update the main calendar
+    mainCalendar.goToDate(newDate);
+  }
+});
+
+const mainCalendar = useCalendar({
+  defaultView: 'week'
+});
+```
+</CodeBlock>

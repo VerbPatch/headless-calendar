@@ -7,7 +7,7 @@ description: Adds a specified number of months to a date, clamping to the last d
 
 > **addMonths**(`date`, `months`): `Date`
 
-Defined in: [utils/date.ts:558](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L558)
+Defined in: [utils/date.ts:552](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L552)
 
 Adds a specified number of months to a date.
 

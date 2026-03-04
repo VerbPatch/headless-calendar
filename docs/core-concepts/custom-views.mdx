@@ -1,0 +1,140 @@
+---
+title: Custom Views
+description: Learn how to create custom calendar views with Headless Calendar.
+---
+
+# Custom Views
+
+Headless Calendar supports flexible, custom views beyond the standard 'day', 'week', 'month', and 'year' views. This is useful for creating specialized calendar layouts, like a 3-day view, a 2-week view, or any other range that fits your application's requirements.
+
+## Configuring a Custom View
+
+To create a custom view, set the `defaultView` to `'custom'` and provide a `customViewOptions` object.
+
+<CodeBlock>
+```typescript
+interface CustomViewOptions {
+  type: 'day' | 'week' | 'month'; // The base unit for the view
+  count: number; // The number of base units to include
+  includeSpecificDays?: number[]; // Optional: Specific days of the week to include (0-6)
+}
+```
+</CodeBlock>
+
+The `type` determines the unit of navigation, and `count` determines how many of those units are displayed at once.
+
+## Filtering with `includeSpecificDays`
+
+The `includeSpecificDays` property allows you to filter the displayed dates based on the day of the week. This is particularly useful for creating "Work Week" views or excluding weekends.
+
+*   Values range from `0` (Sunday) to `6` (Saturday).
+*   This property is currently supported for `type: 'week'` and `type: 'month'`.
+
+### Example: A 5-Day Work Week
+
+Displays only Monday through Friday for a single week.
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: {
+    type: 'week',
+    count: 1,
+    includeSpecificDays: [1, 2, 3, 4, 5], // Monday - Friday
+  },
+});
+```
+</CodeBlock>
+
+## Common Custom View Examples
+
+### 3-Day View (Compact Multi-Day)
+
+Useful for mobile views or compact dashboards where a full week is too wide.
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: {
+    type: 'day',
+    count: 3,
+  },
+});
+```
+</CodeBlock>
+*Navigation: `goToNext()` moves forward by 3 days.*
+
+### 2-Week View (Fortnightly)
+
+Displays a two-week range, starting from the current week.
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: {
+    type: 'week',
+    count: 2,
+  },
+});
+```
+</CodeBlock>
+*Navigation: `goToNext()` moves forward by 2 weeks.*
+
+### Quarterly Work-Days View
+
+Displays three months but includes only work days (Mon-Fri).
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: {
+    type: 'month',
+    count: 3,
+    includeSpecificDays: [1, 2, 3, 4, 5],
+  },
+});
+```
+</CodeBlock>
+*Navigation: `goToNext()` moves forward by 3 months.*
+
+## Navigation in Custom Views
+
+When using a custom view, the `goToNext()` and `goToPrevious()` methods will automatically navigate by the specified `count` of the base unit.
+
+*   If `type` is `'day'` and `count` is `5`, navigation moves by 5 days.
+*   If `type` is `'week'` and `count` is `2`, navigation moves by 2 weeks.
+*   If `type` is `'month'` and `count` is `3`, navigation moves by 3 months.
+
+## Rendering a Custom View
+
+Since Headless Calendar is headless, the rendering logic is up to you. You can use the `visibleDates` and `visibleEvents` properties to get the data you need for your custom layout.
+
+<CodeBlock>
+```typescript
+const { visibleDates, visibleEvents } = useCalendar({
+  defaultView: 'custom',
+  customViewOptions: { type: 'day', count: 3 },
+});
+
+// visibleDates will contain exactly 3 dates
+// visibleEvents will contain events for those 3 dates
+```
+</CodeBlock>
+
+## Switching to Custom View Dynamically
+
+You can also switch to a custom view at runtime using the `changeView` method. This allows you to offer users a variety of viewing options.
+
+<CodeBlock>
+```typescript
+// Switch to a 4-day view on the fly
+calendar.changeView('custom', {
+  type: 'day',
+  count: 4,
+});
+```
+</CodeBlock>

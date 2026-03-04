@@ -7,7 +7,7 @@ description: Adds a specified number of weeks to a date.
 
 > **addWeeks**(`date`, `weeks`): `Date`
 
-Defined in: [utils/date.ts:541](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L541)
+Defined in: [utils/date.ts:535](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L535)
 
 Adds a specified number of weeks to a date.
 

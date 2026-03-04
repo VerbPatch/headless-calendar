@@ -1,0 +1,126 @@
+---
+title: Building a Week View
+description: Learn how to build a week view with time slots using Headless Calendar's state.
+---
+
+# Building a Week View
+
+A week view provides a more detailed breakdown of scheduled events by day and hour. It typically features a 7-column layout (one per day) with horizontal rows representing time slots.
+
+## Using `weekData` and `timeSlots`
+
+To build a week view, you'll need the following properties from the `CalendarInstance`:
+
+* `weekData`: An object containing an array of `Date` objects for the current week and a date range string.
+* `timeSlots`: An array of `TimeSlot` objects representing the time divisions for the view.
+
+### Data Structure
+
+<CodeBlock>
+```typescript
+interface WeekData {
+  dates: Date[];
+  weekRange: string;
+  isToday: (date: Date) => boolean;
+}
+
+interface TimeSlot {
+  hour: number;
+  minute: number;
+  time: string; // e.g., '09:00'
+  label: string; // e.g., '9:00 AM'
+}
+```
+</CodeBlock>
+
+## Basic Layout Strategy
+
+The most common layout for a week view is a 7-column grid with a time-labels column on the far left.
+
+### 1. Header (Dates)
+
+Render a row containing the names and dates for each date in `weekData.dates`.
+
+### 2. Side Column (Time Labels)
+
+Render a vertical column with labels from `timeSlots`.
+
+### 3. Grid (Time Slots per Day)
+
+Map through each date in `weekData.dates` and, for each date, map through each `timeSlot`.
+
+### 4. Render Events
+
+Iterate through `visibleEvents` and calculate their position and height based on their start and end times relative to the time slots.
+
+## Example (React)
+
+Here's a simplified example of how you might render a week view in React.
+
+<CodeBlock>
+```tsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function WeekView() {
+  const { weekData, timeSlots, visibleEvents, goToPrevious, goToNext } = useCalendar({
+    defaultView: 'week',
+    timeSlotInterval: 60, // 1 hour slots
+  });
+
+  if (!weekData) return null;
+
+  return (
+    <div>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <button onClick={goToPrevious}>Prev</button>
+        <h2>{weekData.weekRange}</h2>
+        <button onClick={goToNext}>Next</button>
+      </header>
+
+      {/* Header row with day names */}
+      <div style={{ display: 'flex', borderBottom: '1px solid #eee', paddingBottom: '0.5rem' }}>
+        <div style={{ width: '60px' }}></div> {/* Spacer for time labels */}
+        {weekData.dates.map(date => (
+          <div 
+            key={date.toISOString()} 
+            style={{ flex: 1, textAlign: 'center', fontWeight: weekData.isToday(date) ? 'bold' : 'normal', color: weekData.isToday(date) ? 'blue' : 'inherit' }}
+          >
+            {date.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' })}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ position: 'relative' }}>
+        {/* Render each time slot row */}
+        {timeSlots.map(slot => (
+          <div key={slot.time} style={{ display: 'flex', borderBottom: '1px solid #eee', height: '48px' }}>
+            <div style={{ width: '60px', textAlign: 'right', paddingRight: '0.5rem', fontSize: '0.8rem', color: '#666' }}>
+              {slot.label}
+            </div>
+            {weekData.dates.map(date => (
+              <div key={date.toISOString()} style={{ flex: 1, borderLeft: '1px solid #eee' }}>
+                {/* Find and render events in this slot */}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>
+
+## Positioning Events
+
+In a time-grid view, events are usually positioned using `position: absolute`. You can calculate their top position and height based on:
+
+* **Top**: (Event start time - View start time) / Total view duration * 100%
+* **Height**: (Event duration / Total view duration) * 100%
+
+## Tips for a Great Week View
+
+* **Scroll to Current Time**: On initial load, scroll the container to the current time so users don't have to scroll manually.
+* **Sticky Headers**: Make the day names and time labels sticky so they stay visible while scrolling.
+* **Overlapping Events**: Use logic to calculate the width and horizontal position of events that occur at the same time to prevent them from completely covering each other.
+* **Selection**: Allow users to click and drag over multiple time slots to create a new event for that duration.

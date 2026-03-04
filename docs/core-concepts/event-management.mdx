@@ -1,0 +1,151 @@
+---
+title: Event Management
+description: Learn how to manage calendar events, including CRUD operations, recurring events, and event queries.
+---
+
+# Event Management
+
+Headless Calendar provides a comprehensive set of tools for managing calendar events. Whether you're building a simple agenda or a complex scheduling system, the core library handles the logic of storing, updating, and querying events.
+
+## Event Structure
+
+A `CalendarEvent` is the primary data structure for events. It includes essential properties like `id`, `title`, `start`, and `end`, along with optional metadata and recurrence rules.
+
+<CodeBlock>
+```typescript
+interface CalendarEvent {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  allDay?: boolean;
+  description?: string;
+  color?: string;
+  timezone?: string;
+  recurring?: CalendarEventOccurance | 'never';
+  exdate?: Date[];
+  rdate?: Date[];
+  recurrenceId?: Date | string;
+  status?: 'TENTATIVE' | 'CONFIRMED' | 'CANCELLED';
+  transparency?: 'OPAQUE' | 'TRANSPARENT';
+  [key: string]: any;
+}
+```
+</CodeBlock>
+
+> **Note:** When creating events via `createEvent()`, the `id` is optional. If not provided, Headless Calendar will automatically generate a unique ID for you.
+
+## Independent Hook Usage
+
+If you are using the `useEvents` hook independently of `useCalendar`.
+
+<CodeBlock>
+```typescript
+const { events, createEvent } = useEvents({
+  initialEvents: []
+});
+```
+</CodeBlock>
+
+## CRUD Operations
+
+The `CalendarInstance` (and the `useEvents` hook) exposes methods for performing Create, Read, Update, and Delete operations.
+
+### Creating Events
+
+Use `createEvent` to add a new event to the calendar.
+
+<CodeBlock>
+```typescript
+const newEvent = calendar.createEvent({
+  title: 'Project Kickoff',
+  start: new Date(2023, 10, 25, 10, 0),
+  end: new Date(2023, 10, 25, 11, 30),
+  color: '#4f46e5'
+});
+```
+</CodeBlock>
+
+### Updating Events
+
+Use `updateEvent` to modify an existing event by its ID.
+
+<CodeBlock>
+```typescript
+calendar.updateEvent('event-id', {
+  title: 'Updated Meeting Title',
+  color: '#ef4444'
+});
+```
+</CodeBlock>
+
+### Deleting Events
+
+Use `deleteEvent` to remove an event.
+
+<CodeBlock>
+```typescript
+calendar.deleteEvent('event-id');
+```
+</CodeBlock>
+
+## Querying Events
+
+Headless Calendar makes it easy to retrieve events based on time ranges, which is essential for rendering specific views.
+
+### Get Events for a Date Range
+
+Retrieve all events that occur within a specific window.
+
+<CodeBlock>
+```typescript
+const start = new Date(2023, 10, 1);
+const end = new Date(2023, 10, 30);
+const novemberEvents = calendar.getEventsForDateRange(start, end);
+```
+</CodeBlock>
+
+### Get Events for a Specific Date
+
+A convenience method for getting events on a single day.
+
+<CodeBlock>
+```typescript
+const todayEvents = calendar.getEventsForDate(new Date());
+```
+</CodeBlock>
+
+## Reactive Updates
+
+One of the strengths of Headless Calendar is its reactive nature (when used with framework wrappers). When you call `createEvent`, `updateEvent`, or `deleteEvent`, the calendar state updates automatically, triggering a re-render in your UI.
+
+You can also listen for these changes using callbacks in `CalendarOptions`:
+
+<CodeBlock>
+```typescript
+const calendar = useCalendar({
+  onEventCreate: (event) => console.log('Event created:', event),
+  onEventUpdate: (event) => console.log('Event updated:', event),
+  onEventDelete: (event) => console.log('Event deleted:', event),
+});
+```
+</CodeBlock>
+
+## Recurring Events
+
+The core library includes support for recurring events via the `recurring` property which accepts a `CalendarEventOccurance` object allowing you to define complex rules.
+
+<CodeBlock>
+```typescript
+calendar.createEvent({
+  title: 'Weekly Standup',
+  start: new Date(),
+  end: new Date(new Date().getTime() + 3600000), // 1 hour duration
+  recurring: {
+    repeat: 'weekly',
+    every: 1,
+    weekDays: [1, 3, 5] // Mon, Wed, Fri
+  }
+});
+```
+</CodeBlock>

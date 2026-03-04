@@ -11,6 +11,7 @@ Each option is thoroughly explained in this document, along with its function, d
 <CodeBlock>
 ```ts
 export interface CalendarOptions {
+    calendarId?: string;
     defaultView?: ViewType;
     defaultDate?: Date;
     startOfWeek?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -26,13 +27,15 @@ export interface CalendarOptions {
     onEventDelete?: (event: CalendarEvent) => void;
     onViewChange?: (view: ViewType) => void;
     onDateChange?: (date: Date) => void;
+    customViewOptions?: CustomViewOptions;
 }
 ```
 </CodeBlock>
 
 ## Properties and Events Explained
 
-* `defaultView`: it can be either 'year' or 'month' or 'week' or 'day', if not set, it defaults to 'month'
+* `calendarId`: A unique identifier for the calendar instance. **Mandatory** when displaying multiple calendars in a single view to prevent state conflicts. Defaults to `'default-calendar'`.
+* `defaultView`: it can be either 'year' or 'month' or 'week' or 'day' or 'custom', if not set, it defaults to 'month'
 * `defaultDate`: when you like the calendar to start showing data for, defaults to current utc date, time not included
 * `startOfWeek`: when you like calendar week to start from, usually its 1(Monday), defaults to 0(Sunday).
 * `timeSlotInterval`: time slots you want to display time in week or day view, defaults to 60 minutes.
@@ -47,3 +50,4 @@ export interface CalendarOptions {
 * `onEventDelete`: this callback event will return event which is recently deleted.
 * `onViewChange`: this callback event will return recently changed view.
 * `onDateChange`: this callback event will be called when date change, after navigating.
+* `customViewOptions`: Configuration options for the 'custom' view.

@@ -7,7 +7,7 @@ description: Exports an array of calendar events to iCalendar (.ics) format.
 
 > **exportToICS**(`events`, `prodId`): `string`
 
-Defined in: [utils/ics.ts:216](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/ics.ts#L216)
+Defined in: [utils/ics.ts:216](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/ics.ts#L216)
 
 Exports an array of calendar events to iCalendar (.ics) format, RFC5545.
 

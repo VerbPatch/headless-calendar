@@ -7,9 +7,19 @@ description: |-
 
 # UseDragDropOptions
 
-Defined in: [types/events.ts:348](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L348)
+Defined in: [types/events.ts:348](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L348)
 
 Configuration options for the `useDragDrop` hook.
+
+## Properties
+
+### calendarId?
+
+> `optional` **calendarId**: `string`
+
+Defined in: [types/events.ts:352](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L352)
+
+A unique identifier for the calendar instance.
 
 ## Events
 
@@ -17,7 +27,7 @@ Configuration options for the `useDragDrop` hook.
 
 > `optional` **onDragEnd**: (`event`) => `void`
 
-Defined in: [types/events.ts:368](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L368)
+Defined in: [types/events.ts:372](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L372)
 
 A callback function that is invoked when a drag operation ends.
 
@@ -39,7 +49,7 @@ The event that was dragged.
 
 > `optional` **onDragStart**: (`event`) => `void`
 
-Defined in: [types/events.ts:362](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L362)
+Defined in: [types/events.ts:366](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L366)
 
 A callback function that is invoked when a drag operation starts.
 
@@ -61,7 +71,7 @@ The event being dragged.
 
 > `optional` **onDrop**: (`event`, `target`) => `void`
 
-Defined in: [types/events.ts:375](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L375)
+Defined in: [types/events.ts:379](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L379)
 
 A callback function that is invoked when an event is dropped on a valid target.
 
@@ -89,7 +99,7 @@ The target where the event was dropped.
 
 > `optional` **onEventMove**: (`eventId`, `newStart`, `newEnd`) => `void`
 
-Defined in: [types/events.ts:356](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/types/events.ts#L356)
+Defined in: [types/events.ts:360](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/events.ts#L360)
 
 A callback function that is invoked when an event is moved via drag and drop.
 

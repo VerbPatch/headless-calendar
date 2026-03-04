@@ -1,0 +1,100 @@
+---
+title: ICS Import and Export
+description: Learn how to import events from .ics files and export your calendar data for use in other calendar applications.
+---
+
+# ICS Import and Export
+
+Headless Calendar includes utilities for working with the iCalendar (ICS) format, allowing your users to seamlessly transfer their calendar data to and from other applications like Google Calendar, Outlook, and Apple Calendar.
+
+## Exporting to ICS
+
+You can export an array of `CalendarEvent` objects to an ICS-formatted string using the `exportToICS` utility.
+
+<CodeBlock>
+```typescript
+import { exportToICS, useCalendar } from '@verbpatch/headless-calendar';
+
+const { events } = useCalendar({
+  initialEvents: [
+    {
+      id: '1',
+      title: 'Project Planning',
+      start: new Date(2023, 10, 25, 10, 0),
+      end: new Date(2023, 10, 25, 11, 0),
+    },
+    {
+      id: '2',
+      title: 'Team Sync',
+      start: new Date(2023, 10, 26, 14, 0),
+      end: new Date(2023, 10, 26, 15, 0),
+    }
+  ]
+});
+
+const handleExport = () => {
+  const icsData = exportToICS(events);
+  
+  // Create a download link and trigger it
+  const blob = new Blob([icsData], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'calendar.ics';
+  a.click();
+};
+```
+</CodeBlock>
+
+## Importing from ICS
+
+To import events from an external source, read the ICS file content and use the `importFromICS` utility.
+
+<CodeBlock>
+```typescript
+import { importFromICS } from '@verbpatch/headless-calendar';
+
+const { createEvent } = useCalendar();
+
+const handleImport = async (file: File) => {
+  const text = await file.text();
+  const importedEvents = importFromICS(text);
+  
+  // Add imported events to the calendar
+  importedEvents.forEach(event => createEvent(event));
+};
+```
+</CodeBlock>
+
+### Simple Import Strategy
+
+A common pattern is to provide a file input for users to upload their `.ics` files.
+
+<CodeBlock>
+```tsx
+function ImportButton() {
+  const { createEvent } = useCalendar();
+
+  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const text = await file.text();
+      const events = importFromICS(text);
+      events.forEach(ev => createEvent(ev));
+    }
+  };
+
+  return <input type="file" accept=".ics" onChange={onChange} />;
+}
+```
+</CodeBlock>
+
+## Handling Timezones and Localization
+
+When importing or exporting ICS files, Headless Calendar takes care of timezones based on the `timezone` property in each event. It's recommended to ensure your events have correct timezone information for the best compatibility.
+
+## Limitations
+
+Currently, the ICS utilities support standard event properties like title, start, end, and description.
+
+*Coming Soon: Enhanced support for complex recurrence rules and reminders.*

@@ -1,0 +1,107 @@
+---
+title: Building a Month Grid
+description: Learn how to build a responsive month grid using Headless Calendar's state.
+---
+
+# Building a Month Grid
+
+A month grid is one of the most common calendar views. It displays a full month's worth of days, typically in a 7-column layout. Headless Calendar provides the necessary data to build this view efficiently.
+
+## Using `monthData`
+
+The `monthData` property of the `CalendarInstance` contains all the information you need to render the grid for the currently active month.
+
+### Data Structure
+
+`monthData` contains a 2D array of `Date` objects representing weeks, along with helper functions for rendering.
+
+<CodeBlock>
+```typescript
+interface MonthData {
+  weeks: Date[][];
+  monthName: string;
+  isCurrentMonth: (date: Date) => boolean;
+  isToday: (date: Date) => boolean;
+}
+```
+</CodeBlock>
+
+## Basic Layout Strategy
+
+The standard way to render a month grid is using a 7-column CSS Grid or Flexbox layout.
+
+### 1. Render the Header
+
+Display the days of the week (e.g., Sun, Mon, Tue...) as the first row.
+
+### 2. Map Through Weeks and Dates
+
+Iterate through the `weeks` in `monthData` and then the `Date` objects within each week.
+
+### 3. Style Each Day Cell
+
+Use the `isCurrentMonth` and `isToday` helper functions from `monthData` to apply conditional styling.
+
+## Example (React)
+
+Here's a simplified example of how you might render a month grid in React.
+
+<CodeBlock>
+```tsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function MonthGrid() {
+  const { monthData, goToPrevious, goToNext } = useCalendar({
+    defaultView: 'month',
+  });
+
+  if (!monthData) return null;
+
+  return (
+    <div>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <button onClick={goToPrevious}>Prev</button>
+        <h2>{monthData.monthName}</h2>
+        <button onClick={goToNext}>Next</button>
+      </header>
+
+      {/* A 7-column grid layout is typically used here */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px', backgroundColor: '#eee' }}>
+        {/* Days of week header */}
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          <div key={day} style={{ backgroundColor: 'white', padding: '0.5rem', textAlign: 'center', fontWeight: 'bold' }}>
+            {day}
+          </div>
+        ))}
+
+        {/* Month grid cells */}
+        {monthData.weeks.map((week, weekIndex) => (
+          <React.Fragment key={weekIndex}>
+            {week.map((date, dayIndex) => (
+              <div
+                key={dayIndex}
+                style={{
+                  minHeight: '100px',
+                  backgroundColor: monthData.isToday(date) ? '#e6f2ff' : 'white',
+                  padding: '0.5rem',
+                  opacity: !monthData.isCurrentMonth(date) ? 0.5 : 1,
+                }}
+              >
+                {date.getDate()}
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>
+
+## Tips for a Great Month Grid
+
+* **Handle "Outside" Days**: `monthData` includes days from the previous and next months that fall into the first and last weeks of the current month. Use `monthData.isCurrentMonth(date)` to dim these days or hide them.
+* **Aspect Ratio**: Use a fixed aspect ratio for your day cells (e.g., square) to ensure a consistent grid appearance.
+* **Responsiveness**: On smaller screens, you might want to show only the day number or a simplified view.
+* **Interaction**: Add click handlers to each day cell to allow users to select a date or create a new event.

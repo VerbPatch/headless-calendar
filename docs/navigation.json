@@ -30,8 +30,72 @@
         "path": "/Calendar/docs/core-concepts/calendar-state"
       },
       {
+        "title": "Event Management",
+        "path": "/Calendar/docs/core-concepts/event-management"
+      },
+      {
+        "title": "Drag and Drop",
+        "path": "/Calendar/docs/core-concepts/drag-and-drop"
+      },
+      {
+        "title": "Custom Views",
+        "path": "/Calendar/docs/core-concepts/custom-views"
+      },
+      {
         "title": "Localization",
         "path": "/Calendar/docs/core-concepts/localization"
+      },
+      {
+        "title": "Multiple Calendars",
+        "path": "/Calendar/docs/core-concepts/multiple-calendars"
+      },
+      {
+        "title": "Navigation State",
+        "path": "/Calendar/docs/core-concepts/use-navigation"
+      }
+    ]
+  },
+  {
+    "title": "Components",
+    "group": "doc",
+    "children": [
+      {
+        "title": "Building a Month Grid",
+        "path": "/Calendar/docs/components/building-a-month-grid"
+      },
+      {
+        "title": "Building a Week View",
+        "path": "/Calendar/docs/components/building-a-week-view"
+      },
+      {
+        "title": "Building a Weekday View",
+        "path": "/Calendar/docs/components/building-a-weekday-view"
+      },
+      {
+        "title": "Event Styling & Positioning",
+        "path": "/Calendar/docs/components/event-styling"
+      }
+    ]
+  },
+  {
+    "title": "Cookbook",
+    "group": "doc",
+    "children": [
+      {
+        "title": "Building a Full Calendar",
+        "path": "/Calendar/docs/cookbook/building-a-full-calendar"
+      },
+      {
+        "title": "Building a Mini Calendar",
+        "path": "/Calendar/docs/cookbook/building-a-mini-calendar"
+      },
+      {
+        "title": "Building a Scheduler",
+        "path": "/Calendar/docs/cookbook/building-a-scheduler"
+      },
+      {
+        "title": "ICS Import & Export",
+        "path": "/Calendar/docs/cookbook/ics-integration"
       }
     ]
   },
@@ -652,6 +716,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/React/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/React/multiple-calendars"
       }
     ]
   },

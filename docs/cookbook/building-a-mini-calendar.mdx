@@ -1,0 +1,133 @@
+---
+title: Building a Mini Calendar
+description: How to create a compact, simplified calendar view, often used for date pickers or dashboard widgets.
+---
+
+# Building a Mini Calendar
+
+Mini calendars are a common UI pattern used for date selection, sidebar navigation, or displaying a compact overview of a month. Headless Calendar's flexible core makes it easy to build these.
+
+## Key Differences from a Full Calendar
+
+* **Smaller Grid**: Typically uses a fixed, small size for each day cell.
+* **Simplified Data**: Often only shows the day number, omitting event titles and time slots.
+* **Navigation Focus**: Usually only allows month-to-month navigation.
+* **Interactive**: Often acts as a date picker, updating an external state when a day is clicked.
+
+## Configuration
+
+For a mini calendar, you'll typically want to stick with the `'month'` view.
+
+<CodeBlock>
+```typescript
+const miniCalendar = useCalendar({
+  defaultView: 'month',
+  // You might want to disable event management for a pure date picker
+});
+```
+</CodeBlock>
+
+## Implementation Strategy
+
+### 1. Simplified Grid
+
+Render a compact 7-column grid for the month using `monthData.weeks` (a 2D array of `Date` objects).
+
+<CodeBlock>
+```tsx
+<div style={{ display: 'flex', flexDirection: 'column' }}>
+  {monthData.weeks.map((week, wIndex) => (
+    <div key={wIndex} style={{ display: 'flex' }}>
+      {week.map((date, dIndex) => (
+        <button
+          key={dIndex}
+          style={{
+            flex: 1,
+            padding: '8px',
+            border: 'none',
+            background: 'none',
+            cursor: 'pointer',
+            fontWeight: monthData.isToday(date) ? 'bold' : 'normal',
+            opacity: !monthData.isCurrentMonth(date) ? 0.5 : 1
+          }}
+          onClick={() => onDateSelect(date)}
+        >
+          {date.getDate()}
+        </button>
+      ))}
+    </div>
+  ))}
+</div>
+```
+</CodeBlock>
+
+### 2. Month/Year Header
+
+A simple header with "Previous," "Next," and the current month name.
+
+<CodeBlock>
+```tsx
+<header>
+  <button onClick={goToPrevious}>&lt;</button>
+  <span>{monthData.monthName}</span>
+  <button onClick={goToNext}>&gt;</button>
+</header>
+```
+</CodeBlock>
+
+## Example (React)
+
+<CodeBlock>
+```tsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+function MiniCalendar({ onSelect }) {
+  const { monthData, goToPrevious, goToNext } = useCalendar({
+    defaultView: 'month'
+  });
+
+  if (!monthData) return null;
+
+  return (
+    <div style={{ width: '300px', border: '1px solid #eee', padding: '1rem', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <button onClick={goToPrevious}>Prev</button>
+        <h3 style={{ margin: 0 }}>{monthData.monthName}</h3>
+        <button onClick={goToNext}>Next</button>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
+        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => (
+          <div key={d} style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '0.8rem', color: '#666' }}>
+            {d}
+          </div>
+        ))}
+        {monthData.weeks.flatMap(w => w).map(date => (
+          <button
+            key={date.toISOString()}
+            style={{
+              padding: '8px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              opacity: !monthData.isCurrentMonth(date) ? 0.5 : 1,
+              backgroundColor: monthData.isToday(date) ? '#0066cc' : 'transparent',
+              color: monthData.isToday(date) ? 'white' : 'inherit',
+            }}
+            onClick={() => onSelect(date)}
+          >
+            {date.getDate()}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+</CodeBlock>
+
+## Tips for a Great Mini Calendar
+
+* **Visual Cues**: Use subtle dots or indicators beneath day numbers to show which days have events.
+* **Selection State**: Clearly highlight the currently selected date.
+* **Keyboard Navigation**: Ensure users can navigate the mini calendar using their keyboard (e.g., arrow keys).
+* **Hover Effects**: Add hover effects to day cells to improve the interactive feel.

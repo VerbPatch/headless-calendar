@@ -7,7 +7,7 @@ description: Subtracts a specified number of weeks from a date.
 
 > **subtractWeeks**(`date`, `weeks`): `Date`
 
-Defined in: [utils/date.ts:627](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L627)
+Defined in: [utils/date.ts:621](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L621)
 
 Subtracts a specified number of weeks from a date.
 

@@ -1,0 +1,64 @@
+---
+title: Multiple Calendars
+description: Learn how to display and manage multiple calendar instances in a single view without state conflicts.
+---
+
+# Multiple Calendars
+
+The Headless Calendar library supports displaying multiple calendar instances within a single application view. This is useful for building dashboards, comparison views, or any interface that requires more than one calendar at a time.
+
+## The `calendarId` Property
+
+To prevent state and memoization conflicts between multiple instances, the library uses a global cache identified by unique keys. When you have more than one calendar, you **must** provide a unique `calendarId` for each instance.
+
+### Why is `calendarId` Mandatory for Multiple Instances?
+
+By default, the library uses a set of standard IDs (e.g., `'current-date'`, `'calendar-event'`) to store the internal state of a calendar. If two calendars are initialized without a unique `calendarId`, they will both attempt to use these same default IDs, causing their states to sync. Changing the date on one calendar would unexpectedly change the date on the other.
+
+Providing a `calendarId` prefixes all internal state and memoization IDs, ensuring each calendar has its own isolated "bucket" in the global cache.
+
+## Implementation Example (React)
+
+Here is how you can set up two independent calendars in a single React component:
+
+```tsx
+import { useCalendar } from '@verbpatch/react-calendar';
+
+const MultiCalendarView = () => {
+  // First calendar instance
+  const mainCalendar = useCalendar({
+    calendarId: 'main-calendar',
+    defaultView: 'month',
+  });
+
+  // Second calendar instance
+  const miniCalendar = useCalendar({
+    calendarId: 'mini-calendar',
+    defaultView: 'month',
+  });
+
+  return (
+    <div style={{ display: 'flex', gap: '20px' }}>
+      <section>
+        <h2>Main Calendar</h2>
+        <button onClick={() => mainCalendar.goToToday()}>Today</button>
+        <div>{mainCalendar.utils.formatLocalizedMonth(mainCalendar.currentDate)}</div>
+        {/* Render your main calendar UI here */}
+      </section>
+
+      <aside>
+        <h2>Mini Calendar</h2>
+        <button onClick={() => miniCalendar.goToToday()}>Today</button>
+        <div>{miniCalendar.utils.formatLocalizedMonth(miniCalendar.currentDate)}</div>
+        {/* Render your mini calendar UI here */}
+      </aside>
+    </div>
+  );
+};
+```
+
+## Best Practices
+
+1.  **Unique IDs**: Ensure that the `calendarId` is unique across your entire application if those calendars can exist in the same view or are part of the same lifecycle.
+2.  **Persistence**: If you want to persist the state of a specific calendar across page reloads (if you implement such logic), the `calendarId` will be your primary key for identifying that calendar's state.
+3.  **Naming Convention**: Use descriptive names like `'user-schedule-calendar'` or `'event-planner-mini'` to make debugging easier in the state cache.

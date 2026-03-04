@@ -7,7 +7,7 @@ description: Checks if two dates are the same day.
 
 > **isSameDay**(`date1`, `date2`): `boolean`
 
-Defined in: [utils/date.ts:286](https://github.com/VerbPatch/headless-calendar/blob/73d96f289f76a26fdb3ad1a935ddf2631e7bcf75/packages/headless-calendar/src/utils/date.ts#L286)
+Defined in: [utils/date.ts:280](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L280)
 
 Checks if two dates are the same day.
 

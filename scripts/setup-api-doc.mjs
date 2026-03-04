@@ -6,21 +6,103 @@ import { buildExamplesNav } from './example-nav-tree.mjs';
 function docNavigation() {
   return [
     {
+      title: 'Cookbook',
+      group: 'doc',
+      children: [
+        {
+          title: 'Building a Full Calendar',
+          path: '/Calendar/docs/cookbook/building-a-full-calendar',
+        },
+        {
+          title: 'Building a Mini Calendar',
+          path: '/Calendar/docs/cookbook/building-a-mini-calendar',
+        },
+        {
+          title: 'Building a Scheduler',
+          path: '/Calendar/docs/cookbook/building-a-scheduler',
+        },
+        {
+          title: 'ICS Import & Export',
+          path: '/Calendar/docs/cookbook/ics-integration',
+        },
+      ],
+    },
+    {
+      title: 'Components',
+      group: 'doc',
+      children: [
+        {
+          title: 'Building a Month Grid',
+          path: '/Calendar/docs/components/building-a-month-grid',
+        },
+        {
+          title: 'Building a Week View',
+          path: '/Calendar/docs/components/building-a-week-view',
+        },
+        {
+          title: 'Building a Weekday View',
+          path: '/Calendar/docs/components/building-a-weekday-view',
+        },
+        {
+          title: 'Event Styling & Positioning',
+          path: '/Calendar/docs/components/event-styling',
+        },
+      ],
+    },
+    {
       title: 'Core Concepts',
       group: 'doc',
       children: [
-        { title: 'Architecture', path: '/Calendar/docs/core-concepts/architecture' },
-        { title: 'Options', path: '/Calendar/docs/core-concepts/calendar-options' },
-        { title: 'State', path: '/Calendar/docs/core-concepts/calendar-state' },
-        { title: 'Localization', path: '/Calendar/docs/core-concepts/localization' },
+        {
+          title: 'Architecture',
+          path: '/Calendar/docs/core-concepts/architecture',
+        },
+        {
+          title: 'Options',
+          path: '/Calendar/docs/core-concepts/calendar-options',
+        },
+        {
+          title: 'State',
+          path: '/Calendar/docs/core-concepts/calendar-state',
+        },
+        {
+          title: 'Event Management',
+          path: '/Calendar/docs/core-concepts/event-management',
+        },
+        {
+          title: 'Drag and Drop',
+          path: '/Calendar/docs/core-concepts/drag-and-drop',
+        },
+        {
+          title: 'Custom Views',
+          path: '/Calendar/docs/core-concepts/custom-views',
+        },
+        {
+          title: 'Localization',
+          path: '/Calendar/docs/core-concepts/localization',
+        },
+        {
+          title: 'Multiple Calendars',
+          path: '/Calendar/docs/core-concepts/multiple-calendars',
+        },
+        {
+          title: 'Navigation State',
+          path: '/Calendar/docs/core-concepts/use-navigation',
+        },
       ],
     },
     {
       title: 'Introduction',
       group: 'doc',
       children: [
-        { title: 'Headless Calendar?', path: '/Calendar/docs/introduction' },
-        { title: 'Getting Started', path: '/Calendar/docs/getting-started' },
+        {
+          title: 'Headless Calendar?',
+          path: '/Calendar/docs/introduction',
+        },
+        {
+          title: 'Getting Started',
+          path: '/Calendar/docs/getting-started',
+        },
       ],
     },
   ];
