@@ -34,17 +34,21 @@ import { validateCustomView } from '../utils';
  */
 export const useNavigation = (options: UseNavigationOptions): UseNavigationReturn => {
   const {
+    calendarId = 'default-calendar',
     defaultView = 'month',
     defaultDate,
     onViewChange,
     onDateChange,
     customViewOptions = { type: 'day', count: 1 },
   } = options;
-  const [getCurrentDate, setCurrentDate] = createState<Date>(defaultDate, 'current-date');
-  const [getView, setView] = createState<ViewType>(defaultView, 'view');
+  const [getCurrentDate, setCurrentDate] = createState<Date>(
+    defaultDate,
+    `${calendarId}-current-date`,
+  );
+  const [getView, setView] = createState<ViewType>(defaultView, `${calendarId}-view`);
   const [getCustomViewOptions, setCustomViewOptions] = createState<CustomViewOptions>(
     customViewOptions,
-    'custom-view-options',
+    `${calendarId}-custom-view-options`,
   );
 
   /**
@@ -91,7 +95,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       onDateChange?.(newDate);
     },
     [getCurrentDate, getView, onDateChange, getCustomViewOptions],
-    'go-to-next',
+    `${calendarId}-go-to-next`,
   );
 
   /**
@@ -138,7 +142,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       onDateChange?.(newDate);
     },
     [getCurrentDate, getView, onDateChange, getCustomViewOptions],
-    'go-to-previous',
+    `${calendarId}-go-to-previous`,
   );
 
   /**
@@ -154,7 +158,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       onDateChange?.(today);
     },
     [onDateChange],
-    'go-to-today',
+    `${calendarId}-go-to-today`,
   );
 
   /**
@@ -171,7 +175,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       onDateChange?.(newDate);
     },
     [onDateChange],
-    'go-to-date',
+    `${calendarId}-go-to-date`,
   );
 
   /**
@@ -196,7 +200,7 @@ export const useNavigation = (options: UseNavigationOptions): UseNavigationRetur
       onViewChange?.(newView);
     },
     [onViewChange],
-    'change-view',
+    `${calendarId}-change-view`,
   );
 
   // TODO: Implement date range limits

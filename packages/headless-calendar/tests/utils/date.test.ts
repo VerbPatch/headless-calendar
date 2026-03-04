@@ -164,43 +164,43 @@ describe('Date Utilities', () => {
   describe('Formatting', () => {
     it('should format dates correctly', () => {
       const date = new Date(2024, 0, 15, 14, 30);
-      expect(formatDate(date, { format: 'yyyy-MM-dd' })).toBe('2024-01-15');
-      expect(formatDateTime(date, { format: 'yyyy-MM-dd HH:mm' })).toBe('2024-01-15 14:30');
+      expect(formatDate(date, 'yyyy-MM-dd')).toBe('2024-01-15');
+      expect(formatDateTime(date, 'yyyy-MM-dd HH:mm')).toBe('2024-01-15 14:30');
       expect(formatDate(date)).toBe('2024-01-15');
     });
 
     it('should handle various format tokens', () => {
       const date = new Date(2024, 0, 15, 9, 5, 2);
 
-      expect(formatDate(date, { format: 'EEE' })).toBeDefined();
-      expect(formatDate(date, { format: 'EE' })).toBeDefined();
-      expect(formatDate(date, { format: 'E' })).toBeDefined();
+      expect(formatDate(date, 'EEE')).toBeDefined();
+      expect(formatDate(date, 'EE')).toBeDefined();
+      expect(formatDate(date, 'E')).toBeDefined();
 
-      expect(formatDate(date, { format: 'MMMM' })).toBeDefined();
-      expect(formatDate(date, { format: 'MMM' })).toBeDefined();
-      expect(formatDate(date, { format: 'MM' })).toBe('01');
-      expect(formatDate(date, { format: 'M' })).toBe('1');
+      expect(formatDate(date, 'MMMM')).toBeDefined();
+      expect(formatDate(date, 'MMM')).toBeDefined();
+      expect(formatDate(date, 'MM')).toBe('01');
+      expect(formatDate(date, 'M')).toBe('1');
 
-      expect(formatDate(date, { format: 'yy' })).toBe('24');
+      expect(formatDate(date, 'yy')).toBe('24');
 
-      expect(formatDate(date, { format: 'GGG' })).toBeDefined();
-      expect(formatDate(date, { format: 'GG' })).toBeDefined();
-      expect(formatDate(date, { format: 'G' })).toBeDefined();
+      expect(formatDate(date, 'GGG')).toBeDefined();
+      expect(formatDate(date, 'GG')).toBeDefined();
+      expect(formatDate(date, 'G')).toBeDefined();
 
-      expect(formatDateTime(date, { format: 'hh:mm:ss' })).toBe('09:05:02');
-      expect(formatDateTime(date, { format: 'h:m:s' })).toBe('9:5:2');
-      expect(formatDateTime(date, { format: 'HH:mm:ss' })).toBe('09:05:02');
-      expect(formatDateTime(date, { format: 'H:m:s' })).toBe('9:5:2');
+      expect(formatDateTime(date, 'hh:mm:ss')).toBe('09:05:02');
+      expect(formatDateTime(date, 'h:m:s')).toBe('9:5:2');
+      expect(formatDateTime(date, 'HH:mm:ss')).toBe('09:05:02');
+      expect(formatDateTime(date, 'H:m:s')).toBe('9:5:2');
 
-      expect(formatDateTime(date, { format: 'zzzz' })).toBeDefined();
-      expect(formatDateTime(date, { format: 'zzz' })).toBeDefined();
-      expect(formatDateTime(date, { format: 'zz' })).toBeDefined();
-      expect(formatDateTime(date, { format: 'z' })).toBeDefined();
+      expect(formatDateTime(date, 'zzzz')).toBeDefined();
+      expect(formatDateTime(date, 'zzz')).toBeDefined();
+      expect(formatDateTime(date, 'zz')).toBeDefined();
+      expect(formatDateTime(date, 'z')).toBeDefined();
     });
 
     it('should handle escaped characters in format', () => {
       const date = new Date(2024, 0, 15);
-      expect(formatDate(date, { format: '[Year:] yyyy' })).toBe('Year: 2024');
+      expect(formatDate(date, '[Year:] yyyy')).toBe('Year: 2024');
     });
   });
 });

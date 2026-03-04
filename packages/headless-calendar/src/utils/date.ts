@@ -101,15 +101,14 @@ const parseDateTimeFormat = (format: string): Intl.DateTimeFormatOptions => {
 /**
  * Formats a date object into a string based on the specified format, locale, and timezone.
  * @param {Date} date - The date object to format.
- * @param {object} [options] - Formatting options.
- * @param {string} [options.format="yyyy-MM-dd"] - The format string (e.g., "yyyy-MM-dd", "MM/dd/yyyy").
- * @param {string} [options.locale] - The locale to use for formatting.
- * @param {string} [options.timeZone] - The timezone to use for formatting.
+ * @param {string} [format="yyyy-MM-dd"] - The format string (e.g., "yyyy-MM-dd", "MM/dd/yyyy").
+ * @param {string} [locale] - The locale to use for formatting.
+ * @param {string} [timeZone] - The timezone to use for formatting.
  * @returns {string} - The formatted date string.
  * @see {@link formatDateTime}
  * @example
  * ```ts
- * const formattedDate = formatDate(new Date('2024-01-15'), { format: 'MM/dd/yyyy' }); // "01/15/2024"
+ * const formattedDate = formatDate(new Date('2024-01-15'), 'MM/dd/yyyy'); // "01/15/2024"
  * ```
  * @group dateTime-helper
  * @title formatDate
@@ -117,29 +116,23 @@ const parseDateTimeFormat = (format: string): Intl.DateTimeFormatOptions => {
  */
 export const formatDate = (
   date: Date,
-  options?: { format?: string; locale?: string; timeZone?: string },
+  format: string = 'yyyy-MM-dd',
+  locale?: string,
+  timeZone?: string,
 ): string => {
-  if (!options) {
-    options = { format: 'yyyy-MM-dd' };
-  }
-  return formatDateTime(date, options);
+  return formatDateTime(date, format, locale, timeZone);
 };
 
 /**
  * Formats a date and time object into a string based on the specified format, locale, and timezone.
  * @param {Date} date - The date object to format.
- * @param {object} [options] - Formatting options.
- * @param {string} [options.format="yyyy-MM-ddTHH:mm:ss"] - The format string (e.g., "yyyy-MM-dd HH:mm:ss").
- * @param {string} [options.locale] - The locale to use for formatting.
- * @param {string} [options.timeZone] - The timezone to use for formatting.
+ * @param {string} [format="yyyy-MM-ddTHH:mm:ss"] - The format string (e.g., "yyyy-MM-dd HH:mm:ss").
+ * @param {string} [locale] - The locale to use for formatting.
+ * @param {string} [timeZone] - The timezone to use for formatting.
  * @returns {string} - The formatted date and time string.
  * @example
  * ```ts
- * formatDateTime(new Date(), {
- *  format: "yyyy-MM-dd HH:mm:ss",
- *  locale: "en-US",
- *  timeZone: "America/New_York"
- * });
+ * formatDateTime(new Date(), "yyyy-MM-dd HH:mm:ss", "en-US", "America/New_York");
  * ```
  * @group dateTime-helper
  * @title formatDateTime
@@ -147,13 +140,14 @@ export const formatDate = (
  */
 export const formatDateTime = (
   date: Date,
-  options?: { format?: string; locale?: string; timeZone?: string },
+  format: string = 'yyyy-MM-ddTHH:mm:ss',
+  locale?: string,
+  timeZone?: string,
 ): string => {
-  const format = options?.format ?? 'yyyy-MM-ddTHH:mm:ss';
-  const locale = options?.locale ?? Intl.DateTimeFormat().resolvedOptions().locale;
-  const timeZone = options?.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const _locale = locale ?? Intl.DateTimeFormat().resolvedOptions().locale;
+  const _timeZone = timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   const formatOptions = parseDateTimeFormat(format);
-  const formatter = getIntlFormatter(locale, { ...formatOptions, timeZone });
+  const formatter = getIntlFormatter(_locale, { ...formatOptions, timeZone: _timeZone });
   const parts = formatter.formatToParts(date);
 
   const lookup: Record<string, string> = {};

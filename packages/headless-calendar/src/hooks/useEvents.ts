@@ -37,8 +37,15 @@ import { createCallback, createMemo, createState } from '../state';
  * @description A hook for managing calendar events, including creating, updating, deleting, and moving events.
  */
 export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
-  const { calendarTimezone, onEvent, onEventCreate, onEventUpdate, onEventDelete, initialEvents } =
-    options;
+  const {
+    calendarId = 'default-calendar',
+    calendarTimezone,
+    onEvent,
+    onEventCreate,
+    onEventUpdate,
+    onEventDelete,
+    initialEvents,
+  } = options;
 
   const _initialEvents = createMemo<CalendarEvent[]>(
     (): CalendarEvent[] => {
@@ -63,12 +70,12 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       return [];
     },
     [],
-    'calendar-initial-events',
+    `${calendarId}-calendar-initial-events`,
   );
 
   const [getEvents, setEvents] = createState<CalendarEvent[]>(
     _initialEvents || [],
-    'calendar-event',
+    `${calendarId}-calendar-event`,
   );
 
   /**
@@ -118,7 +125,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       return event;
     },
     [onEventCreate],
-    'create-event',
+    `${calendarId}-create-event`,
   );
 
   /**
@@ -157,7 +164,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       onEvent?.(getEvents());
     },
     [getEvents, onEventUpdate],
-    'update-event',
+    `${calendarId}-update-event`,
   );
 
   /**
@@ -177,7 +184,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       }
     },
     [getEvents, onEventDelete],
-    'delete-event',
+    `${calendarId}-delete-event`,
   );
 
   /**
@@ -204,7 +211,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       onEvent?.(getEvents());
     },
     [getEvents, updateEvent],
-    'move-event',
+    `${calendarId}-move-event`,
   );
 
   /**
@@ -233,7 +240,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       return duplicatedEvent;
     },
     [getEvents, onEventCreate],
-    'duplicate-event',
+    `${calendarId}-duplicate-event`,
   );
 
   /**
@@ -250,7 +257,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       return getEvents().find((e) => e.id === eventId);
     },
     [getEvents],
-    'get-event',
+    `${calendarId}-get-event`,
   );
 
   /**
@@ -265,7 +272,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       onEvent?.([]);
     },
     [],
-    'clear-events',
+    `${calendarId}-clear-events`,
   );
 
   /**
@@ -282,7 +289,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       onEvent?.(getEvents());
     },
     [],
-    'set-event-callback',
+    `${calendarId}-set-event-callback`,
   );
 
   /**
@@ -302,7 +309,7 @@ export const useEvents = (options: UseEventsOptions = {}): UseEventsReturn => {
       setEventsCallback(eventsWithIds);
     },
     [setEventsCallback],
-    'import-from-ics',
+    `${calendarId}-import-from-ics`,
   );
 
   return {

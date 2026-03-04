@@ -133,6 +133,10 @@ export interface DayData {
  */
 export interface UseNavigationOptions {
   /**
+   * A unique identifier for the calendar instance.
+   */
+  calendarId?: string;
+  /**
    * The default view to display when the calendar is initialized.
    */
   defaultView: ViewType;

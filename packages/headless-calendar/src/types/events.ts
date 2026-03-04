@@ -347,6 +347,10 @@ export interface DraggedEvent {
  */
 export interface UseDragDropOptions {
   /**
+   * A unique identifier for the calendar instance.
+   */
+  calendarId?: string;
+  /**
    * A callback function that is invoked when an event is moved via drag and drop.
    * @param {string} eventId - The ID of the moved event.
    * @param {Date} newStart - The new start date and time of the event.
@@ -407,6 +411,10 @@ export interface UseDragDropReturn {
  * @description Defines the configuration options for the `useEvents` hook, including initial events and callback functions for event changes.
  */
 export interface UseEventsOptions {
+  /**
+   * A unique identifier for the calendar instance.
+   */
+  calendarId?: string;
   /**
    * The timezone to use for the calendar.
    */

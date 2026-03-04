@@ -51,10 +51,10 @@ const unfoldICS = (icsContent: string): string => {
  */
 const formatICSDate = (date: Date, allDay: boolean = false): string => {
   if (allDay) {
-    return formatDate(date, { format: 'yyyyMMdd', timeZone: 'UTC' });
+    return formatDate(date, 'yyyyMMdd', undefined, 'UTC');
   }
 
-  return formatDateTime(date, { format: 'yyyyMMddTHHmmssZ', timeZone: 'UTC' });
+  return formatDateTime(date, 'yyyyMMddTHHmmssZ', undefined, 'UTC');
 };
 
 /**

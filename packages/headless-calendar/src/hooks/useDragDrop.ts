@@ -35,11 +35,11 @@ import { createCallback, createState } from '../state';
  * @description A hook for managing drag and drop functionality for calendar events.
  */
 export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn => {
-  const { onEventMove, onDragStart, onDragEnd, onDrop } = options;
+  const { calendarId = 'default-calendar', onEventMove, onDragStart, onDragEnd, onDrop } = options;
 
   const [getDraggedEvent, setDraggedEvent] = createState<DraggedEvent | null>(
     null,
-    'dragged-event',
+    `${calendarId}-dragged-event`,
   );
 
   /**
@@ -60,7 +60,7 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       onDragStart?.(event);
     },
     [onDragStart],
-    'drag-start',
+    `${calendarId}-drag-start`,
   );
 
   /**
@@ -77,7 +77,7 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       setDraggedEvent(null);
     },
     [getDraggedEvent, onDragEnd],
-    'drag-end',
+    `${calendarId}-drag-end`,
   );
 
   /**
@@ -124,7 +124,7 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       endDrag();
     },
     [getDraggedEvent, onEventMove, onDrop, endDrag],
-    'handle-drag',
+    `${calendarId}-handle-drag`,
   );
 
   /**
@@ -150,7 +150,7 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       },
     }),
     [startDrag, endDrag],
-    'get-drag-props',
+    `${calendarId}-get-drag-props`,
   );
 
   /**
@@ -173,7 +173,7 @@ export const useDragDrop = (options: UseDragDropOptions = {}): UseDragDropReturn
       },
     }),
     [handleDrop],
-    'get-drop-props',
+    `${calendarId}-get-drop-props`,
   );
 
   return {

@@ -51,6 +51,11 @@ export interface DropTarget {
  */
 export interface CalendarOptions {
   /**
+   * A unique identifier for the calendar instance. Required for managing multiple calendars in a single view.
+   * @default 'default-calendar'
+   */
+  calendarId?: string;
+  /**
    * The default view to display when the calendar is initialized.
    * @default 'month'
    */

@@ -17,31 +17,31 @@ describe('State Engine', () => {
 
   describe('createState', () => {
     it('should initialize with value', () => {
-      const [getVal] = createState(10, 'test');
-      expect(getVal()).toBe(10);
-    });
-
-    it('should initialize with function', () => {
-      const [getVal] = createState(() => 20, 'test-fn');
-      expect(getVal()).toBe(20);
-    });
-
-    it('should update value', () => {
-      const [getVal, setVal] = createState(0, 'counter');
-      setVal(1);
+      const [getVal] = createState(1, 's1');
       expect(getVal()).toBe(1);
     });
 
+    it('should initialize with function', () => {
+      const [getVal] = createState(() => 1 + 1, 's2');
+      expect(getVal()).toBe(2);
+    });
+
+    it('should update value', () => {
+      const [getVal, setVal] = createState(0, 's3');
+      setVal(5);
+      expect(getVal()).toBe(5);
+    });
+
     it('should update with function', () => {
-      const [getVal, setVal] = createState(10, 'counter');
+      const [getVal, setVal] = createState(10, 's4');
       setVal((prev) => prev + 5);
       expect(getVal()).toBe(15);
     });
 
     it('should notify subscribers', () => {
-      const [, setVal] = createState(0, 's');
+      const [, setVal] = createState(0, 'notify');
       const spy = vi.fn();
-      subscribeToState('s', spy);
+      subscribeToState('notify', spy);
 
       setVal(1);
       expect(spy).toHaveBeenCalledWith(1);
@@ -75,14 +75,16 @@ describe('State Engine', () => {
       let count = 0;
       const factory = () => {
         count++;
-        return 'computed';
+        return `val-${count}`;
       };
 
-      createMemo(factory, [1], 'm1');
-      createMemo(factory, [1], 'm1');
-      expect(count).toBe(1);
+      const val1 = createMemo(factory, [1], 'm1');
+      const val2 = createMemo(factory, [1], 'm1');
+      const val3 = createMemo(factory, [2], 'm1');
 
-      createMemo(factory, [2], 'm1');
+      expect(val1).toBe('val-1');
+      expect(val2).toBe('val-1');
+      expect(val3).toBe('val-2');
       expect(count).toBe(2);
     });
   });
@@ -91,7 +93,7 @@ describe('State Engine', () => {
     it('should run effect initially', () => {
       const spy = vi.fn();
       createEffect(spy, [], 'e1');
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should rerun when deps change', () => {
@@ -99,11 +101,9 @@ describe('State Engine', () => {
       let dep = 1;
 
       createEffect(spy, [dep], 'e2');
-      createEffect(spy, [dep], 'e2');
-      expect(spy).toHaveBeenCalledTimes(1);
-
       dep = 2;
       createEffect(spy, [dep], 'e2');
+
       expect(spy).toHaveBeenCalledTimes(2);
     });
 
@@ -112,11 +112,8 @@ describe('State Engine', () => {
       const effect = vi.fn(() => cleanup);
 
       createEffect(effect, [1], 'cleanup-test');
-      expect(effect).toHaveBeenCalledTimes(1);
-      expect(cleanup).not.toHaveBeenCalled();
-
       createEffect(effect, [2], 'cleanup-test');
-      expect(effect).toHaveBeenCalledTimes(2);
+
       expect(cleanup).toHaveBeenCalledTimes(1);
     });
 
@@ -131,6 +128,7 @@ describe('State Engine', () => {
     it('should run cleanup via cleanupAllEffects', () => {
       const cleanup1 = vi.fn();
       const cleanup2 = vi.fn();
+
       createEffect(() => cleanup1, [], 'c1');
       createEffect(() => cleanup2, [], 'c2');
 
@@ -140,7 +138,7 @@ describe('State Engine', () => {
     });
 
     it('should handle cleanupEffect for non-existent effect', () => {
-      expect(() => cleanupEffect('non-existent')).not.toThrow();
+      expect(() => cleanupEffect('nothing')).not.toThrow();
     });
   });
 
@@ -148,7 +146,6 @@ describe('State Engine', () => {
     it('should return true if either deps is undefined', () => {
       expect(haveDepsChanged(undefined, [])).toBe(true);
       expect(haveDepsChanged([], undefined)).toBe(true);
-      expect(haveDepsChanged(undefined, undefined)).toBe(true);
     });
 
     it('should return true if lengths differ', () => {

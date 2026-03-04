@@ -90,6 +90,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
   const utcDate = new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 0, 0, 0);
 
   const {
+    calendarId = 'default-calendar',
     defaultView = 'month',
     defaultDate = utcDate,
     startOfWeek = DEFAULT_START_OF_WEEK,
@@ -110,6 +111,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
   // Use navigation hook
   const navigation = useNavigation({
+    calendarId,
     defaultView,
     defaultDate,
     onViewChange,
@@ -121,6 +123,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
   // Use events hook
   const eventsManager = useEvents({
+    calendarId,
     calendarTimezone: timezone,
     onEvent,
     onEventCreate,
@@ -131,6 +134,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
 
   // Use drag & drop hook
   const dragDrop = useDragDrop({
+    calendarId,
     onEventMove: eventsManager.moveEvent,
   });
 
@@ -146,7 +150,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       return getTimeSlots(startHour, endHour, timeSlotInterval);
     },
     [startHour, endHour, timeSlotInterval],
-    'time-slots',
+    `${calendarId}-time-slots`,
   );
 
   /**
@@ -213,7 +217,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       return dates;
     },
     [navigation.currentDate, navigation.view, startOfWeek, navigation.customViewOptions],
-    'visible-dates',
+    `${calendarId}-visible-dates`,
   );
 
   /**
@@ -273,7 +277,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       timezone,
       navigation.customViewOptions,
     ],
-    'visible-events',
+    `${calendarId}-visible-events`,
   );
 
   /**
@@ -340,7 +344,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       };
     },
     [navigation.currentDate, navigation.view, startOfWeek, locale, timezone],
-    'year-data',
+    `${calendarId}-year-data`,
   );
 
   /**
@@ -403,7 +407,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       timezone,
       navigation.customViewOptions,
     ],
-    'month-data',
+    `${calendarId}-month-data`,
   );
 
   /**
@@ -442,7 +446,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       timezone,
       navigation.customViewOptions,
     ],
-    'week-data',
+    `${calendarId}-week-data`,
   );
 
   /**
@@ -483,7 +487,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
       timezone,
       navigation.customViewOptions,
     ],
-    'day-data',
+    `${calendarId}-day-data`,
   );
 
   // Modify the utils section to include new localization helpers
@@ -562,7 +566,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @description Formats a date object into a string.
        */
       formatDate: (date: Date, format?: string): string =>
-        formatDate(date, { format: format ?? 'yyyy-MM-dd', locale, timeZone: timezone }),
+        formatDate(date, format ?? 'yyyy-MM-dd', locale, timezone),
       /**
        * Formats a date and time object into a string based on the specified format.
        * @param {Date} date - The date object to format.
@@ -572,11 +576,7 @@ export const useCalendar = (options: CalendarOptions = {}): CalendarInstance => 
        * @description Formats a date and time object into a string.
        */
       formatDateTime: (date: Date, format?: string): string =>
-        formatDateTime(date, {
-          format: format ?? 'yyyy-MM-dd HH:mm:ss',
-          locale,
-          timeZone: timezone,
-        }),
+        formatDateTime(date, format ?? 'yyyy-MM-dd HH:mm:ss', locale, timezone),
       parseDate,
       isSameDay,
       isSameWeek: (d1: Date, d2: Date) => isSameWeek(d1, d2, startOfWeek),
