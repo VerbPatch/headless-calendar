@@ -7,7 +7,7 @@ description: Gets the start of the day for a given date (00:00:00).
 
 > **getStartOfDay**(`date`): `Date`
 
-Defined in: [utils/date.ts:462](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/date.ts#L462)
+Defined in: [utils/date.ts:462](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/date.ts#L462)
 
 Gets the start of the day for a given date (00:00:00).
 

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Calendar ICS Example</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>jQuery Calendar ICS Example</h1>
+
+    <div style="display: flex; gap: 20px; align-items: flex-start">
+      <div id="calendar" style="flex: 0 0 840px"></div>
+      <div style="flex: 1; min-width: 300px; font-family: sans-serif">
+        <div
+          id="event-list-container"
+          style="
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+          "
+        >
+          <h3 style="margin-top: 0">Event List</h3>
+          <ul id="event-list" style="padding-left: 20px"></ul>
+        </div>
+        <div
+          id="ics-output-container"
+          style="border: 1px solid #ccc; padding: 10px; max-height: 400px; overflow-y: auto"
+        >
+          <h3 style="margin-top: 0">
+            ICS Tools
+            <div style="margin-bottom: 10px; float: right; display: flex; gap: 10px">
+              <div style="font-size: 12px">
+                <label style="display: block; margin-bottom: 2px">Import:</label>
+                <input type="file" id="input-import" accept=".ics" style="font-size: 10px" />
+              </div>
+              <button id="btn-export">Export to ICS</button>
+            </div>
+          </h3>
+          <pre
+            id="ics-output"
+            style="
+              white-space: pre-wrap;
+              word-wrap: break-word;
+              font-size: 11px;
+              background: #f5f5f5;
+              padding: 5px;
+            "
+          ></pre>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

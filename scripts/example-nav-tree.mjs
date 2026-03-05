@@ -5,7 +5,6 @@ const IGNORED_DIRS = new Set([
   'node_modules',
   '.angular',
   '.svelte-kit',
-  'jQuery',
   'dist',
   'build',
 ]);

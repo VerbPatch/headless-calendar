@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Multiple Calendars Example</title>
+    <style>
+      body {
+        padding: 20px;
+        font-family: sans-serif;
+        color: #333;
+      }
+      .calendars-container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .calendar-wrapper {
+        border: 1px solid #ccc;
+        padding: 16px;
+        border-radius: 8px;
+        width: 350px;
+      }
+      .view-switcher {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 10px;
+      }
+      .view-btn {
+        flex: 1;
+        padding: 4px;
+        font-size: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: capitalize;
+        background-color: #f0f0f0;
+        color: #000;
+      }
+      .view-btn.active {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .nav span {
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .today-btn {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 6px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: center;
+        padding: 4px;
+        font-size: 14px;
+      }
+      th {
+        font-size: 12px;
+      }
+      .day-cell.today {
+        background-color: #e6f7ff;
+        border-radius: 50%;
+      }
+      .day-cell.other-month {
+        color: #ccc;
+      }
+      .day-cell.current-month {
+        color: #000;
+      }
+      .week-view {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .week-range {
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 4px;
+      }
+      .week-dates {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+      }
+      .week-date {
+        flex: 1;
+        text-align: center;
+        padding: 8px 4px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        border: 1px solid #eee;
+      }
+      .week-date.today {
+        background-color: #e6f7ff;
+        border: 1px solid #007bff;
+      }
+      .day-view {
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        border: 1px solid #eee;
+      }
+      .day-view.today {
+        background-color: #e6f7ff;
+        border: 1px solid #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Multiple Calendars Example</h1>
+    <p style="color: #666; margin-bottom: 30px">
+      Each calendar below has a unique <code>calendarId</code> and maintains its own independent
+      state (date, view, etc.).
+    </p>
+
+    <div class="calendars-container">
+      <div
+        id="calendar-left"
+        class="calendar-wrapper"
+        data-id="calendar-left"
+        data-title="Left Calendar"
+      ></div>
+      <div
+        id="calendar-right"
+        class="calendar-wrapper"
+        data-id="calendar-right"
+        data-title="Right Calendar"
+      ></div>
+    </div>
+
+    <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px">
+      <h2>Default Calendar</h2>
+      <p style="color: #666">
+        This one uses the default ID. If you added another one without an ID, they would conflict.
+      </p>
+      <div
+        id="default-calendar"
+        class="calendar-wrapper"
+        data-id="default-calendar"
+        data-title="Standard Calendar"
+      ></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

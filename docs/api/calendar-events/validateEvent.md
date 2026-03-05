@@ -7,7 +7,7 @@ description: Validates a calendar event object for required fields and logical c
 
 > **validateEvent**(`event`): `string`[]
 
-Defined in: [utils/events.ts:274](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/events.ts#L274)
+Defined in: [utils/events.ts:274](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/events.ts#L274)
 
 Validates a calendar event object for required fields and logical consistency.
 

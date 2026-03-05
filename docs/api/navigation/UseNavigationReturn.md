@@ -7,7 +7,7 @@ description: |-
 
 # UseNavigationReturn
 
-Defined in: [types/views.ts:177](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L177)
+Defined in: [types/views.ts:177](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L177)
 
 ## Properties
 
@@ -15,7 +15,7 @@ Defined in: [types/views.ts:177](https://github.com/VerbPatch/headless-calendar/
 
 > **canGoNext**: `boolean`
 
-Defined in: [types/views.ts:227](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L227)
+Defined in: [types/views.ts:227](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L227)
 
 Indicates if navigation to the next period is possible.
 
@@ -25,7 +25,7 @@ Indicates if navigation to the next period is possible.
 
 > **canGoPrevious**: `boolean`
 
-Defined in: [types/views.ts:232](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L232)
+Defined in: [types/views.ts:232](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L232)
 
 Indicates if navigation to the previous period is possible.
 
@@ -35,7 +35,7 @@ Indicates if navigation to the previous period is possible.
 
 > **changeView**: (`view`, `options?`) => `void`
 
-Defined in: [types/views.ts:222](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L222)
+Defined in: [types/views.ts:222](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L222)
 
 **`Function`**
 
@@ -69,7 +69,7 @@ Configuration options for the 'custom' view.
 
 > **currentDate**: `Date`
 
-Defined in: [types/views.ts:182](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L182)
+Defined in: [types/views.ts:182](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L182)
 
 The currently selected date in the calendar.
 
@@ -79,7 +79,7 @@ The currently selected date in the calendar.
 
 > **customViewOptions**: [`CustomViewOptions`](/calendar/docs/api/navigation/CustomViewOptions)
 
-Defined in: [types/views.ts:193](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L193)
+Defined in: [types/views.ts:193](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L193)
 
 Configuration options for the 'custom' view.
 
@@ -89,7 +89,7 @@ Configuration options for the 'custom' view.
 
 > **goToDate**: (`date`) => `void`
 
-Defined in: [types/views.ts:214](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L214)
+Defined in: [types/views.ts:214](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L214)
 
 **`Function`**
 
@@ -113,7 +113,7 @@ The date to navigate to.
 
 > **goToNext**: () => `void`
 
-Defined in: [types/views.ts:198](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L198)
+Defined in: [types/views.ts:198](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L198)
 
 **`Function`**
 
@@ -129,7 +129,7 @@ Navigates the calendar to the next period (day, week, or month depending on the 
 
 > **goToPrevious**: () => `void`
 
-Defined in: [types/views.ts:203](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L203)
+Defined in: [types/views.ts:203](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L203)
 
 **`Function`**
 
@@ -145,7 +145,7 @@ Navigates the calendar to the previous period (day, week, or month depending on 
 
 > **goToToday**: () => `void`
 
-Defined in: [types/views.ts:208](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L208)
+Defined in: [types/views.ts:208](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L208)
 
 **`Function`**
 
@@ -161,7 +161,7 @@ Navigates the calendar to today's date.
 
 > **view**: [`ViewType`](/calendar/docs/api/navigation/ViewType)
 
-Defined in: [types/views.ts:188](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L188)
+Defined in: [types/views.ts:188](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L188)
 
 The current view of the calendar (e.g., 'month', 'week', 'day').
 

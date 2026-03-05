@@ -7,7 +7,7 @@ description: Checks if a given date and time falls within a specified range (inc
 
 > **dateTimeInBetween**(`between`, `startDateTime`, `endDateTime`): `boolean`
 
-Defined in: [utils/date.ts:741](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/date.ts#L741)
+Defined in: [utils/date.ts:741](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/date.ts#L741)
 
 Checks if a given date and time falls within a specified range (inclusive).
 

@@ -7,7 +7,7 @@ description: Retrieves events that occur at a specific time on a given date.
 
 > **getEventsAtTime**(`events`, `date`, `hour`, `minute?`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:206](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/events.ts#L206)
+Defined in: [utils/events.ts:206](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/events.ts#L206)
 
 Retrieves events that occur at a specific time on a given date.
 

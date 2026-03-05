@@ -7,7 +7,7 @@ description: Validate custom view before populating custom view data when view i
 
 > **validateCustomView**(`customViewOptions`): `void`
 
-Defined in: [utils/calendar.ts:353](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/calendar.ts#L353)
+Defined in: [utils/calendar.ts:353](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/calendar.ts#L353)
 
 Validate custom view before populating custom view data when view is set to 'custom'
 

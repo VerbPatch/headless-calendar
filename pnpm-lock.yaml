@@ -1350,6 +1350,71 @@ importers:
         specifier: ^3.1.3
         version: 3.1.3(typescript@5.9.3)
 
+  examples/jQuery/ICS:
+    dependencies:
+      '@verbpatch/jquery-calendar':
+        specifier: latest
+        version: link:../../../packages/jquery-calendar
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/jQuery/custom-view:
+    dependencies:
+      '@verbpatch/jquery-calendar':
+        specifier: latest
+        version: link:../../../packages/jquery-calendar
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/jQuery/datepicker:
+    dependencies:
+      '@verbpatch/jquery-calendar':
+        specifier: latest
+        version: link:../../../packages/jquery-calendar
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/jQuery/minimal:
+    dependencies:
+      '@verbpatch/jquery-calendar':
+        specifier: latest
+        version: link:../../../packages/jquery-calendar
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/jQuery/multiple-calendars:
+    dependencies:
+      '@verbpatch/jquery-calendar':
+        specifier: latest
+        version: link:../../../packages/jquery-calendar
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   packages/angular-calendar:
     dependencies:
       '@angular/common':

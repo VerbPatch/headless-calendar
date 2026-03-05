@@ -37,8 +37,16 @@ export default defineConfig({
         'headless-calendar': 'HeadlessCalendar',
       },
       banner,
-      //compact: false,
-      //generatedCode: "es2015",
+    },
+    {
+      file: pkg.module,
+      format: 'es',
+      banner,
+    },
+    {
+      file: 'dist/index.js',
+      format: 'cjs',
+      banner,
     },
   ],
   external: ['jquery', 'headless-calendar'],

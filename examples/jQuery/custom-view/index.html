@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Calendar Custom View Example</title>
+  </head>
+  <body style="font-family: sans-serif; padding: 20px">
+    <h1>jQuery Calendar Custom View Example</h1>
+    <div id="calendar-app">
+      <div>
+        <button id="prev">Prev</button>
+        <button id="today">Today</button>
+        <button id="next">Next</button>
+        <span style="margin-left: 20px"><strong id="range-label"></strong></span>
+      </div>
+
+      <div style="margin: 20px 0">
+        <strong>Presets:</strong>
+        <button class="preset" data-type="day" data-count="2">2 Days</button>
+        <button class="preset" data-type="week" data-count="1" data-include="1,2,3,4,5">
+          Work Week
+        </button>
+        <button class="preset" data-type="week" data-count="2">2 Weeks</button>
+        <button class="preset" data-type="month" data-count="1" data-include="1,2,3,4,5">
+          1 Month (WD)
+        </button>
+        <button class="preset" data-type="month" data-count="3">Quarter</button>
+      </div>
+
+      <div id="calendar-view"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -5,7 +5,7 @@ description: Represents the data structure for the year view, including months, 
 
 # YearData
 
-Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L38)
+Defined in: [types/views.ts:38](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L38)
 
 Data specific to the year view.
 
@@ -15,7 +15,7 @@ Data specific to the year view.
 
 > **isCurrentYear**: (`date`) => `boolean`
 
-Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L52)
+Defined in: [types/views.ts:52](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L52)
 
 A function to check if a date is in the current year.
 
@@ -39,7 +39,7 @@ The date to check.
 
 > **months**: [`MonthData`](/calendar/docs/api/navigation/MonthData)[]
 
-Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L42)
+Defined in: [types/views.ts:42](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L42)
 
 An array of month data representing all months of a years .
 
@@ -49,6 +49,6 @@ An array of month data representing all months of a years .
 
 > **year**: `string`
 
-Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/views.ts#L46)
+Defined in: [types/views.ts:46](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L46)
 
 Year label.

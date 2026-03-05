@@ -1,0 +1,121 @@
+import $ from 'jquery';
+import '@verbpatch/jquery-calendar';
+
+$(document).ready(function () {
+  const state = {
+    startDate: null,
+    endDate: null
+  };
+
+  function updateStateDisplay() {
+    $('#state-display').text(JSON.stringify(state, null, 2));
+  }
+
+  function setupDatePicker(selector, stateKey) {
+    const $wrapper = $(selector);
+    const $input = $wrapper.find('.datepicker-input');
+    const $popup = $wrapper.find('.datepicker-popup');
+
+    $wrapper.headlessCalendar({
+      calendarId: 'datepicker-' + stateKey,
+      defaultView: 'month',
+      onRender: function (cal) {
+        const { currentDate, monthData, utils } = cal;
+
+        let html = `
+          <div style="display: flex; justify-content: space-between">
+            <button type="button" class="btn-prev">←</button>
+            <span>${utils.formatLocalizedMonth(currentDate)}</span>
+            <button type="button" class="btn-next">→</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                ${utils.daysofWeek('narrow').map(day => `<th>${day}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        monthData.weeks.forEach(week => {
+          html += '<tr>';
+          week.forEach(date => {
+            const isCurrentMonth = monthData.isCurrentMonth(date);
+            const isSelected = state[stateKey] && date.toDateString() === state[stateKey].toDateString();
+            const isToday = monthData.isToday(date);
+            const style = `
+              cursor: ${isCurrentMonth ? 'pointer' : 'default'};
+              color: ${isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray'};
+              font-weight: ${isToday ? 'bold' : 'normal'};
+              border: ${isSelected ? '1px solid blue' : 'none'};
+            `;
+            html += `<td class="day-cell" data-date="${date.toISOString()}" style="${style}">${date.getDate()}</td>`;
+          });
+          html += '</tr>';
+        });
+
+        html += `
+            </tbody>
+          </table>
+          <div style="text-align: center; margin-top: 5px;">
+            <button type="button" class="btn-today">Today</button>
+          </div>
+        `;
+        $popup.html(html);
+      }
+    });
+
+    // Toggle
+    $input.on('click', function() {
+      $('.datepicker-popup').not($popup).hide();
+      $popup.toggle();
+    });
+
+    // Nav
+    $popup.on('click', '.btn-prev', function(e) {
+      e.stopPropagation();
+      $wrapper.headlessCalendar('goToPrevious');
+    });
+    $popup.on('click', '.btn-next', function(e) {
+      e.stopPropagation();
+      $wrapper.headlessCalendar('goToNext');
+    });
+    $popup.on('click', '.btn-today', function(e) {
+      e.stopPropagation();
+      const today = new Date();
+      state[stateKey] = today;
+      $input.val(today.toISOString().split('T')[0]);
+      $popup.hide();
+      updateStateDisplay();
+      $wrapper.headlessCalendar('goToDate', today);
+    });
+
+    // Select
+    $popup.on('click', '.day-cell', function(e) {
+      e.stopPropagation();
+      const date = new Date($(this).data('date'));
+      state[stateKey] = date;
+      $input.val(date.toISOString().split('T')[0]);
+      $popup.hide();
+      updateStateDisplay();
+      // Re-render to show selected
+      $wrapper.headlessCalendar('render');
+    });
+  }
+
+  setupDatePicker('#departure-picker', 'startDate');
+  setupDatePicker('#return-picker', 'endDate');
+
+  $(document).on('mousedown', function(e) {
+    if (!$(e.target).closest('.datepicker-wrapper').length) {
+      $('.datepicker-popup').hide();
+    }
+  });
+
+  $('#trip-form').on('submit', function(e) {
+    e.preventDefault();
+    alert('Form Submitted!');
+  });
+
+  updateStateDisplay();
+});

@@ -645,6 +645,37 @@
     ]
   },
   {
+    "title": "jQuery",
+    "group": "example",
+    "children": [
+      {
+        "title": "custom-view",
+        "group": "example",
+        "path": "/calendar/examples/jQuery/custom-view"
+      },
+      {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/jQuery/datepicker"
+      },
+      {
+        "title": "ICS",
+        "group": "example",
+        "path": "/calendar/examples/jQuery/ICS"
+      },
+      {
+        "title": "minimal",
+        "group": "example",
+        "path": "/calendar/examples/jQuery/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/jQuery/multiple-calendars"
+      }
+    ]
+  },
+  {
     "title": "Lit",
     "group": "example",
     "children": [

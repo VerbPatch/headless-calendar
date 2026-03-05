@@ -7,7 +7,7 @@ description: |-
 
 # CalendarEventOccurance
 
-Defined in: [types/events.ts:225](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L225)
+Defined in: [types/events.ts:225](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L225)
 
 ## Examples
 
@@ -143,7 +143,7 @@ recurring: {
 
 > `optional` **byDay**: (`string` \| `number`)[]
 
-Defined in: [types/events.ts:306](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L306)
+Defined in: [types/events.ts:306](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L306)
 
 Alias for weekDays.
 Corresponds to RFC 5545 BYDAY.
@@ -154,7 +154,7 @@ Corresponds to RFC 5545 BYDAY.
 
 > `optional` **byMonth**: `number`[]
 
-Defined in: [types/events.ts:312](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L312)
+Defined in: [types/events.ts:312](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L312)
 
 Alias for month.
 Corresponds to RFC 5545 BYMONTH.
@@ -165,7 +165,7 @@ Corresponds to RFC 5545 BYMONTH.
 
 > `optional` **byMonthDay**: `number`[]
 
-Defined in: [types/events.ts:318](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L318)
+Defined in: [types/events.ts:318](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L318)
 
 Alias for day.
 Corresponds to RFC 5545 BYMONTHDAY.
@@ -176,7 +176,7 @@ Corresponds to RFC 5545 BYMONTHDAY.
 
 > `optional` **bySetPos**: `number`[]
 
-Defined in: [types/events.ts:300](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L300)
+Defined in: [types/events.ts:300](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L300)
 
 The position of the occurrence in the set of events.
 Corresponds to RFC 5545 BYSETPOS.
@@ -187,7 +187,7 @@ Corresponds to RFC 5545 BYSETPOS.
 
 > `optional` **byWeekNo**: `number`[]
 
-Defined in: [types/events.ts:294](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L294)
+Defined in: [types/events.ts:294](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L294)
 
 The week number of the year (1 to 53 or -53 to -1).
 Corresponds to RFC 5545 BYWEEKNO.
@@ -198,7 +198,7 @@ Corresponds to RFC 5545 BYWEEKNO.
 
 > `optional` **byYearDay**: `number`[]
 
-Defined in: [types/events.ts:288](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L288)
+Defined in: [types/events.ts:288](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L288)
 
 The day of the year (1 to 366 or -366 to -1).
 Corresponds to RFC 5545 BYYEARDAY.
@@ -209,7 +209,7 @@ Corresponds to RFC 5545 BYYEARDAY.
 
 > `optional` **count**: `number`
 
-Defined in: [types/events.ts:270](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L270)
+Defined in: [types/events.ts:270](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L270)
 
 The number of occurrences before the recurrence stops.
 Corresponds to RFC 5545 COUNT.
@@ -220,7 +220,7 @@ Corresponds to RFC 5545 COUNT.
 
 > `optional` **day**: `number` \| `number`[]
 
-Defined in: [types/events.ts:250](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L250)
+Defined in: [types/events.ts:250](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L250)
 
 The day of the month.
 Corresponds to RFC 5545 BYMONTHDAY.
@@ -231,7 +231,7 @@ Corresponds to RFC 5545 BYMONTHDAY.
 
 > `optional` **end**: `Date`
 
-Defined in: [types/events.ts:276](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L276)
+Defined in: [types/events.ts:276](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L276)
 
 The end date for the recurrence.
 Corresponds to RFC 5545 UNTIL.
@@ -242,7 +242,7 @@ Corresponds to RFC 5545 UNTIL.
 
 > **every**: `number`
 
-Defined in: [types/events.ts:237](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L237)
+Defined in: [types/events.ts:237](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L237)
 
 The interval for the recurrence.
 Corresponds to RFC 5545 INTERVAL.
@@ -259,7 +259,7 @@ Corresponds to RFC 5545 INTERVAL.
 
 > `optional` **month**: `number` \| `number`[]
 
-Defined in: [types/events.ts:264](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L264)
+Defined in: [types/events.ts:264](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L264)
 
 The month of the year.
 0-11 for compatibility, or 1-12 for RFC 5545 strictness (logic should handle both).
@@ -271,7 +271,7 @@ Corresponds to RFC 5545 BYMONTH.
 
 > **repeat**: `"yearly"` \| `"monthly"` \| `"weekly"` \| `"daily"` \| `"hourly"` \| `"minutely"` \| `"secondly"`
 
-Defined in: [types/events.ts:230](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L230)
+Defined in: [types/events.ts:230](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L230)
 
 The type of recurrence pattern.
 Corresponds to RFC 5545 FREQ.
@@ -282,7 +282,7 @@ Corresponds to RFC 5545 FREQ.
 
 > `optional` **week**: `number` \| `number`[]
 
-Defined in: [types/events.ts:257](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L257)
+Defined in: [types/events.ts:257](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L257)
 
 The week number within the month or year.
 Used with weekDays for complex patterns.
@@ -294,7 +294,7 @@ Can also be mapped to RFC 5545 BYSETPOS in some contexts or BYWEEKNO in yearly.
 
 > `optional` **weekDays**: (`string` \| `number`)[]
 
-Defined in: [types/events.ts:244](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L244)
+Defined in: [types/events.ts:244](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L244)
 
 The days of the week for recurrence.
 Supports both 0-6 integers and RFC 5545 string format (e.g., 'SU', '1MO', '-1FR').
@@ -306,7 +306,7 @@ Corresponds to RFC 5545 BYDAY.
 
 > `optional` **wkst**: `"SU"` \| `"MO"` \| `"TU"` \| `"WE"` \| `"TH"` \| `"FR"` \| `"SA"`
 
-Defined in: [types/events.ts:282](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/events.ts#L282)
+Defined in: [types/events.ts:282](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/events.ts#L282)
 
 The day that the work week starts.
 Corresponds to RFC 5545 WKST.
