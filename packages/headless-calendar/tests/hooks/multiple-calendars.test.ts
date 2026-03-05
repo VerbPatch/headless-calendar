@@ -78,7 +78,7 @@ describe('multiple calendars support', () => {
       calendarId: 'cal-1',
     });
 
-    const cal2 = useCalendar({
+    useCalendar({
       calendarId: 'cal-2',
     });
 
