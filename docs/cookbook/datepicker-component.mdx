@@ -1,0 +1,117 @@
+---
+title: Building a DatePicker
+description: Learn how to build a custom DatePicker component with a popup calendar using Headless Calendar.
+---
+
+# Building a DatePicker
+
+A DatePicker is a common UI pattern where an input field reveals a calendar popup for date selection. With Headless Calendar, you can build a fully customized DatePicker that fits your design system perfectly.
+
+## Key Concepts
+
+To build a DatePicker, you need to manage:
+1.  **Open/Closed State**: Whether the calendar popup is visible.
+2.  **Date Selection**: Updating the input value when a user clicks a date.
+3.  **Click Outside**: Closing the popup when the user clicks elsewhere on the page.
+4.  **Positioning**: Ensuring the popup appears correctly relative to the input.
+
+## Implementation Example (React)
+
+Here's a simplified version of a DatePicker component.
+
+```tsx
+import React, { useState, useRef, useEffect } from 'react';
+import { useCalendar } from '@verbpatch/react-calendar';
+
+export const DatePicker = ({ label, value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+  
+  const {
+    currentDate,
+    goToPrevious,
+    goToNext,
+    monthData,
+    utils: { formatLocalizedMonth, formatDate, daysofWeek },
+  } = useCalendar({
+    calendarId: `datepicker-${label}`,
+    defaultView: 'month',
+    defaultDate: value || new Date(),
+  });
+
+  // Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleDateSelect = (date) => {
+    onChange(date);
+    setIsOpen(false);
+  };
+
+  return (
+    <div ref={containerRef} style={{ position: 'relative' }}>
+      <label>{label}</label>
+      <input
+        type="text"
+        readOnly
+        value={value ? formatDate(value, 'yyyy-MM-dd') : ''}
+        onClick={() => setIsOpen(!isOpen)}
+      />
+
+      {isOpen && (
+        <div className="datepicker-popup" style={{ position: 'absolute', zIndex: 100 }}>
+          <header>
+            <button onClick={goToPrevious}>←</button>
+            <span>{formatLocalizedMonth(currentDate)}</span>
+            <button onClick={goToNext}>→</button>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                {daysofWeek('narrow').map(day => <th key={day}>{day}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {monthData?.weeks.map((week, i) => (
+                <tr key={i}>
+                  {week.map((date, j) => (
+                    <td 
+                      key={j} 
+                      onClick={() => handleDateSelect(date)}
+                      className={monthData.isToday(date) ? 'today' : ''}
+                    >
+                      {date.getDate()}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+## Advanced Features
+
+### 1. Date Range Selection
+You can extend this logic to handle ranges by storing both `startDate` and `endDate` and highlighting the range in the `render` logic.
+
+### 2. Accessible Navigation
+Ensure that the input can be focused via Tab and that the calendar popup supports keyboard navigation (Arrow keys).
+
+### 3. Localization
+Pass the `locale` property to `useCalendar` to automatically translate month names and day headers.
+
+### 4. Custom Styling
+Since Headless Calendar provides no styles, you can use CSS Modules, Styled Components, or Tailwind CSS to make the DatePicker look exactly how you want.

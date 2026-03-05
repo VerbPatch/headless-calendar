@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { useCalendar, type ViewType } from '@verbpatch/preact-calendar';
 
 interface Props {

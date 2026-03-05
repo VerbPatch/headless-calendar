@@ -18,6 +18,10 @@ function docNavigation() {
           path: '/Calendar/docs/cookbook/building-a-mini-calendar',
         },
         {
+          title: 'DatePicker Component',
+          path: '/Calendar/docs/cookbook/datepicker-component',
+        },
+        {
           title: 'Building a Scheduler',
           path: '/Calendar/docs/cookbook/building-a-scheduler',
         },

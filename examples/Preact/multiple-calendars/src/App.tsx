@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { CalendarInstance } from './CalendarDemo';
 
 export function App() {

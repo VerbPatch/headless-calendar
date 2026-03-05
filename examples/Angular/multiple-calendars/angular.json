@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-calendar-minimal-example": {
+    "angular-calendar-multiple-calendars-example": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -45,10 +45,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-calendar-minimal-example:build:production"
+              "buildTarget": "angular-calendar-multiple-calendars-example:build:production"
             },
             "development": {
-              "buildTarget": "angular-calendar-minimal-example:build:development"
+              "buildTarget": "angular-calendar-multiple-calendars-example:build:development"
             }
           },
           "defaultConfiguration": "development"

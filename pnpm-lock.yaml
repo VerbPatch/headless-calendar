@@ -239,6 +239,73 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
+  examples/Angular/datepicker:
+    dependencies:
+      '@angular/common':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
+      '@angular/compiler':
+        specifier: ^20.3.12
+        version: 20.3.12
+      '@angular/core':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1)
+      '@angular/forms':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
+      '@angular/platform-browser':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))
+      '@angular/router':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
+      '@verbpatch/angular-calendar':
+        specifier: latest
+        version: link:../../../packages/angular-calendar
+      rxjs:
+        specifier: ~7.8.2
+        version: 7.8.2
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
+      zone.js:
+        specifier: ~0.15.1
+        version: 0.15.1
+    devDependencies:
+      '@angular/build':
+        specifier: ^20.3.10
+        version: 20.3.10(@angular/compiler-cli@20.3.12(@angular/compiler@20.3.12)(typescript@5.9.3))(@angular/compiler@20.3.12)(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@20.3.12(@angular/common@20.3.12(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.3.12(@angular/compiler@20.3.12)(rxjs@7.8.2)(zone.js@0.15.1)))(@types/node@24.10.1)(chokidar@4.0.3)(jiti@2.6.1)(karma@6.4.4)(less@4.4.2)(ng-packagr@20.3.2(@angular/compiler-cli@20.3.12(@angular/compiler@20.3.12)(typescript@5.9.3))(tslib@2.8.1)(typescript@5.9.3))(postcss@8.5.6)(terser@5.44.1)(tslib@2.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@24.10.1)(jiti@2.6.1)(jsdom@28.0.0)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))(yaml@2.8.1)
+      '@angular/cli':
+        specifier: ^20.3.10
+        version: 20.3.10(@types/node@24.10.1)(chokidar@4.0.3)
+      '@angular/compiler-cli':
+        specifier: ^20.3.12
+        version: 20.3.12(@angular/compiler@20.3.12)(typescript@5.9.3)
+      '@types/jasmine':
+        specifier: ~5.1.13
+        version: 5.1.13
+      jasmine-core:
+        specifier: ~5.12.1
+        version: 5.12.1
+      karma:
+        specifier: ~6.4.4
+        version: 6.4.4
+      karma-chrome-launcher:
+        specifier: ~3.2.0
+        version: 3.2.0
+      karma-coverage:
+        specifier: ~2.2.1
+        version: 2.2.1
+      karma-jasmine:
+        specifier: ~5.1.0
+        version: 5.1.0(karma@6.4.4)
+      karma-jasmine-html-reporter:
+        specifier: ~2.1.0
+        version: 2.1.0(jasmine-core@5.12.1)(karma-jasmine@5.1.0(karma@6.4.4))(karma@6.4.4)
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+
   examples/Angular/minimal:
     dependencies:
       '@angular/common':
@@ -405,6 +472,22 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Lit/datepicker:
+    dependencies:
+      '@verbpatch/lit-calendar':
+        specifier: latest
+        version: link:../../../packages/lit-calendar
+      lit:
+        specifier: ^3.3.1
+        version: 3.3.1
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Lit/minimal:
     dependencies:
       '@verbpatch/lit-calendar':
@@ -472,6 +555,25 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Preact/datepicker:
+    dependencies:
+      '@verbpatch/preact-calendar':
+        specifier: latest
+        version: link:../../../packages/preact-calendar
+      preact:
+        specifier: ^10.27.2
+        version: 10.27.2
+    devDependencies:
+      '@preact/preset-vite':
+        specifier: ^2.10.2
+        version: 2.10.2(@babel/core@7.28.5)(preact@10.27.2)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Preact/minimal:
     dependencies:
       '@verbpatch/preact-calendar':
@@ -527,6 +629,28 @@ importers:
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
   examples/Qwik/custom-view:
+    dependencies:
+      '@builder.io/qwik':
+        specifier: ^1.17.2
+        version: 1.17.2(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      '@verbpatch/qwik-calendar':
+        specifier: latest
+        version: link:../../../packages/qwik-calendar
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.10.1
+      serve:
+        specifier: ^14.2.5
+        version: 14.2.5
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
+  examples/Qwik/datepicker:
     dependencies:
       '@builder.io/qwik':
         specifier: ^1.17.2
@@ -676,6 +800,34 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/React/datepicker:
+    dependencies:
+      '@verbpatch/react-calendar':
+        specifier: latest
+        version: link:../../../packages/react-calendar
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.5
+        version: 19.2.5
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.5)
+      '@vitejs/plugin-react':
+        specifier: ^5.1.1
+        version: 5.1.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/React/minimal:
     dependencies:
       '@verbpatch/react-calendar':
@@ -707,7 +859,7 @@ importers:
   examples/React/multiple-calendars:
     dependencies:
       '@verbpatch/react-calendar':
-        specifier: workspace:*
+        specifier: latest
         version: link:../../../packages/react-calendar
       react:
         specifier: ^19.2.0
@@ -771,6 +923,28 @@ importers:
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
       vite-plugin-solid:
         specifier: ^2.10.2
+        version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+
+  examples/Solidjs/datepicker:
+    dependencies:
+      '@verbpatch/solidjs-calendar':
+        specifier: latest
+        version: link:../../../packages/solidjs-calendar
+      solid-js:
+        specifier: ^1.9.10
+        version: 1.9.10
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.10.1
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+      vite-plugin-solid:
+        specifier: ^2.11.10
         version: 2.11.10(solid-js@1.9.10)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
 
   examples/Solidjs/minimal:
@@ -881,6 +1055,43 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Svelte/datepicker:
+    dependencies:
+      '@verbpatch/svelte-calendar':
+        specifier: latest
+        version: link:../../../packages/svelte-calendar
+    devDependencies:
+      '@sveltejs/adapter-auto':
+        specifier: ^7.0.0
+        version: 7.0.0(@sveltejs/kit@2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))
+      '@sveltejs/kit':
+        specifier: ^2.48.5
+        version: 2.48.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)))(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^6.2.1
+        version: 6.2.1(svelte@5.43.6)(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))
+      eslint-config-prettier:
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.39.1(jiti@2.6.1))
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      prettier-plugin-svelte:
+        specifier: ^3.4.0
+        version: 3.4.0(prettier@3.6.2)(svelte@5.43.6)
+      svelte:
+        specifier: ^5.43.6
+        version: 5.43.6
+      svelte-check:
+        specifier: ^4.3.4
+        version: 4.3.4(picomatch@4.0.3)(svelte@5.43.6)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Svelte/minimal:
     dependencies:
       '@verbpatch/svelte-calendar':
@@ -975,6 +1186,16 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
 
+  examples/Vanilla/datepicker:
+    dependencies:
+      '@verbpatch/headless-calendar':
+        specifier: latest
+        version: link:../../../packages/headless-calendar
+    devDependencies:
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+
   examples/Vanilla/minimal:
     dependencies:
       '@verbpatch/headless-calendar':
@@ -1044,6 +1265,34 @@ importers:
       vue-tsc:
         specifier: ^2.0.6
         version: 2.2.12(typescript@5.9.3)
+
+  examples/Vuejs/datepicker:
+    dependencies:
+      '@verbpatch/vuejs-calendar':
+        specifier: latest
+        version: link:../../../packages/vuejs-calendar
+      vue:
+        specifier: ^3.5.24
+        version: 3.5.24(typescript@5.9.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.10.1
+      '@vitejs/plugin-vue':
+        specifier: ^6.0.1
+        version: 6.0.1(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1))(vue@3.5.24(typescript@5.9.3))
+      '@vue/tsconfig':
+        specifier: ^0.8.1
+        version: 0.8.1(typescript@5.9.3)(vue@3.5.24(typescript@5.9.3))
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.2
+        version: 7.2.2(@types/node@24.10.1)(jiti@2.6.1)(less@4.4.2)(sass@1.94.0)(terser@5.44.1)(yaml@2.8.1)
+      vue-tsc:
+        specifier: ^3.1.3
+        version: 3.1.3(typescript@5.9.3)
 
   examples/Vuejs/minimal:
     dependencies:
@@ -11128,7 +11377,7 @@ snapshots:
   istanbul-lib-instrument@5.2.1:
     dependencies:
       '@babel/core': 7.28.5
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.29.0
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
       semver: 6.3.1
