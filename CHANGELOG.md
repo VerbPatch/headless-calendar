@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.0.1-beta.12] - 2026-03-05
+
+### Added
+
+- Multi calendar support
+
+---
+
 ## [v0.0.1-beta.11] - 2026-02-26
 
 ### Added
@@ -107,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JQuery Wrapper of calendar headless libray with examples
 - Svelte Wrapper of calendar headless libray with examples
 
+[v0.0.1-beta.12]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.12
 [v0.0.1-beta.11]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.11
 [v0.0.1-beta.10]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.10
 [v0.0.1-beta.9]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.9
