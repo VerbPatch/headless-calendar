@@ -5,6 +5,7 @@ import {
   ViewType as CalendarView,
   CalendarEvent,
   CustomViewOptions,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 import $ from 'jquery';
 
@@ -173,6 +174,8 @@ declare global {
       state.$el.trigger('calendar:eventsSet', [events]);
     },
     destroy(state: JQueryCalendarState) {
+      const calendarId = state.options.calendarId ?? 'default-calendar';
+      disposeCalendar(calendarId);
       state.$el.removeData(DATA_KEY);
       state.$el.trigger('calendar:destroyed');
     },

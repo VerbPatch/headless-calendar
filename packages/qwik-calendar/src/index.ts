@@ -1,8 +1,9 @@
-import { useStore, useTask$ } from '@builder.io/qwik';
+import { useStore, useTask$, useVisibleTask$ } from '@builder.io/qwik';
 import {
   useCalendar as createCalendar,
   type CalendarOptions,
   type CalendarInstance,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 export * from '@verbpatch/headless-calendar';
 
@@ -10,6 +11,14 @@ export function useCalendar(options?: CalendarOptions) {
   const store = useStore({
     calendar: {} as CalendarInstance,
     stateVersion: 0,
+  });
+
+  const calendarId = options?.calendarId ?? 'default-calendar';
+
+  useVisibleTask$(({ cleanup }) => {
+    cleanup(() => {
+      disposeCalendar(calendarId);
+    });
   });
 
   const refreshCalendar = () => {

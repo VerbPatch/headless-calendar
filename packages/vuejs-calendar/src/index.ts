@@ -1,15 +1,21 @@
-import { ref, watch } from 'vue';
+import { ref, watch, onUnmounted } from 'vue';
 export * from '@verbpatch/headless-calendar';
 
 import {
   useCalendar as createCalendar,
   CalendarOptions,
   CalendarInstance,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 
 export function useCalendar(options?: CalendarOptions) {
   const calendar = ref<CalendarInstance>();
   const stateChanged = ref(0);
+  const calendarId = options?.calendarId ?? 'default-calendar';
+
+  onUnmounted(() => {
+    disposeCalendar(calendarId);
+  });
 
   const refreshCalendar = () => {
     const newCalendar = createCalendar({

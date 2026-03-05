@@ -5,6 +5,7 @@ import {
   CalendarInstance,
   CalendarEvent,
   ViewType,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 export * from '@verbpatch/headless-calendar';
 
@@ -49,7 +50,8 @@ export class CalendarController implements ReactiveController {
   }
 
   hostDisconnected() {
-    // Disconnected
+    const calendarId = this.options?.calendarId ?? 'default-calendar';
+    disposeCalendar(calendarId);
   }
 }
 

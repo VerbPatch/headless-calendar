@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 export * from '@verbpatch/headless-calendar';
 
-import { useCalendar as createCalendar, CalendarOptions } from '@verbpatch/headless-calendar';
+import {
+  useCalendar as createCalendar,
+  CalendarOptions,
+  disposeCalendar,
+} from '@verbpatch/headless-calendar';
 
 export function useCalendar(options?: CalendarOptions) {
   const [, setStateChanged] = useState(0);
+  const calendarId = options?.calendarId ?? 'default-calendar';
+
+  useEffect(() => {
+    return () => {
+      disposeCalendar(calendarId);
+    };
+  }, [calendarId]);
+
   const calendar = createCalendar({
     ...options,
     onEvent: (event) => {

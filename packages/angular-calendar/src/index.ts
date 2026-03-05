@@ -1,10 +1,11 @@
-import { signal, type WritableSignal } from '@angular/core';
+import { signal, type WritableSignal, inject, DestroyRef } from '@angular/core';
 import {
   useCalendar as createCalendar,
   type CalendarOptions,
   type CalendarInstance,
   type CalendarEvent,
   type ViewType,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 
 export * from '@verbpatch/headless-calendar';
@@ -16,6 +17,18 @@ export type CalendarComposable = {
 export function useCalendar(options?: CalendarOptions): CalendarComposable {
   const initialInstance = createCalendar(options);
   const calendarSignal = signal<CalendarInstance>(initialInstance);
+  const calendarId = options?.calendarId ?? 'default-calendar';
+
+  try {
+    const destroyRef = inject(DestroyRef);
+    destroyRef.onDestroy(() => {
+      disposeCalendar(calendarId);
+    });
+  } catch (e) {
+    // eslint-disable-next-line
+    console.error(e);
+    // inject might fail if called outside injection context
+  }
 
   const refreshCalendar = () => {
     const newInstance = createCalendar({

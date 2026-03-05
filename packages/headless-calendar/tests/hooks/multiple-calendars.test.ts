@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { useCalendar } from '../../src/hooks/useCalendar';
 import { clearAllCaches } from '../../src/state';
+import { disposeCalendar } from '../../src/lifecycle';
 
 describe('multiple calendars support', () => {
   beforeEach(() => {
@@ -77,7 +78,6 @@ describe('multiple calendars support', () => {
       calendarId: 'cal-1',
     });
 
-    // eslint-disable-next-line
     const cal2 = useCalendar({
       calendarId: 'cal-2',
     });
@@ -97,5 +97,47 @@ describe('multiple calendars support', () => {
 
     expect(cal1Updated.events).toHaveLength(1);
     expect(cal2Updated.events).toHaveLength(0);
+  });
+
+  it('should correctly dispose a specific calendar instance', () => {
+    const date1 = new Date(2024, 0, 1);
+    const cal1 = useCalendar({
+      calendarId: 'to-be-disposed',
+      defaultDate: date1,
+    });
+
+    // Navigate to change state from default
+    cal1.goToNext();
+    const cal1Changed = useCalendar({ calendarId: 'to-be-disposed' });
+    expect(cal1Changed.currentDate.getMonth()).toBe(1); // Feb
+
+    // Dispose
+    disposeCalendar('to-be-disposed');
+
+    // New instance with same ID should now use its own NEW default instead of old cached state
+    const cal1New = useCalendar({
+      calendarId: 'to-be-disposed',
+      defaultDate: date1,
+    });
+    expect(cal1New.currentDate.getMonth()).toBe(0); // Back to Jan
+  });
+
+  it('should not affect other instances when one is disposed', () => {
+    const date1 = new Date(2024, 0, 1);
+    const date2 = new Date(2024, 5, 1);
+
+    const cal1 = useCalendar({ calendarId: 'cal-1', defaultDate: date1 });
+    const cal2 = useCalendar({ calendarId: 'cal-2', defaultDate: date2 });
+
+    cal1.goToNext();
+    cal2.goToNext();
+
+    disposeCalendar('cal-1');
+
+    const cal1Check = useCalendar({ calendarId: 'cal-1', defaultDate: date1 });
+    const cal2Check = useCalendar({ calendarId: 'cal-2', defaultDate: date2 });
+
+    expect(cal1Check.currentDate.getMonth()).toBe(0); // Reset to Jan
+    expect(cal2Check.currentDate.getMonth()).toBe(6); // Still July (Jun + 1)
   });
 });

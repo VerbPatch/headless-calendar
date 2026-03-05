@@ -1,8 +1,9 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, onCleanup } from 'solid-js';
 import {
   useCalendar as createCalendar,
   type CalendarOptions,
   type CalendarInstance,
+  disposeCalendar,
 } from '@verbpatch/headless-calendar';
 
 export * from '@verbpatch/headless-calendar';
@@ -10,6 +11,11 @@ export * from '@verbpatch/headless-calendar';
 export function useCalendar(options?: CalendarOptions) {
   const [stateVersion, setStateVersion] = createSignal(0);
   const [calendar, setCalendar] = createSignal<CalendarInstance>();
+  const calendarId = options?.calendarId ?? 'default-calendar';
+
+  onCleanup(() => {
+    disposeCalendar(calendarId);
+  });
 
   const refreshCalendar = () => {
     const cal = createCalendar({
