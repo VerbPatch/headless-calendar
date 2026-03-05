@@ -1,13 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const IGNORED_DIRS = new Set([
-  'node_modules',
-  '.angular',
-  '.svelte-kit',
-  'dist',
-  'build',
-]);
+const IGNORED_DIRS = new Set(['node_modules', '.angular', '.svelte-kit', 'dist', 'build']);
 
 export function buildExamplesNav(pathPrefix) {
   const rootDir = process.cwd() + '\\examples';

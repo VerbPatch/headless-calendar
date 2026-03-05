@@ -9,7 +9,9 @@ export class App extends LitElement {
 
   private _handleSubmit(e: Event) {
     e.preventDefault();
-    alert(`Form Submitted!\nStart Date: ${this.startDate?.toDateString() || 'Not set'}\nEnd Date: ${this.endDate?.toDateString() || 'Not set'}`);
+    alert(
+      `Form Submitted!\nStart Date: ${this.startDate?.toDateString() || 'Not set'}\nEnd Date: ${this.endDate?.toDateString() || 'Not set'}`,
+    );
   }
 
   render() {
@@ -38,7 +40,9 @@ export class App extends LitElement {
 
         <div style="margin-top: 20px">
           <h3>Selection State:</h3>
-          <pre>${JSON.stringify({ startDate: this.startDate, endDate: this.endDate }, null, 2)}</pre>
+          <pre>
+${JSON.stringify({ startDate: this.startDate, endDate: this.endDate }, null, 2)}</pre
+          >
         </div>
       </div>
     `;

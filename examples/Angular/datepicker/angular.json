@@ -46,9 +46,10 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-calendar-datepicker-example:build:production"
-              },
-              "development": {
-              "buildTarget": "angular-calendar-datepicker-example:build:development"            }
+            },
+            "development": {
+              "buildTarget": "angular-calendar-datepicker-example:build:development"
+            }
           },
           "defaultConfiguration": "development"
         },

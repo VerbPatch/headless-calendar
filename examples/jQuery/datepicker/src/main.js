@@ -4,7 +4,7 @@ import '@verbpatch/jquery-calendar';
 $(document).ready(function () {
   const state = {
     startDate: null,
-    endDate: null
+    endDate: null,
   };
 
   function updateStateDisplay() {
@@ -31,17 +31,21 @@ $(document).ready(function () {
           <table>
             <thead>
               <tr>
-                ${utils.daysofWeek('narrow').map(day => `<th>${day}</th>`).join('')}
+                ${utils
+                  .daysofWeek('narrow')
+                  .map((day) => `<th>${day}</th>`)
+                  .join('')}
               </tr>
             </thead>
             <tbody>
         `;
 
-        monthData.weeks.forEach(week => {
+        monthData.weeks.forEach((week) => {
           html += '<tr>';
-          week.forEach(date => {
+          week.forEach((date) => {
             const isCurrentMonth = monthData.isCurrentMonth(date);
-            const isSelected = state[stateKey] && date.toDateString() === state[stateKey].toDateString();
+            const isSelected =
+              state[stateKey] && date.toDateString() === state[stateKey].toDateString();
             const isToday = monthData.isToday(date);
             const style = `
               cursor: ${isCurrentMonth ? 'pointer' : 'default'};
@@ -62,25 +66,25 @@ $(document).ready(function () {
           </div>
         `;
         $popup.html(html);
-      }
+      },
     });
 
     // Toggle
-    $input.on('click', function() {
+    $input.on('click', function () {
       $('.datepicker-popup').not($popup).hide();
       $popup.toggle();
     });
 
     // Nav
-    $popup.on('click', '.btn-prev', function(e) {
+    $popup.on('click', '.btn-prev', function (e) {
       e.stopPropagation();
       $wrapper.headlessCalendar('goToPrevious');
     });
-    $popup.on('click', '.btn-next', function(e) {
+    $popup.on('click', '.btn-next', function (e) {
       e.stopPropagation();
       $wrapper.headlessCalendar('goToNext');
     });
-    $popup.on('click', '.btn-today', function(e) {
+    $popup.on('click', '.btn-today', function (e) {
       e.stopPropagation();
       const today = new Date();
       state[stateKey] = today;
@@ -91,7 +95,7 @@ $(document).ready(function () {
     });
 
     // Select
-    $popup.on('click', '.day-cell', function(e) {
+    $popup.on('click', '.day-cell', function (e) {
       e.stopPropagation();
       const date = new Date($(this).data('date'));
       state[stateKey] = date;
@@ -106,13 +110,13 @@ $(document).ready(function () {
   setupDatePicker('#departure-picker', 'startDate');
   setupDatePicker('#return-picker', 'endDate');
 
-  $(document).on('mousedown', function(e) {
+  $(document).on('mousedown', function (e) {
     if (!$(e.target).closest('.datepicker-wrapper').length) {
       $('.datepicker-popup').hide();
     }
   });
 
-  $('#trip-form').on('submit', function(e) {
+  $('#trip-form').on('submit', function (e) {
     e.preventDefault();
     alert('Form Submitted!');
   });

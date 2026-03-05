@@ -30,26 +30,36 @@ export function setupDatePicker($container, options) {
           <table>
             <thead>
               <tr>
-                ${utils.daysofWeek('narrow').map(day => `<th>${day}</th>`).join('')}
+                ${utils
+                  .daysofWeek('narrow')
+                  .map((day) => `<th>${day}</th>`)
+                  .join('')}
               </tr>
             </thead>
             <tbody>
-              ${monthData?.weeks.map(week => `
+              ${monthData?.weeks
+                .map(
+                  (week) => `
                 <tr>
-                  ${week.map(date => {
-                    const isCurrentMonth = monthData.isCurrentMonth(date);
-                    const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
-                    const isToday = monthData.isToday(date);
-                    const style = `
+                  ${week
+                    .map((date) => {
+                      const isCurrentMonth = monthData.isCurrentMonth(date);
+                      const isSelected =
+                        selectedDate && date.toDateString() === selectedDate.toDateString();
+                      const isToday = monthData.isToday(date);
+                      const style = `
                       cursor: ${isCurrentMonth ? 'pointer' : 'default'};
                       color: ${isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray'};
                       font-weight: ${isToday ? 'bold' : 'normal'};
                       border: ${isSelected ? '1px solid blue' : 'none'};
                     `;
-                    return `<td class="day-cell" data-date="${date.toISOString()}" style="${style}">${date.getDate()}</td>`;
-                  }).join('')}
+                      return `<td class="day-cell" data-date="${date.toISOString()}" style="${style}">${date.getDate()}</td>`;
+                    })
+                    .join('')}
                 </tr>
-              `).join('')}
+              `,
+                )
+                .join('')}
             </tbody>
           </table>
 
@@ -62,19 +72,30 @@ export function setupDatePicker($container, options) {
 
     // Re-attach event listeners after render
     const $input = $container.querySelector('.datepicker-input');
-    $input.onclick = () => { isOpen = !isOpen; render(); };
-
-    $container.querySelector('.btn-prev').onclick = (e) => { e.stopPropagation(); calendar.goToPrevious(); render(); };
-    $container.querySelector('.btn-next').onclick = (e) => { e.stopPropagation(); calendar.goToNext(); render(); };
-    $container.querySelector('.btn-today').onclick = (e) => { 
-      e.stopPropagation(); 
-      selectedDate = new Date(); 
-      isOpen = false;
-      options.onChange(selectedDate);
-      render(); 
+    $input.onclick = () => {
+      isOpen = !isOpen;
+      render();
     };
 
-    $container.querySelectorAll('.day-cell').forEach($cell => {
+    $container.querySelector('.btn-prev').onclick = (e) => {
+      e.stopPropagation();
+      calendar.goToPrevious();
+      render();
+    };
+    $container.querySelector('.btn-next').onclick = (e) => {
+      e.stopPropagation();
+      calendar.goToNext();
+      render();
+    };
+    $container.querySelector('.btn-today').onclick = (e) => {
+      e.stopPropagation();
+      selectedDate = new Date();
+      isOpen = false;
+      options.onChange(selectedDate);
+      render();
+    };
+
+    $container.querySelectorAll('.day-cell').forEach(($cell) => {
       $cell.onclick = (e) => {
         e.stopPropagation();
         const date = new Date($cell.dataset.date);

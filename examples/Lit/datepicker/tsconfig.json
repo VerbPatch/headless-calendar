@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "es2021",
+    "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"],
-    "strict": true,
-    "declaration": true,
-    "sourceMap": true,
-    "inlineSources": true,
+    "lib": ["es2021", "dom"],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "useDefineForClassFields": false
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

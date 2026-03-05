@@ -2,7 +2,7 @@ import { setupDatePicker } from './datepicker';
 
 const state = {
   startDate: undefined,
-  endDate: undefined
+  endDate: undefined,
 };
 
 document.querySelector('#app').innerHTML = `
@@ -30,18 +30,26 @@ const updateDisplay = () => {
 setupDatePicker(document.querySelector('#start-date-picker'), {
   label: 'Departure Date',
   placeholder: 'Select departure',
-  onChange: (date) => { state.startDate = date; updateDisplay(); }
+  onChange: (date) => {
+    state.startDate = date;
+    updateDisplay();
+  },
 });
 
 setupDatePicker(document.querySelector('#end-date-picker'), {
   label: 'Return Date',
   placeholder: 'Select return',
-  onChange: (date) => { state.endDate = date; updateDisplay(); }
+  onChange: (date) => {
+    state.endDate = date;
+    updateDisplay();
+  },
 });
 
 document.querySelector('#my-form').onsubmit = (e) => {
   e.preventDefault();
-  alert(`Form Submitted!\nStart Date: ${state.startDate?.toDateString() || 'Not set'}\nEnd Date: ${state.endDate?.toDateString() || 'Not set'}`);
+  alert(
+    `Form Submitted!\nStart Date: ${state.startDate?.toDateString() || 'Not set'}\nEnd Date: ${state.endDate?.toDateString() || 'Not set'}`,
+  );
 };
 
 updateDisplay();

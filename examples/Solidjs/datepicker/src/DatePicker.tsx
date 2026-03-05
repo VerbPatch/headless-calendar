@@ -37,7 +37,8 @@ export const DatePicker: Component<Props> = (props) => {
     setIsOpen(false);
   };
 
-  const displayValue = () => props.value ? calendar()?.utils.formatDate(props.value, 'yyyy-MM-dd') : '';
+  const displayValue = () =>
+    props.value ? calendar()?.utils.formatDate(props.value, 'yyyy-MM-dd') : '';
 
   return (
     <div ref={containerRef} style={{ position: 'relative', 'margin-bottom': '20px' }}>
@@ -58,21 +59,35 @@ export const DatePicker: Component<Props> = (props) => {
             left: 0,
             'z-index': 1000,
             background: 'white',
-            border: '1px solid black'
+            border: '1px solid black',
           }}
         >
           <div style={{ display: 'flex', 'justify-content': 'space-between' }}>
-            <button type="button" onClick={(e) => { e.stopPropagation(); calendar()?.goToPrevious(); }}>←</button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                calendar()?.goToPrevious();
+              }}
+            >
+              ←
+            </button>
             <span>{calendar()?.utils.formatLocalizedMonth(calendar()?.currentDate!)}</span>
-            <button type="button" onClick={(e) => { e.stopPropagation(); calendar()?.goToNext(); }}>→</button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                calendar()?.goToNext();
+              }}
+            >
+              →
+            </button>
           </div>
 
           <table>
             <thead>
               <tr>
-                <For each={calendar()?.utils.daysofWeek('narrow')}>
-                  {(day) => <th>{day}</th>}
-                </For>
+                <For each={calendar()?.utils.daysofWeek('narrow')}>{(day) => <th>{day}</th>}</For>
               </tr>
             </thead>
             <tbody>
@@ -82,7 +97,8 @@ export const DatePicker: Component<Props> = (props) => {
                     <For each={week}>
                       {(date) => {
                         const isCurrentMonth = calendar()?.monthData?.isCurrentMonth(date);
-                        const isSelected = props.value && date.toDateString() === props.value.toDateString();
+                        const isSelected =
+                          props.value && date.toDateString() === props.value.toDateString();
                         const isToday = calendar()?.monthData?.isToday(date);
                         return (
                           <td
@@ -94,7 +110,7 @@ export const DatePicker: Component<Props> = (props) => {
                               cursor: isCurrentMonth ? 'pointer' : 'default',
                               color: isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray',
                               'font-weight': isToday ? 'bold' : 'normal',
-                              border: isSelected ? '1px solid blue' : 'none'
+                              border: isSelected ? '1px solid blue' : 'none',
                             }}
                           >
                             {date.getDate()}
@@ -109,7 +125,15 @@ export const DatePicker: Component<Props> = (props) => {
           </table>
 
           <div style={{ 'text-align': 'center' }}>
-            <button type="button" onClick={(e) => { e.stopPropagation(); handleDateSelect(new Date()); }}>Today</button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDateSelect(new Date());
+              }}
+            >
+              Today
+            </button>
           </div>
         </div>
       </Show>

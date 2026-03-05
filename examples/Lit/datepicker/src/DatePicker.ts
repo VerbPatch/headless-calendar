@@ -76,8 +76,9 @@ export class DatePicker extends LitElement {
 
   render() {
     if (!this._calendarController) return html``;
-    
-    const { currentDate, goToPrevious, goToNext, monthData, utils } = this._calendarController.calendar;
+
+    const { currentDate, goToPrevious, goToNext, monthData, utils } =
+      this._calendarController.calendar;
     const displayValue = this.value ? utils.formatDate(this.value, 'yyyy-MM-dd') : '';
 
     return html`
@@ -95,9 +96,25 @@ export class DatePicker extends LitElement {
           ? html`
               <div class="popup">
                 <div class="header">
-                  <button type="button" @click=${(e: any) => { e.stopPropagation(); goToPrevious(); }}>←</button>
+                  <button
+                    type="button"
+                    @click=${(e: any) => {
+                      e.stopPropagation();
+                      goToPrevious();
+                    }}
+                  >
+                    ←
+                  </button>
                   <span>${utils.formatLocalizedMonth(currentDate)}</span>
-                  <button type="button" @click=${(e: any) => { e.stopPropagation(); goToNext(); }}>→</button>
+                  <button
+                    type="button"
+                    @click=${(e: any) => {
+                      e.stopPropagation();
+                      goToNext();
+                    }}
+                  >
+                    →
+                  </button>
                 </div>
 
                 <table>
@@ -112,7 +129,8 @@ export class DatePicker extends LitElement {
                         <tr>
                           ${week.map((date) => {
                             const isCurrentMonth = monthData.isCurrentMonth(date);
-                            const isSelected = this.value && date.toDateString() === this.value.toDateString();
+                            const isSelected =
+                              this.value && date.toDateString() === this.value.toDateString();
                             const isToday = monthData.isToday(date);
                             return html`
                               <td
@@ -123,7 +141,11 @@ export class DatePicker extends LitElement {
                                 }}
                                 style="
                                   cursor: ${isCurrentMonth ? 'pointer' : 'default'};
-                                  color: ${isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray'};
+                                  color: ${isCurrentMonth
+                                  ? isSelected
+                                    ? 'blue'
+                                    : 'black'
+                                  : 'gray'};
                                   font-weight: ${isToday ? 'bold' : 'normal'};
                                   border: ${isSelected ? '1px solid blue' : 'none'};
                                 "
@@ -139,7 +161,13 @@ export class DatePicker extends LitElement {
                 </table>
 
                 <div style="text-align: center; margin-top: 5px;">
-                  <button type="button" @click=${(e: any) => { e.stopPropagation(); this._handleDateSelect(new Date()); }}>
+                  <button
+                    type="button"
+                    @click=${(e: any) => {
+                      e.stopPropagation();
+                      this._handleDateSelect(new Date());
+                    }}
+                  >
                     Today
                   </button>
                 </div>

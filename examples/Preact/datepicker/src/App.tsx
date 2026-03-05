@@ -7,7 +7,9 @@ export const App = () => {
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
-    alert(`Form Submitted!\nStart Date: ${startDate?.toDateString() || 'Not set'}\nEnd Date: ${endDate?.toDateString() || 'Not set'}`);
+    alert(
+      `Form Submitted!\nStart Date: ${startDate?.toDateString() || 'Not set'}\nEnd Date: ${endDate?.toDateString() || 'Not set'}`,
+    );
   };
 
   return (
@@ -16,18 +18,18 @@ export const App = () => {
       <p>This example shows a DatePicker component with minimal styling.</p>
 
       <form onSubmit={handleSubmit}>
-        <DatePicker 
-          label="Departure Date" 
-          value={startDate} 
-          onChange={setStartDate} 
-          placeholder="Select departure" 
+        <DatePicker
+          label="Departure Date"
+          value={startDate}
+          onChange={setStartDate}
+          placeholder="Select departure"
         />
-        
-        <DatePicker 
-          label="Return Date" 
-          value={endDate} 
-          onChange={setEndDate} 
-          placeholder="Select return" 
+
+        <DatePicker
+          label="Return Date"
+          value={endDate}
+          onChange={setEndDate}
+          placeholder="Select return"
         />
 
         <button type="submit">Check Availability</button>

@@ -6,7 +6,9 @@ const startDate = ref<Date>();
 const endDate = ref<Date>();
 
 const handleSubmit = () => {
-  alert(`Form Submitted!\nStart Date: ${startDate.value?.toDateString() || 'Not set'}\nEnd Date: ${endDate.value?.toDateString() || 'Not set'}`);
+  alert(
+    `Form Submitted!\nStart Date: ${startDate.value?.toDateString() || 'Not set'}\nEnd Date: ${endDate.value?.toDateString() || 'Not set'}`,
+  );
 };
 </script>
 
@@ -16,17 +18,9 @@ const handleSubmit = () => {
     <p>This example shows a DatePicker component with minimal styling.</p>
 
     <form @submit.prevent="handleSubmit">
-      <DatePicker 
-        label="Departure Date" 
-        v-model="startDate" 
-        placeholder="Select departure" 
-      />
-      
-      <DatePicker 
-        label="Return Date" 
-        v-model="endDate" 
-        placeholder="Select return" 
-      />
+      <DatePicker label="Departure Date" v-model="startDate" placeholder="Select departure" />
+
+      <DatePicker label="Return Date" v-model="endDate" placeholder="Select return" />
 
       <button type="submit">Check Availability</button>
     </form>

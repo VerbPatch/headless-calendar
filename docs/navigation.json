@@ -793,11 +793,6 @@
         "path": "/calendar/examples/React/ICS"
       },
       {
-        "title": "minimal",
-        "group": "example",
-        "path": "/calendar/examples/React/minimal"
-      },
-      {
         "title": "multiple-calendars",
         "group": "example",
         "path": "/calendar/examples/React/multiple-calendars"

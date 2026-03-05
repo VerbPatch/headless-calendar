@@ -60,7 +60,7 @@ export const DatePicker = ({ label, value, onChange, placeholder }: DatePickerPr
             left: 0,
             zIndex: 1000,
             background: 'white',
-            border: '1px solid black'
+            border: '1px solid black',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -116,7 +116,7 @@ export const DatePicker = ({ label, value, onChange, placeholder }: DatePickerPr
                           cursor: isCurrentMonth ? 'pointer' : 'default',
                           color: isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray',
                           fontWeight: isToday ? 'bold' : 'normal',
-                          border: isSelected ? '1px solid blue' : 'none'
+                          border: isSelected ? '1px solid blue' : 'none',
                         }}
                       >
                         {date.getDate()}

@@ -464,8 +464,7 @@ $(document).ready(function () {
                                           const slotStart = new Date(date);
                                           slotStart.setHours(slot.hour, slot.minute, 0, 0);
                                           const slotEnd = new Date(
-                                            slotStart.getTime() +
-                                              cal.timeSlotInterval * 60000,
+                                            slotStart.getTime() + cal.timeSlotInterval * 60000,
                                           );
 
                                           const eventStart = new Date(event.start);

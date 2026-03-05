@@ -57,7 +57,14 @@ const formatDateValue = (date?: Date) => {
 
     <div
       v-if="isOpen"
-      style="position: absolute; top: 100%; left: 0; z-index: 1000; background: white; border: 1px solid black"
+      style="
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        background: white;
+        border: 1px solid black;
+      "
     >
       <div style="display: flex; justify-content: space-between">
         <button type="button" @click.stop="calendar?.goToPrevious">←</button>
@@ -81,9 +88,16 @@ const formatDateValue = (date?: Date) => {
               @click.stop="calendar?.monthData?.isCurrentMonth(date) && handleDateSelect(date)"
               :style="{
                 cursor: calendar?.monthData?.isCurrentMonth(date) ? 'pointer' : 'default',
-                color: calendar?.monthData?.isCurrentMonth(date) ? (modelValue && date.toDateString() === modelValue.toDateString() ? 'blue' : 'black') : 'gray',
+                color: calendar?.monthData?.isCurrentMonth(date)
+                  ? modelValue && date.toDateString() === modelValue.toDateString()
+                    ? 'blue'
+                    : 'black'
+                  : 'gray',
                 fontWeight: calendar?.monthData?.isToday(date) ? 'bold' : 'normal',
-                border: modelValue && date.toDateString() === modelValue.toDateString() ? '1px solid blue' : 'none'
+                border:
+                  modelValue && date.toDateString() === modelValue.toDateString()
+                    ? '1px solid blue'
+                    : 'none',
               }"
             >
               {{ date.getDate() }}

@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, HostListener, ElementRef, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  ElementRef,
+  OnInit,
+} from '@angular/core';
 import { useCalendar, CalendarComposable } from '@verbpatch/angular-calendar';
 import { NgStyle } from '@angular/common';
 
@@ -45,13 +53,13 @@ import { NgStyle } from '@angular/common';
                     <td
                       (click)="onDateClick(date, $event)"
                       [ngStyle]="{
-                        'cursor': isCurrentMonth ? 'pointer' : 'default',
-                        'color': isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray',
+                        cursor: isCurrentMonth ? 'pointer' : 'default',
+                        color: isCurrentMonth ? (isSelected ? 'blue' : 'black') : 'gray',
                         'font-weight': isToday ? 'bold' : 'normal',
-                        'border': isSelected ? '1px solid blue' : 'none',
+                        border: isSelected ? '1px solid blue' : 'none',
                         'text-align': 'center',
-                        'padding': '4px',
-                        'font-size': '14px'
+                        padding: '4px',
+                        'font-size': '14px',
                       }"
                     >
                       {{ date.getDate() }}
@@ -68,7 +76,7 @@ import { NgStyle } from '@angular/common';
         </div>
       }
     </div>
-  `
+  `,
 })
 export class DatePickerComponent implements OnInit {
   @Input() label: string = '';
