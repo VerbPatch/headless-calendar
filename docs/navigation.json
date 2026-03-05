@@ -90,6 +90,10 @@
         "path": "/Calendar/docs/cookbook/building-a-mini-calendar"
       },
       {
+        "title": "DatePicker Component",
+        "path": "/Calendar/docs/cookbook/datepicker-component"
+      },
+      {
         "title": "Building a Scheduler",
         "path": "/Calendar/docs/cookbook/building-a-scheduler"
       },
@@ -619,6 +623,11 @@
         "path": "/calendar/examples/Angular/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Angular/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Angular/ICS"
@@ -627,6 +636,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Angular/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Angular/multiple-calendars"
       }
     ]
   },
@@ -640,6 +654,11 @@
         "path": "/calendar/examples/Lit/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Lit/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Lit/ICS"
@@ -648,6 +667,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Lit/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Lit/multiple-calendars"
       }
     ]
   },
@@ -661,6 +685,11 @@
         "path": "/calendar/examples/Preact/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Preact/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Preact/ICS"
@@ -669,6 +698,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Preact/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Preact/multiple-calendars"
       }
     ]
   },
@@ -682,6 +716,11 @@
         "path": "/calendar/examples/Qwik/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Qwik/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Qwik/ICS"
@@ -690,6 +729,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Qwik/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Qwik/multiple-calendars"
       }
     ]
   },
@@ -706,6 +750,11 @@
         "title": "custom-view",
         "group": "example",
         "path": "/calendar/examples/React/custom-view"
+      },
+      {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/React/datepicker"
       },
       {
         "title": "ICS",
@@ -734,6 +783,11 @@
         "path": "/calendar/examples/Solidjs/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Solidjs/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Solidjs/ICS"
@@ -742,6 +796,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Solidjs/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Solidjs/multiple-calendars"
       }
     ]
   },
@@ -755,6 +814,11 @@
         "path": "/calendar/examples/Svelte/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Svelte/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Svelte/ICS"
@@ -763,6 +827,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Svelte/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Svelte/multiple-calendars"
       }
     ]
   },
@@ -776,6 +845,11 @@
         "path": "/calendar/examples/Vanilla/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Vanilla/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Vanilla/ICS"
@@ -784,6 +858,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Vanilla/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Vanilla/multiple-calendars"
       }
     ]
   },
@@ -797,6 +876,11 @@
         "path": "/calendar/examples/Vuejs/custom-view"
       },
       {
+        "title": "datepicker",
+        "group": "example",
+        "path": "/calendar/examples/Vuejs/datepicker"
+      },
+      {
         "title": "ICS",
         "group": "example",
         "path": "/calendar/examples/Vuejs/ICS"
@@ -805,6 +889,11 @@
         "title": "minimal",
         "group": "example",
         "path": "/calendar/examples/Vuejs/minimal"
+      },
+      {
+        "title": "multiple-calendars",
+        "group": "example",
+        "path": "/calendar/examples/Vuejs/multiple-calendars"
       }
     ]
   }

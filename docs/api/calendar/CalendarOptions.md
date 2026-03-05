@@ -5,7 +5,7 @@ description: Configuration options for initializing a calendar instance.
 
 # CalendarOptions
 
-Defined in: [types/calendar.ts:52](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L52)
+Defined in: [types/calendar.ts:52](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L52)
 
 Configuration options for initializing a calendar instance.
 
@@ -15,7 +15,7 @@ Configuration options for initializing a calendar instance.
 
 > `optional` **calendarId**: `string`
 
-Defined in: [types/calendar.ts:57](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L57)
+Defined in: [types/calendar.ts:57](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L57)
 
 A unique identifier for the calendar instance. Required for managing multiple calendars in a single view.
 
@@ -31,7 +31,7 @@ A unique identifier for the calendar instance. Required for managing multiple ca
 
 > `optional` **customViewOptions**: [`CustomViewOptions`](/calendar/docs/api/navigation/CustomViewOptions)
 
-Defined in: [types/calendar.ts:142](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L142)
+Defined in: [types/calendar.ts:142](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L142)
 
 Configuration options for the 'custom' view.
 
@@ -41,7 +41,7 @@ Configuration options for the 'custom' view.
 
 > `optional` **defaultDate**: `Date`
 
-Defined in: [types/calendar.ts:67](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L67)
+Defined in: [types/calendar.ts:67](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L67)
 
 The default date to display when the calendar is initialized.
 
@@ -57,7 +57,7 @@ new Date()
 
 > `optional` **defaultView**: [`ViewType`](/calendar/docs/api/navigation/ViewType)
 
-Defined in: [types/calendar.ts:62](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L62)
+Defined in: [types/calendar.ts:62](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L62)
 
 The default view to display when the calendar is initialized.
 
@@ -73,7 +73,7 @@ The default view to display when the calendar is initialized.
 
 > `optional` **endHour**: `number`
 
-Defined in: [types/calendar.ts:87](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L87)
+Defined in: [types/calendar.ts:87](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L87)
 
 The ending hour for time slots in day and week views.
 
@@ -89,7 +89,7 @@ The ending hour for time slots in day and week views.
 
 > `optional` **initialEvents**: [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [types/calendar.ts:91](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L91)
+Defined in: [types/calendar.ts:91](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L91)
 
 An array of initial events to populate the calendar with.
 
@@ -99,7 +99,7 @@ An array of initial events to populate the calendar with.
 
 > `optional` **locale**: `string`
 
-Defined in: [types/calendar.ts:138](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L138)
+Defined in: [types/calendar.ts:138](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L138)
 
 The locale to use for formatting dates and times.
 
@@ -115,7 +115,7 @@ The user's browser locale.
 
 > `optional` **startHour**: `number`
 
-Defined in: [types/calendar.ts:82](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L82)
+Defined in: [types/calendar.ts:82](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L82)
 
 The starting hour for time slots in day and week views.
 
@@ -131,7 +131,7 @@ The starting hour for time slots in day and week views.
 
 > `optional` **startOfWeek**: `0` \| `1` \| `2` \| `3` \| `4` \| `5` \| `6`
 
-Defined in: [types/calendar.ts:72](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L72)
+Defined in: [types/calendar.ts:72](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L72)
 
 The day of the week to consider as the start of the week (0 for Sunday, 1 for Monday, etc.).
 
@@ -147,7 +147,7 @@ The day of the week to consider as the start of the week (0 for Sunday, 1 for Mo
 
 > `optional` **timeSlotInterval**: `number`
 
-Defined in: [types/calendar.ts:77](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L77)
+Defined in: [types/calendar.ts:77](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L77)
 
 The interval in minutes for time slots in day and week views.
 
@@ -163,7 +163,7 @@ The interval in minutes for time slots in day and week views.
 
 > `optional` **onDateChange**: (`date`) => `void`
 
-Defined in: [types/calendar.ts:127](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L127)
+Defined in: [types/calendar.ts:127](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L127)
 
 A callback function that is invoked when the current date of the calendar changes.
 
@@ -185,7 +185,7 @@ The new date.
 
 > `optional` **onEvent**: (`events`) => `void`
 
-Defined in: [types/calendar.ts:97](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L97)
+Defined in: [types/calendar.ts:97](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L97)
 
 A callback function that is invoked whenever the events array changes.
 
@@ -207,7 +207,7 @@ The updated array of events.
 
 > `optional` **onEventCreate**: (`event`) => `void`
 
-Defined in: [types/calendar.ts:103](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L103)
+Defined in: [types/calendar.ts:103](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L103)
 
 A callback function that is invoked when a new event is created.
 
@@ -229,7 +229,7 @@ The newly created event.
 
 > `optional` **onEventDelete**: (`event`) => `void`
 
-Defined in: [types/calendar.ts:115](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L115)
+Defined in: [types/calendar.ts:115](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L115)
 
 A callback function that is invoked when an event is deleted.
 
@@ -251,7 +251,7 @@ The deleted event.
 
 > `optional` **onEventUpdate**: (`event`) => `void`
 
-Defined in: [types/calendar.ts:109](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L109)
+Defined in: [types/calendar.ts:109](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L109)
 
 A callback function that is invoked when an event is updated.
 
@@ -273,7 +273,7 @@ The updated event.
 
 > `optional` **onViewChange**: (`view`) => `void`
 
-Defined in: [types/calendar.ts:121](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L121)
+Defined in: [types/calendar.ts:121](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L121)
 
 A callback function that is invoked when the calendar view changes.
 
@@ -295,7 +295,7 @@ The new calendar view.
 
 > `optional` **timezone**: `string`
 
-Defined in: [types/calendar.ts:133](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/types/calendar.ts#L133)
+Defined in: [types/calendar.ts:133](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/types/calendar.ts#L133)
 
 The timezone to use for calendar operations.
 

@@ -7,7 +7,7 @@ description: Gets the end of the week for a given date.
 
 > **getEndOfWeek**(`date`, `startOfWeek?`): `Date`
 
-Defined in: [utils/date.ts:413](https://github.com/VerbPatch/headless-calendar/blob/e6cee01a505551c119d043f0b196ea7f57198987/packages/headless-calendar/src/utils/date.ts#L413)
+Defined in: [utils/date.ts:413](https://github.com/VerbPatch/headless-calendar/blob/e1de82bfe4b3e35808592e8ff6bc3c332a79c55d/packages/headless-calendar/src/utils/date.ts#L413)
 
 Gets the end of the week for a given date.
 
