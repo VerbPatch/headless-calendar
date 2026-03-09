@@ -8,6 +8,7 @@
 - [DropTarget](/calendar/docs/api/calendar/DropTarget)
 - [TimeSlot](/calendar/docs/api/calendar/TimeSlot)
 - [calculateWeekNumber](/calendar/docs/api/calendar/calculateWeekNumber)
+- [disposeCalendar](/calendar/docs/api/calendar/disposeCalendar)
 - [formatTimeSlotLabel](/calendar/docs/api/calendar/formatTimeSlotLabel)
 - [getCalendarBounds](/calendar/docs/api/calendar/getCalendarBounds)
 - [getMonthCalendarDates](/calendar/docs/api/calendar/getMonthCalendarDates)

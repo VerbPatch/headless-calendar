@@ -5,7 +5,7 @@ description: Represents the data structure for the day view, including the curre
 
 # DayData
 
-Defined in: [types/views.ts:113](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L113)
+Defined in: [types/views.ts:113](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/types/views.ts#L113)
 
 Data specific to the day view.
 
@@ -15,7 +15,7 @@ Data specific to the day view.
 
 > **dates**: `Date`[]
 
-Defined in: [types/views.ts:117](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L117)
+Defined in: [types/views.ts:117](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/types/views.ts#L117)
 
 An array of dates visible in the day view (useful for custom multi-day views).
 
@@ -25,7 +25,7 @@ An array of dates visible in the day view (useful for custom multi-day views).
 
 > **dayName**: `string`
 
-Defined in: [types/views.ts:121](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L121)
+Defined in: [types/views.ts:121](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/types/views.ts#L121)
 
 The localized name of the day or range.
 
@@ -35,6 +35,6 @@ The localized name of the day or range.
 
 > **isToday**: `boolean`
 
-Defined in: [types/views.ts:125](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/types/views.ts#L125)
+Defined in: [types/views.ts:125](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/types/views.ts#L125)
 
 Indicates if the primary date is today.

@@ -7,7 +7,7 @@ description: Formats a given hour and minute into a time slot label.
 
 > **formatTimeSlotLabel**(`hour`, `minute`, `use24Hour?`): `string`
 
-Defined in: [utils/calendar.ts:160](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/calendar.ts#L160)
+Defined in: [utils/calendar.ts:162](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/utils/calendar.ts#L162)
 
 Formats a given hour and minute into a time slot label.
 

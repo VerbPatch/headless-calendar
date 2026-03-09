@@ -4,14 +4,17 @@ A powerful, flexible, and completely headless calendar library for applications.
 
 ## ✨ Features
 
-- 🎯 **Completely Headless** - No UI components, just logic and data
-- 📅 **Multiple Views** - Month, Week, and Day views
-- 🎨 **Framework Agnostic** - Works with any CSS framework or component library
-- 🔄 **Event Management** - Create, update, delete, and move events
-- 🖱️ **Drag & Drop Events** - Built-in drag and drop event management support
-- 🎭 **TypeScript First** - Full type safety and IntelliSense support
-- 🌳 **Tree Shakeable** - Import only what you need
-- 📦 **Zero Dependencies**
+- 🎯 **Completely Headless** - No UI components, just pure logic and data formatting
+- ⚡ **Extreme Performance** - Benchmarked to effortlessly render 5000+ events
+- 📅 **Multiple Views** - Built-in robust support for Year, Month, Week, Day, and fully Custom multi-period views
+- 🎨 **Framework Agnostic** - Provides stable, isolated, auto-managed wrappers for React, Vue, Svelte, Angular, Solid, Qwik, Lit, and jQuery
+- 🔄 **Advanced Event Management** - Built-in state engine to create, update, delete, duplicate, and manage deeply recurring events
+- 🖱️ **Drag & Drop** - Native drag-and-drop state handlers to effortlessly build rich UI interactions
+- 🌍 **Timezone & i18n** - Robust handling of cross-timezone rendering and locale-aware text formatting
+- 🗄️ **iCalendar (ICS) Support** - High-speed parsing and serialization for `.ics` file imports/exports
+- 🎭 **TypeScript First** - 100% type safety and excellent IntelliSense support
+- 🌳 **Tree Shakeable** - Import only what you need, generating tiny bundle sizes (~11kB max)
+- 📦 **Zero Dependencies** - Highly secure, fast, and completely self-contained core engine
 
 ## 🚀 Installation
 

@@ -7,7 +7,7 @@ description: Gets the end of the day for a given date (23:59:59:999).
 
 > **getEndOfDay**(`date`): `Date`
 
-Defined in: [utils/date.ts:480](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/date.ts#L480)
+Defined in: [utils/date.ts:480](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/utils/date.ts#L480)
 
 Gets the end of the day for a given date (23:59:59:999).
 

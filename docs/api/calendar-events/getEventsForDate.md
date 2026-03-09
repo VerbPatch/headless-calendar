@@ -7,7 +7,7 @@ description: Retrieves all events that occur on a specific date.
 
 > **getEventsForDate**(`events`, `date`, `startofWeek`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/events.ts:64](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/events.ts#L64)
+Defined in: [utils/events.ts:62](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/utils/events.ts#L62)
 
 Retrieves all events that occur on a specific date.
 

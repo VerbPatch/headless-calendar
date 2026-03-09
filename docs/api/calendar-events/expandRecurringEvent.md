@@ -7,7 +7,7 @@ description: Expands a recurring event into multiple instances within a specific
 
 > **expandRecurringEvent**(`event`, `rangeStart`, `rangeEnd`, `startOfWeek`): [`CalendarEvent`](/calendar/docs/api/calendar-events/CalendarEvent)[]
 
-Defined in: [utils/recurrence.ts:255](https://github.com/VerbPatch/headless-calendar/blob/f6f4da1709d871774f2838d9a919bfa2de2bb873/packages/headless-calendar/src/utils/recurrence.ts#L255)
+Defined in: [utils/recurrence.ts:255](https://github.com/VerbPatch/headless-calendar/blob/9f3abcdff5a66a46b79bf3610f623b5a2e6d2df7/packages/headless-calendar/src/utils/recurrence.ts#L255)
 
 Expands a recurring event into multiple instances within a specific date range.
 

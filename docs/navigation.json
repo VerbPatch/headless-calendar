@@ -173,6 +173,12 @@
         "isDeprecated": false
       },
       {
+        "title": "disposeCalendar",
+        "kind": 64,
+        "path": "/calendar/docs/api/calendar/disposeCalendar",
+        "isDeprecated": false
+      },
+      {
         "title": "formatTimeSlotLabel",
         "kind": 64,
         "path": "/calendar/docs/api/calendar/formatTimeSlotLabel",

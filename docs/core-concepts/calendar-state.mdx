@@ -13,7 +13,7 @@ Understanding the `CalendarInstance` is crucial for building custom calendar UIs
 
 The library uses a global internal cache to store the state of calendar instances. To support multiple independent calendars in a single view, each instance is identified by a `calendarId`.
 
-*   **Default Behavior**: If no `calendarId` is provided, it defaults to `'default-calendar'`.
+*   **Default Behavior**: In the core library, if no `calendarId` is provided, it defaults to `'default-calendar'`. However, most framework wrappers (React, Vue, Solid, etc.) will automatically generate a unique, stable ID for each component instance if one is not provided, ensuring isolated state out-of-the-box.
 *   **Isolation**: Providing a unique `calendarId` (e.g., `'main-calendar'`, `'sidebar-mini'`) ensures that the state (current date, view, events, etc.) is isolated to that specific instance.
 *   **Synchronization**: Multiple components using the same `calendarId` will automatically stay in sync. If one component navigates to a new month, all other components sharing that `calendarId` will reactively update to show the same month.
 
