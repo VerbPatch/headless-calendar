@@ -65,6 +65,8 @@ export const formatDateInTimeZone = (
   return fmt.format(date);
 };
 
+const dateTimeFormatCache = new Map<string, Intl.DateTimeFormat>();
+
 /**
  * Returns the timezone offset in minutes for a given date and timezone.
  * @param {Date} date - The date to calculate the offset for.
@@ -78,16 +80,23 @@ export const formatDateInTimeZone = (
  * @description Returns the timezone offset in minutes for a given date and timezone.
  */
 export function getTimeZoneOffset(date: Date, timeZone: string): number {
-  const parts = new Intl.DateTimeFormat('en-GB', {
-    timeZone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).formatToParts(date);
+  let formatter = dateTimeFormatCache.get(timeZone);
+
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat('en-GB', {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+    dateTimeFormatCache.set(timeZone, formatter);
+  }
+
+  const parts = formatter.formatToParts(date);
 
   const lookup = (type: string) => parts.find((p) => p.type === type)!.value;
 

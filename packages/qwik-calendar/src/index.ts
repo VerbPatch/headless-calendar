@@ -4,6 +4,7 @@ import {
   type CalendarOptions,
   type CalendarInstance,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 export * from '@verbpatch/headless-calendar';
 
@@ -13,7 +14,7 @@ export function useCalendar(options?: CalendarOptions) {
     stateVersion: 0,
   });
 
-  const calendarId = options?.calendarId ?? 'default-calendar';
+  const calendarId = options?.calendarId ?? `qwik-cal-${generateId()}`;
 
   useVisibleTask$(({ cleanup }) => {
     cleanup(() => {
@@ -24,6 +25,7 @@ export function useCalendar(options?: CalendarOptions) {
   const refreshCalendar = () => {
     const cal = createCalendar({
       ...options,
+      calendarId,
       onEvent: (event) => {
         store.stateVersion++;
         options?.onEvent?.(event);

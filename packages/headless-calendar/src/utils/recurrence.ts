@@ -275,14 +275,18 @@ export const expandRecurringEvent = (
     });
   }
 
-  const rawRule = event.recurring as CalendarEventOccurance;
-  if (!rawRule || event.recurring === 'never') return instances;
+  const rawRule = event.recurring;
+  if (!rawRule || rawRule === 'never') return instances;
+
+  // Handle accidental string input for recurring rule
+  const normalizedRule = (typeof rawRule === 'string' ? { repeat: rawRule } : rawRule) as any;
 
   const rule = {
-    ...rawRule,
-    month: rawRule.byMonth || rawRule.month,
-    day: rawRule.byMonthDay || rawRule.day,
-    weekDays: rawRule.byDay || rawRule.weekDays,
+    ...normalizedRule,
+    month: normalizedRule.byMonth || normalizedRule.month,
+    day: normalizedRule.byMonthDay || normalizedRule.day,
+    weekDays: normalizedRule.byDay || normalizedRule.weekDays,
+    every: normalizedRule.every || 1, // Fallback to 1 to prevent infinite loops
   } as CalendarEventOccurance;
 
   let current = new Date(event.start);

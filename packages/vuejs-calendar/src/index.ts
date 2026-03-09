@@ -6,12 +6,13 @@ import {
   CalendarOptions,
   CalendarInstance,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 
 export function useCalendar(options?: CalendarOptions) {
   const calendar = ref<CalendarInstance>();
   const stateChanged = ref(0);
-  const calendarId = options?.calendarId ?? 'default-calendar';
+  const calendarId = options?.calendarId ?? `vue-cal-${generateId()}`;
 
   onUnmounted(() => {
     disposeCalendar(calendarId);
@@ -20,6 +21,7 @@ export function useCalendar(options?: CalendarOptions) {
   const refreshCalendar = () => {
     const newCalendar = createCalendar({
       ...options,
+      calendarId,
       onEvent: (event) => {
         stateChanged.value++;
         options?.onEvent?.(event);

@@ -6,6 +6,7 @@ import {
   type CalendarEvent,
   type ViewType,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 
 export * from '@verbpatch/headless-calendar';
@@ -15,9 +16,9 @@ export type CalendarComposable = {
 } & CalendarInstance;
 
 export function useCalendar(options?: CalendarOptions): CalendarComposable {
-  const initialInstance = createCalendar(options);
+  const calendarId = options?.calendarId ?? `angular-cal-${generateId()}`;
+  const initialInstance = createCalendar({ ...options, calendarId });
   const calendarSignal = signal<CalendarInstance>(initialInstance);
-  const calendarId = options?.calendarId ?? 'default-calendar';
 
   try {
     const destroyRef = inject(DestroyRef);
@@ -33,7 +34,7 @@ export function useCalendar(options?: CalendarOptions): CalendarComposable {
   const refreshCalendar = () => {
     const newInstance = createCalendar({
       ...options,
-
+      calendarId,
       onEvent: (event: CalendarEvent[]) => {
         options?.onEvent?.(event);
         refreshCalendar();

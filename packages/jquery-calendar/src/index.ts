@@ -6,6 +6,7 @@ import {
   CalendarEvent,
   CustomViewOptions,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 import $ from 'jquery';
 
@@ -47,7 +48,8 @@ declare global {
 
   function initInstance(element: HTMLElement, options: JQueryCalendarOptions) {
     const $el = $(element);
-    const mergedOptions = $.extend({}, defaultOptions(), options);
+    const calendarId = options.calendarId ?? `jq-cal-${generateId()}`;
+    const mergedOptions = $.extend({}, defaultOptions(), options, { calendarId });
     const calendar = useCalendar(mergedOptions);
 
     const state: JQueryCalendarState = { $el, options: mergedOptions, calendar };
@@ -61,6 +63,7 @@ declare global {
     const { options, calendar } = state;
     const newCalendar = useCalendar({
       ...options,
+      calendarId: options.calendarId,
       defaultDate: calendar.currentDate,
       defaultView: calendar.view,
       customViewOptions: calendar.customViewOptions,
@@ -174,8 +177,9 @@ declare global {
       state.$el.trigger('calendar:eventsSet', [events]);
     },
     destroy(state: JQueryCalendarState) {
-      const calendarId = state.options.calendarId ?? 'default-calendar';
-      disposeCalendar(calendarId);
+      if (state.options.calendarId) {
+        disposeCalendar(state.options.calendarId);
+      }
       state.$el.removeData(DATA_KEY);
       state.$el.trigger('calendar:destroyed');
     },

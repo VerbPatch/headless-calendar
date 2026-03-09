@@ -231,3 +231,42 @@ export interface UseNavigationReturn {
    */
   canGoPrevious: boolean;
 }
+
+/**
+ * Options for the `useViewsData` hook.
+ * @ignore
+ */
+export interface UseViewsDataOptions {
+  /**
+   * The calendar ID.
+   */
+  calendarId: string;
+  /**
+   * The current date.
+   */
+  currentDate: Date;
+  /**
+   * The current view.
+   */
+  view: ViewType;
+  /**
+   * Options for custom views.
+   */
+  customViewOptions: CustomViewOptions;
+  /**
+   * Currently visible dates.
+   */
+  visibleDates: Date[];
+  /**
+   * Day number denoting the start of the week.
+   */
+  startOfWeek: number;
+  /**
+   * The locale string.
+   */
+  locale: string;
+  /**
+   * The timezone string.
+   */
+  timezone: string;
+}

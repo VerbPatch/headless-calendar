@@ -6,6 +6,7 @@ import {
   CalendarEvent,
   ViewType,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 export * from '@verbpatch/headless-calendar';
 
@@ -13,6 +14,7 @@ export class CalendarController implements ReactiveController {
   private host: ReactiveControllerHost;
   private options: CalendarOptions;
   private _calendar!: CalendarInstance;
+  private calendarId: string;
 
   public get calendar(): CalendarInstance {
     return this._calendar;
@@ -21,6 +23,7 @@ export class CalendarController implements ReactiveController {
   constructor(host: ReactiveControllerHost, options: CalendarOptions) {
     this.host = host;
     this.options = options;
+    this.calendarId = options.calendarId ?? `lit-cal-${generateId()}`;
     host.addController(this);
     this.refreshCalendar();
   }
@@ -28,6 +31,7 @@ export class CalendarController implements ReactiveController {
   private refreshCalendar(): void {
     this._calendar = createCalendar({
       ...this.options,
+      calendarId: this.calendarId,
       onEvent: (event: CalendarEvent[]) => {
         this.refreshCalendar();
         this.options?.onEvent?.(event);
@@ -50,8 +54,7 @@ export class CalendarController implements ReactiveController {
   }
 
   hostDisconnected() {
-    const calendarId = this.options?.calendarId ?? 'default-calendar';
-    disposeCalendar(calendarId);
+    disposeCalendar(this.calendarId);
   }
 }
 

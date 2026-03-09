@@ -38,9 +38,7 @@ export const isEventInDateRange = (
   startDate: Date,
   endDate: Date,
 ): boolean => {
-  const eventStart = event.start;
-  const eventEnd = event.end;
-  return eventStart <= endDate && eventEnd >= startDate;
+  return event.start.getTime() <= endDate.getTime() && event.end.getTime() >= startDate.getTime();
 };
 
 /**
@@ -95,12 +93,17 @@ export const getEventsForDateRange = (
   endDate: Date,
   startofWeek: number,
 ): CalendarEvent[] => {
-  return events.flatMap((event) => {
+  return events.reduce((acc, event) => {
     if (event.recurring && event.recurring !== 'never') {
-      return expandRecurringEvent(event, startDate, endDate, startofWeek);
+      const recurringEvents = expandRecurringEvent(event, startDate, endDate, startofWeek);
+      for (let i = 0; i < recurringEvents.length; i++) {
+        acc.push(recurringEvents[i]);
+      }
+    } else if (isEventInDateRange(event, startDate, endDate)) {
+      acc.push(event);
     }
-    return isEventInDateRange(event, startDate, endDate) ? [event] : [];
-  });
+    return acc;
+  }, [] as CalendarEvent[]);
 };
 
 /**

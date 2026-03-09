@@ -4,6 +4,7 @@ import {
   type CalendarOptions,
   type CalendarInstance,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 
 export * from '@verbpatch/headless-calendar';
@@ -11,7 +12,7 @@ export * from '@verbpatch/headless-calendar';
 export function useCalendar(options?: CalendarOptions) {
   const [stateVersion, setStateVersion] = createSignal(0);
   const [calendar, setCalendar] = createSignal<CalendarInstance>();
-  const calendarId = options?.calendarId ?? 'default-calendar';
+  const calendarId = options?.calendarId ?? `solid-cal-${generateId()}`;
 
   onCleanup(() => {
     disposeCalendar(calendarId);
@@ -20,6 +21,7 @@ export function useCalendar(options?: CalendarOptions) {
   const refreshCalendar = () => {
     const cal = createCalendar({
       ...options,
+      calendarId,
       onEvent: (events) => {
         setStateVersion((v) => v + 1);
         options?.onEvent?.(events);

@@ -61,11 +61,12 @@ export const getMonthCalendarDates = (date: Date, startOfWeek: number = 0): Date
   const startDate = getStartOfWeek(startOfMonth, startOfWeek);
   const endDate = getEndOfWeek(endOfMonth, startOfWeek);
 
-  const dates: Date[] = [];
+  const totalDays = Math.round((endDate.getTime() - startDate.getTime()) / 86400000) + 1;
+  const dates = new Array<Date>(totalDays);
   const currentDate = new Date(startDate);
 
-  while (currentDate <= endDate) {
-    dates.push(new Date(currentDate));
+  for (let i = 0; i < totalDays; i++) {
+    dates[i] = new Date(currentDate);
     currentDate.setDate(currentDate.getDate() + 1);
   }
 
@@ -96,11 +97,12 @@ export const getYearCalendarDays = (date: Date, startOfWeek: number = 0): Date[]
   const startDate = getStartOfWeek(startOfYear, startOfWeek);
   const endDate = getEndOfWeek(endOfYear, startOfWeek);
 
-  const dates: Date[] = [];
+  const totalDays = Math.round((endDate.getTime() - startDate.getTime()) / 86400000) + 1;
+  const dates = new Array<Date>(totalDays);
   const currentDate = new Date(startDate);
 
-  while (currentDate <= endDate) {
-    dates.push(new Date(currentDate));
+  for (let i = 0; i < totalDays; i++) {
+    dates[i] = new Date(currentDate);
     currentDate.setDate(currentDate.getDate() + 1);
   }
 

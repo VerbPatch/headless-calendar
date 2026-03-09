@@ -6,13 +6,14 @@ import {
   CalendarOptions,
   CalendarInstance,
   disposeCalendar,
+  generateId,
 } from '@verbpatch/headless-calendar';
 
 export * from '@verbpatch/headless-calendar';
 
 export function useCalendar(options?: CalendarOptions): Writable<CalendarInstance> {
   const calendarStore = writable<CalendarInstance>(null!);
-  const calendarId = options?.calendarId ?? 'default-calendar';
+  const calendarId = options?.calendarId ?? `svelte-cal-${generateId()}`;
 
   onDestroy(() => {
     disposeCalendar(calendarId);
@@ -21,6 +22,7 @@ export function useCalendar(options?: CalendarOptions): Writable<CalendarInstanc
   const refreshCalendar = () => {
     const calendar = createCalendar({
       ...options,
+      calendarId,
       onEvent: (event) => {
         refreshCalendar();
         options?.onEvent?.(event);
