@@ -1,9 +1,6 @@
 {
   "name": "qwik-calendar-datepicker-example",
   "description": "Qwik App with Routing built with Vite",
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "private": true,
   "scripts": {
     "dev": "vite",
