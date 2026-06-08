@@ -45,7 +45,7 @@ import {
   daysofWeek,
 } from '../utils/timezone';
 import { exportToICS as exportEventsToICS } from '../utils/ics';
-import { createMemo } from '../state';
+import { createMemo } from '@verbpatch/state';
 
 /**
  * The main hook for initializing and managing a calendar instance.

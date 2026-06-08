@@ -2,7 +2,7 @@ import { MonthData, WeekData, DayData, YearData, UseViewsDataOptions } from '../
 import { isSameDay, isSameWeek, isSameMonth, isSameYear } from '../utils/date';
 import { formatLocalizedMonth, formatLocalizedDate } from '../utils/timezone';
 import { getMonthCalendarDates } from '../utils/calendar';
-import { createMemo } from '../state';
+import { createMemo } from '@verbpatch/state';
 
 export const useViewsData = (options: UseViewsDataOptions) => {
   const {

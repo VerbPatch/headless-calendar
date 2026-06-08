@@ -5,7 +5,7 @@ import {
   CustomViewOptions,
 } from '../types/views';
 import { addDays, addWeeks, addMonths, getDay, addYears } from '../utils/date';
-import { createCallback, createState } from '../state';
+import { createCallback, createState } from '@verbpatch/state';
 import { validateCustomView } from '../utils';
 
 /**

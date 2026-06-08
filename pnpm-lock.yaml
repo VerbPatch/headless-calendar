@@ -1412,7 +1412,11 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/headless-calendar: {}
+  packages/headless-calendar:
+    dependencies:
+      '@verbpatch/state':
+        specifier: ^1.0.0
+        version: 1.0.0
 
   packages/jquery-calendar:
     dependencies:
@@ -4022,6 +4026,9 @@ packages:
   '@typescript-eslint/visitor-keys@8.58.0':
     resolution: {integrity: sha512-XJ9UD9+bbDo4a4epraTwG3TsNPeiB9aShrUneAVXy8q4LuwowN+qu89/6ByLMINqvIMeI9H9hOHQtg/ijrYXzQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@verbpatch/state@1.0.0':
+    resolution: {integrity: sha512-1Q34tfupxv07622591+7GVqRw7gQeJVOmqkSgT6RvwMTEj9Qf5S8kSPBWK6l20Ybrv3EsIVq68mR3ZuVIqbigw==}
 
   '@vitejs/plugin-basic-ssl@2.1.0':
     resolution: {integrity: sha512-dOxxrhgyDIEUADhb/8OlV9JIqYLgos03YorAueTIeOUskLJSEsfwCByjbu98ctXitUN3znXKp0bYD/WHSudCeA==}
@@ -9800,6 +9807,8 @@ snapshots:
       '@typescript-eslint/types': 8.58.0
       eslint-visitor-keys: 5.0.1
 
+  '@verbpatch/state@1.0.0': {}
+
   '@vitejs/plugin-basic-ssl@2.1.0(vite@7.1.11(@types/node@24.12.2)(jiti@2.6.1)(less@4.6.4)(sass@1.90.0)(terser@5.46.1)(yaml@2.8.3))':
     dependencies:
       vite: 7.1.11(@types/node@24.12.2)(jiti@2.6.1)(less@4.6.4)(sass@1.90.0)(terser@5.46.1)(yaml@2.8.3)
@@ -13128,7 +13137,7 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
       postcss: 8.5.8
-      rollup: 4.59.0
+      rollup: 4.60.1
       tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 24.12.2

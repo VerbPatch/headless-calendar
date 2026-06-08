@@ -2,7 +2,7 @@ import { CalendarEvent, UseEventsOptions, UseEventsReturn } from '../types/event
 import { generateId, validateEvent } from '../utils/events';
 import { convertToTimeZone } from '../utils/timezone';
 import { importFromICS as importFromICSUtility } from '../utils/ics';
-import { createCallback, createMemo, createState } from '../state';
+import { createCallback, createMemo, createState } from '@verbpatch/state';
 
 /**
  * A hook for managing calendar events, including creating, updating, deleting, and moving events.

@@ -5,7 +5,7 @@ import {
   UseDragDropReturn,
 } from '../types/events';
 import { DropTarget } from '../types/calendar';
-import { createCallback, createState } from '../state';
+import { createCallback, createState } from '@verbpatch/state';
 
 /**
  * A hook for managing drag and drop functionality for calendar events.
