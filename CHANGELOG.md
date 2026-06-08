@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v1.0.1] - 2026-06-08
+
+### Added
+
+- Separate out state management into a different package for better reusability and flexibility.
+
+---
+
 ## [v1.0.0] - 2026-03-09
 
 ### Added
@@ -131,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JQuery Wrapper of calendar headless libray with examples
 - Svelte Wrapper of calendar headless libray with examples
 
+[v1.0.1]: https://github.com/VerbPatch/headless-calendar/releases/tag/v1.0.1
 [v1.0.0]: https://github.com/VerbPatch/headless-calendar/releases/tag/v1.0.0
 [v0.0.1-beta.13]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.13
 [v0.0.1-beta.12]: https://github.com/VerbPatch/headless-calendar/releases/tag/v0.0.1-beta.12
